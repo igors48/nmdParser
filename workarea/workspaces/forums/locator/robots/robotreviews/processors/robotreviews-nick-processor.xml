@@ -1,0 +1,18 @@
+<processor>
+
+	<extractTag out="profile">
+		<pattern><![CDATA[<p class="author">]]></pattern> 
+		<occurrence>0</occurrence>
+	</extractTag>
+	
+	<extractTag in="profile" out="profile">
+		<pattern><![CDATA[<strong>]]></pattern> 
+		<occurrence>0</occurrence>
+	</extractTag>
+	
+	<getGroup in="profile" >
+		<pattern><![CDATA[<a.+>(.+?)</a>]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+	
+</processor>

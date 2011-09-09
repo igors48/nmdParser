@@ -1,0 +1,880 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project name="NMD" default="dist">
+
+	<import file="sampleman.xml"/>
+	
+    <property name="codetools.cobertura.home.directory" value="D:/Program Files/cobertura-1.9.2/"/>
+
+    <property name="codetools.pmd.home.directory" value="D:/Program Files/PMD/pmd-4.2.5/"/>
+    <property name="codetools.pmd.xsl.file"
+              value="${codetools.pmd.home.directory}/etc/xslt/pmd-report-per-class-s48.xslt"/>
+
+    <property name="codetools.doxygen.executable.file" value="D:/Program Files/doxygen/bin/doxygen"/>
+
+    <property name="codetools.jdepend.home.directory" value="D:/Program Files/ant/lib/"/>
+    <property name="codetools.jdepend.dot.xsl" value="D:/Program Files/jdepend-2.9/contrib/jdepend2dot.xsl"/>
+    <property name="codetools.jdepend.dot.home" value="D:/Program Files/Graphviz2.20/bin/"/>
+    <property name="codetools.jdepend.html.xsl" value="D:\Program Files\ant\etc\jdepend.xsl"/>
+
+    <property name="codetools.checkstyle.home" location="D:/Program Files/checkstyle/checkstyle-5.0-beta01/"/>
+
+    <property name="codetools.simian.home" location="D:/Program Files/simian/"/>
+
+    <property name="codetools.findbugs.home" location="D:/Program Files/FindBugs/findbugs-1.3.9-rc1/"/>
+
+    <property name="codetools.project.report.directory" value="reports"/>
+    <property name="codetools.junit.report.directory" value="junit\"/>
+    <property name="codetools.junit.work.directory" value="junit\work\"/>
+    <property name="codetools.cobertura.report.directory" value="cobertura"/>
+    <property name="codetools.pmd.report.directory" value="pmd"/>
+    <property name="codetools.doxygen.report.directory" value="doxygen"/>
+    <property name="codetools.jdepend.report.directory" value="jdepend"/>
+    <property name="codetools.cpd.report.directory" value="cpd"/>
+    <property name="codetools.checkstyle.report.directory" value="checkstyle"/>
+    <property name="codetools.simian.report.directory" value="simian"/>
+    <property name="codetools.findbugs.report.directory" value="findbugs"/>
+
+    <!-- project specific compilation targets & props -->
+    <!-- project specific compilation targets & props -->
+    <!-- project specific compilation targets & props -->
+    <!-- project specific compilation targets & props -->
+    <!-- project specific compilation targets & props -->
+
+    <property name="dir.base" value="."/>
+    <property name="dir.build" value="${dir.base}/build/"/>
+    <property name="dir.dist" value="${dir.base}/dist/"/>
+
+    <record name="build.log"/>
+
+    <property name="debug" value="off"/>
+
+    <fileset id="analyzed.files" dir="src" includes="**/*.java" excludes="util/**/*.java"/>
+
+    <property name="compiler.deprecation" value="off"/>
+    <property name="compiler.target" value="1.6"/>
+    <property name="compiler.source" value="1.6"/>
+    <property name="compiler.depend" value="off"/>
+    <property name="compiler.max.memory" value="128m"/>
+    <property name="compiler.debug" value="on"/>
+    <property name="compiler.optimize" value="off"/>
+    <property name="compiler.nowarn" value="off"/>
+    <property name="compiler.verbose" value="on"/>
+
+
+    <patternset id="ignored.files">
+        <exclude name="**/CVS/**"/>
+        <exclude name="**/SCCS/**"/>
+        <exclude name="**/RCS/**"/>
+        <exclude name="**/rcs/**"/>
+        <exclude name="**/.DS_Store/**"/>
+        <exclude name="**/.svn/**"/>
+        <exclude name="**/.sbas/**"/>
+        <exclude name="**/.IJI.*/**"/>
+        <exclude name="**/vssver.scc/**"/>
+        <exclude name="**/vssver2.scc/**"/>
+    </patternset>
+
+
+    <patternset id="compiler.resources">
+        <include name="**/?*.properties"/>
+        <include name="**/?*.xml"/>
+        <include name="**/?*.gif"/>
+        <include name="**/?*.png"/>
+        <include name="**/?*.jpeg"/>
+        <include name="**/?*.jpg"/>
+        <include name="**/?*.html"/>
+        <include name="**/?*.dtd"/>
+        <include name="**/?*.tld"/>
+    </patternset>
+
+
+    <path id="classpath">
+        <pathelement location="${dir.base}/lib/commons-codec-1.4.jar"/>
+        <pathelement location="${dir.base}/lib/commons-logging-1.1.1.jar"/>
+        <pathelement location="${dir.base}/lib/commons-httpclient-3.1.jar"/>
+        <pathelement location="${dir.base}/lib/commons-cli-1.2.jar"/>
+        <pathelement location="${dir.base}/lib/junit-4.5.jar"/>
+        <pathelement location="${dir.base}/lib/rome-1.0.jar"/>
+        <pathelement location="${dir.base}/lib/jdom.jar"/>
+        <pathelement location="${dir.base}/lib/log4j-1.2.15.jar"/>
+        <pathelement location="${dir.base}/lib/htmlcleaner-2.2.jar"/>
+        <pathelement location="${dir.base}/lib/miglayout-3.7.jar"/>
+        <pathelement location="${dir.base}/lib/gson-1.7.1.jar"/>
+        <pathelement location="${dir.base}/lib/org.springframework.core-3.0.5.RELEASE.jar"/>
+        <pathelement location="${dir.base}/lib/org.springframework.web-3.0.5.RELEASE.jar"/>
+    </path>
+
+
+    <path id="sourcepath">
+        <dirset dir="${dir.base}">
+            <include name="src"/>
+        </dirset>
+    </path>
+
+
+    <path id="sourcepath.tests">
+        <dirset dir="${dir.base}">
+            <include name="test"/>
+        </dirset>
+    </path>
+
+
+    <target name="-prepare_dir">
+
+        <delete dir="${param.dir}" includeEmptyDirs="true" quiet="true"/>
+        <mkdir dir="${param.dir}"/>
+
+    </target>
+
+    <target name="-init_compiler"
+            depends="-init_compilation_conditions, -set_production_compilation_if, -set_debug_compilation_if">
+
+        <property name="compiler.deprecation" value="off"/>
+        <property name="compiler.target" value="1.5"/>
+        <property name="compiler.source" value="1.5"/>
+        <property name="compiler.depend" value="off"/>
+        <property name="compiler.max.memory" value="128m"/>
+
+    </target>
+
+
+    <target name="-init_compilation_conditions">
+
+		<echo message="DEBUG MODE=${debug}"/>
+		
+        <condition property="is_debug" value="true">
+            <or>
+                <equals arg1="${debug}" arg2="true"/>
+                <equals arg1="${debug}" arg2="on"/>
+            </or>
+        </condition>
+
+        <condition property="is_production" value="true">
+            <not>
+                <or>
+                    <equals arg1="${debug}" arg2="true"/>
+                    <equals arg1="${debug}" arg2="on"/>
+                </or>
+            </not>
+        </condition>
+
+    </target>
+
+
+    <target name="-set_production_compilation_if" if="is_production">
+
+		<echo message="PRODUCTION MODE"/>
+		
+        <property name="compiler.debug" value="off"/>
+        <property name="compiler.debuglevel" value="none"/>
+        <property name="compiler.optimize" value="on"/>
+        <property name="compiler.nowarn" value="on"/>
+        <property name="compiler.verbose" value="off"/>
+
+    </target>
+
+
+    <target name="-set_debug_compilation_if" if="is_debug">
+
+		<echo message="DEBUG MODE"/>
+		
+        <property name="compiler.debug" value="on"/>
+        <property name="compiler.debuglevel" value="lines,source"/>
+        <property name="compiler.optimize" value="off"/>
+        <property name="compiler.nowarn" value="off"/>
+        <property name="compiler.verbose" value="on"/>
+
+    </target>
+
+    <!-- compile project from specified source to specified directory -->
+    <!--                debuglevel="${compiler.debuglevel}" -->
+
+    <target name="-compile.to" depends="-init_compiler">
+        <!-- call compiler -->
+        <javac destdir="${destination.directory}"
+               debug="${compiler.debug}"
+               optimize="${compiler.optimize}"
+               nowarn="${compiler.nowarn}"
+               deprecation="${compiler.deprecation}"
+               source="${compiler.source}"
+               target="${compiler.target}"
+               verbose="${compiler.verbose}"
+               depend="${compiler.depend}"
+               memoryMaximumSize="${compiler.max.memory}"
+			   encoding="cp1251"
+               fork="true">
+
+            <src refid="sourcepath"/>
+            <classpath refid="classpath"/>
+            <patternset refid="ignored.files"/>
+
+        </javac>
+
+        <!-- copying all resources to destination directory -->
+        <copy todir="${destination.directory}">
+            <fileset dir="${dir.base}/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+
+    </target>
+
+    <!-- compile project tests to specified directory -->
+    <target name="-compile.tests.to">
+
+        <!-- подготовка каталога -->
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${destination.directory}"/>
+        </antcall>
+
+        <!-- сначала компилируем основные классы -->
+        <antcall target="-compile.to">
+            <param name="destination.directory" value="${destination.directory}"/>
+        </antcall>
+
+        <!-- теперь тестовые классы -->
+        <javac destdir="${destination.directory}"
+               debug="${compiler.debug}"
+               optimize="${compiler.optimize}"
+               nowarn="${compiler.nowarn}"
+               deprecation="${compiler.deprecation}"
+               source="${compiler.source}"
+               target="${compiler.target}"
+               verbose="${compiler.verbose}"
+               depend="${compiler.depend}"
+               memoryMaximumSize="${compiler.max.memory}"
+               fork="true">
+
+            <classpath refid="classpath"/>
+            <classpath location="${destination.directory}"/>
+            <src refid="sourcepath.tests"/>
+            <patternset refid="ignored.files"/>
+
+        </javac>
+
+        <!-- копирование ресурсов -->
+        <copy todir="${destination.directory}">
+            <fileset dir="${dir.base}/test">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+
+    </target>
+
+    <target name="dist">
+
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${dir.build}"/>
+        </antcall>
+
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${dir.dist}"/>
+        </antcall>
+
+        <antcall target="-compile.to">
+            <param name="destination.directory" value="${dir.build}"/>
+        </antcall>
+
+        <buildnumber/>
+
+        <propertyfile file="${dir.build}/app/resources.properties">
+            <entry key="build" default="" operation="=" value="${build.number}"/>
+        </propertyfile>
+
+        <property file="${dir.build}/app/resources.properties"/>
+		
+        <mkdir dir="${dir.dist}/lib/"/>
+
+        <jar jarfile="${dir.dist}/lib/nmd.jar" compress="true">
+            <fileset dir="${dir.build}"/>
+        </jar>
+
+        <copy todir="${dir.dist}/lib/">
+            <fileset file="${dir.base}/lib/commons-codec-1.4.jar"/>
+            <fileset file="${dir.base}/lib/commons-logging-1.1.1.jar"/>
+            <fileset file="${dir.base}/lib/commons-httpclient-3.1.jar"/>
+            <fileset file="${dir.base}/lib/commons-cli-1.2.jar"/>
+            <fileset file="${dir.base}/lib/rome-1.0.jar"/>
+            <fileset file="${dir.base}/lib/jdom.jar"/>
+            <fileset file="${dir.base}/lib/log4j-1.2.15.jar"/>
+			<fileset file="${dir.base}/lib/htmlcleaner2_1.jar"/>
+			<fileset file="${dir.base}/lib/miglayout-3.7.jar"/>
+       </copy>
+
+        <delete dir="${dir.build}" includeEmptyDirs="true" quiet="true"/>
+
+        <mkdir dir="${dir.dist}/bin/"/>
+
+        <copy todir="${dir.dist}/bin/">
+            <fileset file="${dir.base}/scripts/appendcp.bat"/>
+            <fileset file="${dir.base}/scripts/nmd.bat"/>
+            <fileset file="${dir.base}/scripts/nmdlite.bat"/>
+            <fileset file="${dir.base}/scripts/nmd"/>
+            <fileset file="${dir.base}/scripts/nmdlite"/>
+        </copy>
+
+        <mkdir dir="${dir.dist}/etc/"/>
+        <copy todir="${dir.dist}/etc/">
+		<!--            <fileset file="${dir.base}/etc/defaults.properties"/>-->
+            <fileset file="${dir.base}/etc/notSupFmt.jpg"/>
+        </copy>
+		<copy file="${dir.base}/etc/defaults.properties.eg" tofile="${dir.dist}/etc/defaults.properties"/>
+		
+        <mkdir dir="${dir.dist}/log/"/>
+		
+        <mkdir dir="${dir.dist}/work/"/>
+        <mkdir dir="${dir.dist}/work/cache/"/>
+        <mkdir dir="${dir.dist}/work/debug/"/>
+        <mkdir dir="${dir.dist}/work/resources/"/>
+		
+		
+		<!-- manually create workarea structure-->
+        <mkdir dir="${dir.dist}/workarea/"/>
+
+        <mkdir dir="${dir.dist}/workarea/settings/"/>
+		<touch file="${dir.dist}/workarea/settings/default.properties"/>
+		
+        <mkdir dir="${dir.dist}/workarea/workspaces"/>
+
+        <mkdir dir="${dir.dist}/workarea/lite"/>
+        <copy file="${dir.base}/workarea/lite/lite.properties.eg" tofile="${dir.dist}/workarea/lite/lite.properties"/>
+        <copy file="${dir.base}/workarea/lite/fb2pdf.bat" todir="${dir.dist}/workarea/lite/"/>
+        <copy file="${dir.base}/workarea/lite/fb2epub.bat" todir="${dir.dist}/workarea/lite/"/>
+
+		<antcall target="-copy.dist.samples"/>
+		
+ 		<echo message="${build}"/>
+		<echo message="${version}"/>
+		<echo message="${title}"/>
+		
+		<zip destfile="${dir.dist}/${title}-${version}${build}.zip"
+			basedir="${dir.dist}"
+		/>
+		
+   </target>
+    <!-- end of project specific compilation targets & props -->
+    <!-- end of project specific compilation targets & props -->
+    <!-- end of project specific compilation targets & props -->
+    <!-- end of project specific compilation targets & props -->
+    <!-- end of project specific compilation targets & props -->
+
+
+    <!-- запуск JUnit -->
+    <!-- маска для прогона модульных тестов "**/unit/**/*TestCase.java" -->
+    <!-- маска для прогона компонентных тестов "**/comp/**/*TestCase.java" -->
+    <target name="-junit">
+
+        <!-- подготовка каталога для отчета -->
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${junit.report.directory}"/>
+        </antcall>
+
+        <!-- подготовка рабочего каталога -->
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${junit.work.directory}"/>
+        </antcall>
+
+        <!-- компиляция обычных и тестовых классов в рабочий каталог -->
+        <antcall target="-compile.tests.to">
+            <param name="destination.directory" value="${junit.work.directory}"/>
+        </antcall>
+
+        <!-- прогон тестов подходящих по маске -->
+        <!-- !!!ВАЖНО!!! параметры fork="yes" forkmode="once" позволяют уменьшить -->
+        <!-- время выполнения тестов на 30%. но если глючит - их нужно убрать-->
+        <junit printsummary="yes" fork="yes" forkmode="once">
+            <formatter type="xml"/>
+            <classpath refid="classpath"/>
+            <classpath location="${junit.work.directory}"/>
+
+            <batchtest todir="${junit.report.directory}">
+                <fileset dir="${dir.base}/test">
+                    <include name="${junit.tests.mask}"/>
+                </fileset>
+            </batchtest>
+        </junit>
+
+        <junitreport todir="${junit.report.directory}">
+            <fileset dir="${junit.report.directory}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.report.directory}"/>
+        </junitreport>
+
+        <!-- удаление рабочего каталога -->
+        <delete dir="${junit.work.directory}" includeEmptyDirs="true" quiet="true"/>
+
+    </target>
+
+
+    <target name="-cobertura">
+
+        <!-- подготовка каталога для инструментированных классов -->
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${cobertura.instrumented.directory}"/>
+        </antcall>
+
+        <!-- подготовка выходного каталога -->
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${cobertura.report.directory}"/>
+        </antcall>
+
+        <!-- подготовка рабочего каталога -->
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${cobertura.work.directory}"/>
+        </antcall>
+
+        <!-- компиляция класcов в рабочий каталог -->
+        <antcall target="-compile.tests.to">
+            <param name="destination.directory" value="${cobertura.work.directory}"/>
+        </antcall>
+
+        <!-- регистрация cobertura -->
+        <path id="cobertura.classpath">
+            <fileset dir="${cobertura.home.directory}">
+                <include name="cobertura.jar"/>
+                <include name="lib/**/*.jar"/>
+            </fileset>
+        </path>
+
+        <taskdef classpathref="cobertura.classpath" resource="tasks.properties"/>
+
+        <!--  инструментирование классов -->
+        <cobertura-instrument todir="${cobertura.instrumented.directory}"
+                              datafile="${cobertura.work.directory}/cobertura.ser">
+            <fileset dir="${cobertura.work.directory}">
+                <include name="**/*.class"/>
+            </fileset>
+        </cobertura-instrument>
+
+        <!-- запуск junit в "специальном" режиме -->
+        <!-- !!!ВАЖНО!!! параметры fork="yes" forkmode="once" позволяют уменьшить -->
+        <!-- время выполнения тестов на 30%. но если глючит - их нужно убрать-->
+        <junit fork="yes" forkmode="once">
+
+            <!-- !!!ВАЖНО!!! подключаем файл данных полученных при инструментировании -->
+            <sysproperty key="net.sourceforge.cobertura.datafile" file="${cobertura.work.directory}/cobertura.ser"/>
+
+            <!-- !!!ВАЖНО!!! инструментированные классы должны указываться самыми первыми в списке -->
+            <classpath location="${cobertura.instrumented.directory}"/>
+            <classpath refid="classpath"/>
+            <classpath location="${cobertura.work.directory}"/>
+
+            <!-- !!!ВАЖНО!!! Инструментированные классы используют классы определяемые Cobertura -->
+            <!-- поэтому их тоже необходимо подключить -->
+            <classpath refid="cobertura.classpath"/>
+
+            <!-- прогон тестов -->
+            <batchtest>
+                <fileset dir="${dir.base}/test">
+                    <include name="${cobertura.tests.mask}"/>
+                </fileset>
+            </batchtest>
+
+        </junit>
+
+        <!-- подготовка отчета -->
+        <cobertura-report format="${cobertura.report.format}" destdir="${cobertura.report.directory}"
+                          srcdir="${dir.base}/src/" datafile="${cobertura.work.directory}/cobertura.ser"/>
+
+        <!-- удаление рабочего каталога и каталога для инструментированных классов -->
+        <delete dir="${cobertura.work.directory}" includeEmptyDirs="true" quiet="true"/>
+        <delete dir="${cobertura.instrumented.directory}" includeEmptyDirs="true" quiet="true"/>
+
+    </target>
+
+
+    <target name="-pmd">
+
+        <!-- подготовка выходного каталога -->
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${pmd.work.directory}"/>
+        </antcall>
+
+        <!--  регистрация pmd -->
+        <path id="pmd.classpath">
+            <fileset dir="${pmd.home.directory}\lib\">
+                <include name="*.jar"/>
+            </fileset>
+        </path>
+
+        <taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask" classpathref="pmd.classpath"/>
+
+        <!--  запуск pmd с указанными наборами правил для генерации отчета в формате xml-->
+        <pmd>
+            <ruleset>basic</ruleset>
+            <ruleset>braces</ruleset>
+            <ruleset>codesize</ruleset>
+            <ruleset>clone</ruleset>
+            <ruleset>controversial</ruleset>
+            <ruleset>coupling</ruleset>
+            <ruleset>design</ruleset>
+            <ruleset>finalizers</ruleset>
+            <ruleset>imports</ruleset>
+            <ruleset>j2ee</ruleset>
+            <ruleset>javabeans</ruleset>
+            <ruleset>junit</ruleset>
+            <ruleset>logging-jakarta</ruleset>
+            <ruleset>logging-java</ruleset>
+            <ruleset>naming</ruleset>
+            <ruleset>optimizations</ruleset>
+            <ruleset>strictexception</ruleset>
+            <ruleset>strings</ruleset>
+            <ruleset>sunsecure</ruleset>
+            <ruleset>unusedcode</ruleset>
+            <fileset refid="analyzed.files"/>
+            <formatter type="xml" toFile="${pmd.work.directory}/pmd-report.xml"/>
+        </pmd>
+
+        <!-- преобразование отчета в html-формат -->
+        <xslt in="${pmd.work.directory}/pmd-report.xml" style="${pmd.xsl.file}"
+              out="${pmd.work.directory}/pmd-report.html"/>
+
+        <!-- удаление рабочего каталога -->
+        <delete file="${pmd.work.directory}/pmd-report.xml" quiet="true"/>
+
+    </target>
+
+
+    <!-- запуск генератора документации -->
+    <target name="-doxygen">
+
+        <!-- подготовка выходного каталога -->
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${doxygen.report.directory}"/>
+        </antcall>
+
+        <!-- запуск генератора с указанием файла конфигурации -->
+        <exec executable="${doxygen.executable.file}">
+            <arg value="${doxygen.settings.file}"/>
+        </exec>
+
+    </target>
+
+
+    <!-- запуск инструмента анализа зависимостей -->
+    <target name="-jdepend">
+
+        <!-- подготовка рабочего и выходного каталога -->
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${jdepend.report.directory}"/>
+        </antcall>
+
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${jdepend.work.directory}"/>
+        </antcall>
+
+        <!-- компиляция классов в рабочий каталог -->
+        <antcall target="-compile.to">
+            <param name="destination.directory" value="${jdepend.work.directory}"/>
+        </antcall>
+
+        <!-- регистрация задачи jdepend -->
+        <path id="jdepend.classpath">
+            <fileset dir="${jdepend.home.directory}">
+                <include name="jdepend-2.9.jar"/>
+                <include name="ant-jdepend.jar"/>
+            </fileset>
+        </path>
+
+        <taskdef name="jdepend" classname="org.apache.tools.ant.taskdefs.optional.jdepend.JDependTask"
+                 classpath="jdepend.classpath"/>
+
+        <!-- формирование отчета в xml-формате -->
+        <jdepend format="xml" outputfile="${jdepend.work.directory}/jdepend-report.xml">
+            <exclude name="java.*"/>
+            <exclude name="javax.*"/>
+            <classespath>
+                <pathelement location="${jdepend.work.directory}"/>
+            </classespath>
+        </jdepend>
+
+        <!-- получение графического варианта отчета -->
+        <xslt in="${jdepend.work.directory}/jdepend-report.xml" out="${jdepend.work.directory}/jdepend-report.dot"
+              style="${jdepend.dot.xsl}"/>
+
+        <exec executable="${jdepend.dot.home}/dot">
+            <arg value="-Tgif"/>
+            <arg value="${jdepend.work.directory}/jdepend-report.dot"/>
+            <arg value="-o"/>
+            <arg value="${jdepend.report.directory}/jdepend-report.gif"/>
+        </exec>
+
+        <!-- получение отчета в формате html -->
+        <xslt in="${jdepend.work.directory}/jdepend-report.xml" out="${jdepend.report.directory}/jdepend-report.html"
+              style="${jdepend.html.xsl}"/>
+
+        <!-- удаление рабочего каталога -->
+        <delete dir="${jdepend.work.directory}" includeEmptyDirs="true" quiet="true"/>
+
+    </target>
+
+
+    <target name="-findbugs">
+
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${findbugs.report.directory}"/>
+        </antcall>
+
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${findbugs.work.directory}"/>
+        </antcall>
+
+        <!--<property name="findbugs.home" value="${findbugs.home.directory}"/>-->
+
+        <taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask"/>
+
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${findbugs.work.directory}"/>
+        </antcall>
+
+        <!-- компиляция классов в рабочий каталог -->
+        <antcall target="-compile.to">
+            <param name="destination.directory" value="${findbugs.work.directory}"/>
+        </antcall>
+
+        <findbugs home="${findbugs.home.directory}"
+                  output="html"
+                  outputFile="${findbugs.report.file}"
+				  jvmargs="-Xmx512m">
+            <sourcePath path="${dir.base}">
+                <fileset refid="analyzed.files"/>
+            </sourcePath>
+            <class location="${findbugs.work.directory}"/>
+        </findbugs>
+
+        <delete dir="${findbugs.work.directory}" quiet="true"/>
+
+    </target>
+
+    <target name="-simian">
+
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${simian.report.directrory}"/>
+        </antcall>
+
+        <path id="simian.classpath">
+            <fileset dir="${simian.home.directrory}/bin/">
+                <include name="simian-2.2.24.jar"/>
+            </fileset>
+        </path>
+
+        <taskdef resource="simiantask.properties" classpathref="simian.classpath"/>
+
+        <simian>
+            <fileset refid="analyzed.files"/>
+            <formatter type="xml" toFile="${simian.report.directrory}/simian-log.xml"/>
+        </simian>
+
+        <xslt in="${simian.report.directrory}/simian-log.xml" out="${simian.report.file}" style="${simian.style.file}"/>
+
+        <delete file="${simian.report.directrory}/simian-log.xml" quiet="true"/>
+
+    </target>
+
+    <target name="-checkstyle">
+
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${checkstyle.report.directory}"/>
+        </antcall>
+
+        <taskdef resource="checkstyletask.properties"
+                 classpath="${checkstyle.home.directory}/checkstyle-all-5.0-beta01.jar"/>
+
+        <checkstyle config="${checkstyle.checks.file}" failOnViolation="false">
+            <fileset refid="analyzed.files"/>
+            <formatter type="plain"/>
+            <formatter type="xml" tofile="${checkstyle.report.directory}/checkstyle-report.xml"/>
+        </checkstyle>
+
+        <xslt in="${checkstyle.report.directory}/checkstyle-report.xml"
+              style="${checkstyle.style.file}"
+              out="${checkstyle.report.file}"/>
+
+        <delete file="${checkstyle.report.directory}/checkstyle-report.xml" quiet="true"/>
+
+    </target>
+
+    <target name="-cpd">
+
+        <antcall target="-prepare_dir">
+            <param name="param.dir" value="${cpd.report.directory}"/>
+        </antcall>
+
+        <taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask"/>
+
+        <cpd minimumTokenCount="100" outputFile="${cpd.report.file}">
+            <fileset refid="analyzed.files"/>
+        </cpd>
+
+    </target>
+
+    <!-- вызов junit с настройками для локальной машины -->
+    <target name="junit">
+
+        <antcall target="-junit">
+
+            <param name="junit.work.directory"
+                   value="${codetools.project.report.directory}/${codetools.junit.work.directory}"/>
+            <param name="junit.report.directory"
+                   value="${codetools.project.report.directory}/${codetools.junit.report.directory}"/>
+            <param name="junit.tests.mask" value="work/**/*Test.java"/>
+
+        </antcall>
+
+    </target>
+
+    <!-- вызов cobertura с настройками для локальной машины -->
+    <target name="cobertura">
+
+        <antcall target="-cobertura">
+
+            <param name="cobertura.home.directory" value="${codetools.cobertura.home.directory}"/>
+            <param name="cobertura.instrumented.directory"
+                   value="${codetools.project.report.directory}/${codetools.cobertura.report.directory}/intstrumented/"/>
+            <param name="cobertura.report.directory"
+                   value="${codetools.project.report.directory}/${codetools.cobertura.report.directory}/"/>
+            <param name="cobertura.report.format" value="html"/>
+            <param name="cobertura.work.directory"
+                   value="${codetools.project.report.directory}/${codetools.cobertura.report.directory}/intstrumented/"/>
+            <!-- -->
+            <param name="cobertura.tests.mask" value="work/unit/greader/ProfilesTest.java"/>
+            <!-- -->
+        </antcall>
+
+    </target>
+
+    <!-- вызов pmd с настройками для локальной машины -->
+    <target name="pmd">
+
+        <antcall target="-pmd">
+
+            <param name="pmd.home.directory" value="${codetools.pmd.home.directory}"/>
+            <param name="pmd.work.directory"
+                   value="${codetools.project.report.directory}/${codetools.pmd.report.directory}/"/>
+            <param name="pmd.xsl.file" value="${codetools.pmd.xsl.file}"/>
+
+            <!-- dont need -->
+            <param name="pmd.include.file.mask" value="**/*.java"/>
+
+        </antcall>
+
+    </target>
+
+    <!-- вызов doxygen с настройками для локальной машины -->
+    <target name="doxygen">
+
+        <antcall target="-doxygen">
+
+            <param name="doxygen.executable.file" value="${codetools.doxygen.executable.file}"/>
+            <param name="doxygen.settings.file" value="doxygen.properties"/>
+            <param name="doxygen.report.directory"
+                   value="${codetools.project.report.directory}/${codetools.doxygen.report.directory}/"/>
+
+        </antcall>
+
+    </target>
+
+    <!-- вызов jdepend с настройками для локальной машины -->
+    <target name="jdepend">
+
+        <antcall target="-jdepend">
+
+            <param name="jdepend.home.directory" value="${codetools.jdepend.home.directory}"/>
+            <param name="jdepend.work.directory"
+                   value="${codetools.project.report.directory}/${codetools.jdepend.report.directory}/work"/>
+            <param name="jdepend.report.directory"
+                   value="${codetools.project.report.directory}/${codetools.jdepend.report.directory}/"/>
+            <param name="jdepend.dot.xsl" value="${codetools.jdepend.dot.xsl}"/>
+            <param name="jdepend.dot.home" value="${codetools.jdepend.dot.home}"/>
+            <param name="jdepend.html.xsl" value="${codetools.jdepend.html.xsl}"/>
+
+        </antcall>
+
+    </target>
+
+    <target name="findbugs">
+
+        <antcall target="-findbugs">
+
+            <param name="findbugs.home.directory" value="${codetools.findbugs.home}"/>
+            <param name="findbugs.report.directory"
+                   value="${codetools.project.report.directory}/${codetools.findbugs.report.directory}/"/>
+            <param name="findbugs.report.file"
+                   value="${codetools.project.report.directory}/${codetools.findbugs.report.directory}/bcel-fb.html"/>
+            <param name="findbugs.work.directory"
+                   value="${codetools.project.report.directory}/${codetools.findbugs.report.directory}/work/"/>
+
+        </antcall>
+
+    </target>
+
+    <target name="simian">
+
+        <antcall target="-simian">
+
+            <param name="simian.home.directrory" value="${codetools.simian.home}"/>
+            <param name="simian.report.directrory"
+                   value="${codetools.project.report.directory}/${codetools.simian.report.directory}/"/>
+            <param name="simian.report.file"
+                   value="${codetools.project.report.directory}/${codetools.simian.report.directory}/simian-log.html"/>
+            <param name="simian.style.file" value="${codetools.simian.home}/simian.xsl"/>
+
+        </antcall>
+
+    </target>
+
+    <target name="checkstyle">
+
+        <antcall target="-checkstyle">
+
+            <param name="checkstyle.home.directory" value="${codetools.checkstyle.home}"/>
+            <param name="checkstyle.report.directory"
+                   value="${codetools.project.report.directory}/${codetools.checkstyle.report.directory}/"/>
+            <param name="checkstyle.report.file"
+                   value="${codetools.project.report.directory}/${codetools.checkstyle.report.directory}/checkstyle-report.html"/>
+            <param name="checkstyle.checks.file" value="${codetools.checkstyle.home}/sun_checks.xml"/>
+            <param name="checkstyle.style.file" value="${codetools.checkstyle.home}/contrib/checkstyle-simple.xsl"/>
+
+        </antcall>
+
+    </target>
+
+    <target name="cpd">
+
+        <antcall target="-cpd">
+
+            <param name="cpd.report.directory"
+                   value="${codetools.project.report.directory}/${codetools.cpd.report.directory}/"/>
+            <param name="cpd.report.file"
+                   value="${codetools.project.report.directory}/${codetools.cpd.report.directory}/cpd.txt"/>
+
+        </antcall>
+
+    </target>
+
+    <!-- формирование отчета по всем инструментам анализа кода -->
+    <target name="analyse">
+
+        <antcall target="-prepare_dir">
+
+            <param name="param.dir" value="${codetools.project.report.directory}"/>
+
+        </antcall>
+
+        <antcall target="junit"/>
+        <antcall target="cobertura"/>
+        <antcall target="pmd"/>
+        <antcall target="doxygen"/>
+        <antcall target="jdepend"/>
+        <antcall target="cpd"/>
+        <antcall target="checkstyle"/>
+        <antcall target="simian"/>
+        <antcall target="findbugs"/>
+
+    </target>
+
+
+</project>

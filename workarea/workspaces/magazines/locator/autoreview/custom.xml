@@ -1,0 +1,16 @@
+<processor>
+
+	<load out="titlePage">
+		<url>${url}</url>
+	</load>
+	
+	<xPath in="titlePage" out="links">
+		<expression>/body/table/tbody/tr/td/div/table/tbody/tr[1]/td[2]/table[3]/tbody/tr[1]/td[1]/table[1]/tbody</expression>
+	</xPath>
+	
+	<getGroup in="links" >
+		<pattern><![CDATA[<a href="(/archive/.+?)" class="leftmenu">]]></pattern>
+		<occurrence>-1</occurrence>
+	</getGroup>
+	
+</processor>

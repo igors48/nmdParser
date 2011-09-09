@@ -1,0 +1,16 @@
+<processor>
+
+	<xPath out="content">
+		<expression>//body[@id='homepage']/div[@id='centering']/div[@class='h-wrapper']/div[@id='lcol']/div/div[@id='news']</expression> 
+	</xPath>
+	
+<!--	<removeTag in="content">
+		<pattern><![CDATA[<script ]]></pattern>
+		<occurrence>0</occurrence>
+	</removeTag> -->
+	
+	<getGroup in="content">
+		<pattern><![CDATA[<td class="news_cnt">(.+?)<script language="javascript" type="text/javascript">]]></pattern>
+	</getGroup>
+	
+</processor>

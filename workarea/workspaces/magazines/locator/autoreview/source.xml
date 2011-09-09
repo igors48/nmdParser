@@ -1,0 +1,9 @@
+<source>
+
+	<store days="0"/>
+	
+	<custom id="autoreview.custom"/>
+	
+	<processor id="autoreview.source-processor"/>
+	
+</source>

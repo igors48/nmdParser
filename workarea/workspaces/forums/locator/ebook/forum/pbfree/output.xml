@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="cp1251"?>
+	<!-- Pocket Book Free-->
+
+<output channel="ebook.forum.pbfree.channel" branch="ebook.forum.pbfree">
+	<one-to-one/>
+</output>

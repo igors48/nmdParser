@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="cp1251"?>
+	<!-- Общий раздел по устройствам для чтения-->
+
+<output channel="ebook.forum.commdev.channel" branch="ebook.forum.commdev">
+	<one-to-one/>
+</output>

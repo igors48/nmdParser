@@ -1,0 +1,3 @@
+<output channel="3DNewsEditorial.channel" branch="tech" resolveImageLinks="no">
+    <many-to-one name="3DNewsEditorial"/>
+</output>

@@ -1,0 +1,3 @@
+<output channel="vs.issue_channel" linksAsFootnotes="no" resolveImageLinks="yes" fromNewToOld="no" branch="VokrugSveta">
+	<many-to-one name="VokrugSveta${issue|0}"/>
+</output>

@@ -1,0 +1,16 @@
+<processor>
+
+	<load out="page">
+		<url>http://www.artlebedev.ru/kovodstvo/sections/</url>
+	</load>
+	
+    <xPath in="page" out="links">
+        <expression>/html/body/table[2]/tbody</expression>
+    </xPath>
+	
+    <getGroup in="links">
+        <pattern><![CDATA[<a href="(/kovodstvo/sections/\d+/)">]]></pattern> 
+        <occurrence>-1</occurrence>
+    </getGroup>
+	
+</processor>

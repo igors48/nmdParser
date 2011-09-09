@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="cp1251"?>
+	<!-- iRex iLiad-->
+
+<output channel="ebook.forum.irexiliad.channel" branch="ebook.forum.irexiliad">
+	<one-to-one/>
+</output>

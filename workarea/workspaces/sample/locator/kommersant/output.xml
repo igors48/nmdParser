@@ -1,0 +1,3 @@
+<output channel="kommersant.channel" branch="news">
+	<many-to-one name="kommersant"/>
+</output>

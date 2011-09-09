@@ -1,0 +1,7 @@
+<processor>
+
+	<set value="http://static.springsource.org/spring/docs/2.5.x/reference/" out="prefix"/>
+	
+	<concat first="prefix" second="input" />
+	
+</processor>

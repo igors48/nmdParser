@@ -1,0 +1,5 @@
+<processor>
+    <xPath>
+        <expression>//body</expression>
+    </xPath>
+</processor>

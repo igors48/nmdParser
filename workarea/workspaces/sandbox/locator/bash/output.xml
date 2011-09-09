@@ -1,0 +1,5 @@
+<!--<output channel="bash.channel" storage="common.storage.root" branch="humor">-->
+<output channel="bash.channel" >
+		<many-to-one name="bash"/>
+		<forEach path="D:\Program Files\fb2pdf\fb2pdf.bat" command="%n %d" wait="30000" />
+</output>

@@ -1,0 +1,3 @@
+<output channel="news.channels.upravda-channel" branch="news">
+	<many-to-one name="upravda"/>
+</output>

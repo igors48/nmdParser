@@ -1,0 +1,6 @@
+<processor>
+	<extractTag>
+		<pattern><![CDATA[<td class="layout_center_column">]]></pattern> 
+		<occurrence>0</occurrence>
+	</extractTag>
+</processor>

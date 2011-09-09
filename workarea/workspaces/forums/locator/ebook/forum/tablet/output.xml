@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="cp1251"?>
+	<!-- Планшетные устройства-->
+
+<output channel="ebook.forum.tablet.channel" branch="ebook.forum.tablet">
+	<one-to-one/>
+</output>

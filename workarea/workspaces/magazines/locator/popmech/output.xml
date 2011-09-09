@@ -1,0 +1,3 @@
+<output channel="popmech.channel" branch="popmech" removeExists="no">
+	<many-to-one name="${name}"/>
+</output>

@@ -1,0 +1,6 @@
+<processor>
+	<extractTag>
+		<pattern><![CDATA[<div class="article">]]></pattern> 
+		<occurrence>0</occurrence>
+	</extractTag>
+</processor>

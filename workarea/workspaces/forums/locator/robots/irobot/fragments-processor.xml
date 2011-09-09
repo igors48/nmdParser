@@ -1,0 +1,8 @@
+<processor>
+
+	<extractTag>
+		<pattern><![CDATA[<tr id="M\d+?">]]></pattern>
+		<occurrence>-1</occurrence>
+	</extractTag>
+	
+</processor>

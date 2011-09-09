@@ -1,0 +1,7 @@
+<processor>
+
+	<set value="http://www.vokrugsveta.ru" out="host"/>
+	
+	<concat first="host" second="input" out="output"/>
+
+</processor>

@@ -1,0 +1,3 @@
+<simpler feedUrl="http://www.f5.ru/rss/columnists" coverUrl="http://www.f5.ru//images/f5.gif" storeDays="7" branch="entertaitment" outName="f5" fromNewToOld="yes">
+<xPath>//div[@class='post-data clearfix']/table/tbody/tr/td</xPath>
+</simpler>

@@ -1,0 +1,3 @@
+<output channel="lebedev.lynch.channel" branch="entertaitment">
+	<many-to-one name="lebedev-lynch"/>
+</output>

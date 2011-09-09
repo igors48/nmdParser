@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="cp1251"?>
+
+<processor>
+
+	<xPath>
+        <expression>//a[@class="fn nickname url"]/span</expression>
+    </xPath>
+	
+</processor>

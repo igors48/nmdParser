@@ -1,0 +1,3 @@
+<output channel="lisp.channel" branch="lisp" storage="common.storage.root" removeExists="no">
+	<many-to-one name="lisp"/>
+</output>

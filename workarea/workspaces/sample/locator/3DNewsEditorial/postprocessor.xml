@@ -1,0 +1,7 @@
+<processor>
+
+	<set value="print" out="print"/>
+	
+	<concat first="input" second="print"/>
+	
+</processor>

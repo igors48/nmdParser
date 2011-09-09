@@ -1,0 +1,6 @@
+<processor>
+	<getGroup>
+		<pattern><![CDATA[(^.+?:\d+?):\d+?$]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+</processor>

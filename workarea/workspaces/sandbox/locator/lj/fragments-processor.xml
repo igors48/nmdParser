@@ -1,0 +1,8 @@
+<processor>
+
+	<getGroup>
+		<pattern><![CDATA[http://${name}\.livejournal\.com/(\d+?)\.html\?mode=reply]]></pattern> 
+		<occurrence>-1</occurrence>
+	</getGroup>	
+	
+</processor>

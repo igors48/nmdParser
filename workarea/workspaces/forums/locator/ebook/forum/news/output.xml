@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="cp1251"?>
+	<!-- Новости-->
+
+<output channel="ebook.forum.news.channel" branch="ebook.forum.news">
+	<one-to-one/>
+</output>

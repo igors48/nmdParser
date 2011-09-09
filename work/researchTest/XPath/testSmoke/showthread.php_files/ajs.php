@@ -1,0 +1,13 @@
+var OX_c6c0f32b = '';
+OX_c6c0f32b += "<"+"script type=\"text/javascript\"><"+"!--\n";
+OX_c6c0f32b += "google_ad_client = \"pub-2741014794461050\";\n";
+OX_c6c0f32b += "/* 728x90, создано 15.01.09 */\n";
+OX_c6c0f32b += "google_ad_slot = \"0149922349\";\n";
+OX_c6c0f32b += "google_ad_width = 728;\n";
+OX_c6c0f32b += "google_ad_height = 90;\n";
+OX_c6c0f32b += "//-->\n";
+OX_c6c0f32b += "<"+"/script>\n";
+OX_c6c0f32b += "<"+"script type=\"text/javascript\"\n";
+OX_c6c0f32b += "src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">\n";
+OX_c6c0f32b += "<"+"/script><"+"div id=\'beacon_3657aaa85d\' style=\'position: absolute; left: 0px; top: 0px; visibility: hidden;\'><"+"img src=\'http://www.kharkovforum.com/reklama/www/delivery/lg.php?bannerid=2&amp;campaignid=1&amp;zoneid=1&amp;loc=http%3A%2F%2Fkharkovforum.com%2Fshowthread.php%3Ft%3D477051&amp;referer=http%3A%2F%2Fkharkovforum.com%2Fforumdisplay.php%3Fs%3Dd84c1bb678c71b0c266157322af87749%26f%3D3&amp;cb=3657aaa85d\' width=\'0\' height=\'0\' alt=\'\' style=\'width: 0px; height: 0px;\' /><"+"/div>\n";
+document.write(OX_c6c0f32b);

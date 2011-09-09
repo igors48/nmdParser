@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="cp1251"?>
+	<!-- Open Ink Pot-->
+
+<output channel="ebook.forum.openinkpot.channel" branch="ebook.forum.openinkpot">
+	<one-to-one/>
+</output>

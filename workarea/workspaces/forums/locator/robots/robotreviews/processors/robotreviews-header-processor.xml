@@ -1,0 +1,19 @@
+<processor>
+
+	<getGroup out="title">
+		<pattern><![CDATA[<title>(.*?)</title>]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+	
+<!--	
+	<getGroup in="title">
+		<pattern><![CDATA[(.*?) - Robot Reviews]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+-->	
+	<getGroup in="title">
+		<pattern><![CDATA[(.*) &bull;\s.*]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+	
+</processor>

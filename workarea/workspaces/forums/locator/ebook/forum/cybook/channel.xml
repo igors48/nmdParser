@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="cp1251"?>
+	<!-- Bookeen CyBook-->
+
+<channel source="ebook.forum.cybook.source" header="ebook.forum.header-processor" interpreter="ebook.forum.interpreter" lastitems="100" forced="yes"/>

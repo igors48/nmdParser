@@ -1,0 +1,3 @@
+<output channel="weather.gismeteo.channel" branch="weather">
+	<many-to-one name="gismeteo"/>
+</output>

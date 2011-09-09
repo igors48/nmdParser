@@ -1,0 +1,7 @@
+<processor>
+	
+	<xPath>
+		<expression>/body/table/tbody/tr/td/div/table/tbody/tr[1]/td[2]/table[3]/tbody/tr[1]/td[3]/div[@id='cnt']</expression>
+	</xPath>
+	
+</processor>

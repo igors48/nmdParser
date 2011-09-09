@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="cp1251"?>
+	<!-- Barnes & Noble-->
+
+<output channel="ebook.forum.barnesnoble.channel" branch="ebook.forum.barnesnoble">
+	<one-to-one/>
+</output>

@@ -1,0 +1,24 @@
+<processor>
+
+	<extractTag out="date">
+		<pattern><![CDATA[<td class="msg_date_cell]]></pattern> 
+		<occurrence>0</occurrence>
+	</extractTag>
+	
+	<getGroup in="date" out="datePart">
+		<pattern><![CDATA[<span class=date_text>(.+?)</span>]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+	
+	<getGroup in="date" out="timePart">
+		<pattern><![CDATA[<span class=time_text>(.+?)</span>]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+	
+	<set value=" " out="space"/>
+	
+	<concat first="datePart" second="space" out="date"/>
+	
+	<concat first="date" second="timePart"/>
+	
+</processor>

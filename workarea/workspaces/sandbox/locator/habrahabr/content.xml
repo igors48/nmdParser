@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="cp1251"?>
+
+<processor>
+
+	<xPath>
+		<expression>//div[@class='content']</expression>
+	</xPath>
+	
+</processor>

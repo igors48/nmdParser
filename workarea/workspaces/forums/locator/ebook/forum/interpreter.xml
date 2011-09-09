@@ -1,0 +1,12 @@
+<interpreter pages="ebook.forum.pages-processor" fragments="ebook.forum.fragments-processor">
+
+	<fragment 
+		nick="ebook.forum.nick-processor" 
+		avatar="ebook.forum.avatar-processor" 
+		info="ebook.forum.info-processor" 
+		content="ebook.forum.content-processor"
+		dateExtractor="ebook.forum.date-processor"
+		dateParser="ebook.forum.date-parser"
+	/>
+	
+</interpreter>

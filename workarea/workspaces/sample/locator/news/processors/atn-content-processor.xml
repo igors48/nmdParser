@@ -1,0 +1,6 @@
+<processor>
+	<getGroup>
+		<pattern><![CDATA[<a href="category.php(.*?):</h1>]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+</processor>

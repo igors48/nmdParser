@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="cp1251"?>
+
+<processor>
+
+	<xPath out="pages">
+		<expression>//td[@id='mbodyline']/table[2]/tbody/tr/td[1]/span[@class='gensmall']/b</expression>
+	</xPath>
+	
+	<getGroup in="pages" out="maxPage">
+		<!-- здесь не два пробела, а два &nbsp; -->
+		<pattern><![CDATA[">(\d+)</a>  <a]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+	
+	<dec in="maxPage" out="maxPage"/>
+
+	<!-- из адреса второй страницы можно узнать количество постов на странице -->
+	<xPath out="secondPage" mode="tag">
+		<expression>//td[@id='mbodyline']/table[2]/tbody/tr/td[1]/span[@class='gensmall']/b/a[1]</expression>
+	</xPath>
+	
+	<getGroup in="secondPage" out="mult">
+		<pattern><![CDATA[start=(\d+)]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+	
+	<set value="&amp;start=*" out="wildcard"/>
+	
+	<concat first="url" second="wildcard" out="topicUrl"/>
+	
+	<set value="0" out="start" />
+	<set value="1" out="step" />
+	
+	<sequence pattern="topicUrl" start="start" stop="maxPage" step="step" mult="mult"/> 
+	
+</processor>

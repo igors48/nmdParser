@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="cp1251"?>
+	<!-- АзБука-->
+
+<output channel="ebook.forum.azbooka.channel" branch="ebook.forum.azbooka">
+	<one-to-one/>
+</output>

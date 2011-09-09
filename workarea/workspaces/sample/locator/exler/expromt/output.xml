@@ -1,0 +1,3 @@
+<output channel="exler.expromt.channel" branch="entertaitment">
+	<many-to-one name="exler-expromt"/>
+</output>

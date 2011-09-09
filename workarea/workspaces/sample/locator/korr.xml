@@ -1,0 +1,3 @@
+<simpler feedUrl="http://k.img.com.ua/rss/ru/events.xml" coverUrl="http://k.img.com.ua/static/img/main/logo.gif" storeDays="7" branch="" outName="korr" fromNewToOld="yes">
+<xPath>//div[@class='bigcol fl']</xPath>
+</simpler>

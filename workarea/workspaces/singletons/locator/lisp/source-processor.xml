@@ -1,0 +1,7 @@
+<processor>
+
+	<set value="http://lisper.ru" out="baseUrl"/>
+	
+	<concat first="baseUrl" second="input"/>
+	
+</processor>	

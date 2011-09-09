@@ -1,0 +1,7 @@
+<processor>
+
+	<getGroup>
+		<pattern><![CDATA[<td class=normal align=left>(.+?)<td class=guestbook>]]></pattern>
+	</getGroup>
+	
+</processor>

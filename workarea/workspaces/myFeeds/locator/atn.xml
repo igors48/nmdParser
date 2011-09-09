@@ -1,0 +1,3 @@
+<simpler feedUrl="http://atn.kharkov.ru/rss/atn.rss" coverUrl="http://atn.kharkov.ua/img/atn_logo_ny.gif" storeDays="7" branch="" outName="atn" fromNewToOld="no">
+<xPath>//td[@id='main']</xPath>
+</simpler>

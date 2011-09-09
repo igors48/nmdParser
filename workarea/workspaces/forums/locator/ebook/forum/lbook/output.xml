@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="cp1251"?>
+	<!-- LBook, Jinke-->
+
+<output channel="ebook.forum.lbook.channel" branch="ebook.forum.lbook">
+	<one-to-one/>
+</output>

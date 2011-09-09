@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="cp1251"?>
+	<!-- ExPlay-->
+
+<output channel="ebook.forum.explay.channel" branch="ebook.forum.explay">
+	<one-to-one/>
+</output>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="cp1251"?>
+
+<processor>
+
+<load out="page"/>
+
+<getGroup>
+	<pattern><![CDATA[<a href="(.+?)"/>]]></pattern>
+</getGroup>	
+
+</processor>

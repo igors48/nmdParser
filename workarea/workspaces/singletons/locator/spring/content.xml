@@ -1,0 +1,7 @@
+<processor>
+
+    <xPath>
+        <expression>/html/body/div[@class='chapter']</expression>
+    </xPath>
+	
+</processor>

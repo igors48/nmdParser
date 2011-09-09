@@ -1,0 +1,3 @@
+<output channel="zadolbali.channel" branch="humor">
+    <many-to-one name="zadolbali"/>
+</output>

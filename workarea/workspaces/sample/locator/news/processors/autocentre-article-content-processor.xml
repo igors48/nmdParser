@@ -1,0 +1,6 @@
+<processor>
+	<getGroup>
+		<pattern><![CDATA[<div id="article" class="magazines">(.*?)id="comments-block" class="colorGreyLight"]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+</processor>

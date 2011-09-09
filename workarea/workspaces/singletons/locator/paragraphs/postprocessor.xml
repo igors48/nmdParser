@@ -1,0 +1,7 @@
+<processor>
+
+	<set value="http://www.artlebedev.ru" out="prefix"/>
+	
+	<concat first="prefix" second="input" />
+	
+</processor>

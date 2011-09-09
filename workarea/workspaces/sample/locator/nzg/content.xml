@@ -1,0 +1,18 @@
+<processor>
+
+    <getGroup out="print">
+        <pattern><![CDATA[<a href="(/printed/.+?)" class="sml print">]]></pattern> 
+        <occurrence>0</occurrence>
+    </getGroup>
+	
+	<set value="http://www.ng.ru" out="prefix"/>
+
+	<concat first="prefix" second="print" out="address"/>
+	
+	<load in="address" out="content"/>
+
+    <xPath in="content">
+        <expression>//div[@class='text']</expression>
+    </xPath>
+
+</processor>

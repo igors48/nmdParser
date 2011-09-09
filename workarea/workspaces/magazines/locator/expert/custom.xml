@@ -1,0 +1,16 @@
+<processor>
+
+	<load out="page">
+		<url>${url}</url>
+	</load>
+	
+	<xPath in="page" out="contents">
+		<expression>/body/center/table[2]/tbody/tr[3]/td[3]</expression>
+	</xPath>
+	
+	<getGroup in="contents">
+		<pattern><![CDATA[<a href=\"(/articles/\d+/\d+/\d+/)\" class=]]></pattern>
+		<occurrence>-1</occurrence>
+	</getGroup>
+	
+</processor>

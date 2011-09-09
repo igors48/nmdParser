@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="cp1251"?>
+
+<source>
+
+	<store days="7"/>
+	
+	<!-- Подключение определяемого пользователем источника модификаций -->
+	<custom id="dt.rss-loader"/>
+	
+</source>

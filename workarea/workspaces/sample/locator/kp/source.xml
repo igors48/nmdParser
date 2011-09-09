@@ -1,0 +1,5 @@
+<source>
+	<rss>http://kp.ua/rss/feed.xml</rss> 
+	<processor id="kp.postprocessor"/>
+	<store days="7"/>
+</source>

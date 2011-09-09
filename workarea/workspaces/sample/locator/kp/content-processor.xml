@@ -1,0 +1,7 @@
+<processor>
+
+	<xPath>
+		<expression>/body/div[@class='print-all']/div[@id='state']</expression>
+	</xPath>
+
+</processor>

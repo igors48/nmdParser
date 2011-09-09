@@ -1,0 +1,8 @@
+<processor>
+	
+	<getGroup>
+		<pattern><![CDATA[<td class=normal align=left>(.+?)<hr noshade]]></pattern>
+	</getGroup>
+	
+	
+</processor>

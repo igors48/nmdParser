@@ -1,0 +1,7 @@
+<processor>
+	
+	<set value="print/" out="postfix"/>
+		
+	<concat first="input" second="postfix"/>
+	
+</processor>

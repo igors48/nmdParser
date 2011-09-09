@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="cp1251"?>
+
+<output channel="wiki.channel" branch="wiki" linksAsFootnotes="no" resolveImageLinks="no">
+	<!-- Перевод линков в ссылки отключен из-за того, что линки в Википедии - escaped и занимают по пол экрана V3-->
+	<!-- Обработка ссылок на изображения отключена, из-за подробностей Вики движка -->
+	<one-to-one/>
+</output>

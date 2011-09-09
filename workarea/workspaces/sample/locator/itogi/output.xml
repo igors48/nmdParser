@@ -1,0 +1,3 @@
+<output channel="itogi.channel" branch="news" linksAsFootnotes="no">
+    <many-to-one name="itogi"/>
+</output>

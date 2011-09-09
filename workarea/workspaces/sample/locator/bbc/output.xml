@@ -1,0 +1,3 @@
+<output channel="bbc.channel" branch="bbc">
+    <many-to-one name="bbc"/>
+</output>

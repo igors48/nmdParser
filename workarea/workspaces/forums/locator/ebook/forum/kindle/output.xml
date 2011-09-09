@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="cp1251"?>
+	<!--  Amazon Kindle-->
+
+<output channel="ebook.forum.kindle.channel" branch="ebook.forum.kindle">
+	<one-to-one/>
+</output>

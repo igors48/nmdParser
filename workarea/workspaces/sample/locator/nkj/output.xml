@@ -1,0 +1,3 @@
+<output channel="nkj.channel" branch="science">
+	<many-to-one name="nkj"/>
+</output>

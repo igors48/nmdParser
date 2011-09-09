@@ -1,0 +1,8 @@
+<processor>
+
+	<set value="http://zavtra.ru/cgi//veil//data/zavtra/09/830/" out="base"/>
+        
+	
+	<concat first="base" second="input"/>
+	
+</processor>

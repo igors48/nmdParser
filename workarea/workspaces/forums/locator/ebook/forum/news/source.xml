@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="cp1251"?>
+	<!-- Новости-->
+
+<source>
+	
+	<store days="7"/>
+	
+	<rss>http://www.the-ebook.org/forum/rss.php?f=6</rss>
+	
+	<processor id="ebook.forum.source-processor"/> 
+	
+</source>

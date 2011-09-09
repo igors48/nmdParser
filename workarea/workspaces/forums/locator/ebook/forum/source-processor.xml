@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="cp1251"?>
+
+<processor>
+
+	<load out="image"/>
+
+	<getGroup in="image" out="topic">
+		<pattern><![CDATA[<a class="maintitle" href="viewtopic.php\?(t=\d+?)&amp;start=]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+	
+	<getGroup out="base">
+		<pattern><![CDATA[(.+?)p=.+?]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+	
+	<concat first="base" second="topic"/>
+
+</processor>

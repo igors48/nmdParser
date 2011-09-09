@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="cp1251"?>
+	<!-- PDA-->
+
+<output channel="ebook.forum.pda.channel" branch="ebook.forum.pda">
+	<one-to-one/>
+</output>

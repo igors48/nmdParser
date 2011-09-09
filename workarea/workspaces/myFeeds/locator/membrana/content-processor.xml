@@ -1,0 +1,5 @@
+<processor>
+	<xPath>
+		<expression>//div[@class='article ']</expression>
+	</xPath>	
+</processor>

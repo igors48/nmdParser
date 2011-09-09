@@ -1,0 +1,3 @@
+<output channel="rbc.funs.channel" branch="rbc">
+    <many-to-one name="funs"/>
+</output>

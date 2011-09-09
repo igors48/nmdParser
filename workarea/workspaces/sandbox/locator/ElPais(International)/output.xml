@@ -1,0 +1,3 @@
+<output channel="ElPais(International).channel" branch="ElPais(International)">
+    <many-to-one name="ElPais(International)"/>
+</output>

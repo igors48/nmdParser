@@ -1,0 +1,11 @@
+<interpreter pages="ixbtforum.processors.ixbt-thread-pages-processor" fragments="ixbtforum.processors.ixbt-thread-fragments-processor">
+
+	<fragment 
+		nick="ixbtforum.processors.ixbt-thread-nick-processor" 
+		info="ixbtforum.processors.ixbt-thread-info-processor" 
+		content="ixbtforum.processors.ixbt-thread-content-processor"
+		dateExtractor="ixbtforum.processors.ixbt-thread-date-processor"
+		dateParser="ixbtforum.dateparsers.ixbt-thread-date-parser"
+	/>
+	
+</interpreter>

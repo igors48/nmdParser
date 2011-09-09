@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="cp1251"?>
+
+<processor>
+
+	<xPath out="pages">
+		<expression>/body/div[1]/div[@class='page']/div/table[2]/tbody/tr/td[2]/div[@class='pagenav']/table[@class='tborder']/tbody/tr/td[@class='vbmenu_control'][position()=1]</expression>
+	</xPath>
+	
+	<getGroup out="maxPage">
+		<pattern><![CDATA[Страница \d+ из (\d+)]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+	
+	<set value="&amp;page=" out="postfix"/>
+	<set value="*" out="wildcard"/>
+	
+	<concat first="url" second="postfix" out="topicUrl"/>
+	
+	<concat first="topicUrl" second="wildcard" out="topicUrl"/>
+	
+	<set value="1" out="start" />
+	<set value="1" out="step" />
+	<set value="1" out="mult" />
+	
+	<sequence pattern="topicUrl" start="start" stop="maxPage" step="step" mult="mult"/>
+	
+</processor>

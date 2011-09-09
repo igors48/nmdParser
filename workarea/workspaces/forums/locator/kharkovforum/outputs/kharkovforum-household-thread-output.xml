@@ -1,0 +1,3 @@
+<output channel="kharkovforum.channels.kharkovforum-household-channel" branch="kharkovforum.household" storage="common.storage.root">
+	<one-to-one/>
+</output>

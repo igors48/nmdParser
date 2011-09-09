@@ -1,0 +1,16 @@
+<dateParser>
+
+	<standard>
+		<pattern><![CDATA[dd-MM-yyyy, hh:mm a]]></pattern>
+		<months>January February March April May June July August September October November December</months>
+	</standard>	
+	
+<!--	<yesterday><![CDATA[^Yesterday.*]]></yesterday>
+	
+	<today><![CDATA[^Today.*]]></today>
+	
+	<minutesAgo><![CDATA[.* minutes ago$]]></minutesAgo>
+	
+	<lessThanMinute><![CDATA[.*less than a minute.*]]></lessThanMinute> -->
+	
+</dateParser>

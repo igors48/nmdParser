@@ -1,0 +1,11 @@
+reports
+dist
+doc
+log
+out
+*.log
+*.iml
+*.ipr
+*.iws
+*.rar
+

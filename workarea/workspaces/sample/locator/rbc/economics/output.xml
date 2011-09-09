@@ -1,0 +1,3 @@
+<output channel="rbc.economics.channel" branch="rbc">
+    <many-to-one name="economics"/>
+</output>

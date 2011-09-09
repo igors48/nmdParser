@@ -1,0 +1,8 @@
+<processor>
+
+	<extractTag>
+		<pattern><![CDATA[<td class="msg_user_cell" width="150" valign=top>]]></pattern> 
+		<occurrence>0</occurrence>
+	</extractTag>
+	
+</processor>

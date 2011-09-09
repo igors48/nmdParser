@@ -1,0 +1,35 @@
+package constructor.objects.channel.core;
+
+import dated.item.modification.Modification;
+import downloader.BatchLoader;
+
+/**
+ * »нтерфейс анализатора канала. «адача - каким-либо законным образом
+ * получить заголовок канала.
+ *
+ * @author Igor Usenko
+ *         Date: 31.12.2008
+ */
+public interface ChannelAnalyser {
+
+    //todo _coverUrl вроде как и не в контексте
+    ChannelDataHeader getHeader(Modification _modification, BatchLoader _batchLoader, String _coverUrl, long _pauseBetweeenRequests) throws ChannelAnalyserException;
+
+    public class ChannelAnalyserException extends Exception {
+
+        public ChannelAnalyserException() {
+        }
+
+        public ChannelAnalyserException(final String _s) {
+            super(_s);
+        }
+
+        public ChannelAnalyserException(final String _s, final Throwable _throwable) {
+            super(_s, _throwable);
+        }
+
+        public ChannelAnalyserException(final Throwable _throwable) {
+            super(_throwable);
+        }
+    }
+}

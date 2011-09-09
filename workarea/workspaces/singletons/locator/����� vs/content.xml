@@ -1,0 +1,13 @@
+<processor>
+
+	<set value="print" out="postfix"/>
+
+	<concat first="url" second="postfix" out="print_version_url"/>
+
+	<load in="print_version_url" out="print_version_content"/>
+
+	<xPath in="print_version_content">
+		<expression>//div[@class='catalog-element']</expression>
+	</xPath>
+	
+</processor>

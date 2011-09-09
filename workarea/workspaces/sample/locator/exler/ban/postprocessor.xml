@@ -1,0 +1,11 @@
+<processor>
+
+	<getGroup out="page">
+		<pattern><![CDATA[http://www.exler.ru/bannizm/(.*)$]]></pattern>
+	</getGroup>
+	
+	<set value="http://www.exler.ru/bannizm/print.phtml?url=" out="base"/>
+	
+	<concat first="base" second="page"/>
+	
+</processor>

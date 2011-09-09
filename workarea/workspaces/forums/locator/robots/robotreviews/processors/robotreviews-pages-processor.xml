@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="cp1251"?>
+
+<processor>
+
+	<xPath out="pages">
+		<expression>//body[@class='section-viewtopic ltr']/div[@id='wrap']/div[@class='border-left']/div[@class='border-right']/div[@class='border-top']/div[@class='border-top-left']/div[@class='border-top-right']/div[@class='inside']/div[@id='page-body']/div[@class='topic-actions']/div[@class='pagination']/a</expression>
+	</xPath>
+	
+	<getGroup out="maxPage">
+		<pattern><![CDATA[Page <strong>\d+</strong> of <strong>(\d+)</strong>]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+	
+	<dec in="maxPage" out="maxPage"/>
+	
+	<set value="&amp;start=" out="postfix"/>
+	<set value="*" out="wildcard"/>
+	
+	<concat first="url" second="postfix" out="topicUrl"/>
+	
+	<concat first="topicUrl" second="wildcard" out="topicUrl"/>
+	
+	<set value="0" out="start" />
+	<set value="1" out="step" />
+	<set value="20" out="mult" />
+	
+	<sequence pattern="topicUrl" start="start" stop="maxPage" step="step" mult="mult"/>
+	
+</processor>

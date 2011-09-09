@@ -1,0 +1,3 @@
+<output channel="rbc.incidents.channel" branch="rbc">
+    <many-to-one name="incidents"/>
+</output>

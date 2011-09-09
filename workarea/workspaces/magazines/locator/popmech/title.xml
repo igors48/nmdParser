@@ -1,0 +1,7 @@
+<processor>
+	
+	<xPath>
+		<expression>//h1[@class='h1_print']</expression>
+	</xPath>
+	
+</processor>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="cp1251"?>
+	<!-- Rocket eBook, REB-->
+
+<output channel="ebook.forum.reb.channel" branch="ebook.forum.reb">
+	<one-to-one/>
+</output>

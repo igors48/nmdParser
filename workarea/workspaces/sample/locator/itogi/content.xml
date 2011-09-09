@@ -1,0 +1,13 @@
+<processor>
+
+    <xPath out="article">
+        <expression>//td[@class='articleColumn']/div/table[1]</expression>
+    </xPath>
+
+    <xPath out="comments">
+        <expression>//td[@class='articleColumn']/div/div</expression>
+    </xPath>
+	
+	<concat first="article" second="comments"/>
+
+</processor>

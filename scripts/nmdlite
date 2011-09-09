@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# This shell script takes care of starting the nmd.
+# 
+
+#JAVA_HOME=/usr/jdk/latest/
+
+WORK_DIRECTORY=.
+
+        VM_ARGV="-Djava.endorsed.dirs=$WORK_DIRECTORY/lib \
+		 -Dconsole.charset=cp866 \
+         -Dwork.dir=$WORK_DIRECTORY \
+		 -Xmx1024m \
+		 -classpath $WORK_DIRECTORY/lib/ "
+
+        CUR_DIR=$PWD
+	
+        cd ..
+
+        cmd="$JAVA_HOME/bin/java $VM_ARGV app.NmdIuiApplication $*"
+
+	$cmd
+	
+	cd $CUR_DIR
+
+exit $?

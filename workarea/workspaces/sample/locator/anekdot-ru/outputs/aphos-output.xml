@@ -1,0 +1,3 @@
+<output channel="anekdot-ru.channels.aphos-channel" branch="humor.anekdot-ru">
+	<many-to-one name="aphos"/>
+</output>

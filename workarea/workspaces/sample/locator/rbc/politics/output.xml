@@ -1,0 +1,3 @@
+<output channel="rbc.politics.channel" branch="rbc">
+    <many-to-one name="politics"/>
+</output>

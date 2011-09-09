@@ -1,0 +1,5 @@
+<source>
+	<store days="4"/>
+	<rss><![CDATA[http://www.kharkovforum.com/external.php?type=RSS2&forumids=46]]></rss>
+	<processor id="kharkovforum.processors.kharkovforum-thread-source-processor"/>
+</source>

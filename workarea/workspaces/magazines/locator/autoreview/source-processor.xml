@@ -1,0 +1,7 @@
+<processor>
+
+	<set value="http://www.autoreview.ru" out="baseUrl"/>
+	
+	<concat first="baseUrl" second="input"/>
+	
+</processor>	

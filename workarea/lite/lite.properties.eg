@@ -1,0 +1,14 @@
+#
+#Tue Nov 16 23:25:43 EET 2010
+gui.editor.one.per.file=false
+gui.fb2.viewer.path=
+gui.window.height=500
+gui.fb2.viewer.one.per.file=true
+gui.startup.workspace.name=
+gui.editor.path=
+gui.show.external.tools.warning=true
+gui.window.y=150
+gui.window.x=150
+gui.window.width=454
+gui.external.postprocessor.enabled=false
+

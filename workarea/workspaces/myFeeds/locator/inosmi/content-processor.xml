@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="cp1251"?>
+
+<processor>
+
+	<firstOne>
+	
+		<xPath>
+			<expression>//div[@class='text_article']</expression>
+		</xPath>
+		
+		<xPath>
+			<expression>//div[@class='topbox']</expression>
+		</xPath>
+		
+	</firstOne>
+	
+</processor>

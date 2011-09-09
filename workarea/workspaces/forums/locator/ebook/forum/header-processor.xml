@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="cp1251"?>
+
+<processor>
+
+	<getGroup out="title">
+		<pattern><![CDATA[<title>(.*?)</title>]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+	
+	<getGroup in="title">
+		<pattern><![CDATA[The-eBook.+? - (.+?)$]]></pattern> 
+		<occurrence>0</occurrence>
+	</getGroup>
+	
+</processor>

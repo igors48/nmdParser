@@ -1,0 +1,3 @@
+<channel source="mr.issue_source" header="mr.header" interpreter="mr.interpreter" forced="yes">
+	<cover>http://www.vokrugsveta.ru/img/srv/logo_150.png</cover>
+</channel>

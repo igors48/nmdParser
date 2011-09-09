@@ -1,0 +1,12 @@
+<interpreter pages="kharkovforum.processors.kharkovforum-thread-pages-processor" fragments="kharkovforum.processors.kharkovforum-thread-fragments-processor">
+
+	<fragment 
+		nick="kharkovforum.processors.kharkovforum-thread-nick-processor" 
+		avatar="kharkovforum.processors.kharkovforum-thread-avatar-processor" 
+		info="kharkovforum.processors.kharkovforum-thread-info-processor" 
+		content="kharkovforum.processors.kharkovforum-thread-content-processor"
+		dateExtractor="kharkovforum.processors.kharkovforum-thread-date-processor"
+		dateParser="kharkovforum.dateparsers.kharkovforum-thread-date-parser"
+	/>
+	
+</interpreter>

@@ -1,0 +1,3 @@
+<channel source="vs.article_source" header="vs.header" interpreter="vs.interpreter" forced="yes" pauseBetweenRequests="520">
+	<cover>http://www.vokrugsveta.ru/img/srv/logo_150.png</cover>
+</channel>

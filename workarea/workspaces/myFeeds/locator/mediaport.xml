@@ -1,0 +1,3 @@
+<simpler feedUrl="http://www.mediaport.ua/rss" coverUrl="http://www.mediaport.ua/templates/images/elements/logo.png" storeDays="7" branch="" outName="mediaport" fromNewToOld="no">
+<xPath>//div[@class='content']</xPath>
+</simpler>

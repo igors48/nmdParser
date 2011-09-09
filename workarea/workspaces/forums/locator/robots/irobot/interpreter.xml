@@ -1,0 +1,11 @@
+<interpreter pages="robots.irobot.pages-processor" fragments="robots.irobot.fragments-processor">
+
+	<fragment 
+		nick="robots.irobot.nick-processor" 
+		info="robots.irobot.info-processor" 
+		content="robots.irobot.content-processor"
+		dateExtractor="robots.irobot.date-processor"
+		dateParser="robots.irobot.date-parser"
+	/>
+	
+</interpreter>

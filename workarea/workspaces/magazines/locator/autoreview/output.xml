@@ -1,0 +1,3 @@
+<output channel="autoreview.channel" branch="auto" removeExists="no">
+	<many-to-one name="${name}"/>
+</output>

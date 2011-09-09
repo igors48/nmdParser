@@ -1,0 +1,3 @@
+<output channel="exler.ban.channel" branch="entertaitment">
+	<many-to-one name="exler-ban"/>
+</output>

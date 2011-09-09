@@ -1,0 +1,3 @@
+<channel source="rusrep.issue_source" header="rusrep.header" interpreter="rusrep.interpreter" forced="yes">
+	<cover>http://www.rusrep.ru/template/im/img/logo.png</cover>
+</channel>

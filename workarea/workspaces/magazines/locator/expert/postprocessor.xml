@@ -1,0 +1,7 @@
+<processor>
+
+	<set value="http://www.expert.ua" out="base"/>
+	
+	<concat first="base" second="input"/>
+	
+</processor>

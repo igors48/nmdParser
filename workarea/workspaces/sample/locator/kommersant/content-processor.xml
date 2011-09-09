@@ -1,0 +1,7 @@
+<processor>
+	
+	<xPath>
+		<expression>//div[@class='_reachbanner_']/table[2]/tbody/tr/td</expression>
+	</xPath>
+	
+</processor>

@@ -1,0 +1,3 @@
+<output channel="robots.irobot.channels.discussion-channel" branch="robots.irobot.discussion" storage="common.storage.root">
+	<one-to-one/>
+</output>

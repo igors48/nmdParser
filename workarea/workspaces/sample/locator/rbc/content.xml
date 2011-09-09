@@ -1,0 +1,7 @@
+<processor>
+
+    <xPath>
+        <expression>//table[@id='content']</expression>
+    </xPath>
+	
+</processor>

@@ -1,0 +1,1 @@
+<channel source="ixbtforum.sources.ixbt-household-thread-source" interpreter="ixbtforum.interpreters.ixbt-thread-interpreter" lastitems="100" forced="yes" pauseBetweenRequests="520"/>

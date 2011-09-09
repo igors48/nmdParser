@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="cp1251"?>
+
+<source>
+    <store days="4"/>
+	<url from="1" to="9">http://habrahabr.ru/new/page*/</url>
+	<url from="1" to="9">http://habrahabr.ru/page*/</url>
+	<processor id="habrahabr.postprocessor"/>
+</source>
