@@ -1,7 +1,6 @@
 reports
 dist
 doc
-log
 out
 *.log
 *.iml
