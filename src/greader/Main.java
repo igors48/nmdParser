@@ -58,7 +58,7 @@ public class Main {
 //        editResponse = restTemplate.postForObject(postUrl, postData, String.class);
 //        System.out.println(String.format("Edit response [ %s ]", editResponse));
 
-        String postUrl = "http://www.google.com/reader/api/0/mark-all-as-read?client=scroll&s=feed/http://www.popmech.ru/rss/&T=" + tokenResponse;
+        String postUrl = "http://www.google.com/reader/api/0/mark-all-as-unread?client=scroll&s=feed/http://www.popmech.ru/rss/&T=" + tokenResponse;
         String editResponse = restTemplate.postForObject(postUrl, "h", String.class);
         System.out.println(String.format("Edit response [ %s ]", editResponse));
     }

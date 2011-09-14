@@ -11,9 +11,9 @@ import java.io.PrintWriter;
 import java.util.*;
 
 /**
- * Парсер для командной строки. Задача - из командной строки
- * выпарсить осмысленную(ые) команду(ы) и пропертя, если таковые
- * найдутся
+ * пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ(пїЅпїЅ) пїЅпїЅпїЅпїЅпїЅпїЅпїЅ(пїЅ) пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 14.04.2009
@@ -103,6 +103,7 @@ public class CliParser {
         this.parsers.put(PROCESS_SNIPPET_OPTION_SHORT_NAME, new ProcessSnippetsOptionParser());
         this.parsers.put(GOOGLE_READER_CREATE_PROFILE_OPTION_SHORT_NAME, new GoogleReaderCreateProfileOptionParser());
         this.parsers.put(GOOGLE_READER_UPDATE_PROFILE_OPTION_SHORT_NAME, new GoogleReaderUpdateProfileOptionParser());
+        this.parsers.put(GOOGLE_READER_TEST_PROFILE_FEED_OPTION_SHORT_NAME, new GoogleReaderTestProfileFeedOptionParser());
     }
 
     private OptionParser getParser(final CommandLine _commandLine) {
@@ -119,7 +120,7 @@ public class CliParser {
         return result;
     }
 
-    // todo !!! ПРОСТЫНЯ !!!
+    // todo !!! пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ !!!
     private void createOptions() {
         this.options = new Options();
 
@@ -279,6 +280,15 @@ public class CliParser {
         googleReaderUpdateProfileOption.setOptionalArg(false);
         googleReaderUpdateProfileOption.setArgs(1);
 
+        Option googleReaderTestProfileFeedOption = new Option(GOOGLE_READER_TEST_PROFILE_FEED_OPTION_SHORT_NAME,
+                GOOGLE_READER_TEST_PROFILE_FEED_OPTION_FULL_NAME,
+                false,
+                GOOGLE_READER_TEST_PROFILE_FEED_OPTION_DESCRIPTION);
+        googleReaderTestProfileFeedOption.setArgName(GOOGLE_READER_TEST_PROFILE_FEED_OPTION_ATTRIBUTE_NAME);
+        googleReaderTestProfileFeedOption.setRequired(true);
+        googleReaderTestProfileFeedOption.setOptionalArg(false);
+        googleReaderTestProfileFeedOption.setArgs(2);
+
         Option baseUrlOption = new Option(BASE_URL_OPTION_SHORT_NAME,
                 BASE_URL_OPTION_FULL_NAME,
                 true,
@@ -361,6 +371,7 @@ public class CliParser {
         mainGroup.addOption(removeServiceFilesOption);
         mainGroup.addOption(googleReaderCreateProfileOption);
         mainGroup.addOption(googleReaderUpdateProfileOption);
+        mainGroup.addOption(googleReaderTestProfileFeedOption);
 
         this.options.addOptionGroup(mainGroup);
 

@@ -3,6 +3,7 @@ package greader.profile;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Iterator;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;
@@ -47,6 +48,19 @@ public class Profile {
         this.feedConfigurations = _feedConfigurations;
     }
 
+    public FeedConfiguration findForFeedUrl(final String _feedUrl) {
+        Assert.isValidString(_feedUrl, "Feed url is not valid");
+
+        for (FeedConfiguration configuration : this.feedConfigurations) {
+
+            if (configuration.getUrl().equalsIgnoreCase(_feedUrl)) {
+                return configuration;
+            }
+        }
+
+        return null;
+    }
+    
     public void changePassword(final String _password) {
         Assert.isValidString(_password, "Password is not valid");
 

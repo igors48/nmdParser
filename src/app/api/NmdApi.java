@@ -529,6 +529,13 @@ public class NmdApi implements ApiFacade {
         Assert.isValidString(_email, "EMail is not valid");
         Assert.isValidString(_feed, "Feeds is not valid");
 
+        try {
+            this.serviceManager.getGoogleReaderAdapter().testProfileFeed(_email, _feed, this);
+        } catch (GoogleReaderAdapter.GoogleReaderAdapterException e) {
+            throw new FatalException(e);
+        } catch (ServiceManager.ServiceManagerException e) {
+            throw new FatalException(e);
+        }
     }
 
     public void cleanup() {

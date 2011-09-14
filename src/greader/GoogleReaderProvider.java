@@ -41,22 +41,24 @@ public class GoogleReaderProvider {
 
     private static final int MAX_UNREAD_ITEMS_COUNT = 1000;
 
-    private static final String FEED_URL_PARAMETER = "url";
-    private static final String TAG_PARAMETER = "tag";
+    private static final String URL_PARAMETER = "url";
     private static final String ITEMS_COUNT_PARAMETER = "count";
-    private static final String TOKEN_PARAMETER = "token";
     private static final String READ_CATEGORY_NAME = "user/-/state/com.google/read";
 
     private static final String GET_UNREAD_ITEMS_URL = "http://www.google.com/reader/api/0/stream/contents/feed/{" +
-            FEED_URL_PARAMETER + "}/?xt=" +
+            URL_PARAMETER + "}/?xt=" +
             READ_CATEGORY_NAME + "&n={" +
             ITEMS_COUNT_PARAMETER + "}";
 
     private static final String GET_TOKEN_URL = "http://www.google.com/reader/api/0/token";
 
-    private final String FEED_PREFIX = "feed/";
+    private static final String FEED_URL_PARAMETER = "url";
+    private static final String TOKEN_PARAMETER = "token";
+    private static final String MARK_ALL_AS_READ_URL = "http://www.google.com/reader/api/0/mark-all-as-read?client=scroll&s=feed/{" +
+            FEED_URL_PARAMETER + "}&T={" +
+            TOKEN_PARAMETER + "}";
 
-    private static final String POST_EDIT_TAG_URL = "http://www.google.com/reader/api/0/edit-tag";
+    private final String FEED_PREFIX = "feed/";
 
     private final RequestFactory requestFactory;
     private final RestTemplate restTemplate;
@@ -120,7 +122,7 @@ public class GoogleReaderProvider {
             this.log.debug(String.format("Try to get unread items for feed [ %s ]", _feedUrl));
 
             Map<String, String> parameters = newHashMap();
-            parameters.put(FEED_URL_PARAMETER, _feedUrl);
+            parameters.put(URL_PARAMETER, _feedUrl);
             parameters.put(ITEMS_COUNT_PARAMETER, String.valueOf(MAX_UNREAD_ITEMS_COUNT));
 
             String feedResponse = restTemplate.getForObject(GET_UNREAD_ITEMS_URL, String.class, parameters);
@@ -143,22 +145,21 @@ public class GoogleReaderProvider {
         }
     }
 
-    public void markFeedItemsAsRead(final Account _account, final String _feedUrl, final List<FeedItem> _feedItems) throws GoogleReaderProviderException {
+    public void markAllFeedItemsAsRead(final Account _account, final String _feedUrl) throws GoogleReaderProviderException {
         Assert.notNull(_account, "Account is null");
         Assert.isValidString(_feedUrl, "Feed Url is not valid");
-        Assert.notNull(_feedItems, "Feed items is null");
 
         login(_account);
 
         try {
-            final String tokenResponse = restTemplate.getForObject(GET_TOKEN_URL, String.class);
+            String tokenResponse = restTemplate.getForObject(GET_TOKEN_URL, String.class);
 
-            for (FeedItem feedItem : _feedItems) {
-                //final String postData = String.format("a=" + READ_CATEGORY_NAME + "&s=" + FEED_PREFIX + "%s&i=%s&T=%s", _feedUrl, feedItem.getId(), tokenResponse);
-                final String postData = "a=user/-/state/com.google/read&s=feed/http://www.popmech.ru/rss/&i=tag:google.com,2005:reader/item/07b725a0ac8df8ee&T=" + tokenResponse;
+            Map<String, String> parameters = newHashMap();
+            parameters.put(FEED_URL_PARAMETER, _feedUrl);
+            parameters.put(TOKEN_PARAMETER, tokenResponse);
 
-                final String editResponse = restTemplate.postForObject(POST_EDIT_TAG_URL, postData, String.class);
-            }
+            restTemplate.postForObject(MARK_ALL_AS_READ_URL, "h", String.class, parameters);
+
         } catch (Exception e) {
             throw new GoogleReaderProviderException(String.format("Error mark items as read from account [ %s ]", _account.getEmail()), e);
         }
