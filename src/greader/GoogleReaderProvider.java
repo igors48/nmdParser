@@ -6,6 +6,8 @@ import greader.entities.FeedItems;
 import greader.entities.Subscription;
 import greader.entities.Subscriptions;
 import greader.profile.Account;
+import org.apache.commons.httpclient.URI;
+import org.apache.commons.httpclient.URIException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.client.RestTemplate;
@@ -44,9 +46,10 @@ public class GoogleReaderProvider {
     private static final String URL_PARAMETER = "url";
     private static final String ITEMS_COUNT_PARAMETER = "count";
     private static final String READ_CATEGORY_NAME = "user/-/state/com.google/read";
+//    private static final String READ_CATEGORY_NAME = "user/18320532357814113877/state/com.google/read";
 
     private static final String GET_UNREAD_ITEMS_URL = "http://www.google.com/reader/api/0/stream/contents/feed/{" +
-            URL_PARAMETER + "}/?xt=" +
+            URL_PARAMETER + "}?xt=" +
             READ_CATEGORY_NAME + "&n={" +
             ITEMS_COUNT_PARAMETER + "}";
 
@@ -122,7 +125,7 @@ public class GoogleReaderProvider {
             this.log.debug(String.format("Try to get unread items for feed [ %s ]", _feedUrl));
 
             Map<String, String> parameters = newHashMap();
-            parameters.put(URL_PARAMETER, _feedUrl);
+            parameters.put(URL_PARAMETER, escapeUrl(_feedUrl));
             parameters.put(ITEMS_COUNT_PARAMETER, String.valueOf(MAX_UNREAD_ITEMS_COUNT));
 
             String feedResponse = restTemplate.getForObject(GET_UNREAD_ITEMS_URL, String.class, parameters);
@@ -155,7 +158,7 @@ public class GoogleReaderProvider {
             String tokenResponse = restTemplate.getForObject(GET_TOKEN_URL, String.class);
 
             Map<String, String> parameters = newHashMap();
-            parameters.put(FEED_URL_PARAMETER, _feedUrl);
+            parameters.put(FEED_URL_PARAMETER, escapeUrl(_feedUrl));
             parameters.put(TOKEN_PARAMETER, tokenResponse);
 
             restTemplate.postForObject(MARK_ALL_AS_READ_URL, "h", String.class, parameters);
@@ -189,6 +192,15 @@ public class GoogleReaderProvider {
             throw new GoogleReaderProviderException(String.format("Error logged as [ %s ]", _account.getEmail()), e);
         }
 
+    }
+
+    private String escapeUrl(final String _url) {
+        
+        //try {
+        //    return new URI(_url, false).toString();
+        //} catch (URIException e) {
+            return _url;
+        //}
     }
 
     public class GoogleReaderProviderException extends Exception {

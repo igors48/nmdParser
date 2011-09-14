@@ -111,6 +111,16 @@ public final class OptionNameTable {
     public static final String GOOGLE_READER_CREATE_PROFILE_OPTION_ATTRIBUTE_NAME = EMAIL_PASSWORD_TOKEN;
     public static final String GOOGLE_READER_CREATE_PROFILE_OPTION_DESCRIPTION = "Create Google Reader profile";
 
+    public static final String GOOGLE_READER_DELETE_PROFILE_OPTION_SHORT_NAME = "gd";
+    public static final String GOOGLE_READER_DELETE_PROFILE_OPTION_FULL_NAME = "google-delete";
+    public static final String GOOGLE_READER_DELETE_PROFILE_OPTION_ATTRIBUTE_NAME = EMAIL_TOKEN;
+    public static final String GOOGLE_READER_DELETE_PROFILE_OPTION_DESCRIPTION = "Delete Google Reader profile";
+
+    public static final String GOOGLE_READER_CHANGE_PROFILE_PASSWORD_OPTION_SHORT_NAME = "gp";
+    public static final String GOOGLE_READER_CHANGE_PROFILE_PASSWORD_OPTION_FULL_NAME = "google-password";
+    public static final String GOOGLE_READER_CHANGE_PROFILE_PASSWORD_OPTION_ATTRIBUTE_NAME = EMAIL_PASSWORD_TOKEN;
+    public static final String GOOGLE_READER_CHANGE_PROFILE_PASSWORD_OPTION_DESCRIPTION = "Change Google Reader profile password";
+
     public static final String GOOGLE_READER_UPDATE_PROFILE_OPTION_SHORT_NAME = "gu";
     public static final String GOOGLE_READER_UPDATE_PROFILE_OPTION_FULL_NAME = "google-update";
     public static final String GOOGLE_READER_UPDATE_PROFILE_OPTION_ATTRIBUTE_NAME = EMAIL_TOKEN;

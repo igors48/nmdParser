@@ -512,11 +512,36 @@ public class NmdApi implements ApiFacade {
         }
     }
 
+    public void deleteGoogleReaderProfile(final String _email) throws FatalException {
+        Assert.isValidString(_email, "EMail is not valid");
+
+        try {
+            this.serviceManager.getGoogleReaderAdapter().removeProfile(_email);
+        } catch (GoogleReaderAdapter.GoogleReaderAdapterException e) {
+            throw new FatalException(e);
+        } catch (ServiceManager.ServiceManagerException e) {
+            throw new FatalException(e);
+        }
+    }
+
     public void updateGoogleReaderProfile(final String _email) throws FatalException {
         Assert.isValidString(_email, "EMail is not valid");
 
         try {
             this.serviceManager.getGoogleReaderAdapter().updateProfile(_email, this);
+        } catch (GoogleReaderAdapter.GoogleReaderAdapterException e) {
+            throw new FatalException(e);
+        } catch (ServiceManager.ServiceManagerException e) {
+            throw new FatalException(e);
+        }
+    }
+
+    public void changeGoogleReaderProfilePassword(String _email, String _newPassword) throws FatalException {
+        Assert.isValidString(_email, "EMail is not valid");
+        Assert.isValidString(_newPassword, "Password is not valid");
+
+        try {
+            this.serviceManager.getGoogleReaderAdapter().changeProfilePassword(_email, _newPassword);
         } catch (GoogleReaderAdapter.GoogleReaderAdapterException e) {
             throw new FatalException(e);
         } catch (ServiceManager.ServiceManagerException e) {

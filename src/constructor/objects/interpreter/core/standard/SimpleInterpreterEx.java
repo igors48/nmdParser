@@ -43,7 +43,9 @@ public class SimpleInterpreterEx implements InterpreterEx {
 
             String title = modification.getTitle();
 
-            HtmlContent htmlContent = new HtmlContent(modification.getUrl(), modification.getDescription(), modification.getUrl());
+            String content = modification.getDescription() == null || modification.getDescription().isEmpty() ? "no content" : modification.getDescription();
+
+            HtmlContent htmlContent = new HtmlContent(modification.getUrl(), content, modification.getUrl());
 
             Date date = modification.getDate();
 
