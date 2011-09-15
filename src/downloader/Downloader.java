@@ -7,6 +7,7 @@ package downloader;
  *         Date: 01.10.2008
  */
 public interface Downloader {
+    
     void start() throws DownloaderException;
 
     void stop();
