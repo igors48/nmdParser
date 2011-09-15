@@ -14,6 +14,7 @@ public class FeedConfiguration {
 
     private String url;
     private String coverUrl;
+    private boolean autoContentFiltering;
     private String criterions;
     private String branch;
     private String name;
@@ -22,6 +23,7 @@ public class FeedConfiguration {
     public FeedConfiguration() {
         setUrl("");
         setCoverUrl("");
+        setAutoContentFiltering(false);
         setCriterions("");
         setBranch("");
         setName("");
@@ -46,6 +48,15 @@ public class FeedConfiguration {
     public void setCoverUrl(final String _coverUrl) {
         Assert.notNull(_coverUrl, "Cover url is null");
         this.coverUrl = _coverUrl;
+    }
+
+    @XmlElement(name = "content-filter", nillable = false, required = false)
+    public boolean isAutoContentFiltering() {
+        return this.autoContentFiltering;
+    }
+
+    public void setAutoContentFiltering(final boolean _autoContentFiltering) {
+        this.autoContentFiltering = _autoContentFiltering;
     }
 
     @XmlElement(name = "criterions", nillable = false, required = true)

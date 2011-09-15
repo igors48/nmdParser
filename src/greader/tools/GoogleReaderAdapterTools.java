@@ -33,7 +33,10 @@ public final class GoogleReaderAdapterTools {
         result.setBranch(safeString(_feedConfiguration.getBranch()));
         result.setCoverUrl(safeString(_feedConfiguration.getCoverUrl()));
 
-        if ((_feedConfiguration.getCriterions() != null) && (!_feedConfiguration.getCriterions().isEmpty())) {
+        if (_feedConfiguration.isAutoContentFiltering()) {
+            result.setCriterionType(CriterionType.FILTER);
+        }
+        else if ((_feedConfiguration.getCriterions() != null) && (!_feedConfiguration.getCriterions().isEmpty())) {
             result.setCriterionExpression(_feedConfiguration.getCriterions());
             result.setCriterionType(CriterionType.XPATH);
         }
