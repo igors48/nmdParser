@@ -12,7 +12,7 @@ import java.util.List;
 import dated.item.modification.Modification;
 
 /**
- * Данные блиц-запроса
+ * пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 28.10.2009
@@ -54,9 +54,9 @@ public class BlitzRequest {
     private String coverUrl;
 
     /**
-     * Через эту переменную процессор возвращает timestamp самой последней(по времени)
-     * из обработанных ATDC элементов. Может равняться -1 если в ходе обработки
-     * запроса обработанных элементов не было
+     * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ timestamp пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ(пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
+     * пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ATDC пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ -1 пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
      */
     private long latestItemTime;
 
@@ -254,7 +254,7 @@ public class BlitzRequest {
         this.forEachWait = _forEachWait;
     }
 
-    public boolean expressionNotSet() {
+    public boolean expressionRemainsDefault() {
         return BODY_EXTRACTION_REGEXP.equals(this.criterionExpression);
     }
 

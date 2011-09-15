@@ -58,23 +58,25 @@ public final class ChannelAdapterTools {
         StandardChainProcessorAdapter adapter = new StandardChainProcessorAdapter(_debugConsole);
 
         adapter.setId(_id);
-        
-        int index = 0;
 
-        for (String expression : _expressions) {
-            String outputVariableName = createOutputVariableName(index);
+        if (_criterionType == CriterionType.FILTER) {
+            adapter.addAdapter(new FilterProcessorAdapter());
+        } else {
+            int index = 0;
 
-            adapter.addAdapter(_criterionType == CriterionType.REGEXP ? createGetGroupProcessorAdapter(expression, outputVariableName) : createXPathProcessorAdapter(expression, outputVariableName));
+            for (String expression : _expressions) {
+                String outputVariableName = createOutputVariableName(index);
 
-            if (index > 0) {
-                adapter.addAdapter(createAppendProcessorAdapter(outputVariableName));
+                adapter.addAdapter(_criterionType == CriterionType.REGEXP ? createGetGroupProcessorAdapter(expression, outputVariableName) : createXPathProcessorAdapter(expression, outputVariableName));
+
+                if (index > 0) {
+                    adapter.addAdapter(createAppendProcessorAdapter(outputVariableName));
+                }
+
+                ++index;
             }
-
-            ++index;
         }
 
-        //adapter.addAdapter(new FilterProcessorAdapter());
-        
         return adapter;
     }
 

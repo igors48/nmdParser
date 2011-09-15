@@ -1,6 +1,7 @@
 package app.cli.blitz;
 
 import app.cli.blitz.request.BlitzRequest;
+import app.cli.blitz.request.CriterionType;
 import app.cli.blitz.request.RequestSourceType;
 import app.controller.NullController;
 import app.iui.flow.custom.SingleProcessInfo;
@@ -12,6 +13,7 @@ import constructor.objects.channel.core.ChannelAnalyser;
 import constructor.objects.channel.core.analyser.StandardAnalyser;
 import constructor.objects.channel.core.stream.ChannelDataList;
 import constructor.objects.interpreter.adapter.SimpleInterpreterAdapter;
+import constructor.objects.interpreter.configuration.FragmentAnalyserConfiguration;
 import constructor.objects.interpreter.core.InterpreterAdapter;
 import constructor.objects.interpreter.core.InterpreterEx;
 import constructor.objects.interpreter.core.standard.SimpleInterpreterEx;
@@ -27,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Адаптер блиц-канала обработки модификаций
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 29.10.2009
@@ -140,7 +142,10 @@ public class BlitzChannelAdapter implements ChannelAdapter {
     }
 
     public boolean isSimpleHandling() {
-        return (this.request.getSourceType() == RequestSourceType.RSS  || this.request.getSourceType() == RequestSourceType.MODIFICATIONS) && this.request.expressionNotSet();
+        boolean rssOrModificationsWithoutCriterionExpression = (this.request.getSourceType() == RequestSourceType.RSS  || this.request.getSourceType() == RequestSourceType.MODIFICATIONS) && this.request.expressionRemainsDefault();
+        boolean filterModeNotUsed = this.request.getCriterionType() != CriterionType.FILTER;
+        
+        return filterModeNotUsed && rssOrModificationsWithoutCriterionExpression;
     }
 
     public boolean isCancelled() {
@@ -172,7 +177,16 @@ public class BlitzChannelAdapter implements ChannelAdapter {
     }
 
     private InterpreterAdapter createInterpreterAdapter(final Modification _modification) {
-        return new BlitzInterpreterAdapter(_modification, ChannelAdapterTools.createFragmentAnalyserConfiguration(this.request.getCriterionType(), this.request.getCriterionExpression(), BLITZ_CHAIN_PROCESSOR_ADAPTER_ID, this.serviceManager.getDebugConsole()), this.batchLoader, getPrecachedItemsCount(), getPauseBetweenRequests());
+        FragmentAnalyserConfiguration fragmentAnalyserConfiguration = ChannelAdapterTools.createFragmentAnalyserConfiguration(this.request.getCriterionType(),
+                        this.request.getCriterionExpression(),
+                        BLITZ_CHAIN_PROCESSOR_ADAPTER_ID,
+                        this.serviceManager.getDebugConsole());
+
+        return new BlitzInterpreterAdapter(_modification,
+                fragmentAnalyserConfiguration,
+                this.batchLoader,
+                getPrecachedItemsCount(),
+                getPauseBetweenRequests());
     }
 
 }
