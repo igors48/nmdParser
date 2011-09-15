@@ -56,7 +56,7 @@ public class SimplerConfigurationToolsTest extends TestCase {
     // тест рендеринга с фильтром контента
     public void testWithContentFilter() {
         SimplerConfiguration fixture = SimplerConfigurationTestUtils.createSimplerConfiguration("id", "");
-        fixture.setAutoContentFiltering();
+        fixture.setAutoContentFiltering(true);
 
         List<String> result = SimplerConfigurationTools.render(fixture);
 

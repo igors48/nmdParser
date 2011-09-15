@@ -34,6 +34,7 @@ public class SimpleFeederForm extends AbstractFormWithValidation implements Acti
     private static final String SIMPLER_EDITOR_OUTPUT_FILE_LABEL_KEY = "iui.simpler.feeder.form.output.file.label.key";
     private static final String SIMPLER_EDITOR_SORT_LABEL_KEY = "iui.simpler.feeder.form.sort.label.key";
     private static final String SIMPLER_EDITOR_CRITERION_LABEL_KEY = "iui.simpler.feeder.form.criterion.label.key";
+    private static final String SIMPLER_EDITOR_CONTENT_FILTER_LABEL_KEY = "iui.simpler.feeder.form.content.filter.label.key";
     private static final String SIMPLER_EDITOR_COVER_URL_LABEL_KEY = "iui.simpler.feeder.form.cover.url.label.key";
     private static final String ONLY_FOR_FRIEF_RSS = "iui.simpler.feeder.form.only.for.brief.rss.label.key";
     private static final String COMMON_PARMS = "iui.simpler.feeder.form.common.parameters.label.key";
@@ -50,6 +51,7 @@ public class SimpleFeederForm extends AbstractFormWithValidation implements Acti
     private JTextField criterionField;
     private JTextField branchField;
     private JCheckBox sortCheck;
+    private JCheckBox contentFilterCheck;
     private JTextField outputField;
     private JTextField coverField;
 
@@ -155,6 +157,7 @@ public class SimpleFeederForm extends AbstractFormWithValidation implements Acti
 
         getContentPanel().add(new JLabel(getString(SIMPLER_EDITOR_CRITERION_LABEL_KEY)), createConstraint().width(FIRST_COLUMN_WIDTH).split(2).toString());
         getContentPanel().add(this.criterionField = new JTextField(SPACE), createConstraint().width(SECOND_COLUMN_WIDTH).wrap().toString());
+        getContentPanel().add(this.contentFilterCheck = new JCheckBox(getString(SIMPLER_EDITOR_CONTENT_FILTER_LABEL_KEY)), createConstraint().width(280).split(2).toString());
 
         this.next = new JButton(getString(NEXT));
         getContentPanel().add(this.next, createConstraint().largeButton().verticalGap().alignRight().wrap().toString());
@@ -175,6 +178,7 @@ public class SimpleFeederForm extends AbstractFormWithValidation implements Acti
         this.criterionField.setText(getXPathCriterion());
         this.coverField.setText(this.model.getConfiguration().getCoverUrl());
         this.sortCheck.setSelected(this.model.getConfiguration().getFromNewToOld() == DocumentItemsSortMode.FROM_NEW_TO_OLD);
+        this.contentFilterCheck.setSelected(this.model.getConfiguration().isAutoContentFiltering());
     }
 
     private String getXPathCriterion() {
@@ -199,6 +203,8 @@ public class SimpleFeederForm extends AbstractFormWithValidation implements Acti
         result.setAttributeOutName(this.outputField.getText());
 
         result.setAttributeFromNewToOld(this.sortCheck.isSelected() ? SimplerConfiguration.YES_TOKEN : SimplerConfiguration.NO_TOKEN);
+
+        result.setAutoContentFiltering(this.contentFilterCheck.isSelected());
 
         if (!this.coverField.getText().isEmpty()) {
             result.setAttributeCoverUrl(this.coverField.getText());
