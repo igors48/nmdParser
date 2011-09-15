@@ -5,6 +5,7 @@ import constructor.objects.interpreter.configuration.FragmentAnalyserConfigurati
 import constructor.objects.processor.VariableProcessorAdapter;
 import constructor.objects.processor.append.adapter.AppendProcessorAdapter;
 import constructor.objects.processor.chain.adapter.StandardChainProcessorAdapter;
+import constructor.objects.processor.filter.adapter.FilterProcessorAdapter;
 import constructor.objects.processor.get_group.adapter.GetGroupProcessorAdapter;
 import constructor.objects.processor.xpath.adapter.XPathProcessorAdapter;
 import debug.DebugConsole;
@@ -57,7 +58,7 @@ public final class ChannelAdapterTools {
         StandardChainProcessorAdapter adapter = new StandardChainProcessorAdapter(_debugConsole);
 
         adapter.setId(_id);
-
+        
         int index = 0;
 
         for (String expression : _expressions) {
@@ -72,6 +73,8 @@ public final class ChannelAdapterTools {
             ++index;
         }
 
+        //adapter.addAdapter(new FilterProcessorAdapter());
+        
         return adapter;
     }
 
