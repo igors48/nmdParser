@@ -36,12 +36,11 @@ public final class SimplerConfigurationTools {
 
         result.add(first);
 
-        /*
-        for (String criterion : _configuration.getCriterions()) {
-            result.add(renderCriterion(criterion));    
+        result.add(renderCriterions(_configuration.getCriterions()));
+
+        if (_configuration.isAutoContentFiltering()) {
+            result.add("<content-filter/>");
         }
-        */
-        result.add(renderCriterion(_configuration.getCriterions()));
 
         result.add(LAST_LINE_TEMPLATE);
 
@@ -58,7 +57,7 @@ public final class SimplerConfigurationTools {
         return result;
     }
 
-    private static String renderCriterion(final String _criterion) {
+    private static String renderCriterions(final String _criterion) {
         return MessageFormat.format(CRITERION_TEMPLATE, _criterion);
     }
 

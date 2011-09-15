@@ -52,4 +52,18 @@ public class SimplerConfigurationToolsTest extends TestCase {
         assertEquals("<xPath>xPath</xPath>", result.get(1));
         assertEquals("</simpler>", result.get(2));
     }
+    
+    // тест рендеринга с фильтром контента
+    public void testWithContentFilter() {
+        SimplerConfiguration fixture = SimplerConfigurationTestUtils.createSimplerConfiguration("id", "");
+        fixture.setAutoContentFiltering();
+
+        List<String> result = SimplerConfigurationTools.render(fixture);
+
+        assertEquals(4, result.size());
+        assertEquals("<simpler feedUrl=\"feedUrl\" coverUrl=\"coverUrl\" storeDays=\"7\" branch=\"branch\" outName=\"outName\" >", result.get(0));
+        assertEquals("<xPath>xPath</xPath>", result.get(1));
+        assertEquals("<content-filter/>", result.get(2));
+        assertEquals("</simpler>", result.get(3));
+    }
 }

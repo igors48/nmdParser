@@ -16,8 +16,8 @@ import constructor.objects.interpreter.adapter.SimpleInterpreterAdapter;
 import constructor.objects.interpreter.configuration.FragmentAnalyserConfiguration;
 import constructor.objects.interpreter.core.InterpreterAdapter;
 import constructor.objects.interpreter.core.InterpreterEx;
-import constructor.objects.interpreter.core.standard.SimpleInterpreterEx;
-import constructor.objects.interpreter.core.standard.StandardInterpreterEx;
+import constructor.objects.interpreter.core.standard.SimpleInterpreter;
+import constructor.objects.interpreter.core.standard.StandardInterpreter;
 import dated.item.modification.Modification;
 import dated.item.modification.stream.ModificationList;
 import downloader.BatchLoader;
@@ -100,9 +100,9 @@ public class BlitzChannelAdapter implements ChannelAdapter {
         List<InterpreterEx> result = new ArrayList<InterpreterEx>();
 
         if (isSimpleHandling()) {
-            result.add(new SimpleInterpreterEx(new SimpleInterpreterAdapter(_modification)));
+            result.add(new SimpleInterpreter(new SimpleInterpreterAdapter(_modification)));
         } else {
-            result.add(new StandardInterpreterEx(createInterpreterAdapter(_modification)));
+            result.add(new StandardInterpreter(createInterpreterAdapter(_modification)));
         }
 
         return result;
