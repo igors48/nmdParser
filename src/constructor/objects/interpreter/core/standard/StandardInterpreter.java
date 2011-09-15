@@ -17,16 +17,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Стандартный интерпретатор. Выживает за счет умений подчиненных.
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
  *
  * @author Igor Usenko
  *         Date: 09.04.2009
  */
-public class StandardInterpreterEx implements InterpreterEx {
+public class StandardInterpreter implements InterpreterEx {
 
     private final InterpreterAdapter adapter;
 
-    public StandardInterpreterEx(final InterpreterAdapter _adapter) {
+    public StandardInterpreter(final InterpreterAdapter _adapter) {
         Assert.notNull(_adapter, "Interpreter adapter is null.");
         this.adapter = _adapter;
     }
@@ -83,7 +83,7 @@ public class StandardInterpreterEx implements InterpreterEx {
             HttpData dataItem = data.get(item.getUrl());
             String image = DataUtil.getDataImage(dataItem.getData());
 
-            // посвящается feed proxies. вместо адреса модификации подставляем адрес откуда пришел ответ
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ feed proxies. пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             Page page = new Page(item.getModification(), dataItem.getUrl(), image);
             result.add(page);
         }

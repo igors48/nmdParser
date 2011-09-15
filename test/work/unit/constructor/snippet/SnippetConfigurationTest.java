@@ -162,4 +162,21 @@ public class SnippetConfigurationTest extends TestCase {
         assertEquals(LocalStorage.DEFAULT_STORAGE_ID, usedObjects.get(0).getId());
         assertEquals(ObjectType.STORAGE, usedObjects.get(0).getType());
     }
+
+    // тест подлючения фильтра контента
+    public void testRssWithFilterConfiguration() throws Constructor.ConstructorException {
+        Map<String, String> streams = new HashMap<String, String>();
+        streams.put("snippet", "<snippet><rss>rss</rss><content-filter/><forced/><many-to-one name=\"mto\"/><branch name=\"branch\"/></snippet>");
+
+        ConstructorFactory constructorFactory = createConstructorFactory(streams);
+        Constructor constructor = constructorFactory.getConstructor();
+
+        SnippetConfiguration configuration = (SnippetConfiguration) constructor.create("snippet", ObjectType.SNIPPET);
+
+        assertNotNull(configuration);
+        assertEquals("snippet", configuration.getId());
+
+        assertEquals(CriterionType.FILTER, configuration.getCriterionType());
+    }   
+
 }

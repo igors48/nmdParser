@@ -40,6 +40,7 @@ public class SimplerConfigurationTest extends TestCase {
         assertEquals(0, configuration.getPauseBetweenRequests());
         assertEquals(DocumentItemsSortMode.DEFAULT, configuration.getFromNewToOld());
         assertEquals("xp01", configuration.getCriterions());
+        assertFalse(configuration.isAutoContentFiltering());
     }
 
     public void testPauseBetweenRequests() throws Constructor.ConstructorException {
@@ -64,5 +65,17 @@ public class SimplerConfigurationTest extends TestCase {
         SimplerConfiguration configuration = (SimplerConfiguration) constructor.create("simpler", ObjectType.SIMPLER);
 
         assertEquals(DocumentItemsSortMode.FROM_OLD_TO_NEW, configuration.getFromNewToOld());
+    }
+
+    public void testContentFilterIsSet() throws Constructor.ConstructorException {
+        Map<String, String> streams = new HashMap<String, String>();
+        streams.put("simpler", "<simpler feedUrl=\"feedUrl\" storeDays=\"storeDays\" branch=\"branch\" outName=\"outName\" fromNewToOld=\"no\"><xPath>xp01</xPath><xPath>xp02</xPath><xPath>xp03</xPath><content-filter/></simpler>");
+
+        ConstructorFactory constructorFactory = createConstructorFactory(streams);
+        Constructor constructor = constructorFactory.getConstructor();
+
+        SimplerConfiguration configuration = (SimplerConfiguration) constructor.create("simpler", ObjectType.SIMPLER);
+
+        assertTrue(configuration.isAutoContentFiltering());
     }
 }

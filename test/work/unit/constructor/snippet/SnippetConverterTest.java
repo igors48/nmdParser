@@ -48,6 +48,21 @@ public class SnippetConverterTest extends TestCase {
         assertEquals(Composition.ONE_TO_ONE, request.getComposition());
     }
 
+    // тест для источника RSS + CONTENT_FILTER
+    public void testRssContentFilterSourceType() throws SnippetConverter.SnippetConverterException {
+        SnippetConfiguration configuration = new SnippetConfiguration();
+        configuration.setRssUrl("rssurl");
+        configuration.setAutoContentFiltering();
+
+        BlitzRequest request = SnippetConverter.convert(configuration);
+
+        assertEquals(RequestSourceType.RSS, request.getSourceType());
+        assertEquals(1, request.getAddresses().size());
+        assertEquals("rssurl", request.getAddresses().get(0));
+
+        assertEquals(CriterionType.FILTER, request.getCriterionType());
+    }
+
     // тест для источника RSS + XPATH
     public void testRssXPathSourceType() throws SnippetConverter.SnippetConverterException {
         SnippetConfiguration configuration = new SnippetConfiguration();

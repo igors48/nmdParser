@@ -5,6 +5,7 @@ import constructor.objects.interpreter.configuration.FragmentAnalyserConfigurati
 import constructor.objects.processor.VariableProcessorAdapter;
 import constructor.objects.processor.append.adapter.AppendProcessorAdapter;
 import constructor.objects.processor.chain.adapter.StandardChainProcessorAdapter;
+import constructor.objects.processor.filter.adapter.FilterProcessorAdapter;
 import constructor.objects.processor.get_group.adapter.GetGroupProcessorAdapter;
 import constructor.objects.processor.xpath.adapter.XPathProcessorAdapter;
 import debug.DebugConsole;
@@ -32,6 +33,22 @@ public final class ChannelAdapterTools {
         FragmentAnalyserConfiguration result = new FragmentAnalyserConfiguration();
 
         result.setContentProcessor(createChainProcessorAdapter(_criterionType, parseExpressionsList(_expressions), _id, _debugConsole));
+
+        return result;
+    }
+
+    public static FragmentAnalyserConfiguration createContentFilterConfiguration(final String _id, final DebugConsole _debugConsole) {
+        Assert.isValidString(_id, "Interpreter id is not valid");
+        Assert.notNull(_debugConsole, "Debug console is not valid");
+
+        FragmentAnalyserConfiguration result = new FragmentAnalyserConfiguration();
+
+        StandardChainProcessorAdapter adapter = new StandardChainProcessorAdapter(_debugConsole);
+
+        adapter.setId(_id);
+        adapter.addAdapter(new FilterProcessorAdapter());
+
+        result.setContentProcessor(adapter);
 
         return result;
     }

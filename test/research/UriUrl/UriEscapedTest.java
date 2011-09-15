@@ -16,9 +16,7 @@ public class UriEscapedTest extends TestCase {
     }
 
     public void testSmoke() throws URIException {
-        String fixture = "http://www.rpi.edu/~de[опаce]mj/";
-
-        URI uri = new URI(fixture, false);
+        URI uri = new URI("http", null, "www.google.com",  -1, "path", "http:?", null);
 
         System.out.println(uri);
     }

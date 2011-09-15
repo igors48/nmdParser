@@ -17,16 +17,16 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Простой интерпретатор - просто берет информацию из модификации
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 11.04.2009
  */
-public class SimpleInterpreterEx implements InterpreterEx {
+public class SimpleInterpreter implements InterpreterEx {
 
     private final InterpreterAdapter adapter;
 
-    public SimpleInterpreterEx(InterpreterAdapter _adapter) {
+    public SimpleInterpreter(InterpreterAdapter _adapter) {
         Assert.notNull(_adapter, "Interpreter adapter is null.");
         this.adapter = _adapter;
     }
@@ -43,7 +43,9 @@ public class SimpleInterpreterEx implements InterpreterEx {
 
             String title = modification.getTitle();
 
-            HtmlContent htmlContent = new HtmlContent(modification.getUrl(), modification.getDescription(), modification.getUrl());
+            String content = modification.getDescription() == null || modification.getDescription().isEmpty() ? "no content" : modification.getDescription();
+
+            HtmlContent htmlContent = new HtmlContent(modification.getUrl(), content, modification.getUrl());
 
             Date date = modification.getDate();
 

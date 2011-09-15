@@ -3,7 +3,7 @@ package constructor.objects.snippet.element;
 import constructor.dom.loader.MappedElementHandler;
 
 /**
- * Обработчик элемента snippet в XML файле
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ snippet пїЅ XML пїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 09.12.2009
@@ -21,6 +21,7 @@ public class SnippetElementHandler extends MappedElementHandler {
     private static final String GENRE_KEY = "genre";
     private static final String BASE_KEY = "base";
     private static final String URL_KEY = "url";
+    private static final String CONTENT_FILTER_KEY = "content-filter";
     private static final String XPATH_KEY = "xPath";
     private static final String REGEXP_KEY = "regExp";
     private static final String FORCED_KEY = "forced";
@@ -43,6 +44,7 @@ public class SnippetElementHandler extends MappedElementHandler {
         this.elementHandlers.put(GENRE_KEY, new GenreElementHandler());
         this.elementHandlers.put(BASE_KEY, new BaseElementHandler());
         this.elementHandlers.put(URL_KEY, new UrlElementHandler());
+        this.elementHandlers.put(CONTENT_FILTER_KEY, new ContentFilterElementHandler());
         this.elementHandlers.put(XPATH_KEY, new XPathElementHandler());
         this.elementHandlers.put(REGEXP_KEY, new RegExpElementHandler());
         this.elementHandlers.put(FORCED_KEY, new ForcedElementHandler());
