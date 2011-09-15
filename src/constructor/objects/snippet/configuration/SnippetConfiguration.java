@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Конфигурация сниппета
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 09.12.2009
@@ -252,6 +252,10 @@ public class SnippetConfiguration implements Blank {
         this.requestSourceType = RequestSourceType.URLS;
         this.urlGenerationPatterns.add(getSequenceGenerationParams(_url));
         setSequenceGenerationDefaults();
+    }
+
+    public void setAutoContentFiltering() {
+        this.criterionType = CriterionType.FILTER;
     }
 
     public void setXPath(final String _expression) {
