@@ -327,6 +327,11 @@ public class CliParser {
                 REG_EXP_OPTION_DESCRIPTION);
         regExpOption.setArgName(REG_EXP_OPTION_ATTRIBUTE_NAME);
 
+        Option autoOption = new Option(AUTO_OPTION_SHORT_NAME,
+                AUTO_OPTION_FULL_NAME,
+                false,
+                AUTO_OPTION_DESCRIPTION);
+
         Option mtoOption = new Option(MTO_OPTION_SHORT_NAME,
                 MTO_OPTION_FULL_NAME,
                 true,
@@ -410,6 +415,7 @@ public class CliParser {
         this.options.addOption(baseUrlOption);
         this.options.addOption(xPathOption);
         this.options.addOption(regExpOption);
+        this.options.addOption(autoOption);
         this.options.addOption(mtoOption);
         this.options.addOption(branchOption);
         this.options.addOption(storageOption);

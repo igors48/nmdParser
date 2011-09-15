@@ -151,6 +151,11 @@ public final class OptionNameTable {
     public static final String REG_EXP_OPTION_ATTRIBUTE_NAME = "RegExp_request";
     public static final String REG_EXP_OPTION_DESCRIPTION = "Set RegExp criterion for content extraction" + FOR_BLITZ_REQUEST_ONLY_TOKEN;
 
+    // a use Philter for content extraction [*]
+    public static final String AUTO_OPTION_SHORT_NAME = "a";
+    public static final String AUTO_OPTION_FULL_NAME = "auto";
+    public static final String AUTO_OPTION_DESCRIPTION = "Use Philter for content extraction" + FOR_BLITZ_REQUEST_ONLY_TOKEN;
+
     // mto name [*]
     public static final String MTO_OPTION_SHORT_NAME = "mto";
     public static final String MTO_OPTION_FULL_NAME = "many-to-one";

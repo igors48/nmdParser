@@ -16,5 +16,9 @@ public enum CriterionType {
     /**
      * отбор по регул€рному выражению
      */
-    REGEXP
+    REGEXP,
+    /**
+     * отбор фильтром контента
+     */
+    FILTER
 }
