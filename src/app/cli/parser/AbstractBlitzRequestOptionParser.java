@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Абстрактный парсер блиц-запросов
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 01.11.2009
@@ -62,6 +62,10 @@ public abstract class AbstractBlitzRequestOptionParser implements OptionParser {
     protected abstract BlitzRequest createRequest(final CommandLine _commandLine);
 
     protected void processMiscOptions(final CommandLine _commandLine, final BlitzRequest _request) {
+
+        if (_commandLine.hasOption(OptionNameTable.AUTO_OPTION_SHORT_NAME)) {
+            _request.setCriterionType(CriterionType.FILTER);
+        }
 
         if (_commandLine.hasOption(OptionNameTable.XPATH_OPTION_SHORT_NAME)) {
             _request.setCriterionType(CriterionType.XPATH);

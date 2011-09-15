@@ -24,6 +24,7 @@ public class SimplerConfiguration implements Blank {
     private String feedUrl;
     private String storeDays;
     private String criterions;
+    private boolean autoContentFiltering;
     private String branch;
     private String outName;
     private DocumentItemsSortMode fromNewToOld;
@@ -35,6 +36,7 @@ public class SimplerConfiguration implements Blank {
         this.feedUrl = "";
         this.storeDays = "7";
         this.criterions = "";
+        this.autoContentFiltering = false;
         this.branch = "";
         this.outName = "";
         this.fromNewToOld = DocumentItemsSortMode.DEFAULT;
@@ -131,7 +133,16 @@ public class SimplerConfiguration implements Blank {
         return LocalStorage.DEFAULT_STORAGE_ID;
     }
 
+    public void setAutoContentFiltering() {
+        this.autoContentFiltering = true;
+    }
+
+    public boolean isAutoContentFiltering() {
+        return this.autoContentFiltering;
+    }
+
     public static SimplerConfiguration getDefault() {
         return new SimplerConfiguration();
     }
+
 }

@@ -13,12 +13,14 @@ import java.util.Map;
 public class SimplerElementHandler extends MappedElementHandler {
 
     private static final String XPATH_KEY = "xPath";
+    private static final String CONTENT_FILTER_KEY = "content-filter";
 
     public SimplerElementHandler() {
         super();
 
         Map<String, ElementHandler> handlers = new HashMap<String, ElementHandler>();
         handlers.put(XPATH_KEY, new XPathElementHandler());
+        handlers.put(CONTENT_FILTER_KEY, new ContentFilterElementHandler());
 
         this.elementHandlers = handlers;
     }

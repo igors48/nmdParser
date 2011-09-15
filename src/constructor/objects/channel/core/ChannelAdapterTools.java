@@ -37,6 +37,22 @@ public final class ChannelAdapterTools {
         return result;
     }
 
+    public static FragmentAnalyserConfiguration createContentFilterConfiguration(final String _id, final DebugConsole _debugConsole) {
+        Assert.isValidString(_id, "Interpreter id is not valid");
+        Assert.notNull(_debugConsole, "Debug console is not valid");
+
+        FragmentAnalyserConfiguration result = new FragmentAnalyserConfiguration();
+
+        StandardChainProcessorAdapter adapter = new StandardChainProcessorAdapter(_debugConsole);
+
+        adapter.setId(_id);
+        adapter.addAdapter(new FilterProcessorAdapter());
+
+        result.setContentProcessor(adapter);
+
+        return result;
+    }
+
     public static List<String> parseExpressionsList(String _expressions) {
         Assert.isValidString(_expressions, "Criterion expressions list is not valid");
 
@@ -58,7 +74,7 @@ public final class ChannelAdapterTools {
         StandardChainProcessorAdapter adapter = new StandardChainProcessorAdapter(_debugConsole);
 
         adapter.setId(_id);
-        
+
         int index = 0;
 
         for (String expression : _expressions) {
@@ -73,8 +89,6 @@ public final class ChannelAdapterTools {
             ++index;
         }
 
-        //adapter.addAdapter(new FilterProcessorAdapter());
-        
         return adapter;
     }
 

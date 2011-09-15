@@ -84,4 +84,6 @@ public interface SimplerAdapter {
     String getCriterions();
 
     DebugConsole getDebugConsole();
+
+    boolean isAutoContentFiltering();
 }

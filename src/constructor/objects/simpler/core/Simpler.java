@@ -32,6 +32,7 @@ public class Simpler {
         return new SimplerChannelAdapter(createId(this.adapter.getId(), ObjectType.CHANNEL),
                 createId(this.adapter.getId(), ObjectType.SOURCE),
                 this.adapter.getCriterions(),
+                this.adapter.isAutoContentFiltering(),
                 this.adapter.getCoverUrl(),
                 this.adapter.getChannelDataListStorage(),
                 this.adapter.getDownloader(),

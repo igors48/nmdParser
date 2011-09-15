@@ -14,8 +14,8 @@ import constructor.objects.channel.core.analyser.StandardAnalyser;
 import constructor.objects.interpreter.adapter.StandardInterpreterAdapter;
 import constructor.objects.interpreter.configuration.InterpreterConfiguration;
 import constructor.objects.interpreter.core.InterpreterEx;
-import constructor.objects.interpreter.core.standard.SimpleInterpreterEx;
-import constructor.objects.interpreter.core.standard.StandardInterpreterEx;
+import constructor.objects.interpreter.core.standard.SimpleInterpreter;
+import constructor.objects.interpreter.core.standard.StandardInterpreter;
 import constructor.objects.processor.chain.ChainProcessor;
 import constructor.objects.processor.chain.ChainProcessorAdapter;
 import constructor.objects.source.core.ModificationListStorage;
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Стандартный адаптер канала
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 08.04.2009
@@ -93,14 +93,14 @@ public class StandardChannelAdapter extends AbstractChannelAdapter {
 
                 StandardInterpreterAdapter adapter = new StandardInterpreterAdapter(configuration, _modification, this.downloader, this.configuration.getLastItemCount(), getRefTimeService(_modification), getPrecachedItemsCount(), getPauseBetweenRequests());
 
-                result.add(new SimpleInterpreterEx(adapter));
+                result.add(new SimpleInterpreter(adapter));
             } else {
                 Constructor constructor = this.factory.getConstructor();
 
                 InterpreterConfiguration configuration = (InterpreterConfiguration) constructor.create(this.configuration.getInterpreterId(), ObjectType.INTERPRETER);
                 StandardInterpreterAdapter adapter = new StandardInterpreterAdapter(configuration, _modification, this.downloader, this.configuration.getLastItemCount(), getRefTimeService(_modification), getPrecachedItemsCount(), getPauseBetweenRequests());
 
-                result.add(new StandardInterpreterEx(adapter));
+                result.add(new StandardInterpreter(adapter));
             }
 
             return result;

@@ -259,6 +259,10 @@ public class StandardSimplerAdapter implements SimplerAdapter {
         return this.configuration.getCriterions();
     }
 
+    public boolean isAutoContentFiltering() {
+        return this.configuration.isAutoContentFiltering();    
+    }
+
     public DebugConsole getDebugConsole() {
         return this.debugConsole;
     }
