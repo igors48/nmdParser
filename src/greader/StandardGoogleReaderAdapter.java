@@ -1,22 +1,20 @@
 package greader;
 
+import app.api.ApiFacade;
 import app.cli.blitz.BlitzRequestHandler;
 import app.cli.blitz.request.BlitzRequest;
-import app.api.ApiFacade;
-import greader.entities.FeedItems;
-import greader.entities.Subscription;
+import dated.item.modification.Modification;
 import greader.entities.FeedItem;
+import greader.entities.Subscription;
 import greader.profile.*;
 import greader.tools.GoogleReaderAdapterTools;
-import util.Assert;
-import static util.CollectionUtils.newArrayList;
-
-import java.util.List;
-import java.util.Date;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import dated.item.modification.Modification;
+import util.Assert;
+
+import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
@@ -68,6 +66,16 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
 
     public void removeProfile(final String _email) throws GoogleReaderAdapterException {
         Assert.isValidString(_email, "Email is not valid");
+
+        try {
+            Profiles profiles = this.profilesStorage.load();
+
+            profiles.removeProfile(_email);
+
+            this.profilesStorage.store(profiles);
+        } catch (ProfilesStorage.ProfilesStorageException e) {
+            throw new GoogleReaderAdapterException(e);
+        }
     }
 
     public void updateProfile(final String _email, final BlitzRequestHandler _handler) throws GoogleReaderAdapterException {
@@ -83,21 +91,9 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
             for (FeedConfiguration configuration : profile.getFeedConfigurations()) {
                 this.log.info(String.format("Processing feed [ %s ] from profile [ %s ]", configuration.getUrl(), _email));
 
-                List<FeedItem> items = this.provider.getUnreadFeedItems(profile.getAccount(), configuration.getUrl());
+                updateFeed(_handler, profile, configuration);
 
-                List<Modification> modifications = newArrayList();
-
-                for (FeedItem item : items) {
-                    Modification modification = Modification.createModification(item);
-
-                    modifications.add(modification);
-                }
-
-                BlitzRequest request = GoogleReaderAdapterTools.createBlitzRequest(configuration, modifications);
-
-                _handler.processBlitzRequest(request, 0);
-
-                this.provider.markFeedItemsAsRead(profile.getAccount(), configuration.getUrl(), items);
+                this.provider.markAllFeedItemsAsRead(profile.getAccount(), configuration.getUrl());
             }
 
         } catch (GoogleReaderProvider.GoogleReaderProviderException e) {
@@ -107,22 +103,75 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
         }
     }
 
-    public void testProfileFeed(final String _email, final String _feedUrl) throws GoogleReaderAdapterException {
+    public void testProfileFeed(final String _email, final String _feedUrl, final BlitzRequestHandler _handler) throws GoogleReaderAdapterException {
         Assert.isValidString(_email, "Email is not valid");
         Assert.isValidString(_feedUrl, "Feed Url is not valid");
+        Assert.notNull(_handler, "Handler is null");
 
+        Profile profile = synchronizeProfile(_email);
+
+        validate(profile.getAccount().getEmail(), profile.getAccount().getPassword());
+
+        try {
+            FeedConfiguration configuration = profile.findForFeedUrl(_feedUrl);
+
+            if (configuration == null) {
+                throw new  GoogleReaderAdapterException(String.format("Can not find feed [ %s ] in profile [ %s ]", _feedUrl, _email));    
+            }
+
+            this.log.info(String.format("Testing feed [ %s ] from profile [ %s ]", configuration.getUrl(), _email));
+            updateFeed(_handler, profile, configuration);
+        }
+
+        catch (GoogleReaderProvider.GoogleReaderProviderException e) {
+            throw new GoogleReaderAdapterException(e);
+        }
+        catch (ApiFacade.FatalException e){
+            throw new GoogleReaderAdapterException(e);
+        }
     }
 
+    /*
     public void resetProfileFeed(final String _email, final String _feedUrl) throws GoogleReaderAdapterException {
         Assert.isValidString(_email, "Email is not valid");
         Assert.isValidString(_feedUrl, "Feed Url is not valid");
 
     }
+    */
 
     public void changeProfilePassword(final String _email, final String _newPassword) throws GoogleReaderAdapterException {
         Assert.isValidString(_email, "Email is not valid");
         Assert.isValidString(_newPassword, "New password is not valid");
 
+        try {
+            Profiles profiles = this.profilesStorage.load();
+
+            boolean changed = profiles.changeProfilePassword(_email, _newPassword);
+
+            if (!changed) {
+                throw new GoogleReaderAdapterException(String.format("Error change profile [ %s ] password", _email));
+            }
+
+            this.profilesStorage.store(profiles);
+        } catch (ProfilesStorage.ProfilesStorageException e) {
+            throw new GoogleReaderAdapterException(e);
+        }
+    }
+
+    private void updateFeed(final BlitzRequestHandler _handler, final Profile profile, final FeedConfiguration configuration) throws GoogleReaderProvider.GoogleReaderProviderException, ApiFacade.FatalException {
+        List<FeedItem> items = this.provider.getUnreadFeedItems(profile.getAccount(), configuration.getUrl());
+
+        List<Modification> modifications = newArrayList();
+
+        for (FeedItem item : items) {
+            Modification modification = Modification.createModification(item);
+
+            modifications.add(modification);
+        }
+
+        BlitzRequest request = GoogleReaderAdapterTools.createBlitzRequest(configuration, modifications);
+
+        _handler.processBlitzRequest(request, 0);
     }
 
     private Profile synchronizeProfile(final String _email) throws GoogleReaderAdapterException {

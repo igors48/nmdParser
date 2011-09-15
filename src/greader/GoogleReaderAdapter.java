@@ -1,9 +1,6 @@
 package greader;
 
-import app.cli.blitz.request.BlitzRequest;
 import app.cli.blitz.BlitzRequestHandler;
-
-import java.util.List;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
@@ -17,9 +14,9 @@ public interface GoogleReaderAdapter {
 
     void updateProfile(String _email, BlitzRequestHandler _handler) throws GoogleReaderAdapterException;
 
-    void testProfileFeed(String _email, String _feedUrl) throws GoogleReaderAdapterException;
+    void testProfileFeed(String _email, String _feedUrl, BlitzRequestHandler _handler) throws GoogleReaderAdapterException;
 
-    void resetProfileFeed(String _email, String _feedUrl) throws GoogleReaderAdapterException;
+    //void resetProfileFeed(String _email, String _feedUrl) throws GoogleReaderAdapterException;
 
     void changeProfilePassword(String _email, String _newPassword) throws GoogleReaderAdapterException;
 
