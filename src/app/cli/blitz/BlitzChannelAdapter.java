@@ -142,9 +142,9 @@ public class BlitzChannelAdapter implements ChannelAdapter {
     }
 
     public boolean isSimpleHandling() {
-        boolean rssOrModificationsWithoutCriterionExpression = (this.request.getSourceType() == RequestSourceType.RSS  || this.request.getSourceType() == RequestSourceType.MODIFICATIONS) && this.request.expressionRemainsDefault();
+        boolean rssOrModificationsWithoutCriterionExpression = (this.request.getSourceType() == RequestSourceType.RSS || this.request.getSourceType() == RequestSourceType.MODIFICATIONS) && this.request.expressionRemainsDefault();
         boolean filterModeNotUsed = this.request.getCriterionType() != CriterionType.FILTER;
-        
+
         return filterModeNotUsed && rssOrModificationsWithoutCriterionExpression;
     }
 
@@ -177,7 +177,9 @@ public class BlitzChannelAdapter implements ChannelAdapter {
     }
 
     private InterpreterAdapter createInterpreterAdapter(final Modification _modification) {
-        FragmentAnalyserConfiguration fragmentAnalyserConfiguration = ChannelAdapterTools.createFragmentAnalyserConfiguration(this.request.getCriterionType(),
+        FragmentAnalyserConfiguration fragmentAnalyserConfiguration = this.request.getCriterionType() == CriterionType.FILTER ?
+                ChannelAdapterTools.createContentFilterConfiguration(BLITZ_CHAIN_PROCESSOR_ADAPTER_ID, this.serviceManager.getDebugConsole()) :
+                ChannelAdapterTools.createFragmentAnalyserConfiguration(this.request.getCriterionType(),
                         this.request.getCriterionExpression(),
                         BLITZ_CHAIN_PROCESSOR_ADAPTER_ID,
                         this.serviceManager.getDebugConsole());

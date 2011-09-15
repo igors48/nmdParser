@@ -75,22 +75,18 @@ public final class ChannelAdapterTools {
 
         adapter.setId(_id);
 
-        if (_criterionType == CriterionType.FILTER) {
-            adapter.addAdapter(new FilterProcessorAdapter());
-        } else {
-            int index = 0;
+        int index = 0;
 
-            for (String expression : _expressions) {
-                String outputVariableName = createOutputVariableName(index);
+        for (String expression : _expressions) {
+            String outputVariableName = createOutputVariableName(index);
 
-                adapter.addAdapter(_criterionType == CriterionType.REGEXP ? createGetGroupProcessorAdapter(expression, outputVariableName) : createXPathProcessorAdapter(expression, outputVariableName));
+            adapter.addAdapter(_criterionType == CriterionType.REGEXP ? createGetGroupProcessorAdapter(expression, outputVariableName) : createXPathProcessorAdapter(expression, outputVariableName));
 
-                if (index > 0) {
-                    adapter.addAdapter(createAppendProcessorAdapter(outputVariableName));
-                }
-
-                ++index;
+            if (index > 0) {
+                adapter.addAdapter(createAppendProcessorAdapter(outputVariableName));
             }
+
+            ++index;
         }
 
         return adapter;
