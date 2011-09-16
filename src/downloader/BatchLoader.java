@@ -18,19 +18,20 @@ public interface BatchLoader {
      * «агружает данные от адресов указанных в списке. Ѕлокирует до завершени€.
      *
      * @param _urls                  список нужных адресов
-     * @param _pauseBeteweenRequests интервал между запросами
+     * @param _pauseBetweenRequests интервал между запросами
      * @return список образов загруженных данных. ≈сли загрузка данных
      *         не удалась - возвращаютс€ пустые данные
      */
-    Map<String, HttpData> loadUrls(List<String> _urls, long _pauseBeteweenRequests);
+    Map<String, HttpData> loadUrls(List<String> _urls, long _pauseBetweenRequests);
 
+    
     /**
      * ќбрабатывает список запросов
      *
      * @param _requests список запросов
      * @return результат обработки
      */
-    Map<RequestList, HttpData> load(List<RequestList> _requests);
+    //Map<RequestList, HttpData> load(List<RequestList> _requests);
 
     /**
      * «агружает данные с указанного урла, подставл€€ указанный реферер

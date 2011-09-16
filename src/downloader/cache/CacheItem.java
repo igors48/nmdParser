@@ -1,4 +1,4 @@
-package downloader.httpadapter.cache;
+package downloader.cache;
 
 import util.Assert;
 

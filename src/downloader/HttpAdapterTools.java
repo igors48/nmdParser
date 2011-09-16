@@ -1,4 +1,4 @@
-package downloader.httpadapter;
+package downloader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

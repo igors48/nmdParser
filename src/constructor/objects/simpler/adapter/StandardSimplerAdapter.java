@@ -12,7 +12,7 @@ import constructor.objects.storage.Storage;
 import converter.format.fb2.resource.Fb2ResourceConversionContext;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
 import debug.DebugConsole;
-import downloader.Downloader;
+import downloader.HttpRequestHandler;
 import resource.ConverterFactory;
 import timeservice.TimeService;
 import util.Assert;
@@ -27,7 +27,7 @@ public class StandardSimplerAdapter implements SimplerAdapter {
 
     private final SimplerConfiguration configuration;
     private final TimeService timeService;
-    private final Downloader downloader;
+    private final HttpRequestHandler httpRequestHandler;
     private final PropertiesCloud propertiesCloud;
     private final Controller controller;
     private final ConverterFactory converterFactory;
@@ -50,7 +50,7 @@ public class StandardSimplerAdapter implements SimplerAdapter {
 
     public StandardSimplerAdapter(final SimplerConfiguration _configuration,
                                   final TimeService _timeService,
-                                  final Downloader _downloader,
+                                  final HttpRequestHandler _httpRequestHandler,
                                   final PropertiesCloud _propertiesCloud,
                                   final Controller _controller,
                                   final ConverterFactory _converterFactory,
@@ -76,8 +76,8 @@ public class StandardSimplerAdapter implements SimplerAdapter {
         Assert.notNull(_timeService, "Time service is null");
         this.timeService = _timeService;
 
-        Assert.notNull(_downloader, "Downloader is null");
-        this.downloader = _downloader;
+        Assert.notNull(_httpRequestHandler, "Http request handler is null");
+        this.httpRequestHandler = _httpRequestHandler;
 
         Assert.notNull(_propertiesCloud, "Properties cloud is null");
         this.propertiesCloud = _propertiesCloud;
@@ -183,8 +183,8 @@ public class StandardSimplerAdapter implements SimplerAdapter {
         return this.channelDataListStorage;
     }
 
-    public Downloader getDownloader() {
-        return this.downloader;
+    public HttpRequestHandler getHttpRequestHandler() {
+        return this.httpRequestHandler;
     }
 
     public int getForcedDays() {

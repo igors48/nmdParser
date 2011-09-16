@@ -10,8 +10,8 @@ import constructor.objects.source.core.ModificationListStorage;
 import dated.item.modification.Modification;
 import dated.item.modification.stream.ModificationList;
 import downloader.BatchLoader;
-import downloader.Downloader;
-import downloader.batchloader.StandardBatchLoader;
+import downloader.HttpRequestHandler;
+import downloader.StandardBatchLoaderEx;
 import timeservice.StandardTimeService;
 import timeservice.StillTimeService;
 import timeservice.TimeService;
@@ -35,7 +35,7 @@ public abstract class AbstractChannelAdapter implements ChannelAdapter {
     protected final long pauseBetweenRequests;
     protected final BatchLoader batchLoader;
 
-    public AbstractChannelAdapter(final ChannelDataListStorage _channelDataListStorage, final Downloader _downloader, final ModificationListStorage _modificationListStorage, final int _forcedDays, final TimeService _timeService, final Controller _controller, final int _precachedItemsCount, final long _pauseBetweenRequests) {
+    public AbstractChannelAdapter(final ChannelDataListStorage _channelDataListStorage, final HttpRequestHandler _httpRequestHandler, final ModificationListStorage _modificationListStorage, final int _forcedDays, final TimeService _timeService, final Controller _controller, final int _precachedItemsCount, final long _pauseBetweenRequests) {
         Assert.notNull(_channelDataListStorage, "Channel data list storage is null.");
         this.channelDataListStorage = _channelDataListStorage;
 
@@ -54,7 +54,7 @@ public abstract class AbstractChannelAdapter implements ChannelAdapter {
         Assert.greaterOrEqual(_pauseBetweenRequests, 0, "Pause between requests < 0");
         this.pauseBetweenRequests = _pauseBetweenRequests;
 
-        this.batchLoader = new StandardBatchLoader(_downloader, new NullController());
+        this.batchLoader = new StandardBatchLoaderEx(_httpRequestHandler, new NullController());
 
         this.forcedAge = _forcedDays < 0 ? -1 : _forcedDays * DAYS_TO_MILLIS;
     }
@@ -127,18 +127,18 @@ public abstract class AbstractChannelAdapter implements ChannelAdapter {
     protected abstract String getSourceId();
 
     /**
-     * Возвращает опорный сервис времени. Нужен для корректного ресолвинга относительных дат
-     * модификаций типа "Вчера" "Минуту назад" и т.п.
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅ" "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ" пїЅ пїЅ.пїЅ.
      * <p/>
-     * Возможная реализация
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
      * <p/>
-     * При форсированном обновлении представляет собой стандартный сервис времени.
-     * При простом обновлении это StillTimeService с датой модификкации
+     * пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
+     * пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ StillTimeService пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
      *
-     * @param _modification модификация
-     * @return опорный сервис времени
+     * @param _modification пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+     * @return пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
      * @throws constructor.objects.AdapterException
-     *          если не получилось
+     *          пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
      */
     protected TimeService getRefTimeService(final Modification _modification) throws AdapterException {
         return this.forcedAge >= 0 ? new StandardTimeService() : new StillTimeService(_modification.getDate());

@@ -14,7 +14,7 @@ import converter.ConverterContext;
 import converter.format.fb2.Fb2Converter;
 import converter.format.fb2.resource.Fb2ResourceConversionContext;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
-import downloader.Downloader;
+import downloader.HttpRequestHandler;
 import flowtext.Document;
 import resource.ConverterFactory;
 import timeservice.TimeService;
@@ -37,7 +37,7 @@ public class SimplerDocumentBuilderAdapter extends AbstractDocumentBuilderAdapte
     private final boolean linksAsFootnotes;
     private final boolean removeExists;
     private final boolean resolveImageLinks;
-    private final Downloader downloader;
+    private final HttpRequestHandler httpRequestHandler;
     private final ConverterFactory converterFactory;
     private final ResourceCache cache;
     private final String dummy;
@@ -55,7 +55,7 @@ public class SimplerDocumentBuilderAdapter extends AbstractDocumentBuilderAdapte
             final boolean _linksAsFootnotes,
             final boolean _removeExists,
             final boolean _resolveImageLinks,
-            final Downloader _downloader,
+            final HttpRequestHandler _httpRequestHandler,
             final ConverterFactory _converterFactory,
             final ResourceCache _cache,
             final String _dummy,
@@ -93,8 +93,8 @@ public class SimplerDocumentBuilderAdapter extends AbstractDocumentBuilderAdapte
         this.removeExists = _removeExists;
         this.resolveImageLinks = _resolveImageLinks;
 
-        Assert.notNull(_downloader, "Downloader is null");
-        this.downloader = _downloader;
+        Assert.notNull(_httpRequestHandler, "Downloader is null");
+        this.httpRequestHandler = _httpRequestHandler;
 
         Assert.notNull(_converterFactory, "Converter factory is null");
         this.converterFactory = _converterFactory;
@@ -124,7 +124,7 @@ public class SimplerDocumentBuilderAdapter extends AbstractDocumentBuilderAdapte
         Assert.notNull(_document, "Document is null.");
 
         try {
-            Fb2Converter converter = new Fb2Converter(this.downloader, this.converterFactory, this.cache, this.dummy, this.conversionContext, this.controller);
+            Fb2Converter converter = new Fb2Converter(this.httpRequestHandler, this.converterFactory, this.cache, this.dummy, this.conversionContext, this.controller);
 
             String name = DocumentBuilderAdapterUtils.getName(_document.getHeader().getBookTitle(), this.maxFileNameLength);
 

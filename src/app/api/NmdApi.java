@@ -492,11 +492,7 @@ public class NmdApi implements ApiFacade {
     public void cancelDownload() throws FatalException {
         checkWorkspaceAndSettings();
 
-        try {
-            this.serviceManager.getDownloader().cancel();
-        } catch (ServiceManager.ServiceManagerException e) {
-            throw new FatalException("Error cancel download", e);
-        }
+        this.serviceManager.getHttpRequestHandler().cancel();
     }
 
     public void createGoogleReaderProfile(final String _email, final String _password) throws FatalException {
@@ -783,7 +779,7 @@ public class NmdApi implements ApiFacade {
         if (configuration instanceof ChannelConfiguration) {
             adapter = new StandardChannelAdapter(this.workspace.getChannelDataListStorage(),
                     (ChannelConfiguration) configuration,
-                    this.serviceManager.getDownloader(),
+                    this.serviceManager.getHttpRequestHandler(),
                     this.workspace.getModificationListStorage(),
                     this.workspace.getConstructorFactory(),
                     _forcedDays,
@@ -816,7 +812,7 @@ public class NmdApi implements ApiFacade {
                     this.workspace.getChannelDataListStorage(),
                     (OutputConfiguration) configuration,
                     this.serviceManager.getTimeService(),
-                    this.serviceManager.getDownloader(),
+                    this.serviceManager.getHttpRequestHandler(),
                     this.serviceManager.getConverterFactory(),
                     this.serviceManager.getResourceCache(),
                     this.serviceManager.getProcessWrapper(),
@@ -845,7 +841,7 @@ public class NmdApi implements ApiFacade {
     private Simpler getSimpler(final SimplerConfiguration _configuration, final int _forcedDays, final Controller _controller) throws ServiceManager.ServiceManagerException, Workspace.WorkspaceException {
         SimplerAdapter adapter = new StandardSimplerAdapter(_configuration,
                 this.serviceManager.getTimeService(),
-                this.serviceManager.getDownloader(),
+                this.serviceManager.getHttpRequestHandler(),
                 this.workspace.getCloud(),
                 _controller,
                 this.serviceManager.getConverterFactory(),

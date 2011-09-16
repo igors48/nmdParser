@@ -11,7 +11,7 @@ import converter.format.fb2.objects.*;
 import converter.format.fb2.resource.Fb2ResourceBundle;
 import converter.format.fb2.resource.Fb2ResourceConversionContext;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
-import downloader.Downloader;
+import downloader.HttpRequestHandler;
 import flowtext.*;
 import flowtext.resource.Resource;
 import flowtext.text.FootNote;
@@ -25,7 +25,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-//todo поменять кейс на стратегию. точно!
+//todo пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅ!
 
 /**
  * @author Igor Usenko
@@ -35,7 +35,7 @@ public class Fb2Converter implements Converter {
 
     private static final String CHARSET_NAME = "UTF-8";
 
-    private final Downloader downloader;
+    private final HttpRequestHandler httpRequestHandler;
     private final ConverterFactory factory;
     private final ResourceCache cache;
     private final String dummy;
@@ -47,15 +47,15 @@ public class Fb2Converter implements Converter {
     private static final int MAX_BOOK_TITLE_LEN = 64;
     private static final String DEFAULT_EXTENSION = "fb2";
 
-    public Fb2Converter(final Downloader _downloader, final ConverterFactory _factory, final ResourceCache _cache, final String _dummy, final Fb2ResourceConversionContext _conversionContext, final Controller _controller) {
-        Assert.notNull(_downloader, "Downloader is null");
+    public Fb2Converter(final HttpRequestHandler _httpRequestHandler, final ConverterFactory _factory, final ResourceCache _cache, final String _dummy, final Fb2ResourceConversionContext _conversionContext, final Controller _controller) {
+        Assert.notNull(_httpRequestHandler, "Http request handler is null");
         Assert.notNull(_factory, "Converter factory is null");
         Assert.notNull(_cache, "Resource cache is null");
         Assert.isValidString(_dummy, "Dummy address is not valid");
         Assert.notNull(_conversionContext, "Conversion context is null");
         Assert.notNull(_controller, "Controller is null");
 
-        this.downloader = _downloader;
+        this.httpRequestHandler = _httpRequestHandler;
         this.factory = _factory;
         this.cache = _cache;
         this.dummy = _dummy;
@@ -88,7 +88,7 @@ public class Fb2Converter implements Converter {
     private List<String> saveToStorages(final ConverterContext _context, final String _tempFile) throws Storage.StorageException {
         List<String> result = new ArrayList<String>();
 
-        // todo дурацкое разделение: хранилищ много, а постпроцессор на всех один 
+        // todo пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ 
         for (Storage storage : _context.getStorages()) {
             result.add(storage.store(new FileStoreItem(_context.getBranch(), _tempFile, false, _context.isRemoveExists()), _context.getForEachPostProcessor()));
         }
@@ -97,7 +97,7 @@ public class Fb2Converter implements Converter {
     }
 
     private String[] getDocumentImage(final Document _document, final String _tempDir) throws ConverterException {
-        Fb2ResourceBundle resources = new Fb2ResourceBundle(this.downloader, this.factory, this.cache, this.dummy, _tempDir, this.conversionContext, this.controller);
+        Fb2ResourceBundle resources = new Fb2ResourceBundle(this.httpRequestHandler, this.factory, this.cache, this.dummy, _tempDir, this.conversionContext, this.controller);
         Fb2FootNoteList notes = new Fb2FootNoteList();
 
         this.controller.onProgress(new SingleProcessInfo("process.convert.to.fb2"));
@@ -243,7 +243,7 @@ public class Fb2Converter implements Converter {
                         result.insertFootNoteLink(tag);
                     }
 
-                    //todo ох и блин!
+                    //todo пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ!
 
                     if (PathTools.imageLink(((FootNote) current).getText()) && this.context.isResolveImageLinks()) {
                         String tag = _resources.appendResourceItem(((FootNote) current).getBase(), ((FootNote) current).getText());

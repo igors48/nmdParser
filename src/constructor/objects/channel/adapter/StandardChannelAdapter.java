@@ -20,7 +20,7 @@ import constructor.objects.processor.chain.ChainProcessor;
 import constructor.objects.processor.chain.ChainProcessorAdapter;
 import constructor.objects.source.core.ModificationListStorage;
 import dated.item.modification.Modification;
-import downloader.Downloader;
+import downloader.HttpRequestHandler;
 import timeservice.TimeService;
 import util.Assert;
 
@@ -36,17 +36,17 @@ import java.util.List;
 public class StandardChannelAdapter extends AbstractChannelAdapter {
 
     private final ChannelConfiguration configuration;
-    private final Downloader downloader;
+    private final HttpRequestHandler httpRequestHandler;
     private final ConstructorFactory factory;
 
-    public StandardChannelAdapter(final ChannelDataListStorage _channelDataListStorage, final ChannelConfiguration _configuration, final Downloader _downloader, final ModificationListStorage _modificationListStorage, final ConstructorFactory _factory, final int _forcedDays, final TimeService _timeService, final Controller _controller, final int _precachedItemsCount) {
-        super(_channelDataListStorage, _downloader, _modificationListStorage, _forcedDays, _timeService, _controller, _precachedItemsCount, 0);
+    public StandardChannelAdapter(final ChannelDataListStorage _channelDataListStorage, final ChannelConfiguration _configuration, final HttpRequestHandler _httpRequestHandler, final ModificationListStorage _modificationListStorage, final ConstructorFactory _factory, final int _forcedDays, final TimeService _timeService, final Controller _controller, final int _precachedItemsCount) {
+        super(_channelDataListStorage, _httpRequestHandler, _modificationListStorage, _forcedDays, _timeService, _controller, _precachedItemsCount, 0);
 
         Assert.notNull(_configuration, "Channel configuration is null.");
         this.configuration = _configuration;
 
-        Assert.notNull(_downloader, "Downloader is null.");
-        this.downloader = _downloader;
+        Assert.notNull(_httpRequestHandler, "Downloader is null.");
+        this.httpRequestHandler = _httpRequestHandler;
 
         Assert.notNull(_factory, "Factory is null.");
         this.factory = _factory;
@@ -91,14 +91,14 @@ public class StandardChannelAdapter extends AbstractChannelAdapter {
                 InterpreterConfiguration configuration = new InterpreterConfiguration();
                 configuration.setId("simple");
 
-                StandardInterpreterAdapter adapter = new StandardInterpreterAdapter(configuration, _modification, this.downloader, this.configuration.getLastItemCount(), getRefTimeService(_modification), getPrecachedItemsCount(), getPauseBetweenRequests());
+                StandardInterpreterAdapter adapter = new StandardInterpreterAdapter(configuration, _modification, this.httpRequestHandler, this.configuration.getLastItemCount(), getRefTimeService(_modification), getPrecachedItemsCount(), getPauseBetweenRequests());
 
                 result.add(new SimpleInterpreter(adapter));
             } else {
                 Constructor constructor = this.factory.getConstructor();
 
                 InterpreterConfiguration configuration = (InterpreterConfiguration) constructor.create(this.configuration.getInterpreterId(), ObjectType.INTERPRETER);
-                StandardInterpreterAdapter adapter = new StandardInterpreterAdapter(configuration, _modification, this.downloader, this.configuration.getLastItemCount(), getRefTimeService(_modification), getPrecachedItemsCount(), getPauseBetweenRequests());
+                StandardInterpreterAdapter adapter = new StandardInterpreterAdapter(configuration, _modification, this.httpRequestHandler, this.configuration.getLastItemCount(), getRefTimeService(_modification), getPrecachedItemsCount(), getPauseBetweenRequests());
 
                 result.add(new StandardInterpreter(adapter));
             }

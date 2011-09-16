@@ -1,7 +1,7 @@
 package work.comp.downloader;
 
+import downloader.banned.BannedList;
 import junit.framework.TestCase;
-import downloader.httpadapter.banned.BannedList;
 
 /**
  * @author Igor Usenko
@@ -18,14 +18,14 @@ public class BannedListTest extends TestCase {
         super(_s);
     }
 
-    // первоначальный тест
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     public void testSmoke(){
         BannedList list = new BannedList(2, 3);
 
         assertFalse(list.isBanned(SITE01));
     }
 
-    // тест на то, что сайт не забанен, если на него недостаточно жаловались
+    // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public void testComplainsNotEnough(){
         BannedList list = new BannedList(2, 3);
 
@@ -34,7 +34,7 @@ public class BannedListTest extends TestCase {
         assertFalse(list.isBanned(SITE01));
     }
     
-    // тест на то, что сайт забанен, если достаточно жаловались
+    // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public void testComplainsEnough(){
         BannedList list = new BannedList(2, 3);
 
@@ -44,7 +44,7 @@ public class BannedListTest extends TestCase {
         assertTrue(list.isBanned(SITE01));
     }
 
-    // тест на то, что из двух сайтов забанен правильный, если достаточно жаловались
+    // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public void testComplainsEnoughRightly(){
         BannedList list = new BannedList(2, 3);
 
@@ -56,7 +56,7 @@ public class BannedListTest extends TestCase {
         assertFalse(list.isBanned(SITE02));
     }
 
-    // тест на контроль размера списка
+    // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public void testLimit(){
         BannedList list = new BannedList(2, 2);
 

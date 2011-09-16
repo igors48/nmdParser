@@ -6,7 +6,9 @@ package downloader;
  */
 public interface HttpRequestHandler {
 
-    Data get(String request, String referer);
+    void get(HttpGetRequest _request);
 
-    Data post(String url, String referer);
+    void cancel();
+   // HttpResponse post(String _request, String _referer);
+    
 }

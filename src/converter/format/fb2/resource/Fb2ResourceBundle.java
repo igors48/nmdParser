@@ -5,7 +5,7 @@ import app.iui.flow.custom.SingleProcessInfo;
 import converter.format.fb2.Stringable;
 import converter.format.fb2.resource.resolver.Fb2ResourceBundleResolver;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
-import downloader.Downloader;
+import downloader.HttpRequestHandler;
 import resource.ConverterFactory;
 import util.Assert;
 import util.PathTools;
@@ -29,7 +29,7 @@ public class Fb2ResourceBundle implements Stringable {
 
     private final List<Fb2ResourceItem> content;
     private final String dummy;
-    private final Downloader downloader;
+    private final HttpRequestHandler httpRequestHandler;
     private final ConverterFactory factory;
     private final ResourceCache cache;
     private final String tempDir;
@@ -38,10 +38,10 @@ public class Fb2ResourceBundle implements Stringable {
 
     //private final Log log;
 
-    //todo получает в конструктор классы, которые лично ему не нужны. как вариант - просто передавать ему ресолвер ресурсов и все
+    //todo пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ
 
-    public Fb2ResourceBundle(final Downloader _downloader, final ConverterFactory _factory, final ResourceCache _cache, final String _dummy, final String _tempDir, final Fb2ResourceConversionContext _conversionContext, final Controller _controller) {
-        Assert.notNull(_downloader, "Downloader is null");
+    public Fb2ResourceBundle(final HttpRequestHandler _httpRequestHandler, final ConverterFactory _factory, final ResourceCache _cache, final String _dummy, final String _tempDir, final Fb2ResourceConversionContext _conversionContext, final Controller _controller) {
+        Assert.notNull(_httpRequestHandler, "Http request handler is null");
         Assert.notNull(_factory, "Converter factory is null");
         Assert.notNull(_cache, "Resource cache is null");
         Assert.isValidString(_dummy, "Resource dummy is not valid");
@@ -50,7 +50,7 @@ public class Fb2ResourceBundle implements Stringable {
         Assert.notNull(_conversionContext, "Conversion context is null");
         Assert.notNull(_controller, "Controller is null");
 
-        this.downloader = _downloader;
+        this.httpRequestHandler = _httpRequestHandler;
         this.factory = _factory;
         this.cache = _cache;
         this.dummy = _dummy;
@@ -96,7 +96,7 @@ public class Fb2ResourceBundle implements Stringable {
     }
 
     public void resolve() {
-        new Fb2ResourceBundleResolver(this.downloader, this.factory, this.cache, this.dummy, this.tempDir, this.controller).resolve(this.content);
+        new Fb2ResourceBundleResolver(this.httpRequestHandler, this.factory, this.cache, this.dummy, this.tempDir, this.controller).resolve(this.content);
     }
 
     private String generate(final String _address) {

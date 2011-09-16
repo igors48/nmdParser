@@ -2,15 +2,14 @@ package constructor.objects.processor.load.adapter;
 
 import app.controller.NullController;
 import app.workingarea.ServiceManager;
-import constructor.objects.ConfigurationException;
 import constructor.objects.processor.VariableProcessor;
 import constructor.objects.processor.VariableProcessorAdapter;
 import constructor.objects.processor.load.LoadProcessor;
-import downloader.batchloader.StandardBatchLoader;
+import downloader.StandardBatchLoaderEx;
 import util.Assert;
 
 /**
- * Адаптер для процессора LoadProcessor
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LoadProcessor
  *
  * @author Igor Usenko
  *         Date: 04.08.2009
@@ -33,13 +32,9 @@ public class LoadProcessorAdapter implements VariableProcessorAdapter {
         this.referer = "";
     }
 
-    public VariableProcessor getProcessor() throws ConfigurationException {
+    public VariableProcessor getProcessor() {
 
-        try {
-            return new LoadProcessor(this.in, this.url, this.referer, this.out, new StandardBatchLoader(this.serviceManager.getDownloader(), new NullController()));
-        } catch (ServiceManager.ServiceManagerException e) {
-            throw new ConfigurationException(e);
-        }
+        return new LoadProcessor(this.in, this.url, this.referer, this.out, new StandardBatchLoaderEx(this.serviceManager.getHttpRequestHandler(), new NullController()));
     }
 
     public void setAttributeIn(final String _value) {

@@ -1,4 +1,4 @@
-package downloader.httpadapter.banned;
+package downloader.banned;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

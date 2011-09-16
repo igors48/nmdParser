@@ -16,7 +16,7 @@ import constructor.objects.interpreter.core.standard.StandardInterpreter;
 import constructor.objects.source.core.ModificationListStorage;
 import dated.item.modification.Modification;
 import debug.DebugConsole;
-import downloader.Downloader;
+import downloader.HttpRequestHandler;
 import timeservice.TimeService;
 import util.Assert;
 
@@ -44,7 +44,7 @@ public class SimplerChannelAdapter extends AbstractChannelAdapter {
                                  final boolean _autoContentFiltering,
                                  final String _coverUrl,
                                  final ChannelDataListStorage _channelDataListStorage,
-                                 final Downloader _downloader,
+                                 final HttpRequestHandler _httpRequestHandler,
                                  final ModificationListStorage _modificationListStorage,
                                  final int _forcedDays,
                                  final TimeService _timeService,
@@ -52,7 +52,7 @@ public class SimplerChannelAdapter extends AbstractChannelAdapter {
                                  final int _precachedItemsCount,
                                  final long _pauseBetweenRequests,
                                  final DebugConsole _debugConsole) {
-        super(_channelDataListStorage, _downloader, _modificationListStorage, _forcedDays, _timeService, _controller, _precachedItemsCount, _pauseBetweenRequests);
+        super(_channelDataListStorage, _httpRequestHandler, _modificationListStorage, _forcedDays, _timeService, _controller, _precachedItemsCount, _pauseBetweenRequests);
 
         Assert.isValidString(_id, "Id is not valid");
         this.id = _id;

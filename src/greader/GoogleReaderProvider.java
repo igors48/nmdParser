@@ -6,8 +6,6 @@ import greader.entities.FeedItems;
 import greader.entities.Subscription;
 import greader.entities.Subscriptions;
 import greader.profile.Account;
-import org.apache.commons.httpclient.URI;
-import org.apache.commons.httpclient.URIException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.client.RestTemplate;

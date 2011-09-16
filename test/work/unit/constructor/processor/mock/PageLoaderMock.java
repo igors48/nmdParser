@@ -1,7 +1,6 @@
 package work.unit.constructor.processor.mock;
 
 import downloader.BatchLoader;
-import downloader.RequestList;
 import downloader.Result;
 import downloader.data.MemoryData;
 import html.HttpData;
@@ -33,10 +32,6 @@ public class PageLoaderMock implements BatchLoader {
         result.put(_urls.get(0), new HttpData(_urls.get(0), new MemoryData(this.data, "UTF-8"), Result.OK));
 
         return result;
-    }
-
-    public Map<RequestList, HttpData> load(List<RequestList> _requests) {
-        return null;
     }
 
     public HttpData loadUrlWithReferer(final String _url, final String _referer) {
