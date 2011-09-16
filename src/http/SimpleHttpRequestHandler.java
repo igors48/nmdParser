@@ -13,10 +13,13 @@ import org.apache.http.impl.client.ContentEncodingHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.apache.http.util.EntityUtils;
 import util.Assert;
 import util.IOTools;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
@@ -93,12 +96,10 @@ public class SimpleHttpRequestHandler implements HttpRequestHandler {
             final HttpResponse response = httpClient.execute(httpGet);
             final HttpEntity entity = response.getEntity();
 
-            final ByteArrayOutputStream output = new ByteArrayOutputStream();
-            IOTools.copy(entity.getContent(), output);
-
             //TODO charset
             //TODO response URL
-            final Data data = new MemoryData(output.toByteArray());
+            //EntityUtils.consume(entity);
+            final Data data = new MemoryData(EntityUtils.toByteArray(entity));
             final HttpData httpData = new HttpData(httpGet.getURI().toURL().toString(), data, Result.OK);
 
             _request.setResult(httpData);

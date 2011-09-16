@@ -27,6 +27,8 @@ public class StandardBatchLoaderEx implements BatchLoader {
     private final HttpRequestHandler requestHandler;
     private final Controller controller;
 
+    final CompletionService<HttpGetRequest> completionService;
+
     private final Log log;
 
     public StandardBatchLoaderEx(final HttpRequestHandler _requestHandler, final Controller _controller) {
@@ -35,6 +37,8 @@ public class StandardBatchLoaderEx implements BatchLoader {
 
         Assert.notNull(_controller, "Controller is null");
         this.controller = _controller;
+
+        this.completionService = new ExecutorCompletionService<HttpGetRequest>(Executors.newFixedThreadPool(16, new DaemonThreadFactory("daemon")));
 
         this.log = LogFactory.getLog(getClass());
     }
@@ -48,19 +52,17 @@ public class StandardBatchLoaderEx implements BatchLoader {
         try {
             this.controller.onProgress(new SingleProcessInfo(PROCESS_LOADING_DATA, 0, _urls.size()));
 
-            final CompletionService<HttpGetRequest> completionService = new ExecutorCompletionService<HttpGetRequest>(Executors.newFixedThreadPool(8));
-
             for (final String url : _urls) {
                 final HttpGetTask task = createTask(url, "");
 
-                completionService.submit(task);
+                this.completionService.submit(task);
             }
 
             int count = 0;
 
             while (count != _urls.size()) {
                 // TODO check for cancel
-                final HttpGetRequest request = completionService.take().get();
+                final HttpGetRequest request = this.completionService.take().get();
 
                 result.put(request.getUrl(), request.getResult());
 
