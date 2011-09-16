@@ -1,4 +1,4 @@
-package work.comp.downloader;
+package work.unit.banned;
 
 import downloader.banned.BannedList;
 import junit.framework.TestCase;
