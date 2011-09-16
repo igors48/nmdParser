@@ -1,6 +1,6 @@
-package downloader;
+package http;
 
-import downloader.data.MemoryData;
+import http.data.MemoryData;
 import html.HttpData;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -3,16 +3,16 @@ package constructor.objects.processor.load;
 import constructor.objects.processor.AbstractVariableProcessor;
 import debug.Snapshot;
 import debug.snapshot.ProcessorSnapshot;
-import downloader.BatchLoader;
-import downloader.Data;
-import downloader.Result;
-import downloader.data.DataUtil;
+import http.BatchLoader;
+import http.Data;
+import http.Result;
+import http.data.DataUtil;
 import html.HttpData;
 import util.Assert;
 import variables.Variables;
 
 /**
- * Загружает html код страницы в переменную
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ html пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 04.08.2009
@@ -65,7 +65,7 @@ public class LoadProcessor extends AbstractVariableProcessor {
         pages.add(inputValue);
         */
 
-        //паузу между запросами здесь пока не делаем
+        //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         /*
         Map<String, HttpData> map = loader.loadUrls(pages, 0);
         HttpData data = map.get(inputValue);

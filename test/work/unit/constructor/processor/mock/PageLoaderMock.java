@@ -1,8 +1,8 @@
 package work.unit.constructor.processor.mock;
 
-import downloader.BatchLoader;
-import downloader.Result;
-import downloader.data.MemoryData;
+import http.BatchLoader;
+import http.Result;
+import http.data.MemoryData;
 import html.HttpData;
 import util.Assert;
 

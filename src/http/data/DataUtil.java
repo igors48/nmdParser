@@ -1,6 +1,6 @@
-package downloader.data;
+package http.data;
 
-import downloader.Data;
+import http.Data;
 import util.Assert;
 
 /**

@@ -12,7 +12,7 @@ import constructor.objects.storage.Storage;
 import converter.format.fb2.resource.Fb2ResourceConversionContext;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
 import debug.DebugConsole;
-import downloader.HttpRequestHandler;
+import http.HttpRequestHandler;
 import resource.ConverterFactory;
 import timeservice.TimeService;
 import util.Assert;

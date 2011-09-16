@@ -4,14 +4,14 @@ import constructor.objects.channel.core.ChannelAnalyser;
 import constructor.objects.channel.core.ChannelDataHeader;
 import constructor.objects.channel.core.ChannelDataTools;
 import dated.item.modification.Modification;
-import downloader.BatchLoader;
-import downloader.Data;
+import http.BatchLoader;
+import http.Data;
 import util.Assert;
 
 /**
- * Стандартный анализатор информации канала. Формирует заголовок
- * канала из урла и заголовка веб-страницы соответствующей этому
- * урлу
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+ * пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+ * пїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 31.12.2008

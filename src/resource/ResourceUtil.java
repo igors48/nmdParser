@@ -1,6 +1,6 @@
 package resource;
 
-import downloader.Data;
+import http.Data;
 import util.Assert;
 
 /**
@@ -9,7 +9,7 @@ import util.Assert;
  */
 public class ResourceUtil {
 
-    private static final String JPG_SIGN_01 = "ÿØÿ";
+    private static final String JPG_SIGN_01 = "ï¿½ï¿½ï¿½";
     private static final String JPG_SIGN_02 = "JFIF";
     private static final String GIF_SIGN = "GIF";
     private static final String PNG_SIGN = "PNG";

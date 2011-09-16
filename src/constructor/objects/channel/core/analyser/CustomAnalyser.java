@@ -6,15 +6,15 @@ import constructor.objects.channel.core.ChannelDataTools;
 import constructor.objects.processor.VariableProcessor;
 import constructor.objects.processor.chain.ChainProcessor;
 import dated.item.modification.Modification;
-import downloader.BatchLoader;
-import downloader.Data;
+import http.BatchLoader;
+import http.Data;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import util.Assert;
 import variables.Variables;
 
 /**
- * Определяемый пользователем анализатор канала
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 06.08.2009

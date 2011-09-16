@@ -5,7 +5,7 @@ import app.workingarea.ServiceManager;
 import constructor.objects.processor.VariableProcessor;
 import constructor.objects.processor.VariableProcessorAdapter;
 import constructor.objects.processor.load.LoadProcessor;
-import downloader.StandardBatchLoaderEx;
+import http.StandardBatchLoaderEx;
 import util.Assert;
 
 /**

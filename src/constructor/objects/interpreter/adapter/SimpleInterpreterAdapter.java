@@ -6,7 +6,7 @@ import constructor.objects.interpreter.core.InterpreterAdapter;
 import constructor.objects.interpreter.core.PageAnalyser;
 import constructor.objects.interpreter.core.PageListAnalyser;
 import dated.item.modification.Modification;
-import downloader.BatchLoader;
+import http.BatchLoader;
 import util.Assert;
 
 /**

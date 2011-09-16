@@ -1,4 +1,4 @@
-package downloader;
+package http;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )

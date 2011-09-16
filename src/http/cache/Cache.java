@@ -1,4 +1,4 @@
-package downloader.cache;
+package http.cache;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -1,18 +1,18 @@
 package constructor.objects.channel.core;
 
 import dated.item.modification.Modification;
-import downloader.BatchLoader;
+import http.BatchLoader;
 
 /**
- * Интерфейс анализатора канала. Задача - каким-либо законным образом
- * получить заголовок канала.
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.
  *
  * @author Igor Usenko
  *         Date: 31.12.2008
  */
 public interface ChannelAnalyser {
 
-    //todo _coverUrl вроде как и не в контексте
+    //todo _coverUrl пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     ChannelDataHeader getHeader(Modification _modification, BatchLoader _batchLoader, String _coverUrl, long _pauseBetweeenRequests) throws ChannelAnalyserException;
 
     public class ChannelAnalyserException extends Exception {

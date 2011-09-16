@@ -5,16 +5,16 @@ import constructor.objects.interpreter.core.data.InterpreterData;
 import constructor.objects.interpreter.core.data.InterpreterDataTools;
 import dated.DatedItem;
 import dated.DatedTools;
-import downloader.BatchLoader;
-import downloader.Data;
-import downloader.data.DataUtil;
+import http.BatchLoader;
+import http.Data;
+import http.data.DataUtil;
 import html.HttpData;
 import util.Assert;
 
 import java.util.*;
 
 /**
- * Утилитный класс для работы с данными канала
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 26.04.2009

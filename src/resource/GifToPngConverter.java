@@ -1,7 +1,7 @@
 package resource;
 
-import downloader.Data;
-import downloader.data.DataFile;
+import http.Data;
+import http.data.DataFile;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import util.Assert;

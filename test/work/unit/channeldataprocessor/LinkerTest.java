@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import dated.DatedItem;
 import dated.item.atdc.AtdcItem;
 import work.testutil.AtdcTestUtils;
-import downloader.Data;
+import http.Data;
 import timeservice.StillTimeService;
 
 /**

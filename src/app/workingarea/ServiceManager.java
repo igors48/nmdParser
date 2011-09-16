@@ -5,7 +5,7 @@ import constructor.objects.source.core.FetcherFactory;
 import constructor.objects.storage.Storage;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
 import debug.DebugConsole;
-import downloader.HttpRequestHandler;
+import http.HttpRequestHandler;
 import resource.ConverterFactory;
 import timeservice.TimeService;
 

@@ -1,9 +1,9 @@
-package downloader.data;
+package http.data;
 
-import downloader.Data;
+import http.Data;
 
 /**
- * Пустые данные
+ * пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 27.09.2008

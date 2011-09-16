@@ -20,8 +20,8 @@ import constructor.objects.interpreter.core.standard.SimpleInterpreter;
 import constructor.objects.interpreter.core.standard.StandardInterpreter;
 import dated.item.modification.Modification;
 import dated.item.modification.stream.ModificationList;
-import downloader.BatchLoader;
-import downloader.StandardBatchLoaderEx;
+import http.BatchLoader;
+import http.StandardBatchLoaderEx;
 import timeservice.TimeService;
 import util.Assert;
 

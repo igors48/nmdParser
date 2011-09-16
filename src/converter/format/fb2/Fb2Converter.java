@@ -11,7 +11,7 @@ import converter.format.fb2.objects.*;
 import converter.format.fb2.resource.Fb2ResourceBundle;
 import converter.format.fb2.resource.Fb2ResourceConversionContext;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
-import downloader.HttpRequestHandler;
+import http.HttpRequestHandler;
 import flowtext.*;
 import flowtext.resource.Resource;
 import flowtext.text.FootNote;

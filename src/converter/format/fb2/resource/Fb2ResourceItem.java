@@ -1,8 +1,8 @@
 package converter.format.fb2.resource;
 
 import converter.format.fb2.Stringable;
-import downloader.Data;
-import downloader.data.EmptyData;
+import http.Data;
+import http.data.EmptyData;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import resource.ResourceType;

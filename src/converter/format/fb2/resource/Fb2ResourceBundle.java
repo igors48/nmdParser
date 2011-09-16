@@ -5,7 +5,7 @@ import app.iui.flow.custom.SingleProcessInfo;
 import converter.format.fb2.Stringable;
 import converter.format.fb2.resource.resolver.Fb2ResourceBundleResolver;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
-import downloader.HttpRequestHandler;
+import http.HttpRequestHandler;
 import resource.ConverterFactory;
 import util.Assert;
 import util.PathTools;

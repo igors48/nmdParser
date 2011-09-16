@@ -1,4 +1,4 @@
-package downloader;
+package http;
 
 import util.Assert;
 

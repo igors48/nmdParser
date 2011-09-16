@@ -18,7 +18,7 @@ import converter.ConverterContext;
 import converter.format.fb2.Fb2Converter;
 import converter.format.fb2.resource.Fb2ResourceConversionContext;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
-import downloader.HttpRequestHandler;
+import http.HttpRequestHandler;
 import flowtext.Document;
 import resource.ConverterFactory;
 import timeservice.TimeService;

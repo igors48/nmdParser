@@ -20,7 +20,7 @@ import constructor.objects.processor.chain.ChainProcessor;
 import constructor.objects.processor.chain.ChainProcessorAdapter;
 import constructor.objects.source.core.ModificationListStorage;
 import dated.item.modification.Modification;
-import downloader.HttpRequestHandler;
+import http.HttpRequestHandler;
 import timeservice.TimeService;
 import util.Assert;
 
@@ -45,7 +45,7 @@ public class StandardChannelAdapter extends AbstractChannelAdapter {
         Assert.notNull(_configuration, "Channel configuration is null.");
         this.configuration = _configuration;
 
-        Assert.notNull(_httpRequestHandler, "Downloader is null.");
+        Assert.notNull(_httpRequestHandler, "Http request handler is null.");
         this.httpRequestHandler = _httpRequestHandler;
 
         Assert.notNull(_factory, "Factory is null.");

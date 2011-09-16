@@ -16,7 +16,7 @@ import constructor.objects.interpreter.core.standard.StandardInterpreter;
 import constructor.objects.source.core.ModificationListStorage;
 import dated.item.modification.Modification;
 import debug.DebugConsole;
-import downloader.HttpRequestHandler;
+import http.HttpRequestHandler;
 import timeservice.TimeService;
 import util.Assert;
 

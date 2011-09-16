@@ -1,6 +1,6 @@
 package work.unit.banned;
 
-import downloader.banned.BannedList;
+import http.banned.BannedList;
 import junit.framework.TestCase;
 
 /**

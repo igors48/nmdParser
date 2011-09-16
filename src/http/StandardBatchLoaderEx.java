@@ -1,4 +1,4 @@
-package downloader;
+package http;
 
 import app.controller.Controller;
 import app.iui.flow.custom.SingleProcessInfo;

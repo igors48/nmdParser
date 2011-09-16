@@ -9,9 +9,9 @@ import constructor.objects.interpreter.core.PageAnalyser;
 import constructor.objects.interpreter.core.PageListAnalyser;
 import constructor.objects.interpreter.core.standard.*;
 import dated.item.modification.Modification;
-import downloader.BatchLoader;
-import downloader.HttpRequestHandler;
-import downloader.StandardBatchLoaderEx;
+import http.BatchLoader;
+import http.HttpRequestHandler;
+import http.StandardBatchLoaderEx;
 import timeservice.TimeService;
 import util.Assert;
 
