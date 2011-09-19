@@ -1,5 +1,6 @@
 package http;
 
+import http.banned.BannedList;
 import http.cache.InMemoryCache;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,13 +37,13 @@ public class SimpleHttpRequestHandler implements HttpRequestHandler {
     public static final String ACCEPT_CHARSET_HEADER_VALUE = "windows-1251,utf-8;q=0.7,*;q=0.3";
     public static final String ACCEPT_LANGUAGE_HEADER_NAME = "Accept-Language";
     public static final String ACCEPT_LANGUAGE_HEADER_VALUE = "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4";
-    */
+
     public static final String ACCEPT_ENCODING_HEADER_NAME = "Accept-Encoding";
     public static final String ACCEPT_ENCODING_HEADER_VALUE = "gzip,deflate";
 
     public static final String CACHE_CONTROL_HEADER_NAME = "Cache-Control";
     public static final String CACHE_CONTROL_HEADER_VALUE = "max-age=2048";
-    /*
+    
     public static final String CONNECTION_HEADER_NAME = "Connection";
     public static final String CONNECTION_HEADER_VALUE = "keep-alive";
     public static final String PRAGMA_HEADER_NAME = "Pragma";
@@ -58,6 +59,7 @@ public class SimpleHttpRequestHandler implements HttpRequestHandler {
 
     private final DefaultHttpClient httpClient;
     private final InMemoryCache cache;
+    private final BannedList bannedList;
 
     private final Log log;
 
@@ -78,6 +80,8 @@ public class SimpleHttpRequestHandler implements HttpRequestHandler {
         HttpConnectionParams.setSoTimeout(params, SOCKET_TIMEOUT);
 
         this.cache = new InMemoryCache();
+
+        this.bannedList = new BannedList(5, 50);
         
         this.log = LogFactory.getLog(getClass());
     }
@@ -85,7 +89,7 @@ public class SimpleHttpRequestHandler implements HttpRequestHandler {
     public synchronized Callable<HttpGetRequest> get(final HttpGetRequest _request) {
         Assert.notNull(_request, "Request is null");
 
-        return new HttpGetTask(this.httpClient, this.cache, _request);
+        return new HttpGetTask(this.httpClient, this.cache, this.bannedList, _request);
     }
 
     public void cancel() {

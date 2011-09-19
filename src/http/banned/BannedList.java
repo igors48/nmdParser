@@ -39,7 +39,7 @@ public class BannedList {
         this.log = LogFactory.getLog(getClass());
     }
 
-    public void complain(final String _item) {
+    public synchronized void complain(final String _item) {
         Assert.isValidString(_item, "Url to complain is not valid.");
 
         Item item = this.list.get(_item);
@@ -55,7 +55,7 @@ public class BannedList {
         this.log.debug(MessageFormat.format("Number of complains to host [ {0} ] is [ {1} ]. Treshold is [ {2} ]", _item, item.getComplains(), this.treshold));
     }
 
-    public boolean isBanned(final String _item) {
+    public synchronized boolean isBanned(final String _item) {
         Assert.isValidString(_item, "Url to ban check is not valid.");
 
         boolean result = false;

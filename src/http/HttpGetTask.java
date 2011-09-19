@@ -1,6 +1,7 @@
 package http;
 
 import html.HttpData;
+import http.banned.BannedList;
 import http.cache.InMemoryCache;
 import http.cache.InMemoryCacheItem;
 import http.data.MemoryData;
@@ -28,18 +29,22 @@ public class HttpGetTask implements Callable<HttpGetRequest> {
 
     private final HttpClient httpClient;
     private final InMemoryCache cache;
+    private final BannedList bannedList;
     private final HttpGetRequest request;
 
     private final HttpContext context;
 
     private final Log log;
 
-    public HttpGetTask(final HttpClient _httpClient, final InMemoryCache _cache, final HttpGetRequest _request) {
+    public HttpGetTask(final HttpClient _httpClient, final InMemoryCache _cache, final BannedList _bannedList, final HttpGetRequest _request) {
         Assert.notNull(_httpClient, "Http client is null");
         this.httpClient = _httpClient;
 
         Assert.notNull(_cache, "Cache is null");
         this.cache = _cache;
+
+        Assert.notNull(_bannedList, "Banned list is null");
+        this.bannedList = _bannedList;
 
         Assert.notNull(_request, "Request is null");
         this.request = _request;
@@ -66,31 +71,49 @@ public class HttpGetTask implements Callable<HttpGetRequest> {
 
     private void getFromAddress(final String _targetUrl) {
         final HttpGet httpGet = createMethod();
+        final String targetHost = getHostFromMethod(httpGet);
 
         try {
-            this.log.debug(String.format("GET request from [ %s ]", _targetUrl));
-            
-            final HttpResponse response = this.httpClient.execute(httpGet, this.context);
-            final HttpEntity entity = response.getEntity();
+            final boolean banned = this.bannedList.isBanned(getHostFromMethod(httpGet));
 
-            if (entity == null) {
+            if (banned) {
+                this.log.info(String.format("Host [ %s ] is banned", targetHost));
+
                 this.request.setResult(HttpData.EMPTY_DATA);
             } else {
-                //TODO charset
-                final Data data = new MemoryData(EntityUtils.toByteArray(entity));
-                final String responseUrl = getResponseUrl();
-                final HttpData httpData = new HttpData(responseUrl, data, Result.OK);
+                this.log.debug(String.format("GET request to [ %s ]", _targetUrl));
 
-                this.request.setResult(httpData);
+                final HttpResponse response = this.httpClient.execute(httpGet, this.context);
+                final HttpEntity entity = response.getEntity();
 
-                this.cache.put(_targetUrl, responseUrl, data);
+                if (entity == null) {
+                    this.request.setResult(HttpData.EMPTY_DATA);
+                } else {
+                    //TODO charset
+                    final Data data = new MemoryData(EntityUtils.toByteArray(entity));
+                    final String responseUrl = getResponseUrl();
+                    final HttpData httpData = new HttpData(responseUrl, data, Result.OK);
+
+                    this.request.setResult(httpData);
+
+                    this.cache.put(_targetUrl, responseUrl, data);
+                }
+
+                EntityUtils.consume(entity);
             }
-
-            EntityUtils.consume(entity);
-        } catch (Exception ex) {
+        } catch (Exception e) {
             httpGet.abort();
+
+            this.bannedList.complain(targetHost);
+
             this.request.setResult(HttpData.ERROR_DATA);
+
+            this.log.error(String.format("Error in GET request from [ %s ]", _targetUrl), e);
         }
+    }
+
+    private String getHostFromMethod(final HttpGet _httpGet) {
+        return _httpGet.getURI().getHost();
     }
 
     private void createFromCached(final InMemoryCacheItem _fromCache) {
