@@ -1,36 +1,25 @@
 package http;
 
-import http.cache.Cache;
-import http.data.MemoryData;
-import html.HttpData;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.HttpRequestRetryHandler;
-import org.apache.http.client.cache.CacheResponseStatus;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.ContentEncodingHttpClient;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.client.cache.CacheConfig;
-import org.apache.http.impl.client.cache.CachingHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
-import org.apache.http.util.EntityUtils;
 import util.Assert;
-import util.IOTools;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.util.concurrent.Callable;
 
 /**
- * Author: Igor Usenko ( Igor.Usenko@teamodc.com )
+ * Author: Igor Usenko ( igors48@gmail.com )
  * Date: 16.09.2011
  */
 public class SimpleHttpRequestHandler implements HttpRequestHandler {
@@ -39,109 +28,70 @@ public class SimpleHttpRequestHandler implements HttpRequestHandler {
     private static final int SOCKET_TIMEOUT = 120000;
     private static final int RETRY_COUNT = 10;
 
-    private static final String REFERER_HEADER_NAME = "Referer";
-    private static final String ACCEPT_HEADER_NAME = "Accept";
-    private static final String ACCEPT_REQUEST_HEADER_VALUE = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-    private static final String USER_AGENT_HEADER_NAME = "User-Agent";
-    private static final String USER_AGENT_REQUEST_HEADER_VALUE = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.220 Safari/535.1";
+    public static final String REFERER_HEADER_NAME = "Referer";
+    public static final String ACCEPT_HEADER_NAME = "Accept";
+    public static final String ACCEPT_REQUEST_HEADER_VALUE = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+    public static final String USER_AGENT_HEADER_NAME = "User-Agent";
+    public static final String USER_AGENT_REQUEST_HEADER_VALUE = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.220 Safari/535.1";
 
     //TODO maybe standard names defined already???
     /*
-    private static final String ACCEPT_CHARSET_HEADER_NAME = "Accept-Charset";
-    private static final String ACCEPT_CHARSET_HEADER_VALUE = "windows-1251,utf-8;q=0.7,*;q=0.3";
-    private static final String ACCEPT_LANGUAGE_HEADER_NAME = "Accept-Language";
-    private static final String ACCEPT_LANGUAGE_HEADER_VALUE = "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4";
+    public static final String ACCEPT_CHARSET_HEADER_NAME = "Accept-Charset";
+    public static final String ACCEPT_CHARSET_HEADER_VALUE = "windows-1251,utf-8;q=0.7,*;q=0.3";
+    public static final String ACCEPT_LANGUAGE_HEADER_NAME = "Accept-Language";
+    public static final String ACCEPT_LANGUAGE_HEADER_VALUE = "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4";
     */
-    private static final String ACCEPT_ENCODING_HEADER_NAME = "Accept-Encoding";
-    private static final String ACCEPT_ENCODING_HEADER_VALUE = "gzip,deflate";
+    public static final String ACCEPT_ENCODING_HEADER_NAME = "Accept-Encoding";
+    public static final String ACCEPT_ENCODING_HEADER_VALUE = "gzip,deflate";
 
-    private static final String CACHE_CONTROL_HEADER_NAME = "Cache-Control";
-    private static final String CACHE_CONTROL_HEADER_VALUE = "max-age=0";
+    public static final String CACHE_CONTROL_HEADER_NAME = "Cache-Control";
+    public static final String CACHE_CONTROL_HEADER_VALUE = "max-age=2048";
     /*
-    private static final String CONNECTION_HEADER_NAME = "Connection";
-    private static final String CONNECTION_HEADER_VALUE = "keep-alive";
-    private static final String PRAGMA_HEADER_NAME = "Pragma";
-    private static final String PRAGMA_HEADER_VALUE = "no-cache";
+    public static final String CONNECTION_HEADER_NAME = "Connection";
+    public static final String CONNECTION_HEADER_VALUE = "keep-alive";
+    public static final String PRAGMA_HEADER_NAME = "Pragma";
+    public static final String PRAGMA_HEADER_VALUE = "no-cache";
     */
 
-    private final HttpClient httpClient;
+
+    private final DefaultHttpClient httpClient;
     private final HttpContext localContext;
 
     private final Log log;
 
     public SimpleHttpRequestHandler() {
-        this.log = LogFactory.getLog(getClass());
+        SchemeRegistry schemeRegistry = new SchemeRegistry();
+        schemeRegistry.register(
+                new Scheme("http", 80, PlainSocketFactory.getSocketFactory()));
 
-        final CacheConfig cacheConfig = new CacheConfig();  
-        cacheConfig.setMaxCacheEntries(1000);
-        cacheConfig.setMaxObjectSizeBytes(32000);
-
-        final DefaultHttpClient subClient = new ContentEncodingHttpClient();
-        //final DefaultHttpClient subClient = new DefaultHttpClient();
+        ClientConnectionManager cm = new ThreadSafeClientConnManager(schemeRegistry);
+        this.httpClient = new DefaultHttpClient(cm);
 
         final HttpRequestRetryHandler retryHandler = new CustomHttpRequestRetryHandler(RETRY_COUNT);
-        subClient.setHttpRequestRetryHandler(retryHandler);
-
-        this.httpClient = new CachingHttpClient(subClient, cacheConfig);
-        this.localContext = new BasicHttpContext();
+        httpClient.setHttpRequestRetryHandler(retryHandler);
 
         final HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, CONNECTION_TIMEOUT);
         HttpConnectionParams.setSoTimeout(params, SOCKET_TIMEOUT);
+
+        this.localContext = new BasicHttpContext();
+
+        this.log = LogFactory.getLog(getClass());
     }
 
-    public void get(final HttpGetRequest _request) {
+    public synchronized Callable<HttpGetRequest> get(final HttpGetRequest _request) {
         Assert.notNull(_request, "Request is null");
 
-
-        try {
-            final String escapedUrl = _request.getUrl() + _request.getRequest();
-            final String escapedReferer = _request.getReferer();
-
-            final HttpGet httpGet = new HttpGet(escapedUrl);
-            httpGet.setHeader(REFERER_HEADER_NAME, escapedReferer);
-            httpGet.setHeader(ACCEPT_HEADER_NAME, ACCEPT_REQUEST_HEADER_VALUE);
-            httpGet.setHeader(USER_AGENT_HEADER_NAME, USER_AGENT_REQUEST_HEADER_VALUE);
-
-            /*
-            httpGet.setHeader(ACCEPT_LANGUAGE_HEADER_NAME, ACCEPT_LANGUAGE_HEADER_VALUE);
-            httpGet.setHeader(ACCEPT_CHARSET_HEADER_NAME, ACCEPT_CHARSET_HEADER_VALUE);
-            */
-            httpGet.setHeader(ACCEPT_ENCODING_HEADER_NAME, ACCEPT_ENCODING_HEADER_VALUE);
-            httpGet.setHeader(CACHE_CONTROL_HEADER_NAME, CACHE_CONTROL_HEADER_VALUE);
-            /*
-            httpGet.setHeader(CONNECTION_HEADER_NAME, CONNECTION_HEADER_VALUE);
-            httpGet.setHeader(PRAGMA_HEADER_NAME, PRAGMA_HEADER_VALUE);
-            */
-
-            final HttpResponse response = httpClient.execute(httpGet, this.localContext);
-            final HttpEntity entity = response.getEntity();
-
-            //TODO charset
-            //TODO response URL
-            //EntityUtils.consume(entity);
-            final Data data = new MemoryData(EntityUtils.toByteArray(entity));
-            final HttpData httpData = new HttpData(httpGet.getURI().toURL().toString(), data, Result.OK);
-
-            final CacheResponseStatus responseStatus = (CacheResponseStatus) this.localContext.getAttribute(CachingHttpClient.CACHE_RESPONSE_STATUS);
-
-            this.log.info(String.format("Cache response status : [ %s ]", responseStatus.toString()));
-            
-            _request.setResult(httpData);
-        } catch (ClientProtocolException e) {
-            this.log.error(String.format("Error in GET request from url [ %s ] referer [ %s ]", _request.getUrl(), _request.getReferer()), e);
-            _request.setResult(HttpData.ERROR_DATA);
-        } catch (IOException e) {
-            this.log.error(String.format("Error in GET request from url [ %s ] referer [ %s ]", _request.getUrl(), _request.getReferer()), e);
-            _request.setResult(HttpData.ERROR_DATA);
-        } finally {
-            //httpClient.getConnectionManager().shutdown();
-        }
+        return new HttpGetTask(this.httpClient, _request);
     }
 
     public void cancel() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
+    public void stop() {
+        httpClient.getConnectionManager().shutdown();
+        this.log.info("SimpleHttpRequestHandler stopped");
+    }
 }
 

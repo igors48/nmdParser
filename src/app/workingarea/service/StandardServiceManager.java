@@ -212,6 +212,8 @@ public class StandardServiceManager implements ServiceManager {
             this.httpRequestHandler.cancel();
 
             waitSomeTime();
+
+            this.httpRequestHandler.stop();
         }
 
         if (this.defaultStorage != null) {

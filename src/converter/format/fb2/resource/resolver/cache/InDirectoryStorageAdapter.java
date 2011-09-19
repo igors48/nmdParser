@@ -33,8 +33,8 @@ public class InDirectoryStorageAdapter implements StorageAdapter {
     private final Log log;
 
     public InDirectoryStorageAdapter(final String _root) {
-        Assert.isValidString(_root, "Cache storage root is not valid");
-        Assert.isTrue(new File(_root).exists(), "Cache storage root does not exists");
+        Assert.isValidString(_root, String.format("Cache storage root [ %s ] is not valid", _root == null ? "" : _root));
+        Assert.isTrue(new File(_root).exists(), String.format("Cache storage root [ %s ]does not exists", _root == null ? "" : _root));
         this.root = PathTools.normalize(_root);
         this.rootDirectory = new File(this.root);
 

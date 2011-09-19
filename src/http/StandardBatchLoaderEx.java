@@ -9,10 +9,7 @@ import util.Assert;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletionService;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorCompletionService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 import static util.CollectionUtils.newHashMap;
 
@@ -53,9 +50,9 @@ public class StandardBatchLoaderEx implements BatchLoader {
             this.controller.onProgress(new SingleProcessInfo(PROCESS_LOADING_DATA, 0, _urls.size()));
 
             for (final String url : _urls) {
-                final HttpGetTask task = createTask(url, "");
+                final Callable<HttpGetRequest> requestTask = createTask(url, "");
 
-                this.completionService.submit(task);
+                this.completionService.submit(requestTask);
             }
 
             int count = 0;
@@ -83,9 +80,9 @@ public class StandardBatchLoaderEx implements BatchLoader {
         Assert.notNull(_referer, "Referer is null");
 
         try {
-            final HttpGetTask task = createTask(_url, _referer);
+            final Callable<HttpGetRequest> requestTask = createTask(_url, _referer);
 
-            return task.call().getResult();
+            return requestTask.call().getResult();
         } catch (Exception e) {
             this.log.error(String.format("Error loading from [ %s ]", _url), e);
 
@@ -97,10 +94,10 @@ public class StandardBatchLoaderEx implements BatchLoader {
         return false;
     }
 
-    private HttpGetTask createTask(String _url, String _referer) {
+    private Callable<HttpGetRequest> createTask(String _url, String _referer) {
         final HttpGetRequest request = new HttpGetRequest(_url, "", _referer);
 
-        return new HttpGetTask(request, this.requestHandler);
+        return this.requestHandler.get(request);
     }
 
 }
