@@ -53,6 +53,8 @@ public class StandardBatchLoader implements BatchLoader {
                 final Callable<HttpGetRequest> requestTask = createTask(url, "");
 
                 this.completionService.submit(requestTask);
+                
+                Thread.sleep(_pauseBetweenRequests);
             }
 
             int count = 0;

@@ -46,7 +46,7 @@ public class Fb2ResourceBundle implements Stringable {
         Assert.notNull(_cache, "Resource cache is null");
         Assert.isValidString(_dummy, "Resource dummy is not valid");
         Assert.isValidString(_tempDir, "Temp directory is not valid");
-        Assert.isTrue(new File(_tempDir).exists(), "Temp directory does not exists");
+        Assert.isTrue(new File(_tempDir).exists(), String.format("Temp directory [ %s ] does not exists", _tempDir));
         Assert.notNull(_conversionContext, "Conversion context is null");
         Assert.notNull(_controller, "Controller is null");
 

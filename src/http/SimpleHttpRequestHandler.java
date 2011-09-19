@@ -1,5 +1,6 @@
 package http;
 
+import http.cache.InMemoryCache;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.client.HttpRequestRetryHandler;
@@ -22,10 +23,6 @@ import java.util.concurrent.Callable;
  * Date: 16.09.2011
  */
 public class SimpleHttpRequestHandler implements HttpRequestHandler {
-
-    private static final int CONNECTION_TIMEOUT = 10000;
-    private static final int SOCKET_TIMEOUT = 20000;
-    private static final int RETRY_COUNT = 10;
 
     public static final String REFERER_HEADER_NAME = "Referer";
     public static final String ACCEPT_HEADER_NAME = "Accept";
@@ -52,18 +49,25 @@ public class SimpleHttpRequestHandler implements HttpRequestHandler {
     public static final String PRAGMA_HEADER_VALUE = "no-cache";
     */
 
+    private static final int CONNECTION_TIMEOUT = 10000;
+    private static final int SOCKET_TIMEOUT = 20000;
+    private static final int RETRY_COUNT = 10;
+
+    private static final String HTTP_SCHEME = "http";
+    private static final int HTTP_DEFAULT_PORT = 80;
 
     private final DefaultHttpClient httpClient;
-    private final HttpContext localContext;
+    private final InMemoryCache cache;
 
     private final Log log;
 
     public SimpleHttpRequestHandler() {
-        SchemeRegistry schemeRegistry = new SchemeRegistry();
-        schemeRegistry.register(
-                new Scheme("http", 80, PlainSocketFactory.getSocketFactory()));
+        final SchemeRegistry schemeRegistry = new SchemeRegistry();
+        final Scheme scheme = new Scheme(HTTP_SCHEME, HTTP_DEFAULT_PORT, PlainSocketFactory.getSocketFactory());
+        schemeRegistry.register(scheme);
 
-        ClientConnectionManager cm = new ThreadSafeClientConnManager(schemeRegistry);
+        final ClientConnectionManager cm = new ThreadSafeClientConnManager(schemeRegistry);
+
         this.httpClient = new DefaultHttpClient(cm);
 
         final HttpRequestRetryHandler retryHandler = new CustomHttpRequestRetryHandler(RETRY_COUNT);
@@ -73,15 +77,15 @@ public class SimpleHttpRequestHandler implements HttpRequestHandler {
         HttpConnectionParams.setConnectionTimeout(params, CONNECTION_TIMEOUT);
         HttpConnectionParams.setSoTimeout(params, SOCKET_TIMEOUT);
 
-        this.localContext = new BasicHttpContext();
-
+        this.cache = new InMemoryCache();
+        
         this.log = LogFactory.getLog(getClass());
     }
 
     public synchronized Callable<HttpGetRequest> get(final HttpGetRequest _request) {
         Assert.notNull(_request, "Request is null");
 
-        return new HttpGetTask(this.httpClient, _request);
+        return new HttpGetTask(this.httpClient, this.cache, _request);
     }
 
     public void cancel() {

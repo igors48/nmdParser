@@ -1,8 +1,13 @@
 package http;
 
 import html.HttpData;
+import http.cache.InMemoryCache;
+import http.cache.InMemoryCacheItem;
 import http.data.MemoryData;
-import org.apache.http.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -22,25 +27,49 @@ import java.util.concurrent.Callable;
 public class HttpGetTask implements Callable<HttpGetRequest> {
 
     private final HttpClient httpClient;
+    private final InMemoryCache cache;
     private final HttpGetRequest request;
 
     private final HttpContext context;
 
-    public HttpGetTask(final HttpClient _httpClient, final HttpGetRequest _request) {
+    private final Log log;
+
+    public HttpGetTask(final HttpClient _httpClient, final InMemoryCache _cache, final HttpGetRequest _request) {
         Assert.notNull(_httpClient, "Http client is null");
         this.httpClient = _httpClient;
 
+        Assert.notNull(_cache, "Cache is null");
+        this.cache = _cache;
+
         Assert.notNull(_request, "Request is null");
         this.request = _request;
-        
+
         this.context = new BasicHttpContext();
+
+        this.log = LogFactory.getLog(getClass());
     }
 
     public HttpGetRequest call() throws Exception {
+        final String targetUrl = getTargetUrl();
+        final InMemoryCacheItem fromCache = this.cache.get(targetUrl);
 
+        if (fromCache == null) {
+            getFromAddress(targetUrl);
+        } else {
+            this.log.debug(String.format("Data for [ %s ] taken from cache", targetUrl));
+
+            createFromCached(fromCache);
+        }
+
+        return this.request;
+    }
+
+    private void getFromAddress(final String _targetUrl) {
         final HttpGet httpGet = createMethod();
 
         try {
+            this.log.debug(String.format("GET request from [ %s ]", _targetUrl));
+            
             final HttpResponse response = this.httpClient.execute(httpGet, this.context);
             final HttpEntity entity = response.getEntity();
 
@@ -48,12 +77,13 @@ public class HttpGetTask implements Callable<HttpGetRequest> {
                 this.request.setResult(HttpData.EMPTY_DATA);
             } else {
                 //TODO charset
-                //TODO response URL
                 final Data data = new MemoryData(EntityUtils.toByteArray(entity));
                 final String responseUrl = getResponseUrl();
                 final HttpData httpData = new HttpData(responseUrl, data, Result.OK);
 
                 this.request.setResult(httpData);
+
+                this.cache.put(_targetUrl, responseUrl, data);
             }
 
             EntityUtils.consume(entity);
@@ -61,20 +91,24 @@ public class HttpGetTask implements Callable<HttpGetRequest> {
             httpGet.abort();
             this.request.setResult(HttpData.ERROR_DATA);
         }
+    }
 
-        return this.request;
+    private void createFromCached(final InMemoryCacheItem _fromCache) {
+        final HttpData httpData = new HttpData(_fromCache.getResponseUrl(), _fromCache.getData(), Result.OK);
+
+        this.request.setResult(httpData);
     }
 
     private String getResponseUrl() {
-        final HttpUriRequest currentReq = (HttpUriRequest) context.getAttribute(ExecutionContext.HTTP_REQUEST);
+        final HttpUriRequest currentRequest = (HttpUriRequest) context.getAttribute(ExecutionContext.HTTP_REQUEST);
         final HttpHost currentHost = (HttpHost) context.getAttribute(ExecutionContext.HTTP_TARGET_HOST);
 
-        return currentHost.toURI() + currentReq.getURI();
+        return currentHost.toURI() + currentRequest.getURI();
     }
 
     private HttpGet createMethod() {
 
-        final String escapedUrl = this.request.getUrl() + this.request.getRequest();
+        final String escapedUrl = getTargetUrl();
         final String escapedReferer = this.request.getReferer();
 
         final HttpGet httpGet = new HttpGet(escapedUrl);
@@ -94,6 +128,10 @@ public class HttpGetTask implements Callable<HttpGetRequest> {
         */
 
         return httpGet;
+    }
+
+    private String getTargetUrl() {
+        return this.request.getUrl() + this.request.getRequest();
     }
 
 }
