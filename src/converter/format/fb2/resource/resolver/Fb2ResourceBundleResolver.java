@@ -4,9 +4,12 @@ import app.controller.Controller;
 import app.iui.flow.custom.SingleProcessInfo;
 import converter.format.fb2.resource.Fb2ResourceItem;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
-import http.*;
-import http.data.DataFile;
 import html.HttpData;
+import http.BatchLoader;
+import http.Data;
+import http.HttpRequestHandler;
+import http.StandardBatchLoader;
+import http.data.DataFile;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import resource.Converter;
@@ -171,23 +174,6 @@ public class Fb2ResourceBundleResolver implements Controller {
     }
 
     private String createRequest(final Fb2ResourceItem _item) {
-        return createRequestForRemote(_item);
-    }
-
-    private List<Request> createRequestsForLocal(final Fb2ResourceItem _item) {
-        List<Request> result = new ArrayList<Request>();
-
-        Request request = new Request(_item.getAddress(), Destination.FILE);
-        result.add(request);
-        request = new Request(this.dummy, Destination.FILE);
-        result.add(request);
-
-        return result;
-    }
-
-    private String createRequestForRemote(final Fb2ResourceItem _item) {
-        Request request;
-
         String address = isItFullRemotePath(_item.getAddress()) ?
                 _item.getAddress() :
                 Fb2ResourceResolverTools.joinAddress(_item.getBase(), _item.getAddress());
@@ -233,13 +219,6 @@ public class Fb2ResourceBundleResolver implements Controller {
         }
 
         return result;
-    }
-
-    private boolean isItRemoteResource(final Fb2ResourceItem _item) {
-        boolean remoteBase = _item.getBase().startsWith(REMOTE_RESOURCE_SIGN) || _item.getBase().startsWith(REMOTE_RESOURCE_SIGN.toUpperCase());
-        boolean remoteAddress = _item.getAddress().startsWith(REMOTE_RESOURCE_SIGN) || _item.getAddress().startsWith(REMOTE_RESOURCE_SIGN.toUpperCase());
-
-        return remoteAddress || remoteBase;
     }
 
     private boolean isItFullRemotePath(final String _path) {

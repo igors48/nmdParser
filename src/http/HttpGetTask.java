@@ -67,7 +67,7 @@ public class HttpGetTask implements Callable<HttpGetRequest> {
 
     private String getResponseUrl() {
         final HttpUriRequest currentReq = (HttpUriRequest) context.getAttribute(ExecutionContext.HTTP_REQUEST);
-        final HttpHost currentHost = (HttpHost)  context.getAttribute(ExecutionContext.HTTP_TARGET_HOST);
+        final HttpHost currentHost = (HttpHost) context.getAttribute(ExecutionContext.HTTP_TARGET_HOST);
 
         return currentHost.toURI() + currentReq.getURI();
     }

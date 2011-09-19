@@ -3,7 +3,6 @@ package http;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.client.HttpRequestRetryHandler;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
@@ -25,7 +24,7 @@ import java.util.concurrent.Callable;
 public class SimpleHttpRequestHandler implements HttpRequestHandler {
 
     private static final int CONNECTION_TIMEOUT = 10000;
-    private static final int SOCKET_TIMEOUT = 120000;
+    private static final int SOCKET_TIMEOUT = 20000;
     private static final int RETRY_COUNT = 10;
 
     public static final String REFERER_HEADER_NAME = "Referer";
