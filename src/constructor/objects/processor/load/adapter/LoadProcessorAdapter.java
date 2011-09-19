@@ -5,7 +5,7 @@ import app.workingarea.ServiceManager;
 import constructor.objects.processor.VariableProcessor;
 import constructor.objects.processor.VariableProcessorAdapter;
 import constructor.objects.processor.load.LoadProcessor;
-import http.StandardBatchLoaderEx;
+import http.StandardBatchLoader;
 import util.Assert;
 
 /**
@@ -34,7 +34,7 @@ public class LoadProcessorAdapter implements VariableProcessorAdapter {
 
     public VariableProcessor getProcessor() {
 
-        return new LoadProcessor(this.in, this.url, this.referer, this.out, new StandardBatchLoaderEx(this.serviceManager.getHttpRequestHandler(), new NullController()));
+        return new LoadProcessor(this.in, this.url, this.referer, this.out, new StandardBatchLoader(this.serviceManager.getHttpRequestHandler(), new NullController()));
     }
 
     public void setAttributeIn(final String _value) {

@@ -11,7 +11,7 @@ import constructor.objects.interpreter.core.standard.*;
 import dated.item.modification.Modification;
 import http.BatchLoader;
 import http.HttpRequestHandler;
-import http.StandardBatchLoaderEx;
+import http.StandardBatchLoader;
 import timeservice.TimeService;
 import util.Assert;
 
@@ -45,7 +45,7 @@ public class StandardInterpreterAdapter implements InterpreterAdapter {
 
         this.interpreterConfiguration = _interpreterConfiguration;
         this.modification = _modification;
-        this.batchLoader = new StandardBatchLoaderEx(_httpRequestHandler, new NullController());
+        this.batchLoader = new StandardBatchLoader(_httpRequestHandler, new NullController());
         this.lastItemCount = _lastPostCount;
         this.refTimeService = _refTimeService;
         this.precachedItemsCount = _precachedItemsCount;

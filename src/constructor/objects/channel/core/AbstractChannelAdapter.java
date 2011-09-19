@@ -11,7 +11,7 @@ import dated.item.modification.Modification;
 import dated.item.modification.stream.ModificationList;
 import http.BatchLoader;
 import http.HttpRequestHandler;
-import http.StandardBatchLoaderEx;
+import http.StandardBatchLoader;
 import timeservice.StandardTimeService;
 import timeservice.StillTimeService;
 import timeservice.TimeService;
@@ -54,7 +54,7 @@ public abstract class AbstractChannelAdapter implements ChannelAdapter {
         Assert.greaterOrEqual(_pauseBetweenRequests, 0, "Pause between requests < 0");
         this.pauseBetweenRequests = _pauseBetweenRequests;
 
-        this.batchLoader = new StandardBatchLoaderEx(_httpRequestHandler, new NullController());
+        this.batchLoader = new StandardBatchLoader(_httpRequestHandler, new NullController());
 
         this.forcedAge = _forcedDays < 0 ? -1 : _forcedDays * DAYS_TO_MILLIS;
     }

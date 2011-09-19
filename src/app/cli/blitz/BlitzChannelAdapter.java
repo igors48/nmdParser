@@ -21,7 +21,7 @@ import constructor.objects.interpreter.core.standard.StandardInterpreter;
 import dated.item.modification.Modification;
 import dated.item.modification.stream.ModificationList;
 import http.BatchLoader;
-import http.StandardBatchLoaderEx;
+import http.StandardBatchLoader;
 import timeservice.TimeService;
 import util.Assert;
 
@@ -60,7 +60,7 @@ public class BlitzChannelAdapter implements ChannelAdapter {
         Assert.greater(_precachedItemsCount, 0, "Precached items count < 1");
         this.precachedItemsCount = _precachedItemsCount;
 
-        this.batchLoader = new StandardBatchLoaderEx(this.serviceManager.getHttpRequestHandler(), new NullController());
+        this.batchLoader = new StandardBatchLoader(this.serviceManager.getHttpRequestHandler(), new NullController());
 
         this.result = new ChannelDataList();
     }

@@ -88,7 +88,7 @@ public class Fb2ResourceBundleResolver implements Controller {
             }
         }
 
-        BatchLoader loader = new StandardBatchLoaderEx(this.httpRequestHandler, this);
+        BatchLoader loader = new StandardBatchLoader(this.httpRequestHandler, this);
 
         Map<String, HttpData> loaded = loader.loadUrls(list, 0);
 

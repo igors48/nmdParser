@@ -17,7 +17,7 @@ import static util.CollectionUtils.newHashMap;
  * Author: Igor Usenko ( igors48@gmail.com )
  * Date: 16.09.2011
  */
-public class StandardBatchLoaderEx implements BatchLoader {
+public class StandardBatchLoader implements BatchLoader {
 
     private static final String PROCESS_LOADING_DATA = "process.loading.data";
 
@@ -28,7 +28,7 @@ public class StandardBatchLoaderEx implements BatchLoader {
 
     private final Log log;
 
-    public StandardBatchLoaderEx(final HttpRequestHandler _requestHandler, final Controller _controller) {
+    public StandardBatchLoader(final HttpRequestHandler _requestHandler, final Controller _controller) {
         Assert.notNull(_requestHandler, "Request handler is null");
         this.requestHandler = _requestHandler;
 
