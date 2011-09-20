@@ -59,6 +59,7 @@ public class HttpGetTask implements Callable<HttpGetRequest> {
 
     public HttpGetRequest call() throws Exception {
         final String targetUrl = getTargetUrl();
+      
         final InMemoryCacheItem fromCache = this.cache.get(targetUrl);
 
         if (fromCache == null) {
