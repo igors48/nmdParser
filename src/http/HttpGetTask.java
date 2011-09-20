@@ -7,6 +7,7 @@ import http.cache.InMemoryCacheItem;
 import http.data.MemoryData;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -19,6 +20,7 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import util.Assert;
 
+import java.io.IOException;
 import java.util.concurrent.Callable;
 
 /**
@@ -35,6 +37,7 @@ public class HttpGetTask implements Callable<HttpGetRequest> {
     private final HttpContext context;
 
     private final Log log;
+    private static final String CONTENT_TYPE_HEADER_NAME = "Content-Type";
 
     public HttpGetTask(final HttpClient _httpClient, final InMemoryCache _cache, final BannedList _bannedList, final HttpGetRequest _request) {
         Assert.notNull(_httpClient, "Http client is null");
@@ -83,23 +86,7 @@ public class HttpGetTask implements Callable<HttpGetRequest> {
             } else {
                 this.log.debug(String.format("GET request to [ %s ]", _targetUrl));
 
-                final HttpResponse response = this.httpClient.execute(httpGet, this.context);
-                final HttpEntity entity = response.getEntity();
-
-                if (entity == null) {
-                    this.request.setResult(HttpData.EMPTY_DATA);
-                } else {
-                    //TODO charset
-                    final Data data = new MemoryData(EntityUtils.toByteArray(entity));
-                    final String responseUrl = getResponseUrl();
-                    final HttpData httpData = new HttpData(responseUrl, data, Result.OK);
-
-                    this.request.setResult(httpData);
-
-                    this.cache.put(_targetUrl, responseUrl, data);
-                }
-
-                EntityUtils.consume(entity);
+                getResponse(_targetUrl, httpGet);
             }
         } catch (Exception e) {
             httpGet.abort();
@@ -110,6 +97,33 @@ public class HttpGetTask implements Callable<HttpGetRequest> {
 
             this.log.error(String.format("Error in GET request from [ %s ]", _targetUrl), e);
         }
+    }
+
+    private void getResponse(final String _targetUrl, final HttpGet _httpGet) throws IOException {
+        final HttpResponse response = this.httpClient.execute(_httpGet, this.context);
+        final HttpEntity entity = response.getEntity();
+
+        if (entity == null) {
+            this.request.setResult(HttpData.EMPTY_DATA);
+        } else {
+            handleEntity(_targetUrl, entity, response);
+        }
+
+        EntityUtils.consume(entity);
+    }
+
+    private void handleEntity(final String _targetUrl, final HttpEntity _entity, final HttpResponse _response) throws IOException {
+        final Header[] headers = _response.getHeaders(CONTENT_TYPE_HEADER_NAME);
+        final String charset = HttpTools.getCharset(headers);
+
+        final Data data = charset.isEmpty() ? new MemoryData(EntityUtils.toByteArray(_entity)) : new MemoryData(EntityUtils.toByteArray(_entity), charset);
+        
+        final String responseUrl = getResponseUrl();
+        final HttpData httpData = new HttpData(responseUrl, data, Result.OK);
+
+        this.request.setResult(httpData);
+
+        this.cache.put(_targetUrl, responseUrl, data);
     }
 
     private String getHostFromMethod(final HttpGet _httpGet) {
@@ -138,17 +152,8 @@ public class HttpGetTask implements Callable<HttpGetRequest> {
         httpGet.setHeader(SimpleHttpRequestHandler.REFERER_HEADER_NAME, escapedReferer);
         httpGet.setHeader(SimpleHttpRequestHandler.ACCEPT_HEADER_NAME, SimpleHttpRequestHandler.ACCEPT_REQUEST_HEADER_VALUE);
         httpGet.setHeader(SimpleHttpRequestHandler.USER_AGENT_HEADER_NAME, SimpleHttpRequestHandler.USER_AGENT_REQUEST_HEADER_VALUE);
-
-        /*
-        httpGet.setHeader(ACCEPT_LANGUAGE_HEADER_NAME, ACCEPT_LANGUAGE_HEADER_VALUE);
-        httpGet.setHeader(ACCEPT_CHARSET_HEADER_NAME, ACCEPT_CHARSET_HEADER_VALUE);
-
+        httpGet.setHeader(SimpleHttpRequestHandler.ACCEPT_CHARSET_HEADER_NAME, SimpleHttpRequestHandler.ACCEPT_CHARSET_HEADER_VALUE);
         httpGet.setHeader(SimpleHttpRequestHandler.ACCEPT_ENCODING_HEADER_NAME, SimpleHttpRequestHandler.ACCEPT_ENCODING_HEADER_VALUE);
-        httpGet.setHeader(SimpleHttpRequestHandler.CACHE_CONTROL_HEADER_NAME, SimpleHttpRequestHandler.CACHE_CONTROL_HEADER_VALUE);
-        
-        httpGet.setHeader(CONNECTION_HEADER_NAME, CONNECTION_HEADER_VALUE);
-        httpGet.setHeader(PRAGMA_HEADER_NAME, PRAGMA_HEADER_VALUE);
-        */
 
         return httpGet;
     }

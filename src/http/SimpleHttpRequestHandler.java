@@ -9,8 +9,10 @@ import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.impl.client.ContentEncodingHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.BasicHttpContext;
@@ -31,16 +33,18 @@ public class SimpleHttpRequestHandler implements HttpRequestHandler {
     public static final String USER_AGENT_HEADER_NAME = "User-Agent";
     public static final String USER_AGENT_REQUEST_HEADER_VALUE = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.220 Safari/535.1";
 
-    //TODO maybe standard names defined already???
-    /*
     public static final String ACCEPT_CHARSET_HEADER_NAME = "Accept-Charset";
     public static final String ACCEPT_CHARSET_HEADER_VALUE = "windows-1251,utf-8;q=0.7,*;q=0.3";
+
+    /*
     public static final String ACCEPT_LANGUAGE_HEADER_NAME = "Accept-Language";
     public static final String ACCEPT_LANGUAGE_HEADER_VALUE = "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4";
+    */
 
     public static final String ACCEPT_ENCODING_HEADER_NAME = "Accept-Encoding";
     public static final String ACCEPT_ENCODING_HEADER_VALUE = "gzip,deflate";
 
+    /*
     public static final String CACHE_CONTROL_HEADER_NAME = "Cache-Control";
     public static final String CACHE_CONTROL_HEADER_VALUE = "max-age=2048";
     
@@ -68,9 +72,11 @@ public class SimpleHttpRequestHandler implements HttpRequestHandler {
         final Scheme scheme = new Scheme(HTTP_SCHEME, HTTP_DEFAULT_PORT, PlainSocketFactory.getSocketFactory());
         schemeRegistry.register(scheme);
 
-        final ClientConnectionManager cm = new ThreadSafeClientConnManager(schemeRegistry);
+        final ClientConnectionManager connectionManager = new ThreadSafeClientConnManager(schemeRegistry);
 
-        this.httpClient = new DefaultHttpClient(cm);
+        final HttpParams httpParams = new BasicHttpParams();
+
+        this.httpClient = new ContentEncodingHttpClient(connectionManager, httpParams);
 
         final HttpRequestRetryHandler retryHandler = new CustomHttpRequestRetryHandler(RETRY_COUNT);
         httpClient.setHttpRequestRetryHandler(retryHandler);
