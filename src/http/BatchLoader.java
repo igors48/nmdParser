@@ -48,4 +48,6 @@ public interface BatchLoader {
      * @return true если был прерван false если небыл
      */
     boolean cancelled();
+
+    void cancel();
 }

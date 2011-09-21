@@ -96,6 +96,10 @@ public class StandardBatchLoader implements BatchLoader {
         return false;
     }
 
+    public void cancel() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
     private Callable<HttpGetRequest> createTask(String _url, String _referer) {
         final HttpGetRequest request = new HttpGetRequest(_url, "", _referer);
 

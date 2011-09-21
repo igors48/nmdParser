@@ -11,6 +11,7 @@ import converter.format.fb2.objects.*;
 import converter.format.fb2.resource.Fb2ResourceBundle;
 import converter.format.fb2.resource.Fb2ResourceConversionContext;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
+import http.BatchLoader;
 import http.HttpRequestHandler;
 import flowtext.*;
 import flowtext.resource.Resource;
@@ -35,7 +36,7 @@ public class Fb2Converter implements Converter {
 
     private static final String CHARSET_NAME = "UTF-8";
 
-    private final HttpRequestHandler httpRequestHandler;
+    private final BatchLoader httpRequestHandler;
     private final ConverterFactory factory;
     private final ResourceCache cache;
     private final String dummy;
@@ -47,15 +48,15 @@ public class Fb2Converter implements Converter {
     private static final int MAX_BOOK_TITLE_LEN = 64;
     private static final String DEFAULT_EXTENSION = "fb2";
 
-    public Fb2Converter(final HttpRequestHandler _httpRequestHandler, final ConverterFactory _factory, final ResourceCache _cache, final String _dummy, final Fb2ResourceConversionContext _conversionContext, final Controller _controller) {
-        Assert.notNull(_httpRequestHandler, "Http request handler is null");
+    public Fb2Converter(final BatchLoader _batchLoader, final ConverterFactory _factory, final ResourceCache _cache, final String _dummy, final Fb2ResourceConversionContext _conversionContext, final Controller _controller) {
+        Assert.notNull(_batchLoader, "Batch loader is null");
         Assert.notNull(_factory, "Converter factory is null");
         Assert.notNull(_cache, "Resource cache is null");
         Assert.isValidString(_dummy, "Dummy address is not valid");
         Assert.notNull(_conversionContext, "Conversion context is null");
         Assert.notNull(_controller, "Controller is null");
 
-        this.httpRequestHandler = _httpRequestHandler;
+        this.httpRequestHandler = _batchLoader;
         this.factory = _factory;
         this.cache = _cache;
         this.dummy = _dummy;

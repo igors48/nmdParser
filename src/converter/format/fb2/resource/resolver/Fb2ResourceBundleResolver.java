@@ -36,7 +36,7 @@ public class Fb2ResourceBundleResolver implements Controller {
     private static final String TEMP_FILE_PRF = "chd";
     private static final String TEMP_FILE_SFX = "chd";
 
-    private final HttpRequestHandler httpRequestHandler;
+    private final BatchLoader batchLoader;
     private final String dummy;
     private final Log log;
     private final ConverterFactory factory;
@@ -55,8 +55,8 @@ public class Fb2ResourceBundleResolver implements Controller {
     //todo ���� ������ ����� �������� �������� - ����� ����� ����������� ��������������, �� �������������� � �������������� ����
     //todo ��� �� ������� - ������ ��������� - ��������, � �� ��� ����� - �� ��� ��������
 
-    public Fb2ResourceBundleResolver(final HttpRequestHandler _httpRequestHandler, final ConverterFactory _factory, final ResourceCache _cache, final String _dummy, final String _tempDir, final Controller _controller) {
-        Assert.notNull(_httpRequestHandler, "Http request handler is null");
+    public Fb2ResourceBundleResolver(final BatchLoader _batchLoader, final ConverterFactory _factory, final ResourceCache _cache, final String _dummy, final String _tempDir, final Controller _controller) {
+        Assert.notNull(_batchLoader, "Batch loader is null");
         Assert.notNull(_factory, "Converter factory is null");
         Assert.notNull(_cache, "Resource cache is null");
         Assert.isValidString(_dummy, "Resource dummy is not valid");
@@ -64,7 +64,7 @@ public class Fb2ResourceBundleResolver implements Controller {
         Assert.isTrue(new File(_tempDir).exists(), "Temp directory does not exists");
         Assert.notNull(_controller, "Conttroller is null");
 
-        this.httpRequestHandler = _httpRequestHandler;
+        this.batchLoader = _batchLoader;
         this.factory = _factory;
         this.cache = _cache;
         this.dummy = _dummy;
@@ -91,9 +91,7 @@ public class Fb2ResourceBundleResolver implements Controller {
             }
         }
 
-        BatchLoader loader = new StandardBatchLoader(this.httpRequestHandler, this);
-
-        Map<String, HttpData> loaded = loader.loadUrls(list, 0);
+        Map<String, HttpData> loaded = this.batchLoader.loadUrls(list, 0);
 
         joinMaps(loaded);
 

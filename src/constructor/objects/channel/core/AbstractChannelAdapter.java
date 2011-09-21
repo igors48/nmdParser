@@ -1,7 +1,6 @@
 package constructor.objects.channel.core;
 
 import app.controller.Controller;
-import app.controller.NullController;
 import app.iui.flow.custom.SingleProcessInfo;
 import constructor.objects.AdapterException;
 import constructor.objects.channel.core.analyser.StandardAnalyser;
@@ -10,8 +9,6 @@ import constructor.objects.source.core.ModificationListStorage;
 import dated.item.modification.Modification;
 import dated.item.modification.stream.ModificationList;
 import http.BatchLoader;
-import http.HttpRequestHandler;
-import http.StandardBatchLoader;
 import timeservice.StandardTimeService;
 import timeservice.StillTimeService;
 import timeservice.TimeService;
@@ -35,7 +32,7 @@ public abstract class AbstractChannelAdapter implements ChannelAdapter {
     protected final long pauseBetweenRequests;
     protected final BatchLoader batchLoader;
 
-    public AbstractChannelAdapter(final ChannelDataListStorage _channelDataListStorage, final HttpRequestHandler _httpRequestHandler, final ModificationListStorage _modificationListStorage, final int _forcedDays, final TimeService _timeService, final Controller _controller, final int _precachedItemsCount, final long _pauseBetweenRequests) {
+    public AbstractChannelAdapter(final ChannelDataListStorage _channelDataListStorage, final BatchLoader _batchLoader, final ModificationListStorage _modificationListStorage, final int _forcedDays, final TimeService _timeService, final Controller _controller, final int _precachedItemsCount, final long _pauseBetweenRequests) {
         Assert.notNull(_channelDataListStorage, "Channel data list storage is null.");
         this.channelDataListStorage = _channelDataListStorage;
 
@@ -54,7 +51,8 @@ public abstract class AbstractChannelAdapter implements ChannelAdapter {
         Assert.greaterOrEqual(_pauseBetweenRequests, 0, "Pause between requests < 0");
         this.pauseBetweenRequests = _pauseBetweenRequests;
 
-        this.batchLoader = new StandardBatchLoader(_httpRequestHandler, new NullController());
+        Assert.notNull(_batchLoader, "Batch loader is null");
+        this.batchLoader = _batchLoader;
 
         this.forcedAge = _forcedDays < 0 ? -1 : _forcedDays * DAYS_TO_MILLIS;
     }

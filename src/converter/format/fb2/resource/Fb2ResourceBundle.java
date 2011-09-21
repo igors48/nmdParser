@@ -5,6 +5,7 @@ import app.iui.flow.custom.SingleProcessInfo;
 import converter.format.fb2.Stringable;
 import converter.format.fb2.resource.resolver.Fb2ResourceBundleResolver;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
+import http.BatchLoader;
 import http.HttpRequestHandler;
 import resource.ConverterFactory;
 import util.Assert;
@@ -29,7 +30,7 @@ public class Fb2ResourceBundle implements Stringable {
 
     private final List<Fb2ResourceItem> content;
     private final String dummy;
-    private final HttpRequestHandler httpRequestHandler;
+    private final BatchLoader batchLoader;
     private final ConverterFactory factory;
     private final ResourceCache cache;
     private final String tempDir;
@@ -40,24 +41,30 @@ public class Fb2ResourceBundle implements Stringable {
 
     //todo �������� � ����������� ������, ������� ����� ��� �� �����. ��� ������� - ������ ���������� ��� �������� �������� � ���
 
-    public Fb2ResourceBundle(final HttpRequestHandler _httpRequestHandler, final ConverterFactory _factory, final ResourceCache _cache, final String _dummy, final String _tempDir, final Fb2ResourceConversionContext _conversionContext, final Controller _controller) {
-        Assert.notNull(_httpRequestHandler, "Http request handler is null");
+    public Fb2ResourceBundle(final BatchLoader _batchLoader, final ConverterFactory _factory, final ResourceCache _cache, final String _dummy, final String _tempDir, final Fb2ResourceConversionContext _conversionContext, final Controller _controller) {
+        Assert.notNull(_batchLoader, "Batch loader is null");
+        this.batchLoader = _batchLoader;
+
         Assert.notNull(_factory, "Converter factory is null");
+        this.factory = _factory;
+
         Assert.notNull(_cache, "Resource cache is null");
+        this.cache = _cache;
+
         Assert.isValidString(_dummy, "Resource dummy is not valid");
+        this.dummy = _dummy;
+
         Assert.isValidString(_tempDir, "Temp directory is not valid");
         Assert.isTrue(new File(_tempDir).exists(), String.format("Temp directory [ %s ] does not exists", _tempDir));
-        Assert.notNull(_conversionContext, "Conversion context is null");
-        Assert.notNull(_controller, "Controller is null");
-
-        this.httpRequestHandler = _httpRequestHandler;
-        this.factory = _factory;
-        this.cache = _cache;
-        this.dummy = _dummy;
-        this.content = new ArrayList<Fb2ResourceItem>();
         this.tempDir = PathTools.normalize(_tempDir);
+
+        Assert.notNull(_conversionContext, "Conversion context is null");
         this.conversionContext = _conversionContext;
+
+        Assert.notNull(_controller, "Controller is null");
         this.controller = _controller;
+
+        this.content = new ArrayList<Fb2ResourceItem>();
     }
 
     public String appendResourceItem(final String _base, final String _address) {
@@ -96,7 +103,7 @@ public class Fb2ResourceBundle implements Stringable {
     }
 
     public void resolve() {
-        new Fb2ResourceBundleResolver(this.httpRequestHandler, this.factory, this.cache, this.dummy, this.tempDir, this.controller).resolve(this.content);
+        new Fb2ResourceBundleResolver(this.batchLoader, this.factory, this.cache, this.dummy, this.tempDir, this.controller).resolve(this.content);
     }
 
     private String generate(final String _address) {

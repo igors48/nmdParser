@@ -1,5 +1,6 @@
 package app.workingarea.service;
 
+import app.controller.NullController;
 import app.workingarea.ProcessWrapper;
 import app.workingarea.ServiceManager;
 import app.workingarea.Settings;
@@ -18,12 +19,14 @@ import debug.DebugConsole;
 import debug.console.FileDebugConsole;
 import debug.console.FileDebugConsoleUpdater;
 import debug.console.NullDebugConsole;
+import http.BatchLoader;
 import http.HttpRequestHandler;
 import http.SimpleHttpRequestHandler;
 import greader.GoogleReaderAdapter;
 import greader.GoogleReaderProvider;
 import greader.StandardGoogleReaderAdapter;
 import greader.profile.ProfilesStorage;
+import http.StandardBatchLoader;
 import resource.ConverterFactory;
 import resource.ResourceConverterFactory;
 import timeservice.StandardTimeService;
@@ -49,6 +52,7 @@ public class StandardServiceManager implements ServiceManager {
     private TimeService timeService;
     private FetcherFactory fetcherFactory;
     private HttpRequestHandler httpRequestHandler;
+    private BatchLoader batchLoader;
     private DebugConsole debugConsole;
     private ResourceCache resourceCache;
     private ProcessWrapper processWrapper;
@@ -94,13 +98,16 @@ public class StandardServiceManager implements ServiceManager {
         return this.fetcherFactory;
     }
 
-    public HttpRequestHandler getHttpRequestHandler() {
+    public BatchLoader getBatchLoader() {
 
         if (this.httpRequestHandler == null) {
             this.httpRequestHandler = new SimpleHttpRequestHandler();
         }
 
-        return this.httpRequestHandler;
+        if (this.batchLoader == null) {
+            this.batchLoader = new StandardBatchLoader(this.httpRequestHandler, new NullController());
+        }
+        return this.batchLoader;
     }
 
     public ConverterFactory getConverterFactory() throws ServiceManagerException {

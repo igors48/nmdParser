@@ -1,6 +1,5 @@
 package constructor.objects.interpreter.adapter;
 
-import app.controller.NullController;
 import constructor.objects.AdapterException;
 import constructor.objects.interpreter.configuration.InterpreterConfiguration;
 import constructor.objects.interpreter.core.FragmentAnalyser;
@@ -10,8 +9,6 @@ import constructor.objects.interpreter.core.PageListAnalyser;
 import constructor.objects.interpreter.core.standard.*;
 import dated.item.modification.Modification;
 import http.BatchLoader;
-import http.HttpRequestHandler;
-import http.StandardBatchLoader;
 import timeservice.TimeService;
 import util.Assert;
 
@@ -34,8 +31,8 @@ public class StandardInterpreterAdapter implements InterpreterAdapter {
 
     private boolean cancelled;
 
-    public StandardInterpreterAdapter(final InterpreterConfiguration _interpreterConfiguration, final Modification _modification, final HttpRequestHandler _httpRequestHandler, final int _lastPostCount, final TimeService _refTimeService, final int _precachedItemsCount, final long _pauseBetweenRequests) {
-        Assert.notNull(_httpRequestHandler, "Http request handler is null");
+    public StandardInterpreterAdapter(final InterpreterConfiguration _interpreterConfiguration, final Modification _modification, final BatchLoader _batchLoader, final int _lastPostCount, final TimeService _refTimeService, final int _precachedItemsCount, final long _pauseBetweenRequests) {
+        Assert.notNull(_batchLoader, "Batch loader is null");
         Assert.notNull(_interpreterConfiguration, "Interpreter configuration is null");
         Assert.notNull(_modification, "Modification is null");
         Assert.greaterOrEqual(_lastPostCount, 0, "Last post count < 0");
@@ -45,7 +42,7 @@ public class StandardInterpreterAdapter implements InterpreterAdapter {
 
         this.interpreterConfiguration = _interpreterConfiguration;
         this.modification = _modification;
-        this.batchLoader = new StandardBatchLoader(_httpRequestHandler, new NullController());
+        this.batchLoader = _batchLoader;
         this.lastItemCount = _lastPostCount;
         this.refTimeService = _refTimeService;
         this.precachedItemsCount = _precachedItemsCount;

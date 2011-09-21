@@ -34,7 +34,7 @@ public class LoadProcessorAdapter implements VariableProcessorAdapter {
 
     public VariableProcessor getProcessor() {
 
-        return new LoadProcessor(this.in, this.url, this.referer, this.out, new StandardBatchLoader(this.serviceManager.getHttpRequestHandler(), new NullController()));
+        return new LoadProcessor(this.in, this.url, this.referer, this.out, this.serviceManager.getBatchLoader());
     }
 
     public void setAttributeIn(final String _value) {

@@ -489,10 +489,10 @@ public class NmdApi implements ApiFacade {
         removeOutputsServiceFiles(_mask);
     }
 
-    public void cancelDownload() throws FatalException {
+    public void cancelAllDownloads() throws FatalException {
         checkWorkspaceAndSettings();
 
-        this.serviceManager.getHttpRequestHandler().cancel();
+        this.serviceManager.getBatchLoader().cancel();
     }
 
     public void createGoogleReaderProfile(final String _email, final String _password) throws FatalException {
@@ -779,7 +779,7 @@ public class NmdApi implements ApiFacade {
         if (configuration instanceof ChannelConfiguration) {
             adapter = new StandardChannelAdapter(this.workspace.getChannelDataListStorage(),
                     (ChannelConfiguration) configuration,
-                    this.serviceManager.getHttpRequestHandler(),
+                    this.serviceManager.getBatchLoader(),
                     this.workspace.getModificationListStorage(),
                     this.workspace.getConstructorFactory(),
                     _forcedDays,
@@ -812,7 +812,7 @@ public class NmdApi implements ApiFacade {
                     this.workspace.getChannelDataListStorage(),
                     (OutputConfiguration) configuration,
                     this.serviceManager.getTimeService(),
-                    this.serviceManager.getHttpRequestHandler(),
+                    this.serviceManager.getBatchLoader(),
                     this.serviceManager.getConverterFactory(),
                     this.serviceManager.getResourceCache(),
                     this.serviceManager.getProcessWrapper(),
@@ -841,7 +841,7 @@ public class NmdApi implements ApiFacade {
     private Simpler getSimpler(final SimplerConfiguration _configuration, final int _forcedDays, final Controller _controller) throws ServiceManager.ServiceManagerException, Workspace.WorkspaceException {
         SimplerAdapter adapter = new StandardSimplerAdapter(_configuration,
                 this.serviceManager.getTimeService(),
-                this.serviceManager.getHttpRequestHandler(),
+                this.serviceManager.getBatchLoader(),
                 this.workspace.getCloud(),
                 _controller,
                 this.serviceManager.getConverterFactory(),

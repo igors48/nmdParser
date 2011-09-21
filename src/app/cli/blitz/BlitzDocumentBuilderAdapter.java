@@ -89,7 +89,7 @@ public class BlitzDocumentBuilderAdapter implements DocumentBuilderAdapter {
         Assert.notNull(_document, "Document is null.");
 
         try {
-            Fb2Converter converter = new Fb2Converter(this.serviceManager.getHttpRequestHandler(),
+            Fb2Converter converter = new Fb2Converter(this.serviceManager.getBatchLoader(),
                     this.serviceManager.getConverterFactory(),
                     this.serviceManager.getResourceCache(),
                     this.settings.getResourceDummy(),

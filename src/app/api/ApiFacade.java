@@ -262,7 +262,7 @@ public interface ApiFacade extends BlitzRequestHandler {
      *
      * @throws FatalException если не получилось
      */
-    void cancelDownload() throws FatalException;
+    void cancelAllDownloads() throws FatalException;
 
     /**
      * Создает Google Reader профайл
