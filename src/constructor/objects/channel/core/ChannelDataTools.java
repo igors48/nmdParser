@@ -1,18 +1,19 @@
 package constructor.objects.channel.core;
 
-import app.controller.NullController;
 import constructor.objects.channel.core.stream.ChannelDataList;
 import constructor.objects.interpreter.core.data.InterpreterData;
 import constructor.objects.interpreter.core.data.InterpreterDataTools;
 import dated.DatedItem;
 import dated.DatedTools;
+import html.HttpData;
 import http.BatchLoader;
 import http.Data;
 import http.data.DataUtil;
-import html.HttpData;
 import util.Assert;
 
 import java.util.*;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * ��������� ����� ��� ������ � ������� ������
@@ -25,19 +26,15 @@ public final class ChannelDataTools {
     public static final String DEFAULT_GENRE = "science";
     public static final String DEFAULT_LANG = "ru";
 
-    public static final List<String> DEFAULT_GENRES = new ArrayList<String>();
+    public static final List<String> DEFAULT_GENRES = newArrayList();
 
-    public static String loadImage(final String _url, final BatchLoader _loader, final long _pauseBetweenRequests) throws Data.DataException {
+    public static String loadImage(final String _url, final BatchLoader _loader) throws Data.DataException {
         Assert.isValidString(_url, "Url is not valid");
         Assert.notNull(_loader, "Loader is null");
-        Assert.greaterOrEqual(_pauseBetweenRequests, 0, "Pause between requests < 0");
 
-        List<String> urls = new ArrayList<String>();
-        urls.add(_url);
+        HttpData data = _loader.loadUrl(_url);
 
-        Map<String, HttpData> datas = _loader.loadUrls(urls, _pauseBetweenRequests, new NullController());
-
-        return DataUtil.getDataImage(datas.get(_url).getData());
+        return DataUtil.getDataImage(data.getData());
     }
 
     public static DatedItem getLatestItem(final ChannelData _data) {

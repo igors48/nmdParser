@@ -35,4 +35,6 @@ public interface BatchLoader {
      */
     HttpData loadUrlWithReferer(String _url, String _referer);
 
+    HttpData loadUrl(String _url);
+    
 }

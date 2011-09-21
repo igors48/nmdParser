@@ -52,12 +52,15 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
     public static final String PRAGMA_HEADER_VALUE = "no-cache";
     */
 
-    private static final int CONNECTION_TIMEOUT = 10000;
+    private static final int CONNECTION_TIMEOUT = 30000;
     private static final int SOCKET_TIMEOUT = 20000;
     private static final int RETRY_COUNT = 10;
 
     private static final String HTTP_SCHEME = "http";
     private static final int HTTP_DEFAULT_PORT = 80;
+
+    private static final int BANNED_LIST_TRESHOLD = 5;
+    private static final int BANNED_LIST_LIMIT = 50;
 
     private final DefaultHttpClient httpClient;
     private final InMemoryCache cache;
@@ -85,7 +88,7 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
 
         this.cache = new InMemoryCache();
 
-        this.bannedList = new BannedList(5, 50);
+        this.bannedList = new BannedList(BANNED_LIST_TRESHOLD, BANNED_LIST_LIMIT);
         
         this.log = LogFactory.getLog(getClass());
     }

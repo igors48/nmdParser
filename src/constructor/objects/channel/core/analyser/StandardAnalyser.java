@@ -18,17 +18,16 @@ import util.Assert;
  */
 public class StandardAnalyser implements ChannelAnalyser {
 
-    public ChannelDataHeader getHeader(final Modification _modification, final BatchLoader _batchLoader, final String _coverUrl, long _pauseBetweenRequests) throws ChannelAnalyserException {
+    public ChannelDataHeader getHeader(final Modification _modification, final BatchLoader _batchLoader, final String _coverUrl) throws ChannelAnalyserException {
         Assert.notNull(_modification, "Modification is null");
         Assert.notNull(_batchLoader, "Page loader is null");
         Assert.notNull(_coverUrl, "Cover URL is null");
-        Assert.greaterOrEqual(_pauseBetweenRequests, 0, "Pause between requests < 0");
 
         try {
             String title = _modification.getTitle();
 
             if (title == null || title.isEmpty()) {
-                String pageImage = ChannelDataTools.loadImage(_modification.getUrl(), _batchLoader, _pauseBetweenRequests);
+                String pageImage = ChannelDataTools.loadImage(_modification.getUrl(), _batchLoader);
                 title = ChannelAnalyserTools.parseTitle(pageImage);
             }
 

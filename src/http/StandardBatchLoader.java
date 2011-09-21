@@ -10,7 +10,6 @@ import util.Assert;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import static util.CollectionUtils.newHashMap;
 
@@ -21,11 +20,11 @@ import static util.CollectionUtils.newHashMap;
 public class StandardBatchLoader implements BatchLoader {
 
     private static final String PROCESS_LOADING_DATA = "process.loading.data";
+    private static final int CHECK_FOR_CANCEL_PERIOD = 100;
 
     private final HttpRequestHandler requestHandler;
 
     private final Log log;
-    private static final int CHECK_FOR_CANCEL_PERIOD = 100;
 
     public StandardBatchLoader(final HttpRequestHandler _requestHandler) {
         Assert.notNull(_requestHandler, "Request handler is null");
@@ -70,17 +69,6 @@ public class StandardBatchLoader implements BatchLoader {
         return result;
     }
 
-    private void submitRequests(List<String> _urls, long _pauseBetweenRequests, CompletionService<HttpGetRequest> completionService) throws InterruptedException {
-        
-        for (final String url : _urls) {
-            final Callable<HttpGetRequest> requestTask = createTask(url, "");
-
-            completionService.submit(requestTask);
-
-            Thread.sleep(_pauseBetweenRequests);
-        }
-    }
-
     public HttpData loadUrlWithReferer(final String _url, final String _referer) {
         Assert.isValidString(_url, "Url is not valid");
         Assert.notNull(_referer, "Referer is null");
@@ -93,6 +81,23 @@ public class StandardBatchLoader implements BatchLoader {
             this.log.error(String.format("Error loading from [ %s ]", _url), e);
 
             return HttpData.EMPTY_DATA;
+        }
+    }
+
+    public HttpData loadUrl(final String _url) {
+        Assert.isValidString(_url, "Url is not valid");
+
+        return loadUrlWithReferer(_url, "");
+    }
+
+    private void submitRequests(final List<String> _urls, final long _pauseBetweenRequests, final CompletionService<HttpGetRequest> _completionService) throws InterruptedException {
+
+        for (final String url : _urls) {
+            final Callable<HttpGetRequest> requestTask = createTask(url, "");
+
+            _completionService.submit(requestTask);
+
+            Thread.sleep(_pauseBetweenRequests);
         }
     }
 

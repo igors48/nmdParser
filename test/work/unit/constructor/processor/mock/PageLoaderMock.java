@@ -41,6 +41,10 @@ public class PageLoaderMock implements BatchLoader {
         return new HttpData(_url, new MemoryData(this.data, "UTF-8"), Result.OK);
     }
 
+    public HttpData loadUrl(String _url) {
+        return null;  
+    }
+
     public String getReferer() {
         return this.referer;
     }
