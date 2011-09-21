@@ -10,6 +10,7 @@ import util.Assert;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static util.CollectionUtils.newHashMap;
 
@@ -56,13 +57,16 @@ public class StandardBatchLoader implements BatchLoader {
 
             int count = 0;
 
-            while (count != _urls.size()) {
+            while (count != _urls.size() && !_controller.isCancelled()) {
                 // TODO check for cancel
-                final HttpGetRequest request = this.completionService.take().get();
+                final Future<HttpGetRequest> future = this.completionService.poll(100, TimeUnit.MILLISECONDS);
 
-                result.put(request.getUrl(), request.getResult());
+                if (future != null) {
+                    final HttpGetRequest request = future.get();
+                    result.put(request.getUrl(), request.getResult());
 
-                _controller.onProgress(new SingleProcessInfo(PROCESS_LOADING_DATA, count++, _urls.size()));
+                    _controller.onProgress(new SingleProcessInfo(PROCESS_LOADING_DATA, count++, _urls.size()));
+                }
             }
 
         } catch (InterruptedException e) {
@@ -87,14 +91,6 @@ public class StandardBatchLoader implements BatchLoader {
 
             return HttpData.EMPTY_DATA;
         }
-    }
-
-    public boolean cancelled() {
-        return false;
-    }
-
-    public void cancel() {
-        // empty
     }
 
     private Callable<HttpGetRequest> createTask(String _url, String _referer) {

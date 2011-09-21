@@ -45,10 +45,6 @@ public class PageLoaderMock implements BatchLoader {
         return this.referer;
     }
 
-    public boolean cancelled() {
-        return false;
-    }
-
     public void cancel() {
         // empty
     }

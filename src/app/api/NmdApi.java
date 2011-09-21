@@ -488,12 +488,6 @@ public class NmdApi implements ApiFacade {
         removeOutputsServiceFiles(_mask);
     }
 
-    public void cancelAllDownloads() throws FatalException {
-        checkWorkspaceAndSettings();
-
-        this.serviceManager.getBatchLoader().cancel();
-    }
-
     public void createGoogleReaderProfile(final String _email, final String _password) throws FatalException {
         Assert.isValidString(_email, "EMail is not valid");
         Assert.isValidString(_password, "Password is not valid");

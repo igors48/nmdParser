@@ -258,13 +258,6 @@ public interface ApiFacade extends BlitzRequestHandler {
     void removeServiceFiles(Mask _mask) throws FatalException;
 
     /**
-     * Отменяет все запрошенные на данный момент загрузки
-     *
-     * @throws FatalException если не получилось
-     */
-    void cancelAllDownloads() throws FatalException;
-
-    /**
      * Создает Google Reader профайл
      *
      * @param _email адрес эл. почты

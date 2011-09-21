@@ -15,8 +15,6 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
 import util.Assert;
 
 import java.util.concurrent.Callable;
@@ -25,7 +23,7 @@ import java.util.concurrent.Callable;
  * Author: Igor Usenko ( igors48@gmail.com )
  * Date: 16.09.2011
  */
-public class SimpleHttpRequestHandler implements HttpRequestHandler {
+public class StandardHttpRequestHandler implements HttpRequestHandler {
 
     public static final String REFERER_HEADER_NAME = "Referer";
     public static final String ACCEPT_HEADER_NAME = "Accept";
@@ -67,7 +65,7 @@ public class SimpleHttpRequestHandler implements HttpRequestHandler {
 
     private final Log log;
 
-    public SimpleHttpRequestHandler() {
+    public StandardHttpRequestHandler() {
         final SchemeRegistry schemeRegistry = new SchemeRegistry();
         final Scheme scheme = new Scheme(HTTP_SCHEME, HTTP_DEFAULT_PORT, PlainSocketFactory.getSocketFactory());
         schemeRegistry.register(scheme);
@@ -98,13 +96,9 @@ public class SimpleHttpRequestHandler implements HttpRequestHandler {
         return new HttpGetTask(this.httpClient, this.cache, this.bannedList, _request);
     }
 
-    public void cancel() {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
     public void stop() {
         httpClient.getConnectionManager().shutdown();
-        this.log.info("SimpleHttpRequestHandler stopped");
+        this.log.info("StandardHttpRequestHandler stopped");
     }
 }
 

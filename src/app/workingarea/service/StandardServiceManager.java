@@ -1,6 +1,5 @@
 package app.workingarea.service;
 
-import app.controller.NullController;
 import app.workingarea.ProcessWrapper;
 import app.workingarea.ServiceManager;
 import app.workingarea.Settings;
@@ -21,7 +20,7 @@ import debug.console.FileDebugConsoleUpdater;
 import debug.console.NullDebugConsole;
 import http.BatchLoader;
 import http.HttpRequestHandler;
-import http.SimpleHttpRequestHandler;
+import http.StandardHttpRequestHandler;
 import greader.GoogleReaderAdapter;
 import greader.GoogleReaderProvider;
 import greader.StandardGoogleReaderAdapter;
@@ -101,7 +100,7 @@ public class StandardServiceManager implements ServiceManager {
     public BatchLoader getBatchLoader() {
 
         if (this.httpRequestHandler == null) {
-            this.httpRequestHandler = new SimpleHttpRequestHandler();
+            this.httpRequestHandler = new StandardHttpRequestHandler();
         }
 
         if (this.batchLoader == null) {

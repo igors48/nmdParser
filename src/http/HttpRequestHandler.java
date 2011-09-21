@@ -12,7 +12,5 @@ public interface HttpRequestHandler {
 
    // HttpResponse post(String _request, String _referer);
     
-    void cancel();
-    
     void stop();
 }

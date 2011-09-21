@@ -150,11 +150,11 @@ public class HttpGetTask implements Callable<HttpGetRequest> {
         final String escapedReferer = this.request.getReferer();
 
         final HttpGet httpGet = new HttpGet(escapedUrl);
-        httpGet.setHeader(SimpleHttpRequestHandler.REFERER_HEADER_NAME, escapedReferer);
-        httpGet.setHeader(SimpleHttpRequestHandler.ACCEPT_HEADER_NAME, SimpleHttpRequestHandler.ACCEPT_REQUEST_HEADER_VALUE);
-        httpGet.setHeader(SimpleHttpRequestHandler.USER_AGENT_HEADER_NAME, SimpleHttpRequestHandler.USER_AGENT_REQUEST_HEADER_VALUE);
-        httpGet.setHeader(SimpleHttpRequestHandler.ACCEPT_CHARSET_HEADER_NAME, SimpleHttpRequestHandler.ACCEPT_CHARSET_HEADER_VALUE);
-        httpGet.setHeader(SimpleHttpRequestHandler.ACCEPT_ENCODING_HEADER_NAME, SimpleHttpRequestHandler.ACCEPT_ENCODING_HEADER_VALUE);
+        httpGet.setHeader(StandardHttpRequestHandler.REFERER_HEADER_NAME, escapedReferer);
+        httpGet.setHeader(StandardHttpRequestHandler.ACCEPT_HEADER_NAME, StandardHttpRequestHandler.ACCEPT_REQUEST_HEADER_VALUE);
+        httpGet.setHeader(StandardHttpRequestHandler.USER_AGENT_HEADER_NAME, StandardHttpRequestHandler.USER_AGENT_REQUEST_HEADER_VALUE);
+        httpGet.setHeader(StandardHttpRequestHandler.ACCEPT_CHARSET_HEADER_NAME, StandardHttpRequestHandler.ACCEPT_CHARSET_HEADER_VALUE);
+        httpGet.setHeader(StandardHttpRequestHandler.ACCEPT_ENCODING_HEADER_NAME, StandardHttpRequestHandler.ACCEPT_ENCODING_HEADER_VALUE);
 
         return httpGet;
     }

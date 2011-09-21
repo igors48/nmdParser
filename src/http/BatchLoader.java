@@ -26,15 +26,6 @@ public interface BatchLoader {
      */
     Map<String, HttpData> loadUrls(List<String> _urls, long _pauseBetweenRequests, Controller _controller);
 
-    
-    /**
-     * Обрабатывает список запросов
-     *
-     * @param _requests список запросов
-     * @return результат обработки
-     */
-    //Map<RequestList, HttpData> load(List<RequestList> _requests);
-
     /**
      * Загружает данные с указанного урла, подставляя указанный реферер
      *
@@ -44,12 +35,4 @@ public interface BatchLoader {
      */
     HttpData loadUrlWithReferer(String _url, String _referer);
 
-    /**
-     * Возвращает информацию о том не был ли прерван процесс обработки
-     *
-     * @return true если был прерван false если небыл
-     */
-    boolean cancelled();
-
-    void cancel();
 }
