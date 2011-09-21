@@ -22,38 +22,35 @@ public class StandardBatchLoader implements BatchLoader {
     private static final String PROCESS_LOADING_DATA = "process.loading.data";
 
     private final HttpRequestHandler requestHandler;
-    private final Controller controller;
 
-    final CompletionService<HttpGetRequest> completionService;
+    private final CompletionService<HttpGetRequest> completionService;
 
     private final Log log;
 
-    public StandardBatchLoader(final HttpRequestHandler _requestHandler, final Controller _controller) {
+    public StandardBatchLoader(final HttpRequestHandler _requestHandler) {
         Assert.notNull(_requestHandler, "Request handler is null");
         this.requestHandler = _requestHandler;
-
-        Assert.notNull(_controller, "Controller is null");
-        this.controller = _controller;
 
         this.completionService = new ExecutorCompletionService<HttpGetRequest>(Executors.newFixedThreadPool(16, new DaemonThreadFactory("daemon")));
 
         this.log = LogFactory.getLog(getClass());
     }
 
-    public Map<String, HttpData> loadUrls(final List<String> _urls, final long _pauseBetweenRequests) {
+    public Map<String, HttpData> loadUrls(final List<String> _urls, final long _pauseBetweenRequests, final Controller _controller) {
         Assert.notNull(_urls, "Url list is null");
         Assert.greaterOrEqual(_pauseBetweenRequests, 0, "Pause between requests < 0");
+        Assert.notNull(_controller, "Controller is null");
 
         final Map<String, HttpData> result = newHashMap();
 
         try {
-            this.controller.onProgress(new SingleProcessInfo(PROCESS_LOADING_DATA, 0, _urls.size()));
+            _controller.onProgress(new SingleProcessInfo(PROCESS_LOADING_DATA, 0, _urls.size()));
 
             for (final String url : _urls) {
                 final Callable<HttpGetRequest> requestTask = createTask(url, "");
 
                 this.completionService.submit(requestTask);
-                
+
                 Thread.sleep(_pauseBetweenRequests);
             }
 
@@ -65,7 +62,7 @@ public class StandardBatchLoader implements BatchLoader {
 
                 result.put(request.getUrl(), request.getResult());
 
-                this.controller.onProgress(new SingleProcessInfo(PROCESS_LOADING_DATA, count++, _urls.size()));
+                _controller.onProgress(new SingleProcessInfo(PROCESS_LOADING_DATA, count++, _urls.size()));
             }
 
         } catch (InterruptedException e) {
@@ -97,7 +94,7 @@ public class StandardBatchLoader implements BatchLoader {
     }
 
     public void cancel() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        // empty
     }
 
     private Callable<HttpGetRequest> createTask(String _url, String _referer) {

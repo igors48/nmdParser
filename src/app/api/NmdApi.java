@@ -37,6 +37,7 @@ import constructor.objects.source.core.ModificationListStorage;
 import constructor.objects.source.core.Source;
 import constructor.objects.source.core.SourceAdapter;
 import constructor.objects.storage.Storage;
+import greader.GoogleReaderAdapter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import timeservice.TimeService;
@@ -53,8 +54,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import greader.GoogleReaderAdapter;
 
 /**
  * NMD API

@@ -1,5 +1,6 @@
 package constructor.objects.channel.core;
 
+import app.controller.NullController;
 import constructor.objects.channel.core.stream.ChannelDataList;
 import constructor.objects.interpreter.core.data.InterpreterData;
 import constructor.objects.interpreter.core.data.InterpreterDataTools;
@@ -34,7 +35,7 @@ public final class ChannelDataTools {
         List<String> urls = new ArrayList<String>();
         urls.add(_url);
 
-        Map<String, HttpData> datas = _loader.loadUrls(urls, _pauseBetweenRequests);
+        Map<String, HttpData> datas = _loader.loadUrls(urls, _pauseBetweenRequests, new NullController());
 
         return DataUtil.getDataImage(datas.get(_url).getData());
     }

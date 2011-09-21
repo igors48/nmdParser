@@ -1,5 +1,6 @@
 package constructor.objects.channel.core;
 
+import app.controller.NullController;
 import app.iui.flow.custom.SingleProcessInfo;
 import constructor.objects.AdapterException;
 import constructor.objects.channel.core.stream.ChannelDataList;
@@ -131,7 +132,7 @@ public class Channel {
     }
 
     private void implicitPreCaching(final List<Modification> _modifications) throws AdapterException {
-        this.adapter.getPageLoader().loadUrls(getUrls(_modifications), this.adapter.getPauseBetweenRequests());
+        this.adapter.getPageLoader().loadUrls(getUrls(_modifications), this.adapter.getPauseBetweenRequests(), new NullController());
     }
 
     private List<String> getUrls(final List<Modification> _modifications) {

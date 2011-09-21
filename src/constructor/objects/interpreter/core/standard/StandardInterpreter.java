@@ -1,5 +1,6 @@
 package constructor.objects.interpreter.core.standard;
 
+import app.controller.NullController;
 import constructor.objects.AdapterException;
 import constructor.objects.interpreter.core.*;
 import constructor.objects.interpreter.core.data.InterpreterData;
@@ -66,7 +67,7 @@ public class StandardInterpreter implements InterpreterEx {
     private String getMainPageImage(final Modification _modification) throws AdapterException {
         List<String> list = new ArrayList<String>();
         list.add(_modification.getUrl());
-        Map<String, HttpData> data = this.adapter.getWebPageLoader().loadUrls(list, this.adapter.getPauseBetweenRequests());
+        Map<String, HttpData> data = this.adapter.getWebPageLoader().loadUrls(list, this.adapter.getPauseBetweenRequests(), new NullController());
         Data mainPage = data.get(_modification.getUrl()).getData();
 
         return DataUtil.getDataImage(mainPage);
@@ -77,7 +78,7 @@ public class StandardInterpreter implements InterpreterEx {
 
         List<String> urls = createUrlList(_items);
 
-        Map<String, HttpData> data = this.adapter.getWebPageLoader().loadUrls(urls, this.adapter.getPauseBetweenRequests());
+        Map<String, HttpData> data = this.adapter.getWebPageLoader().loadUrls(urls, this.adapter.getPauseBetweenRequests(), new NullController());
 
         for (PageListItem item : _items) {
             HttpData dataItem = data.get(item.getUrl());

@@ -105,7 +105,7 @@ public class StandardServiceManager implements ServiceManager {
         }
 
         if (this.batchLoader == null) {
-            this.batchLoader = new StandardBatchLoader(this.httpRequestHandler, new NullController());
+            this.batchLoader = new StandardBatchLoader(this.httpRequestHandler);
         }
         return this.batchLoader;
     }

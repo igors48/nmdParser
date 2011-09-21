@@ -1,5 +1,6 @@
 package work.unit.constructor.processor.mock;
 
+import app.controller.Controller;
 import http.BatchLoader;
 import http.Result;
 import http.data.MemoryData;
@@ -25,7 +26,7 @@ public class PageLoaderMock implements BatchLoader {
         this.data = _data.getBytes("UTF-8");
     }
 
-    public Map<String, HttpData> loadUrls(final List<String> _urls, final long _pauseBetweenRequests) {
+    public Map<String, HttpData> loadUrls(final List<String> _urls, final long _pauseBetweenRequests, final Controller _controller) {
         Assert.notNull(_urls, "Urls is null");
 
         Map<String, HttpData> result = new HashMap<String, HttpData>();

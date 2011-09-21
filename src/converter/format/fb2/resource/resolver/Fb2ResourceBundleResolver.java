@@ -91,7 +91,7 @@ public class Fb2ResourceBundleResolver implements Controller {
             }
         }
 
-        Map<String, HttpData> loaded = this.batchLoader.loadUrls(list, 0);
+        Map<String, HttpData> loaded = this.batchLoader.loadUrls(list, 0, this);
 
         joinMaps(loaded);
 

@@ -1,5 +1,6 @@
 package http;
 
+import app.controller.Controller;
 import html.HttpData;
 
 import java.util.List;
@@ -19,10 +20,11 @@ public interface BatchLoader {
      *
      * @param _urls                  список нужных адресов
      * @param _pauseBetweenRequests интервал между запросами
+     * @param _controller контроллер процесса
      * @return список образов загруженных данных. Если загрузка данных
      *         не удалась - возвращаются пустые данные
      */
-    Map<String, HttpData> loadUrls(List<String> _urls, long _pauseBetweenRequests);
+    Map<String, HttpData> loadUrls(List<String> _urls, long _pauseBetweenRequests, Controller _controller);
 
     
     /**
