@@ -18,7 +18,12 @@ public class ErrorForm extends AbstractForm implements ActionListener {
     private static final String CAPTION = "iui.error.form.caption";
     private static final String ADDITIONAL_INFO_LABEL = "iui.error.form.additional.info.label";
     private static final String CLOSE_BUTTON_LABEL = "iui.error.form.close.button.label";
+    private static final String NO_MESSAGE_TEXT = "iui.error.form.no.message.text";
+    private static final String NO_STACKTRACE_TEXT = "iui.error.form.no.stack.trace.text";
+    
     /*private static final String BACK_BUTTON_LABEL = "iui.error.form.back.button.label";*/
+
+    private static final String CR_LF = "\r\n";
 
     private final ErrorModel model;
     private final Listener listener;
@@ -42,13 +47,23 @@ public class ErrorForm extends AbstractForm implements ActionListener {
         if (this.model.getCause() != null) {
             getContentPanel().add(new JLabel(getString(ADDITIONAL_INFO_LABEL)), createConstraint().maximumWidth().verticalGap().wrap().toString());
 
-            StringBuffer text = new StringBuffer(this.model.getCause().getMessage());
-            text.append("\r\n");
+            String message = this.model.getCause().getMessage();
 
-            for (StackTraceElement element : this.model.getCause().getStackTrace()) {
-                text.append("\r\n").append(element);
+            StringBuffer text = new StringBuffer(message == null || message.isEmpty() ? getString(NO_MESSAGE_TEXT) : message);
+
+            text.append(CR_LF);
+
+            final StackTraceElement[] stackTraceElements = this.model.getCause().getStackTrace();
+
+            if (stackTraceElements == null) {
+                text.append(getString(NO_STACKTRACE_TEXT));
+            } else {
+
+                for (StackTraceElement element : stackTraceElements) {
+                    text.append(CR_LF).append(element);
+                }
             }
-
+            
             JTextArea textArea = new JTextArea(text.toString());
 
             textArea.setEditable(false);

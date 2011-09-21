@@ -7,8 +7,6 @@ import converter.format.fb2.resource.resolver.cache.ResourceCache;
 import html.HttpData;
 import http.BatchLoader;
 import http.Data;
-import http.HttpRequestHandler;
-import http.StandardBatchLoader;
 import http.data.DataFile;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -79,6 +77,16 @@ public class Fb2ResourceBundleResolver implements Controller {
 
         this.itemMap = new HashMap<Fb2ResourceItem, String>();
 
+        List<String> list = createRequests(_resources);
+
+        Map<String, HttpData> loaded = this.batchLoader.loadUrls(list, 0, this);
+
+        if (!isCancelled()) {
+            handleResponses(_resources, loaded);
+        }
+    }
+
+    private List<String> createRequests(final List<Fb2ResourceItem> _resources) {
         List<String> list = new ArrayList<String>();
 
         for (Fb2ResourceItem item : _resources) {
@@ -90,17 +98,15 @@ public class Fb2ResourceBundleResolver implements Controller {
                 this.itemMap.put(item, request);
             }
         }
+        
+        return list;
+    }
 
-        Map<String, HttpData> loaded = this.batchLoader.loadUrls(list, 0, this);
-
-        joinMaps(loaded);
+    private void handleResponses(final List<Fb2ResourceItem> _resources, final Map<String, HttpData> _loaded) {
+        joinMaps(_loaded);
 
         checkResourcesFormat(_resources);
 
-        commitCacheToc();
-    }
-
-    private void commitCacheToc() {
         this.cache.commitToc();
     }
 
@@ -224,7 +230,7 @@ public class Fb2ResourceBundleResolver implements Controller {
     }
 
     public void onStart() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        // empty
     }
 
     public void onProgress(final SingleProcessInfo _info) {
@@ -233,18 +239,19 @@ public class Fb2ResourceBundleResolver implements Controller {
     }
 
     public void onComplete() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        // empty
     }
 
     public void onFault() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        // empty
     }
 
     public void onCancel() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        // empty
     }
 
     public boolean isCancelled() {
         return this.controller.isCancelled();
     }
+    
 }

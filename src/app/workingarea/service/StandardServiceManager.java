@@ -215,10 +215,6 @@ public class StandardServiceManager implements ServiceManager {
         }
 
         if (this.httpRequestHandler != null) {
-            this.httpRequestHandler.cancel();
-
-            waitSomeTime();
-
             this.httpRequestHandler.stop();
         }
 
@@ -226,15 +222,6 @@ public class StandardServiceManager implements ServiceManager {
             this.defaultStorage.close();
         }
 
-    }
-
-    private void waitSomeTime() {
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            // empty
-        }
     }
 
     private Preprocessor getContextPreprocessor() {

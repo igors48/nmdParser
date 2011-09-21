@@ -24,15 +24,12 @@ public class StandardBatchLoader implements BatchLoader {
 
     private final HttpRequestHandler requestHandler;
 
-    private final CompletionService<HttpGetRequest> completionService;
-
     private final Log log;
+    private static final int CHECK_FOR_CANCEL_PERIOD = 100;
 
     public StandardBatchLoader(final HttpRequestHandler _requestHandler) {
         Assert.notNull(_requestHandler, "Request handler is null");
         this.requestHandler = _requestHandler;
-
-        this.completionService = new ExecutorCompletionService<HttpGetRequest>(Executors.newFixedThreadPool(16, new DaemonThreadFactory("daemon")));
 
         this.log = LogFactory.getLog(getClass());
     }
@@ -42,24 +39,19 @@ public class StandardBatchLoader implements BatchLoader {
         Assert.greaterOrEqual(_pauseBetweenRequests, 0, "Pause between requests < 0");
         Assert.notNull(_controller, "Controller is null");
 
+        final CompletionService<HttpGetRequest> completionService = new ExecutorCompletionService<HttpGetRequest>(Executors.newFixedThreadPool(16, new DaemonThreadFactory("daemon")));
+
         final Map<String, HttpData> result = newHashMap();
 
         try {
             _controller.onProgress(new SingleProcessInfo(PROCESS_LOADING_DATA, 0, _urls.size()));
 
-            for (final String url : _urls) {
-                final Callable<HttpGetRequest> requestTask = createTask(url, "");
-
-                this.completionService.submit(requestTask);
-
-                Thread.sleep(_pauseBetweenRequests);
-            }
+            submitRequests(_urls, _pauseBetweenRequests, completionService);
 
             int count = 0;
 
             while (count != _urls.size() && !_controller.isCancelled()) {
-                // TODO check for cancel
-                final Future<HttpGetRequest> future = this.completionService.poll(100, TimeUnit.MILLISECONDS);
+                final Future<HttpGetRequest> future = completionService.poll(CHECK_FOR_CANCEL_PERIOD, TimeUnit.MILLISECONDS);
 
                 if (future != null) {
                     final HttpGetRequest request = future.get();
@@ -76,6 +68,17 @@ public class StandardBatchLoader implements BatchLoader {
         }
 
         return result;
+    }
+
+    private void submitRequests(List<String> _urls, long _pauseBetweenRequests, CompletionService<HttpGetRequest> completionService) throws InterruptedException {
+        
+        for (final String url : _urls) {
+            final Callable<HttpGetRequest> requestTask = createTask(url, "");
+
+            completionService.submit(requestTask);
+
+            Thread.sleep(_pauseBetweenRequests);
+        }
     }
 
     public HttpData loadUrlWithReferer(final String _url, final String _referer) {
