@@ -11,6 +11,7 @@ import constructor.objects.processor.concat.adapter.ConcatProcessorAdapter;
 import constructor.objects.processor.decrement.adapter.DecrementProcessorAdapter;
 import constructor.objects.processor.extract_tag.adapter.ExtractTagProcessorAdapter;
 import constructor.objects.processor.extract_tag.element.ExtractTagProcessorElementHandler;
+import constructor.objects.processor.filter.adapter.FilterProcessorAdapter;
 import constructor.objects.processor.get_group.adapter.GetGroupProcessorAdapter;
 import constructor.objects.processor.get_group.element.GetGroupProcessorElementHandler;
 import constructor.objects.processor.load.adapter.LoadProcessorAdapter;
@@ -26,7 +27,7 @@ import constructor.objects.processor.xpath.element.XPathProcessorElementHandler;
 import util.Assert;
 
 /**
- * Фабрика адаптеров и хендлеров нужных для создания операторов
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 27.06.2010
@@ -46,6 +47,7 @@ public class OperatorFactory {
     public static final String WELD_ID = "weld";
     public static final String PACK_ID = "pack";
     public static final String FIRST_ONE_ID = "firstOne";
+    public static final String FILTER_ID = "filter";
 
     private final ServiceManager serviceManager;
 
@@ -109,6 +111,10 @@ public class OperatorFactory {
 
         if (_name.equals(FIRST_ONE_ID)) {
             adapter = new FirstOneProcessorAdapter(this.serviceManager.getDebugConsole());
+        }
+
+        if (_name.equals(FILTER_ID)) {
+            adapter = new FilterProcessorAdapter();
         }
 
         return adapter;
