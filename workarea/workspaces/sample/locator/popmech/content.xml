@@ -1,7 +1,3 @@
 <processor>
-
-    <xPath>
-        <expression>//td[@class='block_main_inner']/table[1]</expression>
-    </xPath>
-
+	<filter/>
 </processor>
