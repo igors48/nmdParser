@@ -48,5 +48,5 @@ public class HttpRequest {
     public HttpData getResult() {
         return this.result;
     }
-    
+
 }

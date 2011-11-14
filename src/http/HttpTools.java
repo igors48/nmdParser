@@ -1,7 +1,6 @@
 package http;
 
 import org.apache.http.Header;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
 import util.Assert;
 
@@ -20,7 +19,7 @@ public final class HttpTools {
     public static String getCharset(final Header[] _headers) {
         Assert.notNull(_headers, "Headers is null");
 
-        for(final Header header : _headers) {
+        for (final Header header : _headers) {
             final String charset = getCharset(header.getValue());
 
             if (!charset.isEmpty()) {
@@ -30,13 +29,13 @@ public final class HttpTools {
 
         return "";
     }
-    
+
     public static String getCharset(final String _headerValue) {
         Assert.notNull(_headerValue);
 
         final Matcher matcher = PATTERN.matcher(_headerValue);
 
-        return matcher.find() ?  matcher.group(GROUP_NO) : "";
+        return matcher.find() ? matcher.group(GROUP_NO) : "";
     }
 
     public static String getUrlWithEscapedRequest(final String _url, final String _request) {
@@ -48,10 +47,10 @@ public final class HttpTools {
 
     public static String getHostFromMethod(final HttpRequestBase _method) {
         Assert.notNull(_method, "Method is null");
-        
+
         return _method.getURI().getHost();
     }
-    
+
     private HttpTools() {
         // empty
     }

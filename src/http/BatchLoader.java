@@ -18,9 +18,9 @@ public interface BatchLoader {
     /**
      * Загружает данные от адресов указанных в списке. Блокирует до завершения.
      *
-     * @param _urls                  список нужных адресов
+     * @param _urls                 список нужных адресов
      * @param _pauseBetweenRequests интервал между запросами
-     * @param _controller контроллер процесса
+     * @param _controller           контроллер процесса
      * @return список образов загруженных данных. Если загрузка данных
      *         не удалась - возвращаются пустые данные
      */
@@ -36,5 +36,5 @@ public interface BatchLoader {
     HttpData loadUrlWithReferer(String _url, String _referer);
 
     HttpData loadUrl(String _url);
-    
+
 }

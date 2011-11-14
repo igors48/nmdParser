@@ -79,7 +79,7 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
         this.cache = new InMemoryCache();
 
         this.bannedList = new BannedList(BANNED_LIST_TRESHOLD, BANNED_LIST_LIMIT);
-        
+
         this.log = LogFactory.getLog(getClass());
     }
 
@@ -91,7 +91,7 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
 
     public synchronized Callable<HttpRequest> post(final HttpRequest _request) {
         Assert.notNull(_request, "Request is null");
-    
+
         return new HttpPostTask(this.httpClient, this.bannedList, _request);
     }
 
@@ -99,6 +99,6 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
         this.httpClient.getConnectionManager().shutdown();
         this.log.info("StandardHttpRequestHandler stopped");
     }
-    
+
 }
 
