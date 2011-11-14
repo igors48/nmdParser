@@ -1,3 +1,3 @@
-<output channel="popmech.channel" branch="science">
+<output channel="popmech.channel" resolveImageLinks="no" branch="science">
     <many-to-one name="popmech"/>
 </output>
