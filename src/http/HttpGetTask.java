@@ -136,7 +136,7 @@ public class HttpGetTask extends AbstractHttpRequestTask {
     private HttpGet createMethod() {
 
         final String escapedUrl = getUrlWithEscapedRequest(this.request.getUrl(), this.request.getRequest());
-        final String escapedReferer = getUrlWithEscapedRequest(this.request.getReferer(), "");
+        final String escapedReferer = this.request.getReferer().isEmpty() ? "" : getUrlWithEscapedRequest(this.request.getReferer(), "");
 
         final HttpGet httpGet = new HttpGet(escapedUrl);
 
