@@ -133,8 +133,8 @@ public class SimplerConfiguration implements Blank {
         return LocalStorage.DEFAULT_STORAGE_ID;
     }
 
-    public void setAutoContentFiltering() {
-        this.autoContentFiltering = true;
+    public void setAutoContentFiltering(final boolean _value) {
+        this.autoContentFiltering = _value;
     }
 
     public boolean isAutoContentFiltering() {

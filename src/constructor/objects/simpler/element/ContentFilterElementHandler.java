@@ -18,6 +18,6 @@ public class ContentFilterElementHandler implements ElementHandler {
         Assert.notNull(_blank, "Blank is null.");
         Assert.notNull(_factory, "Factory is null.");
 
-        ((SimplerConfiguration) _blank).setAutoContentFiltering();
+        ((SimplerConfiguration) _blank).setAutoContentFiltering(true);
     }
 }
