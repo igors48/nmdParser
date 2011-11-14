@@ -16,8 +16,6 @@ public interface GoogleReaderAdapter {
 
     void testProfileFeed(String _email, String _feedUrl, BlitzRequestHandler _handler) throws GoogleReaderAdapterException;
 
-    //void resetProfileFeed(String _email, String _feedUrl) throws GoogleReaderAdapterException;
-
     void changeProfilePassword(String _email, String _newPassword) throws GoogleReaderAdapterException;
 
     class GoogleReaderAdapterException extends Exception {

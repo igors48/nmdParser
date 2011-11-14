@@ -131,14 +131,6 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
         }
     }
 
-    /*
-    public void resetProfileFeed(final String _email, final String _feedUrl) throws GoogleReaderAdapterException {
-        Assert.isValidString(_email, "Email is not valid");
-        Assert.isValidString(_feedUrl, "Feed Url is not valid");
-
-    }
-    */
-
     public void changeProfilePassword(final String _email, final String _newPassword) throws GoogleReaderAdapterException {
         Assert.isValidString(_email, "Email is not valid");
         Assert.isValidString(_newPassword, "New password is not valid");
