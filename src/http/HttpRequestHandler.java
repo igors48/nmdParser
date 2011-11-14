@@ -8,9 +8,9 @@ import java.util.concurrent.Callable;
  */
 public interface HttpRequestHandler {
 
-    Callable<HttpGetRequest> get(HttpGetRequest _request);
+    Callable<HttpRequest> get(HttpRequest _request);
 
-   // HttpResponse post(String _request, String _referer);
-    
+    Callable<HttpRequest> post(HttpRequest _request);
+
     void stop();
 }

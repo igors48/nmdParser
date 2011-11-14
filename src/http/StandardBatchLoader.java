@@ -38,7 +38,7 @@ public class StandardBatchLoader implements BatchLoader {
         Assert.greaterOrEqual(_pauseBetweenRequests, 0, "Pause between requests < 0");
         Assert.notNull(_controller, "Controller is null");
 
-        final CompletionService<HttpGetRequest> completionService = new ExecutorCompletionService<HttpGetRequest>(Executors.newFixedThreadPool(16, new DaemonThreadFactory("daemon")));
+        final CompletionService<HttpRequest> completionService = new ExecutorCompletionService<HttpRequest>(Executors.newFixedThreadPool(16, new DaemonThreadFactory("daemon")));
 
         final Map<String, HttpData> result = newHashMap();
 
@@ -50,10 +50,10 @@ public class StandardBatchLoader implements BatchLoader {
             int count = 0;
 
             while (count != _urls.size() && !_controller.isCancelled()) {
-                final Future<HttpGetRequest> future = completionService.poll(CHECK_FOR_CANCEL_PERIOD, TimeUnit.MILLISECONDS);
+                final Future<HttpRequest> future = completionService.poll(CHECK_FOR_CANCEL_PERIOD, TimeUnit.MILLISECONDS);
 
                 if (future != null) {
-                    final HttpGetRequest request = future.get();
+                    final HttpRequest request = future.get();
                     result.put(request.getUrl(), request.getResult());
 
                     _controller.onProgress(new SingleProcessInfo(PROCESS_LOADING_DATA, count++, _urls.size()));
@@ -74,7 +74,7 @@ public class StandardBatchLoader implements BatchLoader {
         Assert.notNull(_referer, "Referer is null");
 
         try {
-            final Callable<HttpGetRequest> requestTask = createTask(_url, _referer);
+            final Callable<HttpRequest> requestTask = createTask(_url, _referer);
 
             return requestTask.call().getResult();
         } catch (Exception e) {
@@ -90,10 +90,10 @@ public class StandardBatchLoader implements BatchLoader {
         return loadUrlWithReferer(_url, "");
     }
 
-    private void submitRequests(final List<String> _urls, final long _pauseBetweenRequests, final CompletionService<HttpGetRequest> _completionService) throws InterruptedException {
+    private void submitRequests(final List<String> _urls, final long _pauseBetweenRequests, final CompletionService<HttpRequest> _completionService) throws InterruptedException {
 
         for (final String url : _urls) {
-            final Callable<HttpGetRequest> requestTask = createTask(url, "");
+            final Callable<HttpRequest> requestTask = createTask(url, "");
 
             _completionService.submit(requestTask);
 
@@ -101,8 +101,8 @@ public class StandardBatchLoader implements BatchLoader {
         }
     }
 
-    private Callable<HttpGetRequest> createTask(String _url, String _referer) {
-        final HttpGetRequest request = new HttpGetRequest(_url, "", _referer);
+    private Callable<HttpRequest> createTask(String _url, String _referer) {
+        final HttpRequest request = new HttpRequest(_url, "", _referer);
 
         return this.requestHandler.get(request);
     }

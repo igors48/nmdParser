@@ -1,6 +1,8 @@
 package http;
 
 import org.apache.http.Header;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpRequestBase;
 import util.Assert;
 
 import java.util.regex.Matcher;
@@ -37,6 +39,19 @@ public final class HttpTools {
         return matcher.find() ?  matcher.group(GROUP_NO) : "";
     }
 
+    public static String getUrlWithEscapedRequest(final String _url, final String _request) {
+        Assert.isValidString(_url, "Url is not valid");
+        Assert.notNull(_request, "Request is null");
+
+        return _url + _request;
+    }
+
+    public static String getHostFromMethod(final HttpRequestBase _method) {
+        Assert.notNull(_method, "Method is null");
+        
+        return _method.getURI().getHost();
+    }
+    
     private HttpTools() {
         // empty
     }

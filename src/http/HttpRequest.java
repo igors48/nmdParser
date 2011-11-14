@@ -7,7 +7,7 @@ import util.Assert;
  * Author: Igor Usenko ( igors48@gmail.com )
  * Date: 16.09.2011
  */
-public class HttpGetRequest {
+public class HttpRequest {
 
     private final String url;
     private final String request;
@@ -15,7 +15,7 @@ public class HttpGetRequest {
 
     private HttpData result;
 
-    public HttpGetRequest(final String _url, final String _request, final String _referer) {
+    public HttpRequest(final String _url, final String _request, final String _referer) {
         Assert.isValidString(_url, "Url is not valid");
         this.url = _url;
 

@@ -23,23 +23,24 @@ import util.Assert;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
+import static http.HttpTools.getHostFromMethod;
+import static http.HttpTools.getUrlWithEscapedRequest;
+
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
  * Date: 19.09.2011
  */
-public class HttpGetTask implements Callable<HttpGetRequest> {
+public class HttpGetTask extends AbstractHttpRequestTask {
 
     private final HttpClient httpClient;
     private final InMemoryCache cache;
     private final BannedList bannedList;
-    private final HttpGetRequest request;
-
-    private final HttpContext context;
+    private final HttpRequest request;
 
     private final Log log;
-    private static final String CONTENT_TYPE_HEADER_NAME = "Content-Type";
 
-    public HttpGetTask(final HttpClient _httpClient, final InMemoryCache _cache, final BannedList _bannedList, final HttpGetRequest _request) {
+    public HttpGetTask(final HttpClient _httpClient, final InMemoryCache _cache, final BannedList _bannedList, final HttpRequest _request) {
+        super();
         Assert.notNull(_httpClient, "Http client is null");
         this.httpClient = _httpClient;
 
@@ -52,13 +53,11 @@ public class HttpGetTask implements Callable<HttpGetRequest> {
         Assert.notNull(_request, "Request is null");
         this.request = _request;
 
-        this.context = new BasicHttpContext();
-
         this.log = LogFactory.getLog(getClass());
     }
 
-    public HttpGetRequest call() throws Exception {
-        final String targetUrl = getTargetUrl();
+    public HttpRequest call() throws Exception {
+        final String targetUrl = getUrlWithEscapedRequest(this.request.getUrl(), this.request.getRequest());
       
         final InMemoryCacheItem fromCache = this.cache.get(targetUrl);
 
@@ -78,7 +77,7 @@ public class HttpGetTask implements Callable<HttpGetRequest> {
         final String targetHost = getHostFromMethod(httpGet);
 
         try {
-            final boolean banned = this.bannedList.isBanned(getHostFromMethod(httpGet));
+            final boolean banned = this.bannedList.isBanned(targetHost);
 
             if (banned) {
                 this.log.info(String.format("Host [ %s ] is banned", targetHost));
@@ -127,40 +126,28 @@ public class HttpGetTask implements Callable<HttpGetRequest> {
         this.cache.put(_targetUrl, responseUrl, data);
     }
 
-    private String getHostFromMethod(final HttpGet _httpGet) {
-        return _httpGet.getURI().getHost();
-    }
-
     private void createFromCached(final InMemoryCacheItem _fromCache) {
         final HttpData httpData = new HttpData(_fromCache.getResponseUrl(), _fromCache.getData(), Result.OK);
 
         this.request.setResult(httpData);
     }
 
-    private String getResponseUrl() {
-        final HttpUriRequest currentRequest = (HttpUriRequest) context.getAttribute(ExecutionContext.HTTP_REQUEST);
-        final HttpHost currentHost = (HttpHost) context.getAttribute(ExecutionContext.HTTP_TARGET_HOST);
-
-        return currentHost.toURI() + currentRequest.getURI();
-    }
-
+    //TODO method factory?
     private HttpGet createMethod() {
 
-        final String escapedUrl = getTargetUrl();
-        final String escapedReferer = this.request.getReferer();
+        final String escapedUrl = getUrlWithEscapedRequest(this.request.getUrl(), this.request.getRequest());
+        final String escapedReferer = getUrlWithEscapedRequest(this.request.getReferer(), "");
 
         final HttpGet httpGet = new HttpGet(escapedUrl);
+
         httpGet.setHeader(StandardHttpRequestHandler.REFERER_HEADER_NAME, escapedReferer);
+        
         httpGet.setHeader(StandardHttpRequestHandler.ACCEPT_HEADER_NAME, StandardHttpRequestHandler.ACCEPT_REQUEST_HEADER_VALUE);
         httpGet.setHeader(StandardHttpRequestHandler.USER_AGENT_HEADER_NAME, StandardHttpRequestHandler.USER_AGENT_REQUEST_HEADER_VALUE);
         httpGet.setHeader(StandardHttpRequestHandler.ACCEPT_CHARSET_HEADER_NAME, StandardHttpRequestHandler.ACCEPT_CHARSET_HEADER_VALUE);
         httpGet.setHeader(StandardHttpRequestHandler.ACCEPT_ENCODING_HEADER_NAME, StandardHttpRequestHandler.ACCEPT_ENCODING_HEADER_VALUE);
 
         return httpGet;
-    }
-
-    private String getTargetUrl() {
-        return this.request.getUrl() + this.request.getRequest();
     }
 
 }

@@ -42,16 +42,6 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
     public static final String ACCEPT_ENCODING_HEADER_NAME = "Accept-Encoding";
     public static final String ACCEPT_ENCODING_HEADER_VALUE = "gzip,deflate";
 
-    /*
-    public static final String CACHE_CONTROL_HEADER_NAME = "Cache-Control";
-    public static final String CACHE_CONTROL_HEADER_VALUE = "max-age=2048";
-    
-    public static final String CONNECTION_HEADER_NAME = "Connection";
-    public static final String CONNECTION_HEADER_VALUE = "keep-alive";
-    public static final String PRAGMA_HEADER_NAME = "Pragma";
-    public static final String PRAGMA_HEADER_VALUE = "no-cache";
-    */
-
     private static final int CONNECTION_TIMEOUT = 30000;
     private static final int SOCKET_TIMEOUT = 20000;
     private static final int RETRY_COUNT = 10;
@@ -93,15 +83,22 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
         this.log = LogFactory.getLog(getClass());
     }
 
-    public synchronized Callable<HttpGetRequest> get(final HttpGetRequest _request) {
+    public synchronized Callable<HttpRequest> get(final HttpRequest _request) {
         Assert.notNull(_request, "Request is null");
 
         return new HttpGetTask(this.httpClient, this.cache, this.bannedList, _request);
     }
 
+    public synchronized Callable<HttpRequest> post(final HttpRequest _request) {
+        Assert.notNull(_request, "Request is null");
+    
+        return new HttpPostTask(this.httpClient, this.bannedList, _request);
+    }
+
     public void stop() {
-        httpClient.getConnectionManager().shutdown();
+        this.httpClient.getConnectionManager().shutdown();
         this.log.info("StandardHttpRequestHandler stopped");
     }
+    
 }
 
