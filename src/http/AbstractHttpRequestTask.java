@@ -60,7 +60,7 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
         this.log = LogFactory.getLog(getClass());
     }
 
-    protected HttpRequest handle() {
+    protected HttpRequest execute() {
         final String escapedUrl = getUrlWithEscapedRequest(this.request.getUrl(), this.request.getRequest());
         final HttpRequestBase method = createMethod();
 
@@ -76,7 +76,7 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
             } else {
                 this.log.debug(String.format("%s request to [ %s ]", this.requestType, escapedUrl));
 
-                execute(method);
+                handle(method);
             }
         } catch (Exception e) {
             method.abort();
@@ -98,7 +98,7 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
         return currentHost.toURI() + currentRequest.getURI();
     }
 
-    private void execute(final HttpRequestBase _method) throws IOException {
+    private void handle(final HttpRequestBase _method) throws IOException {
         final HttpResponse response = this.httpClient.execute(_method, this.context);
         final HttpEntity entity = response.getEntity();
 

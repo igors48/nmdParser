@@ -15,13 +15,13 @@ import static http.HttpTools.getUrlWithEscapedRequest;
  * Author: Igor Usenko ( igors48@gmail.com )
  * Date: 19.09.2011
  */
-public class HttpGetTask extends AbstractHttpRequestTask {
+public class HttpCacheableGetTask extends AbstractHttpRequestTask {
 
     private final InMemoryCache cache;
 
     private final Log log;
 
-    public HttpGetTask(final HttpClient _httpClient, final InMemoryCache _cache, final BannedList _bannedList, final HttpRequest _request) {
+    public HttpCacheableGetTask(final HttpClient _httpClient, final InMemoryCache _cache, final BannedList _bannedList, final HttpRequest _request) {
         super(_request, HttpRequestType.GET, _httpClient, _bannedList);
 
         Assert.notNull(_cache, "Cache is null");
@@ -36,7 +36,7 @@ public class HttpGetTask extends AbstractHttpRequestTask {
         final InMemoryCacheItem fromCache = this.cache.get(targetUrl);
 
         if (fromCache == null) {
-            handle();
+            execute();
             this.cache.put(targetUrl, getResponseUrl(), this.request.getResult().getData());
         } else {
             this.log.debug(String.format("Data for [ %s ] taken from cache", targetUrl));

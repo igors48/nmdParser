@@ -86,7 +86,7 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
     public synchronized Callable<HttpRequest> get(final HttpRequest _request) {
         Assert.notNull(_request, "Request is null");
 
-        return new HttpGetTask(this.httpClient, this.cache, this.bannedList, _request);
+        return new HttpCacheableGetTask(this.httpClient, this.cache, this.bannedList, _request);
     }
 
     public synchronized Callable<HttpRequest> post(final HttpRequest _request) {

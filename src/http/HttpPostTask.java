@@ -14,7 +14,7 @@ public class HttpPostTask extends AbstractHttpRequestTask {
     }
 
     public HttpRequest call() throws Exception {
-        return handle();
+        return execute();
     }
 
 }
