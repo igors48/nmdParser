@@ -9,7 +9,6 @@ import greader.profile.Account;
 import http.BatchLoader;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.web.client.RestTemplate;
 import util.Assert;
 import util.CollectionUtils;
 import static util.CollectionUtils.newArrayList;
