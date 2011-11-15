@@ -6,7 +6,9 @@ import greader.entities.FeedItems;
 import greader.entities.Subscription;
 import greader.entities.Subscriptions;
 import greader.profile.Account;
+import html.HttpData;
 import http.BatchLoader;
+import http.data.DataUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import util.Assert;
@@ -31,9 +33,7 @@ public class GoogleReaderProvider {
     private static final String EMAIL_PARAMETER = "email";
     private static final String PASSWORD_PARAMETER = "password";
 
-    private static final String CLIENT_LOGIN_URL = "https://www.google.com/accounts/ClientLogin?service=reader&Email={" +
-            EMAIL_PARAMETER + "}&Passwd={" +
-            PASSWORD_PARAMETER + "}";
+    private static final String CLIENT_LOGIN_URL = "https://www.google.com/accounts/ClientLogin?service=reader&Email=%s&Passwd=%s";
 
     private static final String AUTHORIZATION_KEY = "Auth";
 
@@ -168,11 +168,11 @@ public class GoogleReaderProvider {
     private void login(final Account _account) throws GoogleReaderProviderException {
 
         try {
-            Map<String, String> parameters = newHashMap();
-            parameters.put(EMAIL_PARAMETER, _account.getEmail());
-            parameters.put(PASSWORD_PARAMETER, _account.getPassword());
+            String url = String.format(CLIENT_LOGIN_URL, _account.getEmail(), _account.getPassword());
 
-            String response = "this.restTemplate.getForObject(CLIENT_LOGIN_URL, String.class, parameters)";
+            //String response = "this.restTemplate.getForObject(CLIENT_LOGIN_URL, String.class, parameters)";
+            HttpData httpData = this.batchLoader.loadUrl(url);
+            String response = DataUtil.getString(httpData.getData());
 
             Properties properties = new Properties();
             properties.load(new StringReader(response));

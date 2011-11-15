@@ -195,7 +195,7 @@ public class StandardServiceManager implements ServiceManager {
             }
 
             if (this.googleReaderProvider == null) {
-                this.googleReaderProvider = new GoogleReaderProvider(this.batchLoader);
+                this.googleReaderProvider = new GoogleReaderProvider(getBatchLoader());
             }
 
             if (this.googleReaderAdapter == null) {

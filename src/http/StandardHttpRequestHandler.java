@@ -9,6 +9,7 @@ import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.ContentEncodingHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
@@ -17,6 +18,8 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import util.Assert;
 
+import javax.net.ssl.SSLContext;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.Callable;
 
 /**
@@ -49,6 +52,9 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
     private static final String HTTP_SCHEME = "http";
     private static final int HTTP_DEFAULT_PORT = 80;
 
+    private static final String HTTPS_SCHEME = "https";
+    private static final int HTTPS_DEFAULT_PORT = 443;
+
     private static final int BANNED_LIST_TRESHOLD = 5;
     private static final int BANNED_LIST_LIMIT = 50;
 
@@ -60,8 +66,20 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
 
     public StandardHttpRequestHandler() {
         final SchemeRegistry schemeRegistry = new SchemeRegistry();
-        final Scheme scheme = new Scheme(HTTP_SCHEME, HTTP_DEFAULT_PORT, PlainSocketFactory.getSocketFactory());
-        schemeRegistry.register(scheme);
+
+        final Scheme httpScheme = new Scheme(HTTP_SCHEME, HTTP_DEFAULT_PORT, PlainSocketFactory.getSocketFactory());
+        schemeRegistry.register(httpScheme);
+
+        SSLSocketFactory sf = null;
+        try {
+            sf = new SSLSocketFactory(
+            SSLContext.getInstance("TLS"),
+            SSLSocketFactory.STRICT_HOSTNAME_VERIFIER);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        Scheme https = new Scheme("https", 443, sf);
+        schemeRegistry.register(https);
 
         final ClientConnectionManager connectionManager = new ThreadSafeClientConnManager(schemeRegistry);
 
