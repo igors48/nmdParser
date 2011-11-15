@@ -6,6 +6,7 @@ import greader.entities.FeedItems;
 import greader.entities.Subscription;
 import greader.entities.Subscriptions;
 import greader.profile.Account;
+import http.BatchLoader;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.client.RestTemplate;
@@ -61,15 +62,14 @@ public class GoogleReaderProvider {
 
     private final String FEED_PREFIX = "feed/";
 
-    private final RequestFactory requestFactory;
-    private final RestTemplate restTemplate;
-
+    private final BatchLoader batchLoader;
+    
     private final Log log;
 
-    public GoogleReaderProvider() {
-        this.requestFactory = new RequestFactory();
-        this.restTemplate = new RestTemplate(this.requestFactory);
-
+    public GoogleReaderProvider(final BatchLoader _batchLoader) {
+        Assert.notNull(_batchLoader, "Batch loader is null");
+        this.batchLoader = _batchLoader;
+        
         this.log = LogFactory.getLog(getClass());
     }
 
@@ -97,7 +97,7 @@ public class GoogleReaderProvider {
         login(_account);
 
         try {
-            String subscriptionsResponse = restTemplate.getForObject(GET_SUBSCRIPTIONS_URL, String.class);
+            String subscriptionsResponse = "restTemplate.getForObject(GET_SUBSCRIPTIONS_URL, String.class)";
             Subscriptions subscriptions = JsonCodec.fromJson(subscriptionsResponse, Subscriptions.class);
 
             List<Subscription> result = newArrayList();
@@ -126,7 +126,7 @@ public class GoogleReaderProvider {
             parameters.put(URL_PARAMETER, escapeUrl(_feedUrl));
             parameters.put(ITEMS_COUNT_PARAMETER, String.valueOf(MAX_UNREAD_ITEMS_COUNT));
 
-            String feedResponse = restTemplate.getForObject(GET_UNREAD_ITEMS_URL, String.class, parameters);
+            String feedResponse = "restTemplate.getForObject(GET_UNREAD_ITEMS_URL, String.class, parameters)";
 
             FeedItems feedResponseItems = new Gson().fromJson(feedResponse, FeedItems.class);
 
@@ -153,13 +153,13 @@ public class GoogleReaderProvider {
         login(_account);
 
         try {
-            String tokenResponse = restTemplate.getForObject(GET_TOKEN_URL, String.class);
+            String tokenResponse = "restTemplate.getForObject(GET_TOKEN_URL, String.class)";
 
             Map<String, String> parameters = newHashMap();
             parameters.put(FEED_URL_PARAMETER, escapeUrl(_feedUrl));
             parameters.put(TOKEN_PARAMETER, tokenResponse);
 
-            restTemplate.postForObject(MARK_ALL_AS_READ_URL, "h", String.class, parameters);
+            //restTemplate.postForObject(MARK_ALL_AS_READ_URL, "h", String.class, parameters);
 
         } catch (Exception e) {
             throw new GoogleReaderProviderException(String.format("Error mark items as read from account [ %s ]", _account.getEmail()), e);
@@ -173,7 +173,7 @@ public class GoogleReaderProvider {
             parameters.put(EMAIL_PARAMETER, _account.getEmail());
             parameters.put(PASSWORD_PARAMETER, _account.getPassword());
 
-            String response = this.restTemplate.getForObject(CLIENT_LOGIN_URL, String.class, parameters);
+            String response = "this.restTemplate.getForObject(CLIENT_LOGIN_URL, String.class, parameters)";
 
             Properties properties = new Properties();
             properties.load(new StringReader(response));
@@ -183,7 +183,7 @@ public class GoogleReaderProvider {
                 throw new GoogleReaderProviderException(String.format("Error getting authorization token for [ %s ]", _account.getEmail()));
             }
 
-            this.requestFactory.setAuthorizationToken(authorizationToken);
+            //this.requestFactory.setAuthorizationToken(authorizationToken);
 
             this.log.debug(String.format("Successfully logged as [ %s ]", _account.getEmail()));
         } catch (Exception e) {
