@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.util.concurrent.Callable;
 
 import static http.HttpTools.getHostFromMethod;
-import static http.HttpTools.getUrlWithEscapedRequest;
+import static http.HttpTools.getUrlWithRequest;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
@@ -78,7 +78,7 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
     }
 
     protected HttpRequest execute() {
-        final String escapedUrl = getUrlWithEscapedRequest(this.request.getUrl(), this.request.getRequest());
+        final String urlWithRequest = getUrlWithRequest(this.request.getUrl(), this.request.getRequest());
         final HttpRequestBase method = createMethod();
 
         final String targetHost = getHostFromMethod(method);
@@ -91,7 +91,7 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
 
                 this.request.setResult(HttpData.EMPTY_DATA);
             } else {
-                this.log.debug(String.format("%s request to [ %s ]", this.requestType, escapedUrl));
+                this.log.debug(String.format("%s request to [ %s ]", this.requestType, urlWithRequest));
 
                 handle(method);
             }
@@ -102,7 +102,7 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
 
             this.request.setResult(HttpData.ERROR_DATA);
 
-            this.log.error(String.format("Error in %s request to [ %s ]", this.requestType, escapedUrl), e);
+            this.log.error(String.format("Error in %s request to [ %s ]", this.requestType, urlWithRequest), e);
         }
 
         return this.request;
@@ -118,9 +118,9 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
     protected void setHeaders(final HttpRequestBase _request) {
         Assert.notNull(_request, "Request is null");
 
-        final String escapedReferer = this.request.getReferer().isEmpty() ? "" : getUrlWithEscapedRequest(this.request.getReferer(), "");
+        final String urlWithRequest = this.request.getReferer().isEmpty() ? "" : getUrlWithRequest(this.request.getReferer(), "");
 
-        _request.setHeader(REFERER_HEADER_NAME, escapedReferer);
+        _request.setHeader(REFERER_HEADER_NAME, urlWithRequest);
 
         _request.setHeader(ACCEPT_HEADER_NAME, ACCEPT_REQUEST_HEADER_VALUE);
         _request.setHeader(USER_AGENT_HEADER_NAME, USER_AGENT_REQUEST_HEADER_VALUE);
@@ -154,9 +154,9 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
     }
 
     private HttpRequestBase createMethod() {
-        final String escapedUrl = getUrlWithEscapedRequest(this.request.getUrl(), this.request.getRequest());
+        final String urlWithRequest = getUrlWithRequest(this.request.getUrl(), this.request.getRequest());
 
-        final HttpRequestBase result = this.requestType == HttpRequestType.POST ? new HttpPost(escapedUrl) : new HttpGet(escapedUrl);
+        final HttpRequestBase result = this.requestType == HttpRequestType.POST ? new HttpPost(urlWithRequest) : new HttpGet(urlWithRequest);
 
         setHeaders(result);
 

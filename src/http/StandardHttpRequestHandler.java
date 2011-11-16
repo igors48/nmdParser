@@ -80,16 +80,16 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
         return new HttpCacheableGetTask(this.httpClient, this.cache, this.bannedList, _request);
     }
 
-    public synchronized Callable<HttpRequest> post(final HttpRequest _request) {
-        Assert.notNull(_request, "Request is null");
-
-        return new HttpPostTask(this.httpClient, this.bannedList, _request);
-    }
-
     public Callable<HttpRequest> getSecured(final HttpSecureRequest _request) {
         Assert.notNull(_request, "Request is null");
 
         return new HttpSecureGetTask(this.httpClient, this.bannedList, _request);
+    }
+
+    public Callable<HttpRequest> postSecured(HttpSecureRequest _request) {
+        Assert.notNull(_request, "Request is null");
+
+        return new HttpSecurePostTask(this.httpClient, this.bannedList, _request);
     }
 
     public void stop() {

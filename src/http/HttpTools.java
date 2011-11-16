@@ -38,7 +38,7 @@ public final class HttpTools {
         return matcher.find() ? matcher.group(GROUP_NO) : "";
     }
 
-    public static String getUrlWithEscapedRequest(final String _url, final String _request) {
+    public static String getUrlWithRequest(final String _url, final String _request) {
         Assert.isValidString(_url, "Url is not valid");
         Assert.notNull(_request, "Request is null");
 

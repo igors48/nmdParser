@@ -9,7 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.client.HttpClient;
 import util.Assert;
 
-import static http.HttpTools.getUrlWithEscapedRequest;
+import static http.HttpTools.getUrlWithRequest;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
@@ -31,15 +31,15 @@ public class HttpCacheableGetTask extends AbstractHttpRequestTask {
     }
 
     public HttpRequest call() throws Exception {
-        final String targetUrl = getUrlWithEscapedRequest(this.request.getUrl(), this.request.getRequest());
+        final String urlWithRequest = getUrlWithRequest(this.request.getUrl(), this.request.getRequest());
 
-        final InMemoryCacheItem fromCache = this.cache.get(targetUrl);
+        final InMemoryCacheItem fromCache = this.cache.get(urlWithRequest);
 
         if (fromCache == null) {
             execute();
-            this.cache.put(targetUrl, getResponseUrl(), this.request.getResult().getData());
+            this.cache.put(urlWithRequest, getResponseUrl(), this.request.getResult().getData());
         } else {
-            this.log.debug(String.format("Data for [ %s ] taken from cache", targetUrl));
+            this.log.debug(String.format("Data for [ %s ] taken from cache", urlWithRequest));
 
             createFromCached(fromCache);
         }

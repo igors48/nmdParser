@@ -16,7 +16,7 @@ public class HttpSecureAdapter {
     private final HttpRequestHandler httpRequestHandler;
 
     private String authorizationToken;
-    
+
     public HttpSecureAdapter(final HttpRequestHandler _httpRequestHandler) {
         Assert.notNull(_httpRequestHandler, "Request handler is null");
         this.httpRequestHandler = _httpRequestHandler;
@@ -40,9 +40,24 @@ public class HttpSecureAdapter {
         Assert.isValidString(_url, "Url is not valid");
         Assert.notNull(_request, "Request is null");
 
+        final Callable<HttpRequest> request = createGetSecureRequestTask(_url, _request);
+
+        return execute(request);
+    }
+
+    public String postForString(final String _url, final String _request) throws HttpSecureAdapterException {
+        Assert.isValidString(_url, "Url is not valid");
+        Assert.notNull(_request, "Request is null");
+
+        final Callable<HttpRequest> request = createPostSecureRequestTask(_url, _request);
+
+        return execute(request);
+    }
+
+    private String execute(final Callable<HttpRequest> _request) throws HttpSecureAdapterException {
+
         try {
-            final Callable<HttpRequest> request = createGetRequestTask(_url, _request);
-            final HttpData httpData = request.call().getResult();
+            final HttpData httpData = _request.call().getResult();
 
             return getStringFromData(httpData);
         } catch (Exception e) {
@@ -50,17 +65,16 @@ public class HttpSecureAdapter {
         }
     }
 
-    public String postForString(final String _url, final String _request) throws HttpSecureAdapterException {
-        Assert.isValidString(_url, "Url is not valid");
-        Assert.notNull(_request, "Request is null");
-
-        return "";
-    }
-
-    private Callable<HttpRequest> createGetRequestTask(final String _url, final String _request) {
+    private Callable<HttpRequest> createGetSecureRequestTask(final String _url, final String _request) {
         final HttpSecureRequest httpRequest = new HttpSecureRequest(_url, _request, this.authorizationToken);
 
         return this.httpRequestHandler.getSecured(httpRequest);
+    }
+
+    private Callable<HttpRequest> createPostSecureRequestTask(final String _url, final String _request) {
+        final HttpSecureRequest httpRequest = new HttpSecureRequest(_url, _request, this.authorizationToken);
+
+        return this.httpRequestHandler.postSecured(httpRequest);
     }
 
     private String getStringFromData(final HttpData _data) throws HttpSecureAdapterException, Data.DataException {

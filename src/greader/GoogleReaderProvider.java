@@ -34,19 +34,22 @@ public class GoogleReaderProvider {
     private static final String AUTHORIZATION_KEY = "Auth";
 
     private static final String GET_SUBSCRIPTIONS_URL = "http://www.google.com/reader/api/0/subscription/list?output=json";
+    private final String FEED_PREFIX = "feed/";
 
     private static final String GET_UNREAD_ITEMS_URL = "http://www.google.com/reader/api/0/stream/contents/feed/%s?";
     private static final String GET_UNREAD_ITEMS_REQUEST ="xt=user/-/state/com.google/read&n=1000";
 
     private static final String GET_TOKEN_URL = "http://www.google.com/reader/api/0/token";
 
+    /*
     private static final String FEED_URL_PARAMETER = "url";
     private static final String TOKEN_PARAMETER = "token";
     private static final String MARK_ALL_AS_READ_URL = "http://www.google.com/reader/api/0/mark-all-as-read?client=scroll&s=feed/{" +
             FEED_URL_PARAMETER + "}&T={" +
             TOKEN_PARAMETER + "}";
-
-    private final String FEED_PREFIX = "feed/";
+    */
+    private static final String MARK_ALL_AS_READ_URL = "http://www.google.com/reader/api/0/mark-all-as-read?";
+    private static final String MARK_ALL_AS_READ_REQUEST = "client=scroll&s=feed/%s&T=%s";
 
     private final HttpSecureAdapter httpSecureAdapter;
     
@@ -137,13 +140,10 @@ public class GoogleReaderProvider {
         login(_account);
 
         try {
-            String tokenResponse = "restTemplate.getForObject(GET_TOKEN_URL, String.class)";
+            String token = this.httpSecureAdapter.getForString(GET_TOKEN_URL);
 
-            Map<String, String> parameters = newHashMap();
-            parameters.put(FEED_URL_PARAMETER, escapeUrl(_feedUrl));
-            parameters.put(TOKEN_PARAMETER, tokenResponse);
-
-            //restTemplate.postForObject(MARK_ALL_AS_READ_URL, "h", String.class, parameters);
+            String markRequest = String.format(MARK_ALL_AS_READ_REQUEST, _feedUrl, token);
+            this.httpSecureAdapter.postForString(MARK_ALL_AS_READ_URL, markRequest);
 
         } catch (Exception e) {
             throw new GoogleReaderProviderException(String.format("Error mark items as read from account [ %s ]", _account.getEmail()), e);
@@ -172,15 +172,6 @@ public class GoogleReaderProvider {
             throw new GoogleReaderProviderException(String.format("Error logged as [ %s ]", _account.getEmail()), e);
         }
 
-    }
-
-    private String escapeUrl(final String _url) {
-        
-        //try {
-        //    return new URI(_url, false).toString();
-        //} catch (URIException e) {
-            return _url;
-        //}
     }
 
     public class GoogleReaderProviderException extends Exception {
