@@ -16,8 +16,12 @@ public abstract class AbstractHttpSecureRequestTask extends AbstractHttpRequestT
     private static final String CONTENT_TYPE_HEADER_NAME = "Content-type";
     private static final String CONTENT_TYPE_HEADER_VALUE = "application/x-www-form-urlencoded";
 
-    public AbstractHttpSecureRequestTask(final HttpRequest _request, final HttpRequestType _requestType, final HttpClient _httpClient, final BannedList _bannedList) {
+    private final String authorizationToken;
+
+    public AbstractHttpSecureRequestTask(final HttpSecureRequest _request, final HttpRequestType _requestType, final HttpClient _httpClient, final BannedList _bannedList) {
         super(_request, _requestType, _httpClient, _bannedList);
+
+        this.authorizationToken = _request.getAutorizationToken();
     }
 
     @Override
@@ -29,9 +33,7 @@ public abstract class AbstractHttpSecureRequestTask extends AbstractHttpRequestT
     protected void setHeaders(final HttpRequestBase _request) {
         super.setHeaders(_request);
 
-        String authorizationToken = ((HttpSecureRequest) this.request).getAutorizationToken();
-
-        if (!authorizationToken.isEmpty()) {
+        if (!this.authorizationToken.isEmpty()) {
             _request.setHeader(CONTENT_TYPE_HEADER_NAME, CONTENT_TYPE_HEADER_VALUE);
             _request.setHeader(AUTHORIZATION_HEADER_NAME, GOOGLE_LOGIN_AUTHORIZATION_PREFIX + authorizationToken);
         }

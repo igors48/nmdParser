@@ -41,13 +41,6 @@ public class GoogleReaderProvider {
 
     private static final String GET_TOKEN_URL = "http://www.google.com/reader/api/0/token";
 
-    /*
-    private static final String FEED_URL_PARAMETER = "url";
-    private static final String TOKEN_PARAMETER = "token";
-    private static final String MARK_ALL_AS_READ_URL = "http://www.google.com/reader/api/0/mark-all-as-read?client=scroll&s=feed/{" +
-            FEED_URL_PARAMETER + "}&T={" +
-            TOKEN_PARAMETER + "}";
-    */
     private static final String MARK_ALL_AS_READ_URL = "http://www.google.com/reader/api/0/mark-all-as-read?";
     private static final String MARK_ALL_AS_READ_REQUEST = "client=scroll&s=feed/%s&T=%s";
 

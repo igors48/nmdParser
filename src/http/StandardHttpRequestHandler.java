@@ -33,14 +33,14 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
     private static final int SOCKET_TIMEOUT = 20000;
     private static final int RETRY_COUNT = 10;
 
+    private static final int BANNED_LIST_TRESHOLD = 5;
+    private static final int BANNED_LIST_LIMIT = 50;
+
     private static final String HTTP_SCHEME = "http";
     private static final int HTTP_DEFAULT_PORT = 80;
 
     private static final String HTTPS_SCHEME = "https";
     private static final int HTTPS_DEFAULT_PORT = 443;
-
-    private static final int BANNED_LIST_TRESHOLD = 5;
-    private static final int BANNED_LIST_LIMIT = 50;
 
     private final DefaultHttpClient httpClient;
     private final InMemoryCache cache;
@@ -108,8 +108,7 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
         try {
             final SSLSocketFactory sslSocketFactory = new SSLSocketFactory(new TrustStrategy() {
 
-                public boolean isTrusted(X509Certificate[] chain,
-                                         String authType) throws CertificateException {
+                public boolean isTrusted(final X509Certificate[] _chain, final String _authType) throws CertificateException {
                     return true;
                 }
             });
