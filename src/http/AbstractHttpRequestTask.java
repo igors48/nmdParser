@@ -34,6 +34,23 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
 
     protected static final String CONTENT_TYPE_HEADER_NAME = "Content-Type";
 
+    private static final String REFERER_HEADER_NAME = "Referer";
+    private static final String ACCEPT_HEADER_NAME = "Accept";
+    private static final String ACCEPT_REQUEST_HEADER_VALUE = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+    private static final String USER_AGENT_HEADER_NAME = "User-Agent";
+    private static final String USER_AGENT_REQUEST_HEADER_VALUE = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.220 Safari/535.1";
+
+    private static final String ACCEPT_CHARSET_HEADER_NAME = "Accept-Charset";
+    private static final String ACCEPT_CHARSET_HEADER_VALUE = "windows-1251,utf-8;q=0.7,*;q=0.3";
+
+    /*
+    private static final String ACCEPT_LANGUAGE_HEADER_NAME = "Accept-Language";
+    private static final String ACCEPT_LANGUAGE_HEADER_VALUE = "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4";
+    */
+
+    private static final String ACCEPT_ENCODING_HEADER_NAME = "Accept-Encoding";
+    private static final String ACCEPT_ENCODING_HEADER_VALUE = "gzip,deflate";
+
     protected final HttpRequestType requestType;
     protected final HttpContext context;
     protected final HttpClient httpClient;
@@ -129,14 +146,18 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
 
         final HttpRequestBase result = this.requestType == HttpRequestType.POST ? new HttpPost(escapedUrl) : new HttpGet(escapedUrl);
 
-//        result.setHeader(StandardHttpRequestHandler.REFERER_HEADER_NAME, escapedReferer);
-//
-//        result.setHeader(StandardHttpRequestHandler.ACCEPT_HEADER_NAME, StandardHttpRequestHandler.ACCEPT_REQUEST_HEADER_VALUE);
-//        result.setHeader(StandardHttpRequestHandler.USER_AGENT_HEADER_NAME, StandardHttpRequestHandler.USER_AGENT_REQUEST_HEADER_VALUE);
-//        result.setHeader(StandardHttpRequestHandler.ACCEPT_CHARSET_HEADER_NAME, StandardHttpRequestHandler.ACCEPT_CHARSET_HEADER_VALUE);
-//        result.setHeader(StandardHttpRequestHandler.ACCEPT_ENCODING_HEADER_NAME, StandardHttpRequestHandler.ACCEPT_ENCODING_HEADER_VALUE);
+        setHeaders(escapedReferer, result);
 
         return result;
+    }
+
+    private void setHeaders(final String _referer, final HttpRequestBase _request) {
+        _request.setHeader(REFERER_HEADER_NAME, _referer);
+
+        _request.setHeader(ACCEPT_HEADER_NAME, ACCEPT_REQUEST_HEADER_VALUE);
+        _request.setHeader(USER_AGENT_HEADER_NAME, USER_AGENT_REQUEST_HEADER_VALUE);
+        _request.setHeader(ACCEPT_CHARSET_HEADER_NAME, ACCEPT_CHARSET_HEADER_VALUE);
+        _request.setHeader(ACCEPT_ENCODING_HEADER_NAME, ACCEPT_ENCODING_HEADER_VALUE);
     }
 
 }

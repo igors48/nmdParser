@@ -10,6 +10,7 @@ import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.impl.client.ContentEncodingHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
@@ -18,8 +19,8 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import util.Assert;
 
-import javax.net.ssl.SSLContext;
-import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.concurrent.Callable;
 
 /**
@@ -27,23 +28,6 @@ import java.util.concurrent.Callable;
  * Date: 16.09.2011
  */
 public class StandardHttpRequestHandler implements HttpRequestHandler {
-
-    public static final String REFERER_HEADER_NAME = "Referer";
-    public static final String ACCEPT_HEADER_NAME = "Accept";
-    public static final String ACCEPT_REQUEST_HEADER_VALUE = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-    public static final String USER_AGENT_HEADER_NAME = "User-Agent";
-    public static final String USER_AGENT_REQUEST_HEADER_VALUE = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.220 Safari/535.1";
-
-    public static final String ACCEPT_CHARSET_HEADER_NAME = "Accept-Charset";
-    public static final String ACCEPT_CHARSET_HEADER_VALUE = "windows-1251,utf-8;q=0.7,*;q=0.3";
-
-    /*
-    public static final String ACCEPT_LANGUAGE_HEADER_NAME = "Accept-Language";
-    public static final String ACCEPT_LANGUAGE_HEADER_VALUE = "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4";
-    */
-
-    public static final String ACCEPT_ENCODING_HEADER_NAME = "Accept-Encoding";
-    public static final String ACCEPT_ENCODING_HEADER_VALUE = "gzip,deflate";
 
     private static final int CONNECTION_TIMEOUT = 30000;
     private static final int SOCKET_TIMEOUT = 20000;
@@ -67,19 +51,8 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
     public StandardHttpRequestHandler() {
         final SchemeRegistry schemeRegistry = new SchemeRegistry();
 
-        final Scheme httpScheme = new Scheme(HTTP_SCHEME, HTTP_DEFAULT_PORT, PlainSocketFactory.getSocketFactory());
-        schemeRegistry.register(httpScheme);
-
-        SSLSocketFactory sf = null;
-        try {
-            sf = new SSLSocketFactory(
-            SSLContext.getInstance("TLS"),
-            SSLSocketFactory.STRICT_HOSTNAME_VERIFIER);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-        Scheme https = new Scheme("https", 443, sf);
-        schemeRegistry.register(https);
+        registerHttpScheme(schemeRegistry);
+        registerHttpsScheme(schemeRegistry);
 
         final ClientConnectionManager connectionManager = new ThreadSafeClientConnManager(schemeRegistry);
 
@@ -116,6 +89,31 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
     public void stop() {
         this.httpClient.getConnectionManager().shutdown();
         this.log.info("StandardHttpRequestHandler stopped");
+    }
+
+    private void registerHttpScheme(final SchemeRegistry _schemeRegistry) {
+        final Scheme httpScheme = new Scheme(HTTP_SCHEME, HTTP_DEFAULT_PORT, PlainSocketFactory.getSocketFactory());
+
+        _schemeRegistry.register(httpScheme);
+    }
+
+    private void registerHttpsScheme(final SchemeRegistry _schemeRegistry) {
+
+        try {
+            final SSLSocketFactory sslSocketFactory = new SSLSocketFactory(new TrustStrategy() {
+
+                public boolean isTrusted(X509Certificate[] chain,
+                                         String authType) throws CertificateException {
+                    return true;
+                }
+            });
+
+            Scheme httpsScheme = new Scheme(HTTPS_SCHEME, HTTPS_DEFAULT_PORT, sslSocketFactory);
+            
+            _schemeRegistry.register(httpsScheme);
+        } catch (Exception e) {
+            this.log.error("Error registering HTTPS scheme", e);
+        }
     }
 
 }
