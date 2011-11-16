@@ -18,6 +18,7 @@ import debug.DebugConsole;
 import debug.console.FileDebugConsole;
 import debug.console.FileDebugConsoleUpdater;
 import debug.console.NullDebugConsole;
+import greader.HttpSecureAdapter;
 import http.BatchLoader;
 import http.HttpRequestHandler;
 import http.StandardHttpRequestHandler;
@@ -99,14 +100,20 @@ public class StandardServiceManager implements ServiceManager {
 
     public BatchLoader getBatchLoader() {
 
+        if (this.batchLoader == null) {
+            this.batchLoader = new StandardBatchLoader(getHttpRequestHandler());
+        }
+
+        return this.batchLoader;
+    }
+
+    private HttpRequestHandler getHttpRequestHandler() {
+
         if (this.httpRequestHandler == null) {
             this.httpRequestHandler = new StandardHttpRequestHandler();
         }
 
-        if (this.batchLoader == null) {
-            this.batchLoader = new StandardBatchLoader(this.httpRequestHandler);
-        }
-        return this.batchLoader;
+        return this.httpRequestHandler;
     }
 
     public ConverterFactory getConverterFactory() throws ServiceManagerException {
@@ -195,7 +202,8 @@ public class StandardServiceManager implements ServiceManager {
             }
 
             if (this.googleReaderProvider == null) {
-                this.googleReaderProvider = new GoogleReaderProvider(getBatchLoader());
+                HttpSecureAdapter httpSecureAdapter = new HttpSecureAdapter(getHttpRequestHandler());
+                this.googleReaderProvider = new GoogleReaderProvider(httpSecureAdapter);
             }
 
             if (this.googleReaderAdapter == null) {

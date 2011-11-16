@@ -12,5 +12,7 @@ public interface HttpRequestHandler {
 
     Callable<HttpRequest> post(HttpRequest _request);
 
+    Callable<HttpRequest> getSecured(HttpSecureRequest _request);
+
     void stop();
 }

@@ -86,6 +86,12 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
         return new HttpPostTask(this.httpClient, this.bannedList, _request);
     }
 
+    public Callable<HttpRequest> getSecured(final HttpSecureRequest _request) {
+        Assert.notNull(_request, "Request is null");
+
+        return new HttpSecureGetTask(this.httpClient, this.bannedList, _request);
+    }
+
     public void stop() {
         this.httpClient.getConnectionManager().shutdown();
         this.log.info("StandardHttpRequestHandler stopped");

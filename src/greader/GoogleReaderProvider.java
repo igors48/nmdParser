@@ -28,28 +28,15 @@ import java.util.Properties;
  */
 public class GoogleReaderProvider {
 
-    private static final String OUTPUT_JSON = "output=json";
-
-    private static final String EMAIL_PARAMETER = "email";
-    private static final String PASSWORD_PARAMETER = "password";
-
-    private static final String CLIENT_LOGIN_URL = "https://www.google.com/accounts/ClientLogin?service=reader&Email=%s&Passwd=%s";
+    private static final String CLIENT_LOGIN_URL = "https://www.google.com/accounts/ClientLogin?";
+    private static final String CLIENT_LOGIN_REQUEST = "service=reader&Email=%s&Passwd=%s";
 
     private static final String AUTHORIZATION_KEY = "Auth";
 
-    private static final String GET_SUBSCRIPTIONS_URL = "http://www.google.com/reader/api/0/subscription/list?" + OUTPUT_JSON;
+    private static final String GET_SUBSCRIPTIONS_URL = "http://www.google.com/reader/api/0/subscription/list?output=json";
 
-    private static final int MAX_UNREAD_ITEMS_COUNT = 1000;
-
-    private static final String URL_PARAMETER = "url";
-    private static final String ITEMS_COUNT_PARAMETER = "count";
-    private static final String READ_CATEGORY_NAME = "user/-/state/com.google/read";
-//    private static final String READ_CATEGORY_NAME = "user/18320532357814113877/state/com.google/read";
-
-    private static final String GET_UNREAD_ITEMS_URL = "http://www.google.com/reader/api/0/stream/contents/feed/{" +
-            URL_PARAMETER + "}?xt=" +
-            READ_CATEGORY_NAME + "&n={" +
-            ITEMS_COUNT_PARAMETER + "}";
+    private static final String GET_UNREAD_ITEMS_URL = "http://www.google.com/reader/api/0/stream/contents/feed/%s?";
+    private static final String GET_UNREAD_ITEMS_REQUEST ="xt=user/-/state/com.google/read&n=1000";
 
     private static final String GET_TOKEN_URL = "http://www.google.com/reader/api/0/token";
 
@@ -61,13 +48,13 @@ public class GoogleReaderProvider {
 
     private final String FEED_PREFIX = "feed/";
 
-    private final BatchLoader batchLoader;
+    private final HttpSecureAdapter httpSecureAdapter;
     
     private final Log log;
 
-    public GoogleReaderProvider(final BatchLoader _batchLoader) {
-        Assert.notNull(_batchLoader, "Batch loader is null");
-        this.batchLoader = _batchLoader;
+    public GoogleReaderProvider(final HttpSecureAdapter _httpSecureAdapter) {
+        Assert.notNull(_httpSecureAdapter, "Batch loader is null");
+        this.httpSecureAdapter =_httpSecureAdapter;
         
         this.log = LogFactory.getLog(getClass());
     }
@@ -96,7 +83,7 @@ public class GoogleReaderProvider {
         login(_account);
 
         try {
-            String subscriptionsResponse = "restTemplate.getForObject(GET_SUBSCRIPTIONS_URL, String.class)";
+            String subscriptionsResponse = this.httpSecureAdapter.getForString(GET_SUBSCRIPTIONS_URL);
             Subscriptions subscriptions = JsonCodec.fromJson(subscriptionsResponse, Subscriptions.class);
 
             List<Subscription> result = newArrayList();
@@ -121,11 +108,9 @@ public class GoogleReaderProvider {
         try {
             this.log.debug(String.format("Try to get unread items for feed [ %s ]", _feedUrl));
 
-            Map<String, String> parameters = newHashMap();
-            parameters.put(URL_PARAMETER, escapeUrl(_feedUrl));
-            parameters.put(ITEMS_COUNT_PARAMETER, String.valueOf(MAX_UNREAD_ITEMS_COUNT));
+            final String url = String.format(GET_UNREAD_ITEMS_URL, _feedUrl);
 
-            String feedResponse = "restTemplate.getForObject(GET_UNREAD_ITEMS_URL, String.class, parameters)";
+            String feedResponse = this.httpSecureAdapter.getForString(url, GET_UNREAD_ITEMS_REQUEST);
 
             FeedItems feedResponseItems = new Gson().fromJson(feedResponse, FeedItems.class);
 
@@ -168,11 +153,9 @@ public class GoogleReaderProvider {
     private void login(final Account _account) throws GoogleReaderProviderException {
 
         try {
-            String url = String.format(CLIENT_LOGIN_URL, _account.getEmail(), _account.getPassword());
+            String request = String.format(CLIENT_LOGIN_REQUEST, _account.getEmail(), _account.getPassword());
 
-            //String response = "this.restTemplate.getForObject(CLIENT_LOGIN_URL, String.class, parameters)";
-            HttpData httpData = this.batchLoader.loadUrl(url);
-            String response = DataUtil.getString(httpData.getData());
+            String response = this.httpSecureAdapter.getForString(CLIENT_LOGIN_URL, request);
 
             Properties properties = new Properties();
             properties.load(new StringReader(response));
@@ -182,7 +165,7 @@ public class GoogleReaderProvider {
                 throw new GoogleReaderProviderException(String.format("Error getting authorization token for [ %s ]", _account.getEmail()));
             }
 
-            //this.requestFactory.setAuthorizationToken(authorizationToken);
+            this.httpSecureAdapter.setAuthorizationToken(authorizationToken);
 
             this.log.debug(String.format("Successfully logged as [ %s ]", _account.getEmail()));
         } catch (Exception e) {

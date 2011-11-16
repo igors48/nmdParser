@@ -115,6 +115,19 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
         return currentHost.toURI() + currentRequest.getURI();
     }
 
+    protected void setHeaders(final HttpRequestBase _request) {
+        Assert.notNull(_request, "Request is null");
+
+        final String escapedReferer = this.request.getReferer().isEmpty() ? "" : getUrlWithEscapedRequest(this.request.getReferer(), "");
+
+        _request.setHeader(REFERER_HEADER_NAME, escapedReferer);
+
+        _request.setHeader(ACCEPT_HEADER_NAME, ACCEPT_REQUEST_HEADER_VALUE);
+        _request.setHeader(USER_AGENT_HEADER_NAME, USER_AGENT_REQUEST_HEADER_VALUE);
+        _request.setHeader(ACCEPT_CHARSET_HEADER_NAME, ACCEPT_CHARSET_HEADER_VALUE);
+        _request.setHeader(ACCEPT_ENCODING_HEADER_NAME, ACCEPT_ENCODING_HEADER_VALUE);
+    }
+
     private void handle(final HttpRequestBase _method) throws IOException {
         final HttpResponse response = this.httpClient.execute(_method, this.context);
         final HttpEntity entity = response.getEntity();
@@ -142,22 +155,12 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
 
     private HttpRequestBase createMethod() {
         final String escapedUrl = getUrlWithEscapedRequest(this.request.getUrl(), this.request.getRequest());
-        final String escapedReferer = this.request.getReferer().isEmpty() ? "" : getUrlWithEscapedRequest(this.request.getReferer(), "");
 
         final HttpRequestBase result = this.requestType == HttpRequestType.POST ? new HttpPost(escapedUrl) : new HttpGet(escapedUrl);
 
-        setHeaders(escapedReferer, result);
+        setHeaders(result);
 
         return result;
-    }
-
-    private void setHeaders(final String _referer, final HttpRequestBase _request) {
-        _request.setHeader(REFERER_HEADER_NAME, _referer);
-
-        _request.setHeader(ACCEPT_HEADER_NAME, ACCEPT_REQUEST_HEADER_VALUE);
-        _request.setHeader(USER_AGENT_HEADER_NAME, USER_AGENT_REQUEST_HEADER_VALUE);
-        _request.setHeader(ACCEPT_CHARSET_HEADER_NAME, ACCEPT_CHARSET_HEADER_VALUE);
-        _request.setHeader(ACCEPT_ENCODING_HEADER_NAME, ACCEPT_ENCODING_HEADER_VALUE);
     }
 
 }
