@@ -81,4 +81,5 @@ public final class GoogleReaderAdapterTools {
     private GoogleReaderAdapterTools() {
         // empty
     }
+    
 }

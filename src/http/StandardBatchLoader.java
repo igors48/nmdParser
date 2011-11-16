@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
 
+import static java.lang.Thread.sleep;
 import static util.CollectionUtils.newHashMap;
 
 /**
@@ -21,6 +22,7 @@ public class StandardBatchLoader implements BatchLoader {
 
     private static final String PROCESS_LOADING_DATA = "process.loading.data";
     private static final int CHECK_FOR_CANCEL_PERIOD = 100;
+    private static final int MAX_THREADS_IN_POOL = 16;
 
     private final HttpRequestHandler requestHandler;
 
@@ -38,7 +40,7 @@ public class StandardBatchLoader implements BatchLoader {
         Assert.greaterOrEqual(_pauseBetweenRequests, 0, "Pause between requests < 0");
         Assert.notNull(_controller, "Controller is null");
 
-        final CompletionService<HttpRequest> completionService = new ExecutorCompletionService<HttpRequest>(Executors.newFixedThreadPool(16, new DaemonThreadFactory("daemon")));
+        final CompletionService<HttpRequest> completionService = new ExecutorCompletionService<HttpRequest>(Executors.newFixedThreadPool(MAX_THREADS_IN_POOL, new DaemonThreadFactory("daemon")));
 
         final Map<String, HttpData> result = newHashMap();
 
@@ -74,7 +76,7 @@ public class StandardBatchLoader implements BatchLoader {
         Assert.notNull(_referer, "Referer is null");
 
         try {
-            final Callable<HttpRequest> requestTask = createTask(_url, _referer);
+            final Callable<HttpRequest> requestTask = createRequestTask(_url, _referer);
 
             return requestTask.call().getResult();
         } catch (Exception e) {
@@ -93,15 +95,15 @@ public class StandardBatchLoader implements BatchLoader {
     private void submitRequests(final List<String> _urls, final long _pauseBetweenRequests, final CompletionService<HttpRequest> _completionService) throws InterruptedException {
 
         for (final String url : _urls) {
-            final Callable<HttpRequest> requestTask = createTask(url, "");
+            final Callable<HttpRequest> requestTask = createRequestTask(url, "");
 
             _completionService.submit(requestTask);
 
-            Thread.sleep(_pauseBetweenRequests);
+            sleep(_pauseBetweenRequests);
         }
     }
 
-    private Callable<HttpRequest> createTask(String _url, String _referer) {
+    private Callable<HttpRequest> createRequestTask(final String _url, final String _referer) {
         final HttpRequest request = new HttpRequest(_url, "", _referer);
 
         return this.requestHandler.get(request);

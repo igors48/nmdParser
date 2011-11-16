@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.util.concurrent.Callable;
 
 import static http.HttpTools.getHostFromMethod;
-import static http.HttpTools.getUrlWithEscapedRequest;
+import static http.HttpTools.getUrlWithRequest;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
@@ -33,6 +33,23 @@ import static http.HttpTools.getUrlWithEscapedRequest;
 public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
 
     protected static final String CONTENT_TYPE_HEADER_NAME = "Content-Type";
+
+    private static final String REFERER_HEADER_NAME = "Referer";
+    private static final String ACCEPT_HEADER_NAME = "Accept";
+    private static final String ACCEPT_REQUEST_HEADER_VALUE = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+    private static final String USER_AGENT_HEADER_NAME = "User-Agent";
+    private static final String USER_AGENT_REQUEST_HEADER_VALUE = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.220 Safari/535.1";
+
+    private static final String ACCEPT_CHARSET_HEADER_NAME = "Accept-Charset";
+    private static final String ACCEPT_CHARSET_HEADER_VALUE = "windows-1251,utf-8;q=0.7,*;q=0.3";
+
+    /*
+    private static final String ACCEPT_LANGUAGE_HEADER_NAME = "Accept-Language";
+    private static final String ACCEPT_LANGUAGE_HEADER_VALUE = "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4";
+    */
+
+    private static final String ACCEPT_ENCODING_HEADER_NAME = "Accept-Encoding";
+    private static final String ACCEPT_ENCODING_HEADER_VALUE = "gzip,deflate";
 
     protected final HttpRequestType requestType;
     protected final HttpContext context;
@@ -61,7 +78,7 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
     }
 
     protected HttpRequest execute() {
-        final String escapedUrl = getUrlWithEscapedRequest(this.request.getUrl(), this.request.getRequest());
+        final String urlWithRequest = getUrlWithRequest(this.request.getUrl(), this.request.getRequest());
         final HttpRequestBase method = createMethod();
 
         final String targetHost = getHostFromMethod(method);
@@ -74,7 +91,7 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
 
                 this.request.setResult(HttpData.EMPTY_DATA);
             } else {
-                this.log.debug(String.format("%s request to [ %s ]", this.requestType, escapedUrl));
+                this.log.debug(String.format("%s request to [ %s ]", this.requestType, urlWithRequest));
 
                 handle(method);
             }
@@ -85,7 +102,7 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
 
             this.request.setResult(HttpData.ERROR_DATA);
 
-            this.log.error(String.format("Error in %s request to [ %s ]", this.requestType, escapedUrl), e);
+            this.log.error(String.format("Error in %s request to [ %s ]", this.requestType, urlWithRequest), e);
         }
 
         return this.request;
@@ -96,6 +113,19 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
         final HttpHost currentHost = (HttpHost) this.context.getAttribute(ExecutionContext.HTTP_TARGET_HOST);
 
         return currentHost.toURI() + currentRequest.getURI();
+    }
+
+    protected void setHeaders(final HttpRequestBase _request) {
+        Assert.notNull(_request, "Request is null");
+
+        final String urlWithRequest = this.request.getReferer().isEmpty() ? "" : getUrlWithRequest(this.request.getReferer(), "");
+
+        _request.setHeader(REFERER_HEADER_NAME, urlWithRequest);
+
+        _request.setHeader(ACCEPT_HEADER_NAME, ACCEPT_REQUEST_HEADER_VALUE);
+        _request.setHeader(USER_AGENT_HEADER_NAME, USER_AGENT_REQUEST_HEADER_VALUE);
+        _request.setHeader(ACCEPT_CHARSET_HEADER_NAME, ACCEPT_CHARSET_HEADER_VALUE);
+        _request.setHeader(ACCEPT_ENCODING_HEADER_NAME, ACCEPT_ENCODING_HEADER_VALUE);
     }
 
     private void handle(final HttpRequestBase _method) throws IOException {
@@ -124,17 +154,11 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
     }
 
     private HttpRequestBase createMethod() {
-        final String escapedUrl = getUrlWithEscapedRequest(this.request.getUrl(), this.request.getRequest());
-        final String escapedReferer = this.request.getReferer().isEmpty() ? "" : getUrlWithEscapedRequest(this.request.getReferer(), "");
+        final String urlWithRequest = getUrlWithRequest(this.request.getUrl(), this.request.getRequest());
 
-        final HttpRequestBase result = this.requestType == HttpRequestType.POST ? new HttpPost(escapedUrl) : new HttpGet(escapedUrl);
+        final HttpRequestBase result = this.requestType == HttpRequestType.POST ? new HttpPost(urlWithRequest) : new HttpGet(urlWithRequest);
 
-        result.setHeader(StandardHttpRequestHandler.REFERER_HEADER_NAME, escapedReferer);
-
-        result.setHeader(StandardHttpRequestHandler.ACCEPT_HEADER_NAME, StandardHttpRequestHandler.ACCEPT_REQUEST_HEADER_VALUE);
-        result.setHeader(StandardHttpRequestHandler.USER_AGENT_HEADER_NAME, StandardHttpRequestHandler.USER_AGENT_REQUEST_HEADER_VALUE);
-        result.setHeader(StandardHttpRequestHandler.ACCEPT_CHARSET_HEADER_NAME, StandardHttpRequestHandler.ACCEPT_CHARSET_HEADER_VALUE);
-        result.setHeader(StandardHttpRequestHandler.ACCEPT_ENCODING_HEADER_NAME, StandardHttpRequestHandler.ACCEPT_ENCODING_HEADER_VALUE);
+        setHeaders(result);
 
         return result;
     }
