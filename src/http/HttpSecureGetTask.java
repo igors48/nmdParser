@@ -10,8 +10,8 @@ import org.apache.http.client.methods.HttpRequestBase;
  */
 public class HttpSecureGetTask extends AbstractHttpSecureRequestTask {
     
-    public HttpSecureGetTask(final HttpClient _httpClient, final BannedList _bannedList, final HttpSecureRequest _request) {
-        super(_request, HttpRequestType.GET, _httpClient, _bannedList);
+    public HttpSecureGetTask(final HttpClient _httpClient, final BannedList _bannedList, final HttpSecureRequest _request, final String _userAgent) {
+        super(_request, HttpRequestType.GET, _httpClient, _bannedList, _userAgent);
     }
 
 }

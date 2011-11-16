@@ -29,26 +29,25 @@ import java.util.concurrent.Callable;
  */
 public class StandardHttpRequestHandler implements HttpRequestHandler {
 
-    private static final int CONNECTION_TIMEOUT = 30000;
-    private static final int SOCKET_TIMEOUT = 20000;
-    private static final int RETRY_COUNT = 10;
-
-    private static final int BANNED_LIST_TRESHOLD = 5;
-    private static final int BANNED_LIST_LIMIT = 50;
-
     private static final String HTTP_SCHEME = "http";
     private static final int HTTP_DEFAULT_PORT = 80;
 
     private static final String HTTPS_SCHEME = "https";
     private static final int HTTPS_DEFAULT_PORT = 443;
 
+    private final String userAgent;
     private final DefaultHttpClient httpClient;
     private final InMemoryCache cache;
     private final BannedList bannedList;
 
     private final Log log;
 
-    public StandardHttpRequestHandler() {
+    public StandardHttpRequestHandler(final StandardHttpRequestHandlerContext _context) {
+        Assert.notNull(_context, "Context is null");
+
+        Assert.notNull(_context.getUseragent(), "User agent is null");
+        this.userAgent = _context.getUseragent();
+
         final SchemeRegistry schemeRegistry = new SchemeRegistry();
 
         registerHttpScheme(schemeRegistry);
@@ -60,16 +59,16 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
 
         this.httpClient = new ContentEncodingHttpClient(connectionManager, httpParams);
 
-        final HttpRequestRetryHandler retryHandler = new CustomHttpRequestRetryHandler(RETRY_COUNT);
+        final HttpRequestRetryHandler retryHandler = new CustomHttpRequestRetryHandler(_context.getRetryCount());
         httpClient.setHttpRequestRetryHandler(retryHandler);
 
         final HttpParams params = httpClient.getParams();
-        HttpConnectionParams.setConnectionTimeout(params, CONNECTION_TIMEOUT);
-        HttpConnectionParams.setSoTimeout(params, SOCKET_TIMEOUT);
+        HttpConnectionParams.setConnectionTimeout(params, _context.getConnectionTimeout());
+        HttpConnectionParams.setSoTimeout(params, _context.getSocketTimeout());
 
         this.cache = new InMemoryCache();
 
-        this.bannedList = new BannedList(BANNED_LIST_TRESHOLD, BANNED_LIST_LIMIT);
+        this.bannedList = new BannedList(_context.getBannedListTreshold(), _context.getBannedListLimit());
 
         this.log = LogFactory.getLog(getClass());
     }
@@ -77,19 +76,19 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
     public synchronized Callable<HttpRequest> get(final HttpRequest _request) {
         Assert.notNull(_request, "Request is null");
 
-        return new HttpCacheableGetTask(this.httpClient, this.cache, this.bannedList, _request);
+        return new HttpCacheableGetTask(this.httpClient, this.cache, this.bannedList, _request, this.userAgent);
     }
 
     public Callable<HttpRequest> getSecured(final HttpSecureRequest _request) {
         Assert.notNull(_request, "Request is null");
 
-        return new HttpSecureGetTask(this.httpClient, this.bannedList, _request);
+        return new HttpSecureGetTask(this.httpClient, this.bannedList, _request, this.userAgent);
     }
 
     public Callable<HttpRequest> postSecured(HttpSecureRequest _request) {
         Assert.notNull(_request, "Request is null");
 
-        return new HttpSecurePostTask(this.httpClient, this.bannedList, _request);
+        return new HttpSecurePostTask(this.httpClient, this.bannedList, _request, this.userAgent);
     }
 
     public void stop() {

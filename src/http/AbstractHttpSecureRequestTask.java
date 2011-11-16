@@ -18,8 +18,8 @@ public abstract class AbstractHttpSecureRequestTask extends AbstractHttpRequestT
 
     private final String authorizationToken;
 
-    public AbstractHttpSecureRequestTask(final HttpSecureRequest _request, final HttpRequestType _requestType, final HttpClient _httpClient, final BannedList _bannedList) {
-        super(_request, _requestType, _httpClient, _bannedList);
+    public AbstractHttpSecureRequestTask(final HttpSecureRequest _request, final HttpRequestType _requestType, final HttpClient _httpClient, final BannedList _bannedList, final String _userAgent) {
+        super(_request, _requestType, _httpClient, _bannedList, _userAgent);
 
         this.authorizationToken = _request.getAutorizationToken();
     }

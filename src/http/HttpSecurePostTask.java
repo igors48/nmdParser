@@ -9,8 +9,8 @@ import org.apache.http.client.HttpClient;
  */
 public class HttpSecurePostTask extends AbstractHttpSecureRequestTask {
 
-    public HttpSecurePostTask(final HttpClient _httpClient, final BannedList _bannedList, final HttpSecureRequest _request) {
-        super(_request, HttpRequestType.POST, _httpClient, _bannedList);
+    public HttpSecurePostTask(final HttpClient _httpClient, final BannedList _bannedList, final HttpSecureRequest _request, final String _userAgent) {
+        super(_request, HttpRequestType.POST, _httpClient, _bannedList, _userAgent);
     }
 
 }

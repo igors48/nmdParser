@@ -21,8 +21,8 @@ public class HttpCacheableGetTask extends AbstractHttpRequestTask {
 
     private final Log log;
 
-    public HttpCacheableGetTask(final HttpClient _httpClient, final InMemoryCache _cache, final BannedList _bannedList, final HttpRequest _request) {
-        super(_request, HttpRequestType.GET, _httpClient, _bannedList);
+    public HttpCacheableGetTask(final HttpClient _httpClient, final InMemoryCache _cache, final BannedList _bannedList, final HttpRequest _request, final String _userAgent) {
+        super(_request, HttpRequestType.GET, _httpClient, _bannedList, _userAgent);
 
         Assert.notNull(_cache, "Cache is null");
         this.cache = _cache;

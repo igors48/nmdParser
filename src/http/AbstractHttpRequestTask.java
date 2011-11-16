@@ -38,7 +38,6 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
     private static final String ACCEPT_HEADER_NAME = "Accept";
     private static final String ACCEPT_REQUEST_HEADER_VALUE = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
     private static final String USER_AGENT_HEADER_NAME = "User-Agent";
-    private static final String USER_AGENT_REQUEST_HEADER_VALUE = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.220 Safari/535.1";
 
     private static final String ACCEPT_CHARSET_HEADER_NAME = "Accept-Charset";
     private static final String ACCEPT_CHARSET_HEADER_VALUE = "windows-1251,utf-8;q=0.7,*;q=0.3";
@@ -51,15 +50,17 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
     private static final String ACCEPT_ENCODING_HEADER_NAME = "Accept-Encoding";
     private static final String ACCEPT_ENCODING_HEADER_VALUE = "gzip,deflate";
 
-    protected final HttpRequestType requestType;
-    protected final HttpContext context;
-    protected final HttpClient httpClient;
-    protected final BannedList bannedList;
     protected final HttpRequest request;
+
+    private final HttpRequestType requestType;
+    private final HttpContext context;
+    private final HttpClient httpClient;
+    private final BannedList bannedList;
+    private final String userAgent;
 
     protected final Log log;
 
-    public AbstractHttpRequestTask(final HttpRequest _request, final HttpRequestType _requestType, final HttpClient _httpClient, final BannedList _bannedList) {
+    public AbstractHttpRequestTask(final HttpRequest _request, final HttpRequestType _requestType, final HttpClient _httpClient, final BannedList _bannedList, final String _userAgent) {
         Assert.notNull(_request, "Request is null");
         this.request = _request;
 
@@ -72,6 +73,9 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
         Assert.notNull(_requestType, "Request type is null");
         this.requestType = _requestType;
 
+        Assert.notNull(_userAgent, "User agent is null");
+        this.userAgent = _userAgent;
+        
         this.context = new BasicHttpContext();
 
         this.log = LogFactory.getLog(getClass());
@@ -123,7 +127,7 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
         _request.setHeader(REFERER_HEADER_NAME, urlWithRequest);
 
         _request.setHeader(ACCEPT_HEADER_NAME, ACCEPT_REQUEST_HEADER_VALUE);
-        _request.setHeader(USER_AGENT_HEADER_NAME, USER_AGENT_REQUEST_HEADER_VALUE);
+        _request.setHeader(USER_AGENT_HEADER_NAME, this.userAgent);
         _request.setHeader(ACCEPT_CHARSET_HEADER_NAME, ACCEPT_CHARSET_HEADER_VALUE);
         _request.setHeader(ACCEPT_ENCODING_HEADER_NAME, ACCEPT_ENCODING_HEADER_VALUE);
     }
