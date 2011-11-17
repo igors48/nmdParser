@@ -1,15 +1,15 @@
 package work.unit.constructor.channel.stream;
 
-import junit.framework.TestCase;
 import constructor.objects.channel.core.ChannelData;
 import constructor.objects.channel.core.stream.ChannelDataList;
+import junit.framework.TestCase;
 import work.testutil.ChannelDataTestUtils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.beans.XMLEncoder;
 import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 /**
  * @author Igor Usenko
@@ -22,6 +22,7 @@ public class XmlEncoderDecoderChannelDataListTest extends TestCase {
     }
 
     // тест записи/чтения списка данных канала
+
     public void testWriteRead() throws IOException {
         ChannelData channelData01 = ChannelDataTestUtils.createChannelDataFixture01();
         ChannelData channelData02 = ChannelDataTestUtils.createChannelDataFixture02();

@@ -21,6 +21,7 @@ public class XPathProcessorTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws VariableProcessor.VariableProcessorException {
         String fixture = "<html><body><div><div><p>asd</p></div></div><div>def</div></body></html>";
 
@@ -40,6 +41,7 @@ public class XPathProcessorTest extends TestCase {
     }
 
     // тест куска HTML кода
+
     public void testIllformed() throws VariableProcessor.VariableProcessorException {
         String fixture = "<div><div><p>asd</p></div></div><div>def</div>";
 
@@ -54,6 +56,7 @@ public class XPathProcessorTest extends TestCase {
     }
 
     // тест на извлечение тега а не его содержимого
+
     public void testTag() throws VariableProcessor.VariableProcessorException {
         String fixture = "<div><div a=b b=c><p>asd</p></div></div><div>def</div>";
 
@@ -68,6 +71,7 @@ public class XPathProcessorTest extends TestCase {
     }
 
     // тест на извлечение аттрибута тега
+
     public void testAttribute() throws VariableProcessor.VariableProcessorException {
         String fixture = "<div><div a=\"b\" b=\"c\"><p>asd</p></div></div><div>def</div>";
 
@@ -82,6 +86,7 @@ public class XPathProcessorTest extends TestCase {
     }
 
     // тест на двойное экранирование амперсанда
+
     public void testDoubleEscape() throws VariableProcessor.VariableProcessorException {
         String fixture = "<div>a&b</div>";
 
@@ -96,6 +101,7 @@ public class XPathProcessorTest extends TestCase {
     }
 
     // тест снапшота
+
     public void testSnapshot() {
         XPathProcessor processor = new XPathProcessor("test", "content2", XPathProcessorMode.INNER, "out");
 

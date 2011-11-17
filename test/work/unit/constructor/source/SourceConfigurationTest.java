@@ -4,14 +4,15 @@ import constructor.dom.Constructor;
 import constructor.dom.ConstructorFactory;
 import constructor.dom.ObjectType;
 import constructor.dom.UsedObject;
-import constructor.objects.source.configuration.SourceConfiguration;
 import constructor.objects.source.configuration.FetcherType;
+import constructor.objects.source.configuration.SourceConfiguration;
 import junit.framework.TestCase;
-import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
+
+import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
 /**
  * @author Igor Usenko
@@ -24,6 +25,7 @@ public class SourceConfigurationTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws Constructor.ConstructorException {
         Map<String, String> streams = new HashMap<String, String>();
         streams.put("processor", "<processor><getGroup in=\"inp\" out=\"sample\"><occurrence>0</occurrence><pattern>abc(.+?)def</pattern></getGroup><getGroup in=\"sample\" out=\"out\"><occurrence>0</occurrence><pattern>z(.+?)z</pattern></getGroup></processor>");
@@ -43,6 +45,7 @@ public class SourceConfigurationTest extends TestCase {
     }
 
     // тест на простые урлы
+
     public void testSimpleUrls() throws Constructor.ConstructorException {
         Map<String, String> streams = new HashMap<String, String>();
         streams.put("source", "<source><store days=\"48\"/><update mode=\"auto\"/><url>url1</url><url>url2</url></source>");
@@ -61,6 +64,7 @@ public class SourceConfigurationTest extends TestCase {
     }
 
     // тест на генератор последовательности урлов
+
     public void testUrlsGeneration() throws Constructor.ConstructorException {
         Map<String, String> streams = new HashMap<String, String>();
         streams.put("source", "<source><store days=\"48\"/><update mode=\"auto\"/><url>url1</url><url from=\"1\" to=\"5\" step=\"2\">url*2</url></source>");
@@ -75,10 +79,10 @@ public class SourceConfigurationTest extends TestCase {
         assertTrue(configuration.isAutoUpdate());
         assertEquals(FetcherType.URL, configuration.getFetcherType());
 
-        List<String> urls =  configuration.getFetchedUrls();
+        List<String> urls = configuration.getFetchedUrls();
 
         assertEquals(4, urls.size());
-        
+
         assertEquals("url1", urls.get(0));
         assertEquals("url12", urls.get(1));
         assertEquals("url32", urls.get(2));
@@ -86,6 +90,7 @@ public class SourceConfigurationTest extends TestCase {
     }
 
     // тест на зависимости - зависимостей нет
+
     public void testNoDependencies() throws Constructor.ConstructorException {
         Map<String, String> streams = new HashMap<String, String>();
         streams.put("source", "<source><store days=\"48\"/><url>url1</url></source>");
@@ -95,12 +100,13 @@ public class SourceConfigurationTest extends TestCase {
 
         SourceConfiguration configuration = (SourceConfiguration) constructor.create("source", ObjectType.SOURCE);
 
-        List<UsedObject> objects =  configuration.getUsedObjects();
+        List<UsedObject> objects = configuration.getUsedObjects();
 
         assertEquals(0, objects.size());
     }
 
     // тест на зависимости - зависимость от кастом детектора модификаций
+
     public void testDependensCustomFetcher() throws Constructor.ConstructorException {
         Map<String, String> streams = new HashMap<String, String>();
 
@@ -112,7 +118,7 @@ public class SourceConfigurationTest extends TestCase {
 
         SourceConfiguration configuration = (SourceConfiguration) constructor.create("source", ObjectType.SOURCE);
 
-        List<UsedObject> urls =  configuration.getUsedObjects();
+        List<UsedObject> urls = configuration.getUsedObjects();
 
         assertEquals(1, urls.size());
 
@@ -121,6 +127,7 @@ public class SourceConfigurationTest extends TestCase {
     }
 
     // тест на зависимости - зависимость от постпроцессора
+
     public void testDependensPostprocessor() throws Constructor.ConstructorException {
         Map<String, String> streams = new HashMap<String, String>();
 
@@ -132,7 +139,7 @@ public class SourceConfigurationTest extends TestCase {
 
         SourceConfiguration configuration = (SourceConfiguration) constructor.create("source", ObjectType.SOURCE);
 
-        List<UsedObject> urls =  configuration.getUsedObjects();
+        List<UsedObject> urls = configuration.getUsedObjects();
 
         assertEquals(1, urls.size());
 
@@ -141,6 +148,7 @@ public class SourceConfigurationTest extends TestCase {
     }
 
     // тест на зависимости - зависимость от кастом детектора модификаций и от постпроцессора
+
     public void testDependensFetcherPostprocessor() throws Constructor.ConstructorException {
         Map<String, String> streams = new HashMap<String, String>();
 
@@ -153,7 +161,7 @@ public class SourceConfigurationTest extends TestCase {
 
         SourceConfiguration configuration = (SourceConfiguration) constructor.create("source", ObjectType.SOURCE);
 
-        List<UsedObject> urls =  configuration.getUsedObjects();
+        List<UsedObject> urls = configuration.getUsedObjects();
 
         assertEquals(2, urls.size());
 

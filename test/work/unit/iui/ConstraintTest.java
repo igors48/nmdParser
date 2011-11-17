@@ -1,7 +1,7 @@
 package work.unit.iui;
 
-import junit.framework.TestCase;
 import app.iui.flow.Constraint;
+import junit.framework.TestCase;
 
 /**
  * @author Igor Usenko

@@ -1,11 +1,9 @@
 package constructor.objects.processor.load.adapter;
 
-import app.controller.NullController;
 import app.workingarea.ServiceManager;
 import constructor.objects.processor.VariableProcessor;
 import constructor.objects.processor.VariableProcessorAdapter;
 import constructor.objects.processor.load.LoadProcessor;
-import http.StandardBatchLoader;
 import util.Assert;
 
 /**

@@ -111,5 +111,5 @@ public class StandardHttpRequestHandlerContext {
     public String getProxyPassword() {
         return this.proxyPassword;
     }
-    
+
 }

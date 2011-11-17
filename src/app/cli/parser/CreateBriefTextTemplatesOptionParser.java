@@ -1,7 +1,8 @@
 package app.cli.parser;
 
-import static app.cli.parser.OptionNameTable.CREATE_BRIEF_TEXT_TEMPLATES_OPTION_SHORT_NAME;
 import app.templater.TemplateType;
+
+import static app.cli.parser.OptionNameTable.CREATE_BRIEF_TEXT_TEMPLATES_OPTION_SHORT_NAME;
 
 /**
  * Парсер опции "Создать комплект шаблонов для краткого RSS фида"

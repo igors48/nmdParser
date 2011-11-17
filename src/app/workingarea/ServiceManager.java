@@ -5,14 +5,12 @@ import constructor.objects.source.core.FetcherFactory;
 import constructor.objects.storage.Storage;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
 import debug.DebugConsole;
+import greader.GoogleReaderAdapter;
 import http.BatchLoader;
-import http.HttpRequestHandler;
 import resource.ConverterFactory;
 import timeservice.TimeService;
 
 import java.util.Map;
-
-import greader.GoogleReaderAdapter;
 
 /**
  * @author Igor Usenko

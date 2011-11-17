@@ -1,13 +1,12 @@
 package work.unit.schedule;
 
-import app.iui.schedule.Schedule;
-import app.iui.schedule.Period;
 import app.iui.schedule.Item;
-
-import java.util.List;
-import java.util.ArrayList;
-
+import app.iui.schedule.Period;
+import app.iui.schedule.Schedule;
 import util.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Igor Usenko

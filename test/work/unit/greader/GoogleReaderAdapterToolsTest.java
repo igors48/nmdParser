@@ -4,9 +4,10 @@ import greader.entities.Subscription;
 import greader.profile.FeedConfiguration;
 import greader.tools.GoogleReaderAdapterTools;
 import junit.framework.TestCase;
-import static util.CollectionUtils.newArrayList;
 
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )

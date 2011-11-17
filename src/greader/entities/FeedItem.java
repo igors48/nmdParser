@@ -23,10 +23,10 @@ public class FeedItem {
 
         Assert.notNull(_title, "Title is null");
         this.title = _title;
-        
+
         Assert.notNull(_summary, "Summary is null");
         this.summary = _summary;
-        
+
         this.published = _published;
     }
 
@@ -60,7 +60,7 @@ public class FeedItem {
         if (_item.getSummary() != null) {
 
             if (_item.getSummary().getContent() != null) {
-                summary = _item.getSummary().getContent(); 
+                summary = _item.getSummary().getContent();
             }
         }
 

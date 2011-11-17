@@ -1,16 +1,16 @@
 package work.unit.atdc;
 
-import dated.item.atdc.AtdcItem;
 import dated.DatedItemConverter;
 import dated.DatedItemConverterContext;
+import dated.item.atdc.AtdcItem;
 import flowtext.*;
 import flowtext.resource.Resource;
+import http.Data;
 import junit.framework.TestCase;
 import timeservice.StandardTimeService;
 import timeservice.TimeService;
 import work.testutil.AtdcTestUtils;
 import work.testutil.FlowTextDocumentTestUtils;
-import http.Data;
 
 /**
  * @author Igor Usenko
@@ -74,7 +74,7 @@ public class AtdcItemConverterTest extends TestCase {
     private boolean isValidContent(Section _section, AtdcItem _item) throws Data.DataException {
         String content = AtdcTestUtils.getContentString(_item);
         String text = FlowTextDocumentTestUtils.getString(_section, 5, 0).trim();
-        
+
         return content.equalsIgnoreCase(text);
     }
 

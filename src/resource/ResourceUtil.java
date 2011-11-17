@@ -54,7 +54,7 @@ public final class ResourceUtil {
         int first = convertToUnsigned(buffer[0]);
         int second = convertToUnsigned(buffer[1]);
 
-        return new int[] {first, second};
+        return new int[]{first, second};
     }
 
     private static int convertToUnsigned(final byte _byte) {

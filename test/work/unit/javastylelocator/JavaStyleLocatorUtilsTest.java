@@ -18,6 +18,7 @@ public class JavaStyleLocatorUtilsTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() {
         List<String> list = new ArrayList<String>();
         list.add("test");
@@ -33,6 +34,7 @@ public class JavaStyleLocatorUtilsTest extends TestCase {
     }
 
     // тест c одной маской
+
     public void testWithOneMask() {
         List<String> list = new ArrayList<String>();
         list.add("test.test.object");
@@ -49,6 +51,7 @@ public class JavaStyleLocatorUtilsTest extends TestCase {
     }
 
     // тест c более чем одной маской
+
     public void testWithManyMask() {
         List<String> list = new ArrayList<String>();
         list.add("test.test.object");
@@ -68,21 +71,25 @@ public class JavaStyleLocatorUtilsTest extends TestCase {
     }
 
     // определение пути к симплеру если он не в корне локатора
+
     public void testGetNotRootSimplerPath() {
         assertEquals("one/two/three/", JavaStyleLocatorUtils.getPathToSimpler("one.two.three.simpler"));
     }
 
     // определение пути к симплеру если он в корне локатора
+
     public void testGetRootSimplerPath() {
         assertEquals("", JavaStyleLocatorUtils.getPathToSimpler("simpler"));
     }
 
     // определение имени симплера если он не в корне локатора
+
     public void testGetNotRootSimplerFileName() {
         assertEquals("simpler.xml", JavaStyleLocatorUtils.getSimplerFileName("one.two.three.simpler"));
     }
 
     // определение имени симплера если он в корне локатора
+
     public void testGetRootSimplerFileName() {
         assertEquals("simpler.xml", JavaStyleLocatorUtils.getSimplerFileName("simpler"));
     }

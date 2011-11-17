@@ -1,9 +1,9 @@
 package work.unit.schedule;
 
-import junit.framework.TestCase;
-import app.iui.schedule.ScheduledItems;
 import app.iui.schedule.Item;
 import app.iui.schedule.Period;
+import app.iui.schedule.ScheduledItems;
+import junit.framework.TestCase;
 
 import java.util.Set;
 

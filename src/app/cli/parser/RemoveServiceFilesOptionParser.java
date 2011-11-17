@@ -5,7 +5,6 @@ import app.cli.command.Command;
 import app.cli.command.LoadSettingsCommand;
 import app.cli.command.LoadWorkspaceCommand;
 import app.cli.command.RemoveServiceFilesCommand;
-import static app.cli.parser.OptionNameTable.*;
 import constructor.dom.locator.Mask;
 import constructor.dom.locator.MaskUtils;
 import org.apache.commons.cli.CommandLine;
@@ -14,6 +13,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static app.cli.parser.OptionNameTable.*;
 
 /**
  * Парсер опции "удалить служебные файлы настроек"

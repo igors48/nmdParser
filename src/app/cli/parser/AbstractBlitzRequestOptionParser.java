@@ -7,7 +7,6 @@ import app.cli.command.BlitzRequestCommand;
 import app.cli.command.Command;
 import app.cli.command.LoadSettingsCommand;
 import app.cli.command.LoadWorkspaceCommand;
-import static app.cli.parser.OptionNameTable.FORCED_MODE_OPTION_SHORT_NAME;
 import constructor.objects.output.configuration.Composition;
 import org.apache.commons.cli.CommandLine;
 import util.Assert;
@@ -15,6 +14,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static app.cli.parser.OptionNameTable.FORCED_MODE_OPTION_SHORT_NAME;
 
 /**
  * ����������� ������ ����-��������

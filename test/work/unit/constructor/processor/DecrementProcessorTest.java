@@ -1,11 +1,11 @@
 package work.unit.constructor.processor;
 
+import constructor.objects.processor.VariableProcessor;
+import constructor.objects.processor.decrement.DecrementProcessor;
+import debug.snapshot.NameValuePair;
+import debug.snapshot.ProcessorSnapshot;
 import junit.framework.TestCase;
 import variables.Variables;
-import constructor.objects.processor.decrement.DecrementProcessor;
-import constructor.objects.processor.VariableProcessor;
-import debug.snapshot.ProcessorSnapshot;
-import debug.snapshot.NameValuePair;
 
 import java.util.List;
 
@@ -20,6 +20,7 @@ public class DecrementProcessorTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws VariableProcessor.VariableProcessorException {
         Variables variables = new Variables();
         variables.put("test", 0, "49");
@@ -39,6 +40,7 @@ public class DecrementProcessorTest extends TestCase {
     }
 
     // тест c выходной переменной
+
     public void testWithOutput() throws VariableProcessor.VariableProcessorException {
         Variables variables = new Variables();
         variables.put("test", 0, "49");
@@ -56,8 +58,9 @@ public class DecrementProcessorTest extends TestCase {
         assertEquals("54", variables.get("testout", 5));
         assertEquals("4a", variables.get("testout", 124));
     }
-    
+
     // тест без параметров
+
     public void testWithoutParms() throws VariableProcessor.VariableProcessorException {
         Variables variables = new Variables();
         variables.put(Variables.DEFAULT_INPUT_VARIABLE_NAME, 0, "49");
@@ -77,7 +80,8 @@ public class DecrementProcessorTest extends TestCase {
     }
 
     // тест снапшота
-    public void testSnapshot(){
+
+    public void testSnapshot() {
         DecrementProcessor processor = new DecrementProcessor("test", "content2");
 
         ProcessorSnapshot snapshot = (ProcessorSnapshot) processor.getSnapshot();

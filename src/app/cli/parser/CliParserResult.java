@@ -12,7 +12,7 @@ import java.util.List;
  *         Date: 08.10.2009
  */
 public class CliParserResult {
-    
+
     private final List<Command> script;
 
     public CliParserResult(final List<Command> _script) {

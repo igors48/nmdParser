@@ -1,15 +1,15 @@
 package work.unit.constructor.simpler;
 
+import constructor.dom.Constructor;
+import constructor.dom.ConstructorFactory;
+import constructor.dom.ObjectType;
+import constructor.objects.output.configuration.DocumentItemsSortMode;
+import constructor.objects.simpler.configuration.SimplerConfiguration;
 import junit.framework.TestCase;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
-import constructor.dom.ConstructorFactory;
-import constructor.dom.Constructor;
-import constructor.dom.ObjectType;
-import constructor.objects.simpler.configuration.SimplerConfiguration;
-import constructor.objects.output.configuration.DocumentItemsSortMode;
 import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
 /**

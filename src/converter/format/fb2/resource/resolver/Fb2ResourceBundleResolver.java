@@ -98,7 +98,7 @@ public class Fb2ResourceBundleResolver implements Controller {
                 this.itemMap.put(item, request);
             }
         }
-        
+
         return list;
     }
 
@@ -253,5 +253,5 @@ public class Fb2ResourceBundleResolver implements Controller {
     public boolean isCancelled() {
         return this.controller.isCancelled();
     }
-    
+
 }

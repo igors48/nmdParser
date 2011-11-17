@@ -1,10 +1,10 @@
 package work.unit.javastylelocator;
 
-import junit.framework.TestCase;
 import constructor.dom.locator.Mask;
+import junit.framework.TestCase;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Igor Usenko
@@ -17,6 +17,7 @@ public class MaskTest extends TestCase {
     }
 
     // первоначальный тест есть оба списка
+
     public void testSmoke() {
         List<String> accepted = new ArrayList<String>();
         accepted.add("test");
@@ -31,6 +32,7 @@ public class MaskTest extends TestCase {
     }
 
     // пустые списки
+
     public void testEmptyLists() {
         List<String> accepted = new ArrayList<String>();
 
@@ -42,6 +44,7 @@ public class MaskTest extends TestCase {
     }
 
     // есть список включаемых список исключаемых пуст
+
     public void testAccepted() {
         List<String> accepted = new ArrayList<String>();
         accepted.add("test");
@@ -55,6 +58,7 @@ public class MaskTest extends TestCase {
     }
 
     // есть список исключаемых список включаемых пуст
+
     public void testExcepted() {
         List<String> accepted = new ArrayList<String>();
 
@@ -68,6 +72,7 @@ public class MaskTest extends TestCase {
     }
 
     // режим точного совпаднения маски
+
     public void testExactly() {
         Mask mask = new Mask("mask");
 

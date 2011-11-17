@@ -1,14 +1,14 @@
 package work.unit.fb2.resource.cache;
 
-import junit.framework.TestCase;
+import converter.format.fb2.resource.resolver.cache.InMemoryStorageAdapter;
 import converter.format.fb2.resource.resolver.cache.StandardResourceCache;
 import converter.format.fb2.resource.resolver.cache.StorageAdapter;
-import converter.format.fb2.resource.resolver.cache.InMemoryStorageAdapter;
-import timeservice.TimeService;
-import timeservice.StandardTimeService;
-import timeservice.StillTimeService;
 import http.Data;
 import http.data.MemoryData;
+import junit.framework.TestCase;
+import timeservice.StandardTimeService;
+import timeservice.StillTimeService;
+import timeservice.TimeService;
 
 import java.util.Arrays;
 
@@ -23,6 +23,7 @@ public class ResourceCacheTest extends TestCase {
     }
 
     // �������������� ����
+
     public void testSmoke() throws Data.DataException {
         StorageAdapter adapter = new InMemoryStorageAdapter();
         TimeService timeService = new StandardTimeService();
@@ -44,6 +45,7 @@ public class ResourceCacheTest extends TestCase {
     }
 
     // ��� ������ ������
+
     public void testTwoRead() throws Data.DataException {
         StorageAdapter adapter = new InMemoryStorageAdapter();
         TimeService timeService = new StandardTimeService();
@@ -66,6 +68,7 @@ public class ResourceCacheTest extends TestCase {
     }
 
     // ������ ����� ������ ������
+
     public void testNewRewriteOld() throws Data.DataException {
         StorageAdapter adapter = new InMemoryStorageAdapter();
         TimeService timeService = new StandardTimeService();
@@ -126,6 +129,7 @@ public class ResourceCacheTest extends TestCase {
     } */
 
     // �������� ������������ ������ ��� ������� �������� � ��� ������
+
     public void testRemoveStalledData() throws Data.DataException {
         StorageAdapter adapter = new InMemoryStorageAdapter();
         StillTimeService timeService = new StillTimeService();
@@ -147,8 +151,9 @@ public class ResourceCacheTest extends TestCase {
 
         assertNull(loaded01);
     }
-    
+
     // ������� ������� ������������� ������� �� �����������
+
     public void testNoInsertBiggerThanMax() throws Data.DataException {
         StorageAdapter adapter = new InMemoryStorageAdapter();
         StillTimeService timeService = new StillTimeService();
@@ -169,6 +174,7 @@ public class ResourceCacheTest extends TestCase {
     }
 
     // ����� : �������� �����
+
     public void testRemoveOrphans() throws Data.DataException, StorageAdapter.StorageAdapterException {
         StorageAdapter adapter = new InMemoryStorageAdapter();
         StillTimeService timeService = new StillTimeService();
@@ -187,8 +193,9 @@ public class ResourceCacheTest extends TestCase {
         assertNull(loaded);
         assertNull(adapter.load(name));
     }
-    
+
     // ����� : ���� �������� �� ������� ���������, ��������, ��� �������� �� ������� ����������� ������
+
     public void testAudit() throws Data.DataException {
         InMemoryStorageAdapter adapter = new InMemoryStorageAdapter();
         StillTimeService timeService = new StillTimeService();
@@ -211,6 +218,7 @@ public class ResourceCacheTest extends TestCase {
     }
 
     // ����������� ������ ��������� �������� � ������� ������������ ����������� ��������
+
     public void testThisReadsPrevious() throws Data.DataException {
         InMemoryStorageAdapter adapter = new InMemoryStorageAdapter();
         StillTimeService timeService = new StillTimeService();
@@ -259,7 +267,7 @@ public class ResourceCacheTest extends TestCase {
     }
 
     // ���� ��������� ��� ���������� ������� ������� 01
-   /* public void testSpaceLimitOne() throws Data.DataException, InterruptedException {
+    /* public void testSpaceLimitOne() throws Data.DataException, InterruptedException {
         InMemoryStorageAdapter adapter = new InMemoryStorageAdapter();
         TimeService timeService = new StandardTimeService();
 
@@ -295,7 +303,7 @@ public class ResourceCacheTest extends TestCase {
     }*/
 
     // ���� ��������� ��� ���������� ������� ������� 02
-   /* public void testSpaceLimitTwo() throws Data.DataException, InterruptedException {
+    /* public void testSpaceLimitTwo() throws Data.DataException, InterruptedException {
         InMemoryStorageAdapter adapter = new InMemoryStorageAdapter();
         TimeService timeService = new StandardTimeService();
 

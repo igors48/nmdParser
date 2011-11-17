@@ -1,14 +1,15 @@
 package util.html;
 
 import util.Assert;
-import static util.html.HtmlUtils.CLOSE_TAG_PATTERN;
-import static util.html.HtmlUtils.OPEN_TAG_PATTERN;
 
 import javax.swing.text.html.HTMLEditorKit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static util.html.HtmlUtils.CLOSE_TAG_PATTERN;
+import static util.html.HtmlUtils.OPEN_TAG_PATTERN;
 
 /**
  * Утилитный класс содержит функцию извлечения тэга из документа

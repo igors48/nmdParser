@@ -1,20 +1,13 @@
 package greader;
 
-import com.google.gson.Gson;
-
 import java.io.IOException;
-import java.io.StringReader;
-import java.util.Properties;
-
-import greader.entities.FeedItems;
-import greader.entities.Subscriptions;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
  * Date: 27.07.2011
  */
 public class Main {
-    
+
     private static final String AUTHORIZATION_KEY = "Auth";
 
     public static void main(String[] args) throws IOException {

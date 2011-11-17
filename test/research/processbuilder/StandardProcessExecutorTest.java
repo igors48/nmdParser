@@ -1,8 +1,8 @@
 package research.processbuilder;
 
-import junit.framework.TestCase;
-import app.workingarea.process.ExternalProcessExecutor;
 import app.workingarea.ProcessWrapper;
+import app.workingarea.process.ExternalProcessExecutor;
+import junit.framework.TestCase;
 import work.testutil.CompTestsUtils;
 
 /**

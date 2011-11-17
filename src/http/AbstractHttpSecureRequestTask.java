@@ -38,5 +38,5 @@ public abstract class AbstractHttpSecureRequestTask extends AbstractHttpRequestT
             _request.setHeader(AUTHORIZATION_HEADER_NAME, GOOGLE_LOGIN_AUTHORIZATION_PREFIX + authorizationToken);
         }
     }
-    
+
 }

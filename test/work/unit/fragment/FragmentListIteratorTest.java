@@ -3,8 +3,8 @@ package work.unit.fragment;
 import junit.framework.TestCase;
 import util.fragment.ListFragmentIterator;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Igor Usenko
@@ -17,7 +17,8 @@ public class FragmentListIteratorTest extends TestCase {
     }
 
     // первоначальный тест - количество элементов не кратно размеру фрагмента
-    public void testSmoke(){
+
+    public void testSmoke() {
         List<String> fixture = new ArrayList<String>();
         fixture.add("1");
         fixture.add("2");
@@ -42,7 +43,8 @@ public class FragmentListIteratorTest extends TestCase {
     }
 
     // количество элементов кратно размеру фрагмента
-    public void testMult(){
+
+    public void testMult() {
         List<String> fixture = new ArrayList<String>();
         fixture.add("1");
         fixture.add("2");
@@ -69,7 +71,8 @@ public class FragmentListIteratorTest extends TestCase {
     }
 
     // размер фрагмента больше чем общее колчиество элементов
-    public void testBigFragment(){
+
+    public void testBigFragment() {
         List<String> fixture = new ArrayList<String>();
         fixture.add("1");
         fixture.add("2");
@@ -87,7 +90,8 @@ public class FragmentListIteratorTest extends TestCase {
     }
 
     // пустой список
-    public void testEmpty(){
+
+    public void testEmpty() {
         List<String> fixture = new ArrayList<String>();
 
         ListFragmentIterator<String> iterator = new ListFragmentIterator<String>(fixture, 4);

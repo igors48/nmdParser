@@ -1,18 +1,17 @@
 package work.unit.dom;
 
-import work.testutil.SaxLoaderTestUtils;
+import app.templater.Template;
+import constructor.dom.Locator;
+import constructor.dom.ObjectType;
+import constructor.dom.locator.Mask;
+import constructor.objects.simpler.configuration.SimplerConfiguration;
 import util.Assert;
+import work.testutil.SaxLoaderTestUtils;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import constructor.dom.Locator;
-import constructor.dom.ObjectType;
-import constructor.dom.locator.Mask;
-import constructor.objects.simpler.configuration.SimplerConfiguration;
-import app.templater.Template;
 
 /**
  * @author Igor Usenko
@@ -40,7 +39,7 @@ public class LocatorMock implements Locator {
 
         String stream = this.streams.get(_id);
 
-        if (stream == null){
+        if (stream == null) {
             throw new LocatorException("Can`t locate object [ " + _id + " ] of type [ " + _type + " ].");
         }
 

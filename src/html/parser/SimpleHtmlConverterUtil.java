@@ -5,8 +5,6 @@ import org.htmlcleaner.TagNode;
 import org.htmlcleaner.XPatherException;
 import util.Assert;
 
-import java.io.IOException;
-
 /**
  * @author Igor Usenko
  *         Date: 20.09.2008

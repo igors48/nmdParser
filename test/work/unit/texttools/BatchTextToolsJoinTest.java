@@ -1,8 +1,8 @@
 package work.unit.texttools;
 
 import junit.framework.TestCase;
-import util.batchtext.Boundary;
 import util.batchtext.BatchTextTools;
+import util.batchtext.Boundary;
 
 /**
  * @author Igor Usenko
@@ -15,7 +15,8 @@ public class BatchTextToolsJoinTest extends TestCase {
     }
 
     // первоначальный тест
-    public void testSmoke(){
+
+    public void testSmoke() {
         Boundary first = new Boundary(2, 4);
         Boundary second = new Boundary(3, 6);
 
@@ -26,7 +27,8 @@ public class BatchTextToolsJoinTest extends TestCase {
     }
 
     // тест не пересекающихся
-    public void testNonIntercepted(){
+
+    public void testNonIntercepted() {
         Boundary first = new Boundary(2, 4);
         Boundary second = new Boundary(8, 10);
 
@@ -36,7 +38,8 @@ public class BatchTextToolsJoinTest extends TestCase {
     }
 
     // тест на поглощение
-    public void testConsumed(){
+
+    public void testConsumed() {
         Boundary first = new Boundary(4, 6);
         Boundary second = new Boundary(2, 10);
 

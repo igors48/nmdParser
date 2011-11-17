@@ -1,13 +1,12 @@
 package greader.profile;
 
+import util.Assert;
+
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Iterator;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;
-import util.Assert;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
@@ -23,7 +22,7 @@ public class Profile {
         setAccount(_account);
         this.feedConfigurations = newArrayList();
     }
-    
+
     public Profile() {
         this(new Account());
     }
@@ -60,7 +59,7 @@ public class Profile {
 
         return null;
     }
-    
+
     public void changePassword(final String _password) {
         Assert.isValidString(_password, "Password is not valid");
 

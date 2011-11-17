@@ -1,14 +1,13 @@
 package work.unit.constructor.processor;
 
+import constructor.objects.processor.VariableProcessor;
+import constructor.objects.processor.sequencer.SequenceProcessor;
+import debug.snapshot.NameValuePair;
+import debug.snapshot.ProcessorSnapshot;
 import junit.framework.TestCase;
 import variables.Variables;
-import constructor.objects.processor.sequencer.SequenceProcessor;
-import constructor.objects.processor.VariableProcessor;
 
 import java.util.List;
-
-import debug.snapshot.ProcessorSnapshot;
-import debug.snapshot.NameValuePair;
 
 /**
  * @author Igor Usenko
@@ -21,6 +20,7 @@ public class SequenceProcessorTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws VariableProcessor.VariableProcessorException {
         Variables variables = new Variables();
         variables.put("start", "50");
@@ -39,6 +39,7 @@ public class SequenceProcessorTest extends TestCase {
     }
 
     // тест с заданием длины и паддинга
+
     public void testLengthAndPadding() throws VariableProcessor.VariableProcessorException {
         Variables variables = new Variables();
         variables.put("start", "50");
@@ -59,6 +60,7 @@ public class SequenceProcessorTest extends TestCase {
     }
 
     // тест снапшота
+
     public void testSnapshot() {
         SequenceProcessor processor = new SequenceProcessor("test", "pattern", "start", "stop", "step", "mult", "out", "len", "padd");
 

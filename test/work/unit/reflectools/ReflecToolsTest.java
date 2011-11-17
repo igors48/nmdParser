@@ -16,6 +16,7 @@ public class ReflecToolsTest extends TestCase {
     }
 
     // поиск существующего если он существует и подходит
+
     public void testFindMethod() {
         Fixture fixture = new Fixture();
 
@@ -29,6 +30,7 @@ public class ReflecToolsTest extends TestCase {
     }
 
     // поиск существующего если он существует но с другими параметрами
+
     public void testFindMethodWrongParms() {
         Fixture fixture = new Fixture();
 
@@ -43,6 +45,7 @@ public class ReflecToolsTest extends TestCase {
     }
 
     // поиск несуществующего
+
     public void testFindMethodNotExists() {
         Fixture fixture = new Fixture();
 

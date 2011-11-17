@@ -2,8 +2,8 @@ package research.heuristic;
 
 import util.Assert;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Igor Usenko
@@ -30,7 +30,7 @@ public class Path {
     }
 
     public int getLength() {
-        return this.elements.size();    
+        return this.elements.size();
     }
 
     public List<PathElement> getElements() {

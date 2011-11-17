@@ -1,12 +1,13 @@
 package greader.profile;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import util.Assert;
+
 import javax.xml.bind.annotation.XmlElement;
-import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Iterator;
+import java.util.List;
 
 import static util.CollectionUtils.newArrayList;
-import util.Assert;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
@@ -38,7 +39,7 @@ public class Profiles {
 
         Iterator<Profile> iterator = this.profiles.iterator();
 
-        while(iterator.hasNext() && result == null) {
+        while (iterator.hasNext() && result == null) {
             Profile profile = iterator.next();
 
             if (profile.getAccount().getEmail().equalsIgnoreCase(_email)) {
@@ -77,7 +78,7 @@ public class Profiles {
         }
 
         found.changePassword(_password);
-        
+
         return true;
     }
 

@@ -1,8 +1,8 @@
 package work.unit.html;
 
-import junit.framework.TestCase;
 import html.parser.tag.HtmlTag;
 import html.parser.tag.HtmlTagStatus;
+import junit.framework.TestCase;
 
 /**
  * @author Igor Usenko
@@ -14,7 +14,7 @@ public class HtmlTagTest extends TestCase {
         super(s);
     }
 
-    public void test01(){
+    public void test01() {
         String data = "img src=\"topic-229134_files/p_tofaq-on.gif\"id=\"img25\"    class =  \"preload\" alt=\"\"";
 
         HtmlTag tag = new HtmlTag(data, new String[]{"I", "IMG"});
@@ -28,7 +28,7 @@ public class HtmlTagTest extends TestCase {
         assertEquals("", tag.getAttribute("alt"));
     }
 
-    public void test02(){
+    public void test02() {
         String data = "imgcacaca";
 
         HtmlTag tag = new HtmlTag(data, new String[]{"I", "IMG"});
@@ -38,7 +38,7 @@ public class HtmlTagTest extends TestCase {
         assertEquals("IMG", tag.getId());
     }
 
-    public void test03(){
+    public void test03() {
         String data = "hiamgcacaca";
 
         HtmlTag tag = new HtmlTag(data, new String[]{"I", "IMG"});
@@ -48,7 +48,7 @@ public class HtmlTagTest extends TestCase {
         assertEquals("hiamgcacaca", tag.getId());
     }
 
-    public void test04(){
+    public void test04() {
         String data = "img width=535 height = 25 src=\"topic-229134_files/p_tofaq-on.gif\"id=\"img25\"    class =  \"preload\" alt=\"\"";
 
         HtmlTag tag = new HtmlTag(data, new String[]{"I", "IMG"});
@@ -65,7 +65,8 @@ public class HtmlTagTest extends TestCase {
     }
 
     // посвящен баге при разборе кода в тупичке Гоблина 20 июня 2009
-    public void testReal01(){
+
+    public void testReal01() {
         String data = "img alt='&#171;Шерлок Холмс&#187; Гая Ричи &#8212; Холмс' title='&#171;Шерлок Холмс&#187; Гая Ричи &#8212; Холмс' vspace=10 hspace=10 border=1 width=147 height=225 src=http://static.oper.ru/data/gallery/m1048753469.jpg";
 
         HtmlTag tag = new HtmlTag(data, new String[]{"I", "IMG"});

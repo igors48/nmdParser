@@ -1,20 +1,16 @@
 package greader.tools;
 
-import greader.profile.FeedConfiguration;
-import greader.entities.Subscription;
-import greader.entities.FeedItem;
-
-import java.util.List;
-
-import util.Assert;
-import util.CollectionUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import app.cli.blitz.request.BlitzRequest;
-import app.cli.blitz.request.RequestSourceType;
 import app.cli.blitz.request.CriterionType;
 import constructor.objects.output.configuration.Composition;
 import dated.item.modification.Modification;
+import greader.entities.Subscription;
+import greader.profile.FeedConfiguration;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import util.Assert;
+
+import java.util.List;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
@@ -27,7 +23,7 @@ public final class GoogleReaderAdapterTools {
     public static BlitzRequest createBlitzRequest(final FeedConfiguration _feedConfiguration, final List<Modification> _modifications) {
         Assert.notNull(_feedConfiguration, "Feed configuration is null");
         Assert.notNull(_modifications, "Modifications is null");
-        
+
         BlitzRequest result = new BlitzRequest(_modifications);
 
         result.setBranch(safeString(_feedConfiguration.getBranch()));
@@ -35,8 +31,7 @@ public final class GoogleReaderAdapterTools {
 
         if (_feedConfiguration.isAutoContentFiltering()) {
             result.setCriterionType(CriterionType.FILTER);
-        }
-        else if ((_feedConfiguration.getCriterions() != null) && (!_feedConfiguration.getCriterions().isEmpty())) {
+        } else if ((_feedConfiguration.getCriterions() != null) && (!_feedConfiguration.getCriterions().isEmpty())) {
             result.setCriterionExpression(_feedConfiguration.getCriterions());
             result.setCriterionType(CriterionType.XPATH);
         }
@@ -44,7 +39,7 @@ public final class GoogleReaderAdapterTools {
         result.setComposition(Composition.MANY_TO_ONE);
         result.setOutName(safeString(_feedConfiguration.getName()));
 
-        return result;    
+        return result;
     }
 
     public static void synchronize(final List<FeedConfiguration> _feedConfigurations, final List<Subscription> _subscriptions) {
@@ -73,7 +68,7 @@ public final class GoogleReaderAdapterTools {
 
         return false;
     }
-    
+
     private static String safeString(final String _string) {
         return _string == null ? "" : _string;
     }
@@ -81,5 +76,5 @@ public final class GoogleReaderAdapterTools {
     private GoogleReaderAdapterTools() {
         // empty
     }
-    
+
 }

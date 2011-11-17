@@ -5,12 +5,13 @@ import constructor.objects.channel.core.ChannelDataListStorage;
 import constructor.objects.channel.core.storage.ChannelDataListFileStorage;
 import constructor.objects.channel.core.stream.ChannelDataList;
 import junit.framework.TestCase;
-import static work.testutil.ChannelDataTestUtils.channelDataEquals;
-import static work.testutil.ChannelDataTestUtils.createChannelDataFixture01;
 import work.testutil.CompTestsUtils;
-import static work.testutil.CompTestsUtils.cleanupDir;
 
 import java.io.IOException;
+
+import static work.testutil.ChannelDataTestUtils.channelDataEquals;
+import static work.testutil.ChannelDataTestUtils.createChannelDataFixture01;
+import static work.testutil.CompTestsUtils.cleanupDir;
 
 /**
  * @author Igor Usenko
@@ -25,6 +26,7 @@ public class ChannelDataListFileStorageTest extends TestCase {
     }
 
     // тест возврата пустого списка если ранее он не сохранялся
+
     public void testNonExistent() throws IOException, ChannelDataListStorage.ChannelDataListStorageException {
         cleanupDir(DIR);
 
@@ -38,6 +40,7 @@ public class ChannelDataListFileStorageTest extends TestCase {
     }
 
     // тест сохранения/восстановления
+
     public void testStoreLoad() throws IOException, ChannelDataListStorage.ChannelDataListStorageException {
         cleanupDir(DIR);
 
@@ -56,6 +59,7 @@ public class ChannelDataListFileStorageTest extends TestCase {
     }
 
     // тест на удаление
+
     public void testRemove() throws IOException, ChannelDataListStorage.ChannelDataListStorageException {
         cleanupDir(DIR);
 

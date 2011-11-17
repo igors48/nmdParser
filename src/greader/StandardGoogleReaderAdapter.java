@@ -116,7 +116,7 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
             FeedConfiguration configuration = profile.findForFeedUrl(_feedUrl);
 
             if (configuration == null) {
-                throw new  GoogleReaderAdapterException(String.format("Can not find feed [ %s ] in profile [ %s ]", _feedUrl, _email));    
+                throw new GoogleReaderAdapterException(String.format("Can not find feed [ %s ] in profile [ %s ]", _feedUrl, _email));
             }
 
             this.log.info(String.format("Testing feed [ %s ] from profile [ %s ]", configuration.getUrl(), _email));
@@ -126,7 +126,7 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
         catch (GoogleReaderProvider.GoogleReaderProviderException e) {
             throw new GoogleReaderAdapterException(e);
         }
-        catch (ApiFacade.FatalException e){
+        catch (ApiFacade.FatalException e) {
             throw new GoogleReaderAdapterException(e);
         }
     }

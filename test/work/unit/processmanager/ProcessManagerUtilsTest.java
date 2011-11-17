@@ -1,7 +1,7 @@
 package work.unit.processmanager;
 
-import junit.framework.TestCase;
 import app.workingarea.process.ProcessManagerUtils;
+import junit.framework.TestCase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +17,8 @@ public class ProcessManagerUtilsTest extends TestCase {
     }
 
     // строка без плейсхолдеров не меняется
-    public void testSmoke(){
+
+    public void testSmoke() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("1", "1val");
 
@@ -25,7 +26,8 @@ public class ProcessManagerUtilsTest extends TestCase {
     }
 
     // тест одного плейсхолдера и одного значения
-    public void testOneValueOneHolder(){
+
+    public void testOneValueOneHolder() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("d", "1val");
 
@@ -33,7 +35,8 @@ public class ProcessManagerUtilsTest extends TestCase {
     }
 
     // тест двух плейсхолдеров и одного значения
-    public void testOneValueTwoHolder(){
+
+    public void testOneValueTwoHolder() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("d", "1val");
 
@@ -41,7 +44,8 @@ public class ProcessManagerUtilsTest extends TestCase {
     }
 
     // тест двух плейсхолдеров и двух значений
-    public void testTwoValueTwoHolder(){
+
+    public void testTwoValueTwoHolder() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("d", "1val");
         map.put("f", "2val");
@@ -50,7 +54,8 @@ public class ProcessManagerUtilsTest extends TestCase {
     }
 
     // тест двух разных плейсхолдеров и одного значений
-    public void testOneValueTwoDiffHolder(){
+
+    public void testOneValueTwoDiffHolder() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("d", "1val");
 
@@ -58,6 +63,7 @@ public class ProcessManagerUtilsTest extends TestCase {
     }
 
     // тест точек в шаблоне и параметрах
+
     public void testWithPoints() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("f", "bash.fb2");

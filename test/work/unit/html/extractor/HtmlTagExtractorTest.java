@@ -1,11 +1,10 @@
 package work.unit.html.extractor;
 
 import junit.framework.TestCase;
-
-import java.util.List;
-
 import util.html.HtmlTagBounds;
 import util.html.HtmlTagExtractor;
+
+import java.util.List;
 
 /**
  * @author Igor Usenko
@@ -21,9 +20,10 @@ public class HtmlTagExtractorTest extends TestCase {
     }
 
     // простой тест на правильность работы
-    public void testSmoke(){
+
+    public void testSmoke() {
         List<HtmlTagBounds> result = HtmlTagExtractor.extractTag("<td colspan=\"2\">", FIXTURE);
-        
+
         assertEquals(2, result.size());
 
         String test = FIXTURE.substring(result.get(0).getContentStart(), result.get(0).getEnd() - result.get(0).getClosingTagLength());
@@ -34,7 +34,8 @@ public class HtmlTagExtractorTest extends TestCase {
     }
 
     // тест граничной ситуации
-    public void testBoundary(){
+
+    public void testBoundary() {
         List<HtmlTagBounds> result = HtmlTagExtractor.extractTag("<td colspan=\"2\">", FIXTURE_BOUNDARY);
 
         assertEquals(1, result.size());

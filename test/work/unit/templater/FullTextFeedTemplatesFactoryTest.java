@@ -1,7 +1,7 @@
 package work.unit.templater;
 
-import junit.framework.TestCase;
 import app.templater.*;
+import junit.framework.TestCase;
 
 import java.util.List;
 
@@ -16,7 +16,8 @@ public class FullTextFeedTemplatesFactoryTest extends TestCase {
     }
 
     // первоначальный тест
-    public void testSmoke(){
+
+    public void testSmoke() {
         TemplateContentFactory contentFactory = new TemplateContentFactory();
         FullTextFeedTemplatesFactory templatesFactory = new FullTextFeedTemplatesFactory(contentFactory);
         TemplateParameters parameters = new TemplateParameters(TemplateType.FULL_RSS_TEMPLATE, "name", "url", "workspace");

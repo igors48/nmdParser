@@ -1,16 +1,15 @@
 package app.cli.blitz;
 
 import app.cli.blitz.request.BlitzRequest;
-import app.cli.blitz.request.RequestSourceType;
 import app.iui.flow.custom.SingleProcessInfo;
 import app.workingarea.Settings;
 import constructor.objects.AdapterException;
 import constructor.objects.source.core.ModificationFetcher;
 import constructor.objects.source.core.ModificationProcessor;
 import constructor.objects.source.core.SourceAdapter;
+import constructor.objects.source.core.fetcher.ModificationsListFetcher;
 import constructor.objects.source.core.fetcher.RssFeedFetcher;
 import constructor.objects.source.core.fetcher.UrlFetcher;
-import constructor.objects.source.core.fetcher.ModificationsListFetcher;
 import constructor.objects.source.core.processor.NoopModificationProcessor;
 import constructor.objects.strategies.StoreStrategy;
 import constructor.objects.strategies.UpdateStrategy;

@@ -1,9 +1,9 @@
 package app.cli.command;
 
 import app.api.ApiFacade;
-import util.Assert;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import util.Assert;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )

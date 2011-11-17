@@ -1,12 +1,12 @@
 package work.unit.dom;
 
-import util.Assert;
 import constructor.dom.Blank;
 import constructor.dom.UsedObject;
 import debug.Snapshot;
+import util.Assert;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Igor Usenko

@@ -1,14 +1,18 @@
 package app.cli.parser;
 
 import app.api.ApiFacade;
-import app.cli.command.*;
-import static app.cli.parser.OptionNameTable.WORKSPACE_OPTION_SHORT_NAME;
+import app.cli.command.Command;
+import app.cli.command.GoogleReaderUpdateProfileCommand;
+import app.cli.command.LoadSettingsCommand;
+import app.cli.command.LoadWorkspaceCommand;
 import org.apache.commons.cli.CommandLine;
 import util.Assert;
-import static util.CollectionUtils.newArrayList;
 
 import java.util.List;
 import java.util.Map;
+
+import static app.cli.parser.OptionNameTable.WORKSPACE_OPTION_SHORT_NAME;
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
@@ -34,7 +38,7 @@ public class GoogleReaderUpdateProfileOptionParser implements OptionParser {
         if (_commandLine.hasOption(WORKSPACE_OPTION_SHORT_NAME)) {
             workspaceName = _commandLine.getOptionValue(WORKSPACE_OPTION_SHORT_NAME);
         }
-        
+
         result.add(new LoadSettingsCommand(settingsName, _api));
         result.add(new LoadWorkspaceCommand(workspaceName, _api));
 

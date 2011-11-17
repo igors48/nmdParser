@@ -4,14 +4,15 @@ import app.api.ApiFacade;
 import app.cli.command.Command;
 import app.cli.command.CreateWorkspaceCommand;
 import app.cli.command.LoadSettingsCommand;
-import static app.cli.parser.OptionNameTable.CREATE_WORKSPACE_OPTION_SHORT_NAME;
-import static app.cli.parser.OptionNameTable.SETTINGS_OPTION_SHORT_NAME;
 import org.apache.commons.cli.CommandLine;
 import util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static app.cli.parser.OptionNameTable.CREATE_WORKSPACE_OPTION_SHORT_NAME;
+import static app.cli.parser.OptionNameTable.SETTINGS_OPTION_SHORT_NAME;
 
 /**
  * Парсер опции "создать рабочее пространство"

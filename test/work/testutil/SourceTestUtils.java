@@ -1,7 +1,7 @@
 package work.testutil;
 
-import dated.item.modification.stream.ModificationList;
 import dated.item.modification.Modification;
+import dated.item.modification.stream.ModificationList;
 
 /**
  * @author Igor Usenko
@@ -27,7 +27,9 @@ public final class SourceTestUtils {
         }
 
         return result;
-    }    private SourceTestUtils() {
+    }
+
+    private SourceTestUtils() {
         // empty
     }
 }

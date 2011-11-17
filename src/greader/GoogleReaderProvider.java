@@ -6,21 +6,17 @@ import greader.entities.FeedItems;
 import greader.entities.Subscription;
 import greader.entities.Subscriptions;
 import greader.profile.Account;
-import html.HttpData;
-import http.BatchLoader;
-import http.data.DataUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import util.Assert;
 import util.CollectionUtils;
-import static util.CollectionUtils.newArrayList;
-import static util.CollectionUtils.newHashMap;
 import util.JsonCodec;
 
 import java.io.StringReader;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
@@ -37,7 +33,7 @@ public class GoogleReaderProvider {
     private final String FEED_PREFIX = "feed/";
 
     private static final String GET_UNREAD_ITEMS_URL = "http://www.google.com/reader/api/0/stream/contents/feed/%s?";
-    private static final String GET_UNREAD_ITEMS_REQUEST ="xt=user/-/state/com.google/read&n=1000";
+    private static final String GET_UNREAD_ITEMS_REQUEST = "xt=user/-/state/com.google/read&n=1000";
 
     private static final String GET_TOKEN_URL = "http://www.google.com/reader/api/0/token";
 
@@ -45,13 +41,13 @@ public class GoogleReaderProvider {
     private static final String MARK_ALL_AS_READ_REQUEST = "client=scroll&s=feed/%s&T=%s";
 
     private final HttpSecureAdapter httpSecureAdapter;
-    
+
     private final Log log;
 
     public GoogleReaderProvider(final HttpSecureAdapter _httpSecureAdapter) {
         Assert.notNull(_httpSecureAdapter, "Batch loader is null");
-        this.httpSecureAdapter =_httpSecureAdapter;
-        
+        this.httpSecureAdapter = _httpSecureAdapter;
+
         this.log = LogFactory.getLog(getClass());
     }
 
@@ -177,5 +173,5 @@ public class GoogleReaderProvider {
             super(message, cause);
         }
     }
-    
+
 }

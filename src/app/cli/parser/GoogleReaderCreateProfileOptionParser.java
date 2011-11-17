@@ -6,10 +6,11 @@ import app.cli.command.GoogleReaderCreateProfileCommand;
 import app.cli.command.LoadSettingsCommand;
 import org.apache.commons.cli.CommandLine;
 import util.Assert;
-import static util.CollectionUtils.newArrayList;
 
 import java.util.List;
 import java.util.Map;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )

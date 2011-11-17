@@ -1,10 +1,9 @@
 package work.unit.sequenser;
 
 import junit.framework.TestCase;
+import util.sequense.StringSequencer;
 
 import java.util.List;
-
-import util.sequense.StringSequencer;
 
 /**
  * @author Igor Usenko
@@ -17,7 +16,8 @@ public class StringSequencerTest extends TestCase {
     }
 
     // первоначальный тест
-    public void testSmoke(){
+
+    public void testSmoke() {
         List<String> result = StringSequencer.getSequence("a*b", 0, 1, 1, 1, 0, "");
 
         assertFalse(result.isEmpty());
@@ -27,7 +27,8 @@ public class StringSequencerTest extends TestCase {
     }
 
     // тест - место вставки номеров отсутствует
-    public void testNoWildcard(){
+
+    public void testNoWildcard() {
         List<String> result = StringSequencer.getSequence("ab", 0, 1, 1, 1, 0, "");
 
         assertFalse(result.isEmpty());
@@ -36,7 +37,8 @@ public class StringSequencerTest extends TestCase {
     }
 
     // тест - двухсимвольный паддинг с символом по умолчанию
-    public void testTwoSymbolWildcard(){
+
+    public void testTwoSymbolWildcard() {
         List<String> result = StringSequencer.getSequence("a*b", 0, 1, 1, 1, 2, "");
 
         assertFalse(result.isEmpty());
@@ -46,7 +48,8 @@ public class StringSequencerTest extends TestCase {
     }
 
     // тест - трехсимвольный паддинг с пробелом
-    public void testThreeSpaceWildcard(){
+
+    public void testThreeSpaceWildcard() {
         List<String> result = StringSequencer.getSequence("a*b", 0, 1, 1, 1, 3, " ");
 
         assertFalse(result.isEmpty());
@@ -56,7 +59,8 @@ public class StringSequencerTest extends TestCase {
     }
 
     // тест - отсутствия обрезки если длина превышает заданную
-    public void testNoCrop(){
+
+    public void testNoCrop() {
         List<String> result = StringSequencer.getSequence("a*b", 21, 22, 1, 1, 1, " ");
 
         assertFalse(result.isEmpty());

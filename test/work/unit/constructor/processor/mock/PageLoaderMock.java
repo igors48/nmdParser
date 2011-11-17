@@ -1,10 +1,10 @@
 package work.unit.constructor.processor.mock;
 
 import app.controller.Controller;
+import html.HttpData;
 import http.BatchLoader;
 import http.Result;
 import http.data.MemoryData;
-import html.HttpData;
 import util.Assert;
 
 import java.io.UnsupportedEncodingException;
@@ -42,7 +42,7 @@ public class PageLoaderMock implements BatchLoader {
     }
 
     public HttpData loadUrl(String _url) {
-        return null;  
+        return null;
     }
 
     public String getReferer() {

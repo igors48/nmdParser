@@ -2,13 +2,14 @@ package resource.split;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import static resource.split.ImageHelperTools.*;
 import util.Assert;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static resource.split.ImageHelperTools.*;
 
 /**
  * @author Igor Usenko

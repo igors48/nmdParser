@@ -1,7 +1,7 @@
 package work.unit.constructor.snippet;
 
-import junit.framework.TestCase;
 import constructor.objects.snippet.adapter.StandardSnippetProcessorAdapterUtils;
+import junit.framework.TestCase;
 
 /**
  * @author Igor Usenko
@@ -14,14 +14,16 @@ public class StandardSnippetProcessorAdapterUtilsTest extends TestCase {
     }
 
     // проверка имени с расширением
-    public void testWithExtension(){
+
+    public void testWithExtension() {
         String result = StandardSnippetProcessorAdapterUtils.getPropertiesFileName("C:/test/test/sample.xml");
 
         assertTrue(result.matches("C:.test.test.sample\\.timestamp"));
     }
 
     // проверка имени без расширения
-    public void testWithoutExtension(){
+
+    public void testWithoutExtension() {
         String result = StandardSnippetProcessorAdapterUtils.getPropertiesFileName("C:/test/test/sample");
 
         assertTrue(result.matches("C:.test.test.sample\\.timestamp"));

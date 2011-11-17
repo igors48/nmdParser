@@ -1,11 +1,10 @@
 package work.unit.javastylelocator;
 
+import constructor.dom.locator.MaskUtils;
 import junit.framework.TestCase;
 
-import java.util.List;
 import java.util.ArrayList;
-
-import constructor.dom.locator.MaskUtils;
+import java.util.List;
 
 /**
  * @author Igor Usenko
@@ -18,6 +17,7 @@ public class MaskUtilsTest extends TestCase {
     }
 
     // тест парсинга включаемых
+
     public void testParseAccepted() {
         List<String> fixture = new ArrayList<String>();
         fixture.add("first");
@@ -30,6 +30,7 @@ public class MaskUtilsTest extends TestCase {
     }
 
     // тест парсинга исключаемых
+
     public void testParseExcepted() {
         List<String> fixture = new ArrayList<String>();
         fixture.add("first");

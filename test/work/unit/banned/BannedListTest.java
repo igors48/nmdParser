@@ -8,7 +8,7 @@ import junit.framework.TestCase;
  *         Date: 06.05.2009
  */
 public class BannedListTest extends TestCase {
-    
+
     private static final String SITE01 = "site01";
     private static final String SITE02 = "site02";
     private static final String SITE03 = "site03";
@@ -19,23 +19,26 @@ public class BannedListTest extends TestCase {
     }
 
     // �������������� ����
-    public void testSmoke(){
+
+    public void testSmoke() {
         BannedList list = new BannedList(2, 3);
 
         assertFalse(list.isBanned(SITE01));
     }
 
     // ���� �� ��, ��� ���� �� �������, ���� �� ���� ������������ ����������
-    public void testComplainsNotEnough(){
+
+    public void testComplainsNotEnough() {
         BannedList list = new BannedList(2, 3);
 
         list.complain(SITE01);
 
         assertFalse(list.isBanned(SITE01));
     }
-    
+
     // ���� �� ��, ��� ���� �������, ���� ���������� ����������
-    public void testComplainsEnough(){
+
+    public void testComplainsEnough() {
         BannedList list = new BannedList(2, 3);
 
         list.complain(SITE01);
@@ -45,7 +48,8 @@ public class BannedListTest extends TestCase {
     }
 
     // ���� �� ��, ��� �� ���� ������ ������� ����������, ���� ���������� ����������
-    public void testComplainsEnoughRightly(){
+
+    public void testComplainsEnoughRightly() {
         BannedList list = new BannedList(2, 3);
 
         list.complain(SITE01);
@@ -57,7 +61,8 @@ public class BannedListTest extends TestCase {
     }
 
     // ���� �� �������� ������� ������
-    public void testLimit(){
+
+    public void testLimit() {
         BannedList list = new BannedList(2, 2);
 
         list.complain(SITE01);

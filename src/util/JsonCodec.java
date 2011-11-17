@@ -13,7 +13,7 @@ public final class JsonCodec {
     public static <T> T fromJson(final String _data, final Class<T> _clazz) {
         Assert.notNull(_data, "Data is null");
         Assert.notNull(_clazz, "Class is null");
-        
+
         return INSTANCE.fromJson(_data, _clazz);
     }
 

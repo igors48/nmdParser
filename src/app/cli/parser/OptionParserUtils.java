@@ -1,10 +1,11 @@
 package app.cli.parser;
 
-import static app.cli.parser.OptionNameTable.FORCED_MODE_OPTION_SHORT_NAME;
 import org.apache.commons.cli.CommandLine;
 import util.Assert;
 
 import java.util.*;
+
+import static app.cli.parser.OptionNameTable.FORCED_MODE_OPTION_SHORT_NAME;
 
 /**
  * Утилиты для парсера опций

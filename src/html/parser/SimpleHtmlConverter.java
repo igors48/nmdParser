@@ -1,7 +1,6 @@
 package html.parser;
 
 import dated.item.atdc.HtmlContent;
-import http.Data;
 import flowtext.DocumentBuilder;
 import flowtext.DocumentBuilderContext;
 import flowtext.Section;
@@ -11,6 +10,7 @@ import html.parser.tag.format.CancelTextFormatHandler;
 import html.parser.tag.format.EmphasisTextFormatHandler;
 import html.parser.tag.format.StrongTextFormatHandler;
 import html.parser.tag.section.*;
+import http.Data;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import util.Assert;

@@ -1,11 +1,11 @@
 package work.unit.texttools;
 
 import junit.framework.TestCase;
-import util.batchtext.Boundary;
 import util.batchtext.BatchTextTools;
+import util.batchtext.Boundary;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Igor Usenko
@@ -18,7 +18,8 @@ public class BatchTextToolsJoinListTest extends TestCase {
     }
 
     // первоначальный тест
-    public void testSmoke(){
+
+    public void testSmoke() {
         Boundary boundary01 = new Boundary(2, 10);
         Boundary boundary02 = new Boundary(8, 12);
 
@@ -34,7 +35,8 @@ public class BatchTextToolsJoinListTest extends TestCase {
     }
 
     // тест на пустой список
-    public void testEmpty(){
+
+    public void testEmpty() {
         List<Boundary> list = new ArrayList<Boundary>();
 
         List<Boundary> result = BatchTextTools.joinList(list);
@@ -43,7 +45,8 @@ public class BatchTextToolsJoinListTest extends TestCase {
     }
 
     // тест непересекающихся
-    public void testNonIntercepted(){
+
+    public void testNonIntercepted() {
         Boundary boundary01 = new Boundary(2, 6);
         Boundary boundary02 = new Boundary(8, 12);
 
@@ -61,7 +64,8 @@ public class BatchTextToolsJoinListTest extends TestCase {
     }
 
     // тест поглощения
-    public void testConsumed(){
+
+    public void testConsumed() {
         Boundary boundary01 = new Boundary(2, 6);
         Boundary boundary02 = new Boundary(8, 12);
         Boundary boundary03 = new Boundary(4, 10);

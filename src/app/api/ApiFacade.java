@@ -260,7 +260,7 @@ public interface ApiFacade extends BlitzRequestHandler {
     /**
      * Создает Google Reader профайл
      *
-     * @param _email адрес эл. почты
+     * @param _email    адрес эл. почты
      * @param _password пароль
      * @throws FatalException если не получилось
      */
@@ -285,7 +285,7 @@ public interface ApiFacade extends BlitzRequestHandler {
     /**
      * Изменяет пароль Google Reader профайла
      *
-     * @param _email адрес эл. почты
+     * @param _email       адрес эл. почты
      * @param _newPassword новый пароль
      * @throws FatalException если не получилось
      */
@@ -295,7 +295,7 @@ public interface ApiFacade extends BlitzRequestHandler {
      * Тестирует фиды Google Reader профайла
      *
      * @param _email адрес эл. почты
-     * @param _feed фид из профиля подпадающий под тестирование
+     * @param _feed  фид из профиля подпадающий под тестирование
      * @throws FatalException если не получилось
      */
     void testGoogleReaderProfile(String _email, String _feed) throws FatalException;

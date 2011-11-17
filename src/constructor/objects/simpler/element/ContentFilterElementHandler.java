@@ -3,7 +3,6 @@ package constructor.objects.simpler.element;
 import constructor.dom.ConstructorFactory;
 import constructor.dom.ElementHandler;
 import constructor.objects.simpler.configuration.SimplerConfiguration;
-import constructor.objects.snippet.configuration.SnippetConfiguration;
 import org.w3c.dom.Element;
 import util.Assert;
 

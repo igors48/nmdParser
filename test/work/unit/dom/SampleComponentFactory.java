@@ -1,6 +1,9 @@
 package work.unit.dom;
 
-import constructor.dom.*;
+import constructor.dom.AttributeHandler;
+import constructor.dom.Blank;
+import constructor.dom.ComponentFactory;
+import constructor.dom.ElementHandler;
 import constructor.dom.loader.MappedElementHandler;
 import util.Assert;
 

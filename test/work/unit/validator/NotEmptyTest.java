@@ -1,8 +1,8 @@
 package work.unit.validator;
 
-import junit.framework.TestCase;
 import app.iui.validator.Rule;
 import app.iui.validator.rules.NotEmpty;
+import junit.framework.TestCase;
 
 /**
  * @author Igor Usenko

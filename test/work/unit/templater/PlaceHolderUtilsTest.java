@@ -1,13 +1,13 @@
 package work.unit.templater;
 
-import junit.framework.TestCase;
-import app.templater.PlaceHolderUtils;
 import app.templater.PlaceHolderBoundary;
 import app.templater.PlaceHolderInfo;
+import app.templater.PlaceHolderUtils;
+import junit.framework.TestCase;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Igor Usenko
@@ -20,14 +20,16 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // строка без плейсхолдеров не меняется
-    public void testSmoke(){
+
+    public void testSmoke() {
         String result = PlaceHolderUtils.replace("test", new HashMap<String, String>());
 
         assertEquals("test", result);
     }
 
     // один плейсхолдер
-    public void testOnePlaceHolder(){
+
+    public void testOnePlaceHolder() {
         Map<String, String> values = new HashMap<String, String>();
         values.put("value", "data");
 
@@ -38,7 +40,8 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // три одинаковых плейсхолдера
-    public void testThreePlaceHolder(){
+
+    public void testThreePlaceHolder() {
         Map<String, String> values = new HashMap<String, String>();
         values.put("value", "data");
 
@@ -47,9 +50,10 @@ public class PlaceHolderUtilsTest extends TestCase {
 
         assertEquals("test data+data=data", result);
     }
-    
+
     // при остутствии данных плейсхолдер не меняется
-    public void testSomeDifferent(){
+
+    public void testSomeDifferent() {
         Map<String, String> values = new HashMap<String, String>();
         values.put("value", "data");
         values.put("avg", "5");
@@ -57,17 +61,19 @@ public class PlaceHolderUtilsTest extends TestCase {
         String result = PlaceHolderUtils.replace("test " + PlaceHolderUtils.getPlaceholder("value") + "+"
                 + PlaceHolderUtils.getPlaceholder("mean") + "=" + PlaceHolderUtils.getPlaceholder("avg"), values);
 
-        assertEquals("test data+" + PlaceHolderUtils.getPlaceholder("mean") +  "=5", result);
+        assertEquals("test data+" + PlaceHolderUtils.getPlaceholder("mean") + "=5", result);
     }
 
     // генерация плейсхолдера со значением по умолчанию
+
     public void testGetPlaceHolderWithDefault() {
         String result = PlaceHolderUtils.getPlaceholder("name", "default");
 
         assertEquals("${name|default}", result);
     }
-    
+
     // генерация плейсхолдера с пустым значением по умолчанию
+
     public void testGetPlaceHolderWithEmptyDefault() {
         String result = PlaceHolderUtils.getPlaceholder("name", "");
 
@@ -75,6 +81,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // генерация плейсхолдера с null значением по умолчанию
+
     public void testGetPlaceHolderWithNullDefault() {
         String result = PlaceHolderUtils.getPlaceholder("name", null);
 
@@ -82,6 +89,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // извлечение значения по умолчанию
+
     public void testParseDefaultValue() {
         String result = PlaceHolderUtils.parseDefaultValue("name|val");
 
@@ -89,13 +97,15 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // извлечение пустого значения по умолчанию
+
     public void testParseEmptyDefaultValue() {
         String result = PlaceHolderUtils.parseDefaultValue("name|");
 
         assertEquals("", result);
     }
-    
+
     // обработка отсутствия значения по умолчанию
+
     public void testParseNoDefaultValue() {
         String result = PlaceHolderUtils.parseDefaultValue("name");
 
@@ -103,13 +113,15 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // обработка отсутствия имени
+
     public void testParseNoNameDefaultValue() {
         String result = PlaceHolderUtils.parseDefaultValue("|val");
 
         assertEquals("val", result);
     }
-    
+
     // обработка отсутствия имени и значения по умолчанию
+
     public void testParseNoNameNoDefaultValue() {
         String result = PlaceHolderUtils.parseDefaultValue("|");
 
@@ -117,6 +129,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // извлечение имени - задано имя и значение по умолчанию
+
     public void testParseNameWithDefaultValue() {
         String result = PlaceHolderUtils.parseName("name|val");
 
@@ -124,13 +137,15 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // извлечение имени - задано имя без значения по умолчанию
+
     public void testParseNameWithoutDefaultValue() {
         String result = PlaceHolderUtils.parseName("name");
 
         assertEquals("name", result);
     }
-    
+
     // извлечение имени - задано имя с пустым значением по умолчанию
+
     public void testParseNameWithEmptyDefaultValue() {
         String result = PlaceHolderUtils.parseName("name|");
 
@@ -138,6 +153,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // извлечение имени - не задано имя и пустое значение по умолчанию
+
     public void testParseEmptyNameWithEmptyDefaultValue() {
         String result = PlaceHolderUtils.parseName("|");
 
@@ -145,6 +161,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // извлечение границ плейсхолдера
+
     public void testGetBoundary() {
         PlaceHolderBoundary result = PlaceHolderUtils.getBoundary(new StringBuilder("01${45}7"), 0);
 
@@ -154,6 +171,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // возврат null если плейсхолдеров нет
+
     public void testGetBoundaryNoPlaceHolders() {
         PlaceHolderBoundary result = PlaceHolderUtils.getBoundary(new StringBuilder("017"), 0);
 
@@ -161,13 +179,15 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // malformed плейсхолдер не ловится - случай 1
+
     public void testMalformedNotDetectedVar1() {
         PlaceHolderBoundary result = PlaceHolderUtils.getBoundary(new StringBuilder("01${7sdfsdf"), 0);
 
         assertNull(result);
     }
-    
+
     // malformed плейсхолдер не ловится - случай 2
+
     public void testMalformedNotDetectedVar2() {
         PlaceHolderBoundary result = PlaceHolderUtils.getBoundary(new StringBuilder("017sdf}sdf"), 0);
 
@@ -175,6 +195,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // извлекаются границы первого попавшегося плейсхолдера
+
     public void testGetFirstBoundary() {
         PlaceHolderBoundary result = PlaceHolderUtils.getBoundary(new StringBuilder("01${45}7${asdf}asdfas"), 0);
 
@@ -184,6 +205,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // ловится сначала первый плейсхолдер, а потом второй
+
     public void testGetBoundarySequental() {
         PlaceHolderBoundary result = PlaceHolderUtils.getBoundary(new StringBuilder("01${45}7${asdf}asdfas"), 0);
 
@@ -197,6 +219,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // два плейсхолдера подряд
+
     public void testOneAfterOne() {
         PlaceHolderBoundary result = PlaceHolderUtils.getBoundary(new StringBuilder("asd${45}${asdf}asd"), 0);
 
@@ -214,6 +237,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // короткая строка два плейсхолдера подряд первый заменяется на один символ
+
     public void testOneAfterOneSmallData() {
         Map<String, String> values = new HashMap<String, String>();
         values.put("first", "f");
@@ -225,6 +249,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // тест получения информации о плейсхолдерах: плейсхолдеров нет
+
     public void testPlaceHolderInfoNoPlaceHolders() {
         List<PlaceHolderInfo> result = PlaceHolderUtils.getPlaceHolderInfos("abs");
 
@@ -232,6 +257,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // тест получения информации о плейсхолдерах: один плейсхолдер без дефолтного значения
+
     public void testPlaceHolderInfoOnePlaceHoldersWithoutDef() {
         List<PlaceHolderInfo> result = PlaceHolderUtils.getPlaceHolderInfos("abs${one}");
 
@@ -241,6 +267,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // тест получения информации о плейсхолдерах: один плейсхолдер с дефолтным значением
+
     public void testPlaceHolderInfoOnePlaceHoldersWithDef() {
         List<PlaceHolderInfo> result = PlaceHolderUtils.getPlaceHolderInfos("abs${one|two}");
 
@@ -250,6 +277,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     }
 
     // тест получения информации о плейсхолдерах: три плейсхолдера
+
     public void testPlaceHolderInfohThreePlaceHolders() {
         List<PlaceHolderInfo> result = PlaceHolderUtils.getPlaceHolderInfos("${one|two}asd${three}asdfasd${four|five}");
 

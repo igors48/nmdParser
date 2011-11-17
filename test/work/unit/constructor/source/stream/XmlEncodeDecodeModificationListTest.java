@@ -3,7 +3,6 @@ package work.unit.constructor.source.stream;
 import dated.item.modification.Modification;
 import dated.item.modification.stream.ModificationList;
 import junit.framework.TestCase;
-import static work.testutil.ModificationTestUtils.assertModificationEquals;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -11,6 +10,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Date;
+
+import static work.testutil.ModificationTestUtils.assertModificationEquals;
 
 /**
  * @author Igor Usenko
@@ -23,6 +24,7 @@ public class XmlEncodeDecodeModificationListTest extends TestCase {
     }
 
     // проверка записи/чтения списка модификаций
+
     public void testSmoke() throws IOException {
         Modification modification01 = new Modification(new Date(), "URL01", "TITLE01", "DESCRIPTION01");
         Modification modification02 = new Modification(new Date(), "URL02");

@@ -1,12 +1,13 @@
 package constructor.objects.processor.concat;
 
 import constructor.objects.processor.AbstractVariableProcessor;
-import static constructor.objects.processor.VariableProcessorUtils.specified;
 import debug.Snapshot;
 import debug.snapshot.ProcessorSnapshot;
 import util.Assert;
 import variables.VariableIterator;
 import variables.Variables;
+
+import static constructor.objects.processor.VariableProcessorUtils.specified;
 
 /**
  * Процессор конкатенации строк

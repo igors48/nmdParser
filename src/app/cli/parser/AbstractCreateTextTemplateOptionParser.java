@@ -5,8 +5,6 @@ import app.cli.command.Command;
 import app.cli.command.CreateTemplatesCommand;
 import app.cli.command.LoadSettingsCommand;
 import app.cli.command.LoadWorkspaceCommand;
-import static app.cli.parser.OptionNameTable.SETTINGS_OPTION_SHORT_NAME;
-import static app.cli.parser.OptionNameTable.WORKSPACE_OPTION_SHORT_NAME;
 import app.templater.TemplateParameters;
 import app.templater.TemplateType;
 import org.apache.commons.cli.CommandLine;
@@ -15,6 +13,9 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static app.cli.parser.OptionNameTable.SETTINGS_OPTION_SHORT_NAME;
+import static app.cli.parser.OptionNameTable.WORKSPACE_OPTION_SHORT_NAME;
 
 /**
  * Абстрактный парсер опции создания шаблонов для обработки фидов

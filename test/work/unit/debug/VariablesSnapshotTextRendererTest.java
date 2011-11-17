@@ -17,6 +17,7 @@ public class VariablesSnapshotTextRendererTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() {
         VariablesSnapshot snapshot = new VariablesSnapshot();
         snapshot.addElement("name", 1, "value01", false);
@@ -33,6 +34,7 @@ public class VariablesSnapshotTextRendererTest extends TestCase {
     }
 
     // тест двух переменных
+
     public void testTwoVariables() {
         VariablesSnapshot snapshot = new VariablesSnapshot();
         snapshot.addElement("name1", 1, "value01", false);

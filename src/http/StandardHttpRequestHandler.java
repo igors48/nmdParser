@@ -64,8 +64,8 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
 
         if (_context.isProxyUse()) {
             this.httpClient.getCredentialsProvider().setCredentials(
-                new AuthScope(_context.getProxyHost(), _context.getProxyPort()),
-                new UsernamePasswordCredentials(_context.getProxyUser(), _context.getProxyPassword()));
+                    new AuthScope(_context.getProxyHost(), _context.getProxyPort()),
+                    new UsernamePasswordCredentials(_context.getProxyUser(), _context.getProxyPassword()));
 
             HttpHost proxy = new HttpHost(_context.getProxyHost(), _context.getProxyPort());
 
@@ -128,7 +128,7 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
             });
 
             Scheme httpsScheme = new Scheme(HTTPS_SCHEME, HTTPS_DEFAULT_PORT, sslSocketFactory);
-            
+
             _schemeRegistry.register(httpsScheme);
         } catch (Exception e) {
             this.log.error("Error registering HTTPS scheme", e);

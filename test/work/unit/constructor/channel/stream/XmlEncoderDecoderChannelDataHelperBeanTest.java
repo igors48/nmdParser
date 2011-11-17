@@ -1,16 +1,15 @@
 package work.unit.constructor.channel.stream;
 
-import junit.framework.TestCase;
-
-import java.io.ByteArrayOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.beans.XMLEncoder;
-import java.beans.XMLDecoder;
-
 import constructor.objects.channel.core.ChannelData;
 import constructor.objects.channel.core.stream.ChannelDataHelperBean;
+import junit.framework.TestCase;
 import work.testutil.ChannelDataTestUtils;
+
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 /**
  * @author Igor Usenko
@@ -23,6 +22,7 @@ public class XmlEncoderDecoderChannelDataHelperBeanTest extends TestCase {
     }
 
     // проверка записи/чтения данных канала
+
     public void testSmoke() throws IOException {
         ChannelData original = ChannelDataTestUtils.createChannelDataFixture01();
 

@@ -13,7 +13,6 @@ import converter.format.fb2.resource.Fb2ResourceConversionContext;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
 import debug.DebugConsole;
 import http.BatchLoader;
-import http.HttpRequestHandler;
 import resource.ConverterFactory;
 import timeservice.TimeService;
 import util.Assert;
@@ -261,7 +260,7 @@ public class StandardSimplerAdapter implements SimplerAdapter {
     }
 
     public boolean isAutoContentFiltering() {
-        return this.configuration.isAutoContentFiltering();    
+        return this.configuration.isAutoContentFiltering();
     }
 
     public DebugConsole getDebugConsole() {

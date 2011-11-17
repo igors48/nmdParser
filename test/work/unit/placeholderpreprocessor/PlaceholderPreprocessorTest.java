@@ -3,8 +3,8 @@ package work.unit.placeholderpreprocessor;
 import constructor.dom.Preprocessor;
 import constructor.dom.preprocessor.PlaceholderPreprocessor;
 import junit.framework.TestCase;
-import work.testutil.SaxLoaderTestUtils;
 import util.IOTools;
+import work.testutil.SaxLoaderTestUtils;
 
 import java.io.*;
 import java.util.HashMap;
@@ -21,6 +21,7 @@ public class PlaceholderPreprocessorTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws Preprocessor.PreprocessorException {
         Map<String, String> values = new HashMap<String, String>();
         values.put("key01", "value01");
@@ -55,6 +56,7 @@ public class PlaceholderPreprocessorTest extends TestCase {
     }
 
     // если не хватает данных - выбрасывается исключение
+
     public void testNotEnoughDataException() {
         Map<String, String> values = new HashMap<String, String>();
         values.put("key01", "value01");

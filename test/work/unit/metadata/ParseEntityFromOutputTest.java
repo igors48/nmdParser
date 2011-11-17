@@ -1,16 +1,15 @@
 package work.unit.metadata;
 
-import junit.framework.TestCase;
-
-import java.util.List;
-import java.util.ArrayList;
-
+import app.iui.entity.Entity;
 import app.metadata.ObjectMetaData;
 import app.metadata.ObjectMetaDataTools;
-import app.iui.entity.Entity;
 import constructor.dom.ObjectType;
 import constructor.dom.UsedObject;
+import junit.framework.TestCase;
 import work.unit.dom.SampleObject01;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Igor Usenko
@@ -23,6 +22,7 @@ public class ParseEntityFromOutputTest extends TestCase {
     }
 
     // если нужной сущности нет - возвращается null
+
     public void testNotExists() {
         List<ObjectMetaData> datas = new ArrayList<ObjectMetaData>();
 
@@ -32,6 +32,7 @@ public class ParseEntityFromOutputTest extends TestCase {
     }
 
     // не найден канал - возвращается null
+
     public void testNotChannelExists() {
         List<ObjectMetaData> datas = new ArrayList<ObjectMetaData>();
 
@@ -43,6 +44,7 @@ public class ParseEntityFromOutputTest extends TestCase {
     }
 
     // не найден источник - возвращается null
+
     public void testNotSourceExists() {
         List<ObjectMetaData> datas = new ArrayList<ObjectMetaData>();
 
@@ -58,6 +60,7 @@ public class ParseEntityFromOutputTest extends TestCase {
     }
 
     // все найдено
+
     public void testAllOk() {
         List<ObjectMetaData> datas = new ArrayList<ObjectMetaData>();
 
@@ -81,6 +84,7 @@ public class ParseEntityFromOutputTest extends TestCase {
     }
 
     // сборка исходников
+
     public void testCollectSources() {
         List<ObjectMetaData> datas = new ArrayList<ObjectMetaData>();
 

@@ -6,11 +6,12 @@ import constructor.dom.ObjectType;
 import constructor.dom.UsedObject;
 import constructor.objects.interpreter.configuration.InterpreterConfiguration;
 import junit.framework.TestCase;
-import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
+
+import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
 /**
  * @author Igor Usenko
@@ -23,6 +24,7 @@ public class InterpreterConfigurationTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws Constructor.ConstructorException {
         Map<String, String> streams = new HashMap<String, String>();
         streams.put("interpreter", "<interpreter><fragment></fragment></interpreter>");
@@ -37,6 +39,7 @@ public class InterpreterConfigurationTest extends TestCase {
     }
 
     // тест с процессорами
+
     public void testWithProcessor() throws Constructor.ConstructorException {
         Map<String, String> streams = new HashMap<String, String>();
         streams.put("interpreter", "<interpreter><fragment content=\"processor\"/></interpreter>");
@@ -52,6 +55,7 @@ public class InterpreterConfigurationTest extends TestCase {
     }
 
     // тест определения зависимостей
+
     public void testDependencies() throws Constructor.ConstructorException {
         Map<String, String> streams = new HashMap<String, String>();
         streams.put("interpreter", "<interpreter pages=\"pages\" fragments=\"fragments\"><fragment nick=\"nick\" info=\"info\" avatar=\"avatar\" title=\"title\" date=\"date\" content=\"content\" dateParser=\"parser\"/></interpreter>");

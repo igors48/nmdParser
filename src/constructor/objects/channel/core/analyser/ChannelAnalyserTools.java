@@ -16,6 +16,7 @@ public final class ChannelAnalyserTools {
     public static final int TITLE_GROUP = 1;
 
     //todo где-то уже было
+
     public static String getHostName(final String _url) {
         String result = " ";
 

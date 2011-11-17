@@ -1,13 +1,13 @@
 package work.unit.constructor.source.modificator;
 
-import junit.framework.TestCase;
-import constructor.objects.source.core.processor.UrlModificator;
 import constructor.objects.source.core.ModificationProcessor;
+import constructor.objects.source.core.processor.UrlModificator;
 import dated.item.modification.Modification;
+import junit.framework.TestCase;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Igor Usenko
@@ -20,6 +20,7 @@ public class UrlModificatorTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws ModificationProcessor.ModificationProcessorException {
         UrlModificator modificator = new UrlModificator(new MockProcessor("", ""));
 
@@ -32,8 +33,9 @@ public class UrlModificatorTest extends TestCase {
         assertEquals(1, processed.size());
         assertEquals("url", processed.get(0).getUrl());
     }
-    
+
     // тест списка из трех модификаций - порядок сохранен
+
     public void testThreeMods() throws ModificationProcessor.ModificationProcessorException {
         UrlModificator modificator = new UrlModificator(new MockProcessor("", ""));
 
@@ -54,6 +56,7 @@ public class UrlModificatorTest extends TestCase {
     }
 
     // постобработчик адресов вернул более одного адреса
+
     public void testPostMoreThanOne() throws ModificationProcessor.ModificationProcessorException {
         UrlModificator modificator = new UrlModificator(new DoublerMockProcessor("", ""));
 

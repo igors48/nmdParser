@@ -1,19 +1,18 @@
 package work.unit.fb2.resource.cache;
 
-import junit.framework.TestCase;
-import work.testutil.CompTestsUtils;
-
-import java.io.IOException;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Arrays;
-
 import converter.format.fb2.resource.resolver.cache.CacheEntry;
 import converter.format.fb2.resource.resolver.cache.InDirectoryStorageAdapter;
 import converter.format.fb2.resource.resolver.cache.StorageAdapter;
 import converter.format.fb2.resource.resolver.cache.StoredItem;
 import http.Data;
 import http.data.MemoryData;
+import junit.framework.TestCase;
+import work.testutil.CompTestsUtils;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Igor Usenko
@@ -28,6 +27,7 @@ public class InDirectoryStorageAdapterTest extends TestCase {
     }
 
     // �������������� ���� ���������� � ������ ������� ��������� ����
+
     public void testStoreLoadToc() throws IOException, StorageAdapter.StorageAdapterException {
         String dir = TEST_ROOT + "testStoreLoadToc/";
         CompTestsUtils.cleanupDir(dir);
@@ -58,6 +58,7 @@ public class InDirectoryStorageAdapterTest extends TestCase {
     }
 
     // ������� ������ TOC ����� ��� ��� 
+
     public void testNoToc() throws IOException, StorageAdapter.StorageAdapterException {
         String dir = TEST_ROOT + "testNoToc/";
         CompTestsUtils.cleanupDir(dir);
@@ -70,6 +71,7 @@ public class InDirectoryStorageAdapterTest extends TestCase {
     }
 
     // ���������� � �������� ������
+
     public void testStoreLoadData() throws IOException, StorageAdapter.StorageAdapterException, Data.DataException {
         String dir = TEST_ROOT + "testStoreLoadData/";
         CompTestsUtils.cleanupDir(dir);
@@ -90,6 +92,7 @@ public class InDirectoryStorageAdapterTest extends TestCase {
     }
 
     // ��������� ����� ����������� ������
+
     public void testGetMap() throws IOException, StorageAdapter.StorageAdapterException, Data.DataException {
         String dir = TEST_ROOT + "testStoreLoadData/";
         CompTestsUtils.cleanupDir(dir);
@@ -105,7 +108,7 @@ public class InDirectoryStorageAdapterTest extends TestCase {
         entries.put("address01", entry01);
 
         adapter.storeToc(entries);
-        
+
         byte[] buffer01 = new byte[3];
         buffer01[0] = 1;
         buffer01[1] = 2;
@@ -132,12 +135,13 @@ public class InDirectoryStorageAdapterTest extends TestCase {
         String id03 = adapter.store(data03);
 
         Map<String, StoredItem> map = adapter.getMap();
-        
+
         assertNotNull(map);
         assertEquals(3, map.size());
     }
 
     // ��������� �������� ����������� ������
+
     public void testRemoveData() throws IOException, StorageAdapter.StorageAdapterException, Data.DataException {
         String dir = TEST_ROOT + "testStoreLoadData/";
         CompTestsUtils.cleanupDir(dir);

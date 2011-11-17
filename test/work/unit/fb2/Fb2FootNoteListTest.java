@@ -1,7 +1,7 @@
 package work.unit.fb2;
 
-import junit.framework.TestCase;
 import converter.format.fb2.footnotes.Fb2FootNoteList;
+import junit.framework.TestCase;
 
 /**
  * @author Igor Usenko
@@ -14,7 +14,8 @@ public class Fb2FootNoteListTest extends TestCase {
     }
 
     // первоначальный тест
-    public void testSmoke(){
+
+    public void testSmoke() {
         Fb2FootNoteList list = new Fb2FootNoteList();
 
         String tag01 = list.appendFootNote("first");
@@ -27,7 +28,8 @@ public class Fb2FootNoteListTest extends TestCase {
     }
 
     // тест одинакового тега на одинаковые футноты
-    public void testSame(){
+
+    public void testSame() {
         Fb2FootNoteList list = new Fb2FootNoteList();
 
         String tag01 = list.appendFootNote("same");

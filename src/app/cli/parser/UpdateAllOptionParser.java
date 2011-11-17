@@ -2,7 +2,6 @@ package app.cli.parser;
 
 import app.api.ApiFacade;
 import app.cli.command.*;
-import static app.cli.parser.OptionNameTable.*;
 import constructor.dom.locator.Mask;
 import constructor.dom.locator.MaskUtils;
 import org.apache.commons.cli.CommandLine;
@@ -11,6 +10,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static app.cli.parser.OptionNameTable.*;
 
 /**
  * Парсер опции "обновить все"

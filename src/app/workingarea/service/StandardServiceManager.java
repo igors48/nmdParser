@@ -18,12 +18,12 @@ import debug.DebugConsole;
 import debug.console.FileDebugConsole;
 import debug.console.FileDebugConsoleUpdater;
 import debug.console.NullDebugConsole;
-import greader.HttpSecureAdapter;
-import http.*;
 import greader.GoogleReaderAdapter;
 import greader.GoogleReaderProvider;
+import greader.HttpSecureAdapter;
 import greader.StandardGoogleReaderAdapter;
 import greader.profile.ProfilesStorage;
+import http.*;
 import resource.ConverterFactory;
 import resource.ResourceConverterFactory;
 import timeservice.StandardTimeService;
@@ -107,18 +107,18 @@ public class StandardServiceManager implements ServiceManager {
     private HttpRequestHandler getHttpRequestHandler() {
 
         if (this.httpRequestHandler == null) {
-             StandardHttpRequestHandlerContext standardHttpRequestHandlerContext = new StandardHttpRequestHandlerContext(
-                this.settings.getErrorTimeout(),
-                this.settings.getSocketTimeout(),
-                this.settings.getMaxTryCount(),
-                this.settings.getBannedListTreshold(),
-                this.settings.getBannedListLimit(),
-                this.settings.getUserAgent(),
-                this.settings.isProxyUsed(),
-                this.settings.getProxyHost(),
-                this.settings.getProxyPort(),
-                this.settings.getUserName(),
-                this.settings.getUserPassword()
+            StandardHttpRequestHandlerContext standardHttpRequestHandlerContext = new StandardHttpRequestHandlerContext(
+                    this.settings.getErrorTimeout(),
+                    this.settings.getSocketTimeout(),
+                    this.settings.getMaxTryCount(),
+                    this.settings.getBannedListTreshold(),
+                    this.settings.getBannedListLimit(),
+                    this.settings.getUserAgent(),
+                    this.settings.isProxyUsed(),
+                    this.settings.getProxyHost(),
+                    this.settings.getProxyPort(),
+                    this.settings.getUserName(),
+                    this.settings.getUserPassword()
             );
             this.httpRequestHandler = new StandardHttpRequestHandler(standardHttpRequestHandlerContext);
         }

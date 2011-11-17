@@ -1,15 +1,15 @@
 package app.cli.command;
 
 import app.api.ApiFacade;
-import util.Assert;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import util.Assert;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
  * Date: 23.08.2011
  */
-public class GoogleReaderCreateProfileCommand  implements Command {
+public class GoogleReaderCreateProfileCommand implements Command {
 
     private final ApiFacade facade;
     private final String email;
@@ -31,7 +31,7 @@ public class GoogleReaderCreateProfileCommand  implements Command {
     }
 
     public void execute() throws CommandExecutionException {
-        
+
         try {
             this.facade.createGoogleReaderProfile(this.email, this.password);
             this.log.info(String.format("Google Reader profile for email [ %s ] created", this.email));

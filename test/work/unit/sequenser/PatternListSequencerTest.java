@@ -1,11 +1,11 @@
 package work.unit.sequenser;
 
 import junit.framework.TestCase;
-import util.sequense.SequenceGenerationParams;
 import util.sequense.PatternListSequencer;
+import util.sequense.SequenceGenerationParams;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Igor Usenko
@@ -18,6 +18,7 @@ public class PatternListSequencerTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() {
         SequenceGenerationParams fixture01 = new SequenceGenerationParams("a*b", 0, 1, 1, 1, 0, "");
         SequenceGenerationParams fixture02 = new SequenceGenerationParams("c*d", 1, 2, 1, 1, 0, "");

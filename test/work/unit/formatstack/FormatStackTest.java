@@ -1,8 +1,8 @@
 package work.unit.formatstack;
 
-import junit.framework.TestCase;
 import flowtext.FormatStack;
 import html.parser.tag.format.TextFormat;
+import junit.framework.TestCase;
 
 /**
  * @author Igor Usenko
@@ -14,7 +14,7 @@ public class FormatStackTest extends TestCase {
         super(s);
     }
 
-    public void testEmpty(){
+    public void testEmpty() {
         FormatStack stack = new FormatStack();
 
         assertEquals(TextFormat.SIMPLE, stack.pop());
@@ -22,7 +22,7 @@ public class FormatStackTest extends TestCase {
         assertEquals(TextFormat.SIMPLE, stack.pop());
     }
 
-    public void testFirstFormatRemain(){
+    public void testFirstFormatRemain() {
         FormatStack stack = new FormatStack();
 
         stack.push(TextFormat.EMPHASIS);

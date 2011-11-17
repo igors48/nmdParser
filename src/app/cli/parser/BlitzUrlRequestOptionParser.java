@@ -3,10 +3,11 @@ package app.cli.parser;
 import app.cli.blitz.BlitzRequestUtils;
 import app.cli.blitz.request.BlitzRequest;
 import app.cli.blitz.request.RequestSourceType;
-import static app.cli.parser.OptionNameTable.BLITZ_PAGE_REQUEST_OPTION_SHORT_NAME;
 import org.apache.commons.cli.CommandLine;
 
 import java.util.List;
+
+import static app.cli.parser.OptionNameTable.BLITZ_PAGE_REQUEST_OPTION_SHORT_NAME;
 
 /**
  * Парсер опции "обработать блиц запрос к странице"

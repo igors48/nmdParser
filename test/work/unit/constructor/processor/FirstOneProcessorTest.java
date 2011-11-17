@@ -1,19 +1,19 @@
 package work.unit.constructor.processor;
 
-import junit.framework.TestCase;
 import constructor.dom.Constructor;
 import constructor.dom.ConstructorFactory;
 import constructor.dom.ObjectType;
 import constructor.objects.ConfigurationException;
 import constructor.objects.processor.VariableProcessor;
-import constructor.objects.processor.chain.adapter.StandardChainProcessorAdapter;
 import constructor.objects.processor.chain.ChainProcessor;
+import constructor.objects.processor.chain.adapter.StandardChainProcessorAdapter;
+import junit.framework.TestCase;
+import variables.Variables;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 import static work.testutil.ConstructorTestUtils.createConstructorFactory;
-import variables.Variables;
 
 /**
  * @author Igor Usenko
@@ -26,6 +26,7 @@ public class FirstOneProcessorTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws Constructor.ConstructorException, ConfigurationException, VariableProcessor.VariableProcessorException {
         Map<String, String> streams = new HashMap<String, String>();
         streams.put("processor", "<processor><firstOne out=\"sample\"><set value=\"test\" out=\"testvar\"/><set value=\"test2\" out=\"testvar2\"/></firstOne></processor>");
@@ -47,6 +48,7 @@ public class FirstOneProcessorTest extends TestCase {
     }
 
     // тест - выполнение завершается на первом операторе изменившем выходную переменную 
+
     public void testBreakExecution() throws Constructor.ConstructorException, ConfigurationException, VariableProcessor.VariableProcessorException {
         Map<String, String> streams = new HashMap<String, String>();
         streams.put("processor", "<processor><firstOne out=\"sample\"><set value=\"test\" out=\"testvar\"/><set value=\"test2\" out=\"sample\"/><set value=\"test3\" out=\"testvar3\"/></firstOne></processor>");

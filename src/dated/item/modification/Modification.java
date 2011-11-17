@@ -1,7 +1,6 @@
 package dated.item.modification;
 
 import dated.Dated;
-import greader.entities.FeedItems;
 import greader.entities.FeedItem;
 import util.Assert;
 

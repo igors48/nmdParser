@@ -3,11 +3,11 @@ package constructor.objects.processor.load;
 import constructor.objects.processor.AbstractVariableProcessor;
 import debug.Snapshot;
 import debug.snapshot.ProcessorSnapshot;
+import html.HttpData;
 import http.BatchLoader;
 import http.Data;
 import http.Result;
 import http.data.DataUtil;
-import html.HttpData;
 import util.Assert;
 import variables.Variables;
 

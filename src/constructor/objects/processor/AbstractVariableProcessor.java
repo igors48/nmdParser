@@ -1,7 +1,8 @@
 package constructor.objects.processor;
 
-import static constructor.objects.processor.VariableProcessorUtils.specified;
 import variables.Variables;
+
+import static constructor.objects.processor.VariableProcessorUtils.specified;
 
 /**
  * Абстрактный обработчик переменной. Вводит два предопределенных

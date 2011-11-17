@@ -75,7 +75,7 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
 
         Assert.notNull(_userAgent, "User agent is null");
         this.userAgent = _userAgent;
-        
+
         this.context = new BasicHttpContext();
 
         this.log = LogFactory.getLog(getClass());

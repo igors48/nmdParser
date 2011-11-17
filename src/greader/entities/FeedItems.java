@@ -20,7 +20,7 @@ public class FeedItems {
     }
 
     public class Item {
-        
+
         private long published;
         private String title;
         private String id;

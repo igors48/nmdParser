@@ -58,7 +58,7 @@ public class ProfilesTest extends TestCase {
         assertTrue(result);
         assertEquals("n", found.getAccount().getPassword());
     }
-    
+
     public void testChangeNotExistsProfilePasswordReturnsFalse() {
         Profiles profiles = new Profiles();
 

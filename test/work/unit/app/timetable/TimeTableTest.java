@@ -15,6 +15,7 @@ public class TimeTableTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() {
         StillTimeService timeService = new StillTimeService();
         TimeTable timeTable = new TimeTable(timeService);
@@ -27,7 +28,8 @@ public class TimeTableTest extends TestCase {
     }
 
     // тест на удаление
-    public void testRemove(){
+
+    public void testRemove() {
         StillTimeService timeService = new StillTimeService();
         TimeTable timeTable = new TimeTable(timeService);
 
@@ -38,7 +40,8 @@ public class TimeTableTest extends TestCase {
     }
 
     // тест нулевого таймаута если ни одна единица не выполнялась
-    public void testNoExecTimeout(){
+
+    public void testNoExecTimeout() {
         StillTimeService timeService = new StillTimeService();
         TimeTable timeTable = new TimeTable(timeService);
 
@@ -48,7 +51,8 @@ public class TimeTableTest extends TestCase {
     }
 
     // тест таймаута = -1 если очередь пуста
-    public void testEmptyQueueTimeout(){
+
+    public void testEmptyQueueTimeout() {
         StillTimeService timeService = new StillTimeService();
         TimeTable timeTable = new TimeTable(timeService);
 
@@ -56,7 +60,8 @@ public class TimeTableTest extends TestCase {
     }
 
     // тест таймаута одной тронутой единицы
-    public void testTouchTimeoutOneItem(){
+
+    public void testTouchTimeoutOneItem() {
         StillTimeService timeService = new StillTimeService();
         TimeTable timeTable = new TimeTable(timeService);
 
@@ -67,7 +72,8 @@ public class TimeTableTest extends TestCase {
     }
 
     // тест таймаута до ближайшей из двух тронутых единиц
-    public void testTouchTimeoutTwoItem(){
+
+    public void testTouchTimeoutTwoItem() {
         StillTimeService timeService = new StillTimeService();
         TimeTable timeTable = new TimeTable(timeService);
 
@@ -80,7 +86,8 @@ public class TimeTableTest extends TestCase {
     }
 
     // тест на израсходование попыток
-    public void testExpired(){
+
+    public void testExpired() {
         StillTimeService timeService = new StillTimeService();
         TimeTable timeTable = new TimeTable(timeService);
 

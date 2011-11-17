@@ -4,8 +4,6 @@ import constructor.objects.dateparser.core.DateParser;
 import constructor.objects.interpreter.configuration.FragmentAnalyserConfiguration;
 import constructor.objects.interpreter.core.Fragment;
 import constructor.objects.interpreter.core.FragmentAnalyser;
-import static constructor.objects.interpreter.core.standard.StandardFragmentAnalyserUtils.callProcessorForList;
-import static constructor.objects.interpreter.core.standard.StandardFragmentAnalyserUtils.callProcessorForString;
 import dated.DatedItem;
 import dated.item.atdc.AtdcItem;
 import dated.item.atdc.Author;
@@ -17,6 +15,9 @@ import util.Assert;
 import util.TextTools;
 
 import java.util.Date;
+
+import static constructor.objects.interpreter.core.standard.StandardFragmentAnalyserUtils.callProcessorForList;
+import static constructor.objects.interpreter.core.standard.StandardFragmentAnalyserUtils.callProcessorForString;
 
 /**
  * Стандартный анализатор фрагмента. Для извлечения нужных данных

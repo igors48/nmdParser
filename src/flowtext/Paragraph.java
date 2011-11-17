@@ -99,6 +99,7 @@ public class Paragraph implements FlowTextObject {
     }
 
     //todo проверка типов
+
     public void addContent(List<FlowTextObject> _content) {
         Assert.notNull(_content);
 

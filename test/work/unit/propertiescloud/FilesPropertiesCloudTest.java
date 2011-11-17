@@ -4,11 +4,12 @@ import cloud.FilesPropertiesCloud;
 import cloud.PropertiesCloud;
 import constructor.dom.ObjectType;
 import junit.framework.TestCase;
-import static work.testutil.CompTestsUtils.cleanupDir;
-import static work.testutil.CompTestsUtils.getCompTestsRoot;
 
 import java.io.IOException;
 import java.util.Properties;
+
+import static work.testutil.CompTestsUtils.cleanupDir;
+import static work.testutil.CompTestsUtils.getCompTestsRoot;
 
 /**
  * @author Igor Usenko
@@ -23,6 +24,7 @@ public class FilesPropertiesCloudTest extends TestCase {
     }
 
     // тест на возврат пустых пропертей если не нашлось
+
     public void testEmpty() throws PropertiesCloud.PropertyCloudException, IOException {
         cleanupDir(DIR);
 
@@ -36,6 +38,7 @@ public class FilesPropertiesCloudTest extends TestCase {
     }
 
     // тест на сохранение/восстановление пропертей
+
     public void testStoreLoad() throws PropertiesCloud.PropertyCloudException, IOException {
         cleanupDir(DIR);
 
@@ -58,6 +61,7 @@ public class FilesPropertiesCloudTest extends TestCase {
     }
 
     // тест на удаление пропертей
+
     public void testRemove() throws PropertiesCloud.PropertyCloudException, IOException {
         cleanupDir(DIR);
 

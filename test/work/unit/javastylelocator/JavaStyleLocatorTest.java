@@ -1,27 +1,26 @@
 package work.unit.javastylelocator;
 
-import junit.framework.TestCase;
+import constructor.dom.Locator;
+import constructor.dom.ObjectType;
 import constructor.dom.locator.JavaStyleLocator;
 import constructor.dom.locator.Mask;
-import constructor.dom.ObjectType;
-import constructor.dom.Locator;
 import constructor.objects.simpler.configuration.SimplerConfiguration;
+import junit.framework.TestCase;
+import util.IOTools;
 import work.testutil.CompTestsUtils;
 import work.testutil.SimplerConfigurationTestUtils;
 
-import java.io.InputStream;
 import java.io.IOException;
-import java.util.List;
+import java.io.InputStream;
 import java.util.ArrayList;
-
-import util.IOTools;
+import java.util.List;
 
 /**
  * @author Igor Usenko
  *         Date: 18.07.2009
  */
 public class JavaStyleLocatorTest extends TestCase {
-    
+
     public static String DIR = CompTestsUtils.getCompTestsRoot() + "JavaStyleLocatorTest/";
 
     public static String TEST_SMOKE_DIR = DIR + "testSmoke/";
@@ -32,6 +31,7 @@ public class JavaStyleLocatorTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() {
         JavaStyleLocator locator = new JavaStyleLocator(TEST_SMOKE_DIR);
 
@@ -48,8 +48,9 @@ public class JavaStyleLocatorTest extends TestCase {
             IOTools.close(stream02);
         }
     }
-    
+
     // поиск несуществующего
+
     public void testNonExistent() {
         JavaStyleLocator locator = new JavaStyleLocator(TEST_SMOKE_DIR);
 
@@ -60,13 +61,14 @@ public class JavaStyleLocatorTest extends TestCase {
 
             fail();
         } catch (Locator.LocatorException e) {
-          // empty
+            // empty
         } finally {
             IOTools.close(stream01);
         }
     }
 
     // поиск чтения файла неизвестного типа
+
     public void testIncorrect() {
         JavaStyleLocator locator = new JavaStyleLocator(TEST_SMOKE_DIR);
 
@@ -77,13 +79,14 @@ public class JavaStyleLocatorTest extends TestCase {
 
             fail();
         } catch (Locator.LocatorException e) {
-          // empty
+            // empty
         } finally {
             IOTools.close(stream01);
         }
     }
 
     // поиск чтения файла неизвестного формата
+
     public void testIncorrectFormat() {
         JavaStyleLocator locator = new JavaStyleLocator(TEST_SMOKE_DIR);
 
@@ -94,13 +97,14 @@ public class JavaStyleLocatorTest extends TestCase {
 
             fail();
         } catch (Locator.LocatorException e) {
-          // empty
+            // empty
         } finally {
             IOTools.close(stream01);
         }
     }
-    
+
     // поиск всех объектов указанного типа
+
     public void testLocateAll() throws Locator.LocatorException {
         JavaStyleLocator locator = new JavaStyleLocator(TEST_SMOKE_DIR);
 
@@ -110,6 +114,7 @@ public class JavaStyleLocatorTest extends TestCase {
     }
 
     // сохранение конфигурации корневого симплера
+
     public void testStoreRootSimplerConfiguration() throws Locator.LocatorException, IOException {
         JavaStyleLocator locator = new JavaStyleLocator(TEST_SIMPLER_DIR);
 
@@ -122,8 +127,9 @@ public class JavaStyleLocatorTest extends TestCase {
 
         locator.removeSimplerConfiguration(fixture);
     }
-    
+
     // сохранение конфигурации не корневого симплера
+
     public void testStoreNotRootSimplerConfiguration() throws Locator.LocatorException, IOException {
         JavaStyleLocator locator = new JavaStyleLocator(TEST_SIMPLER_DIR);
 

@@ -13,6 +13,7 @@ import http.BatchLoader;
 public interface ChannelAnalyser {
 
     //todo _coverUrl ����� ��� � �� � ���������
+
     ChannelDataHeader getHeader(Modification _modification, BatchLoader _batchLoader, String _coverUrl) throws ChannelAnalyserException;
 
     public class ChannelAnalyserException extends Exception {

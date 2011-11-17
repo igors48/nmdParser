@@ -50,6 +50,7 @@ public class Fb2ResourceItem implements Stringable {
     private Data data;
 
     //todo нужно создать отдельную абстракцию "внешний ресурс"
+
     public Fb2ResourceItem(final String _base, final String _address, final String _tag, final Fb2ResourceConversionContext _conversionContext) {
         Assert.notNull(_base, "Base is null");
         this.base = _base;

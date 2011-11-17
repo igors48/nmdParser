@@ -1,8 +1,6 @@
 package app.workingarea.process;
 
 import app.workingarea.ProcessWrapper;
-import static app.workingarea.process.StreamDumper.createOutputStreamDumper;
-import static app.workingarea.process.StreamDumper.createErrorStreamDumper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import util.Assert;
@@ -11,6 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
+
+import static app.workingarea.process.StreamDumper.createErrorStreamDumper;
+import static app.workingarea.process.StreamDumper.createOutputStreamDumper;
 
 /**
  * Инициатор внешнего процесса

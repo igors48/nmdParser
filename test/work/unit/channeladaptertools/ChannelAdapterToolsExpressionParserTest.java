@@ -1,10 +1,9 @@
 package work.unit.channeladaptertools;
 
+import constructor.objects.channel.core.ChannelAdapterTools;
 import junit.framework.TestCase;
 
 import java.util.List;
-
-import constructor.objects.channel.core.ChannelAdapterTools;
 
 /**
  * @author Igor Usenko

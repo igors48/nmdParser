@@ -3,8 +3,8 @@ package research.heuristic;
 import org.htmlcleaner.TagNode;
 import util.Assert;
 
-import java.util.List;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Igor Usenko
@@ -30,7 +30,7 @@ public final class PathTools {
         } while (parent != null);
 
         result.setWeight(_node.getText().length());
-        
+
         return result;
     }
 
@@ -41,18 +41,18 @@ public final class PathTools {
 
         List<PathElement> elements = _path.getElements();
         Collections.reverse(elements);
-        
+
         for (PathElement current : elements) {
             result.append(convertPathElement(current)).append("/");
         }
-        
-        return result.toString().substring(0, result.length() - 1);    
+
+        return result.toString().substring(0, result.length() - 1);
     }
 
     private static String convertPathElement(final PathElement _element) {
         String id = _element.getId();
         String className = _element.getClassName();
-        
+
         String insert = "";
 
         if (!id.isEmpty() || !className.isEmpty()) {

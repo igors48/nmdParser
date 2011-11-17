@@ -1,7 +1,10 @@
 package app.cli.parser;
 
 import app.api.ApiFacade;
-import app.cli.command.*;
+import app.cli.command.Command;
+import app.cli.command.GoogleReaderTestProfileFeedCommand;
+import app.cli.command.LoadSettingsCommand;
+import app.cli.command.LoadWorkspaceCommand;
 import org.apache.commons.cli.CommandLine;
 import util.Assert;
 

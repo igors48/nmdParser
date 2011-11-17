@@ -3,10 +3,10 @@ package work.unit.channeladaptertools;
 import app.cli.blitz.request.CriterionType;
 import constructor.objects.ConfigurationException;
 import constructor.objects.channel.core.ChannelAdapterTools;
-import constructor.objects.processor.chain.adapter.StandardChainProcessorAdapter;
-import constructor.objects.processor.xpath.XPathProcessor;
-import constructor.objects.processor.get_group.GetGroupProcessor;
 import constructor.objects.processor.append.AppendProcessor;
+import constructor.objects.processor.chain.adapter.StandardChainProcessorAdapter;
+import constructor.objects.processor.get_group.GetGroupProcessor;
+import constructor.objects.processor.xpath.XPathProcessor;
 import debug.console.NullDebugConsole;
 import junit.framework.TestCase;
 

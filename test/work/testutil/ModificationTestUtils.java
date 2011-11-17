@@ -2,6 +2,7 @@ package work.testutil;
 
 import dated.item.modification.Modification;
 import util.Assert;
+
 import static junit.framework.Assert.assertEquals;
 
 /**

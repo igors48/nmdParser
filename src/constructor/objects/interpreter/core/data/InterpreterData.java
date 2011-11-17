@@ -16,7 +16,7 @@ import java.util.List;
  *         Date: 18.12.2008
  */
 public class InterpreterData {
-    
+
     private String id;
     private List<DatedItem> items;
 

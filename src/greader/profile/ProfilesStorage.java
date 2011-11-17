@@ -52,7 +52,7 @@ public class ProfilesStorage {
 
         try {
             File profilesFile = createProfilesFile();
-            
+
             return profilesFile.exists() ? this.codec.decode(IOTools.readFile(profilesFile, UTF_8)) : new Profiles();
         } catch (Exception e) {
             throw new ProfilesStorageException(e);
@@ -70,5 +70,5 @@ public class ProfilesStorage {
         }
 
     }
-    
+
 }

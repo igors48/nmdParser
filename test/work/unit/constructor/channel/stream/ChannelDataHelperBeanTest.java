@@ -16,6 +16,7 @@ public class ChannelDataHelperBeanTest extends TestCase {
     }
 
     // тест идентичности сохраненной и восстановленной единицы
+
     public void testStoreRestore() {
         ChannelData original = ChannelDataTestUtils.createChannelDataFixture01();
         ChannelDataHelperBean bean = new ChannelDataHelperBean();

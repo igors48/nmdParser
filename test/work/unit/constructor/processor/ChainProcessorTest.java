@@ -1,18 +1,20 @@
 package work.unit.constructor.processor;
 
-import junit.framework.TestCase;
-import constructor.dom.*;
-import constructor.objects.processor.chain.adapter.StandardChainProcessorAdapter;
-import constructor.objects.processor.chain.ChainProcessor;
-import constructor.objects.processor.VariableProcessor;
+import constructor.dom.Constructor;
+import constructor.dom.ConstructorFactory;
+import constructor.dom.ObjectType;
 import constructor.objects.ConfigurationException;
+import constructor.objects.processor.VariableProcessor;
+import constructor.objects.processor.chain.ChainProcessor;
+import constructor.objects.processor.chain.adapter.StandardChainProcessorAdapter;
+import debug.snapshot.TopLevelObjectSnapshot;
+import junit.framework.TestCase;
+import variables.Variables;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 import static work.testutil.ConstructorTestUtils.createConstructorFactory;
-import variables.Variables;
-import debug.snapshot.TopLevelObjectSnapshot;
 
 /**
  * @author Igor Usenko
@@ -25,6 +27,7 @@ public class ChainProcessorTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws Constructor.ConstructorException, ConfigurationException, VariableProcessor.VariableProcessorException {
         Map<String, String> streams = new HashMap<String, String>();
         streams.put("processor", "<processor><getGroup in=\"inp\" out=\"sample\"><occurrence>0</occurrence><pattern>abc(.+?)def</pattern></getGroup><getGroup in=\"sample\" out=\"out\"><occurrence>0</occurrence><pattern>z(.+?)z</pattern></getGroup></processor>");
@@ -45,6 +48,7 @@ public class ChainProcessorTest extends TestCase {
     }
 
     // тест снапшота
+
     public void testSnapshot() throws Constructor.ConstructorException {
         Map<String, String> streams = new HashMap<String, String>();
         streams.put("processor", "<processor></processor>");

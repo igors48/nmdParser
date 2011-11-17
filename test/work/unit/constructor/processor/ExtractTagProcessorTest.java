@@ -26,6 +26,7 @@ public class ExtractTagProcessorTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws VariableProcessor.VariableProcessorException {
         OccurrenceSet occurrenceSet = new OccurrenceSet();
         ExtractTagProcessor processor = new ExtractTagProcessor("", "<b>", occurrenceSet, "");
@@ -38,6 +39,7 @@ public class ExtractTagProcessorTest extends TestCase {
     }
 
     // тест сложного тега
+
     public void testComplexTag() throws VariableProcessor.VariableProcessorException {
         OccurrenceSet occurrenceSet = new OccurrenceSet();
         ExtractTagProcessor processor = new ExtractTagProcessor("", "<td colspan=\"\\d\">", occurrenceSet, "");
@@ -50,6 +52,7 @@ public class ExtractTagProcessorTest extends TestCase {
     }
 
     // тест на выборку нужного вхождения
+
     public void testOccurence() throws VariableProcessor.VariableProcessorException {
         OccurrenceSet occurrenceSet = new OccurrenceSet();
         occurrenceSet.add(1);
@@ -63,6 +66,7 @@ public class ExtractTagProcessorTest extends TestCase {
     }
 
     // тест на выборку несуществующего вхождения
+
     public void testNonExistentOccurence() throws VariableProcessor.VariableProcessorException {
         OccurrenceSet occurrenceSet = new OccurrenceSet();
         occurrenceSet.add(50);
@@ -76,6 +80,7 @@ public class ExtractTagProcessorTest extends TestCase {
     }
 
     // тест на выборку списка вхождений
+
     public void testListOccurences() throws VariableProcessor.VariableProcessorException {
         OccurrenceSet occurrenceSet = new OccurrenceSet();
         occurrenceSet.add(0);
@@ -92,6 +97,7 @@ public class ExtractTagProcessorTest extends TestCase {
     }
 
     // реальный тест на выборку
+
     public void testReal001() throws VariableProcessor.VariableProcessorException {
         OccurrenceSet occurrenceSet = new OccurrenceSet();
         occurrenceSet.add(0);
@@ -106,6 +112,7 @@ public class ExtractTagProcessorTest extends TestCase {
     }
 
     // тест снапшота с заданными вхождениями
+
     public void testSnapshotWithOccurrences() {
         OccurrenceSet occurrenceSet = new OccurrenceSet();
         occurrenceSet.add(0);
@@ -136,6 +143,7 @@ public class ExtractTagProcessorTest extends TestCase {
     }
 
     // тест снапшота "подходит все"
+
     public void testSnapshotAllAcceptable() {
         OccurrenceSet occurrenceSet = new OccurrenceSet();
         occurrenceSet.add(-1);

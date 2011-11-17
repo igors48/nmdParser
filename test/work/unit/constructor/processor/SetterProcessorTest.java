@@ -20,6 +20,7 @@ public class SetterProcessorTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws VariableProcessor.VariableProcessorException {
         SetterProcessor processor = new SetterProcessor("", "48", "", "test");
 
@@ -31,6 +32,7 @@ public class SetterProcessorTest extends TestCase {
     }
 
     // тест на замену существующего значения
+
     public void testReplace() throws VariableProcessor.VariableProcessorException {
         SetterProcessor processor = new SetterProcessor("", "48", "", "test");
 
@@ -43,6 +45,7 @@ public class SetterProcessorTest extends TestCase {
     }
 
     // тест на копирование значения
+
     public void testCopy() throws VariableProcessor.VariableProcessorException {
         SetterProcessor processor = new SetterProcessor("test", "", "", "test2");
         Variables variables = new Variables();
@@ -55,6 +58,7 @@ public class SetterProcessorTest extends TestCase {
     }
 
     // тест копирования без параметров
+
     public void testCopyNoParms() throws VariableProcessor.VariableProcessorException {
         SetterProcessor processor = new SetterProcessor("", "", "", "");
         Variables variables = new Variables();
@@ -74,6 +78,7 @@ public class SetterProcessorTest extends TestCase {
     }
 
     // тест индексного копирования
+
     public void testIndexedCopy() throws VariableProcessor.VariableProcessorException {
         SetterProcessor processor = new SetterProcessor("", "", "index", "");
 
@@ -98,6 +103,7 @@ public class SetterProcessorTest extends TestCase {
     }
 
     // тест установки значения первого элемента
+
     public void testSetFirst() throws VariableProcessor.VariableProcessorException {
         SetterProcessor processor = new SetterProcessor("", "value", "", "");
 
@@ -113,6 +119,7 @@ public class SetterProcessorTest extends TestCase {
     }
 
     // тест установки значения в элементы указанные в индексе
+
     public void testSetIndexed() throws VariableProcessor.VariableProcessorException {
         SetterProcessor processor = new SetterProcessor("", "value", "index", "");
 
@@ -134,6 +141,7 @@ public class SetterProcessorTest extends TestCase {
     }
 
     // тест снапшота
+
     public void testSnapshot() {
         SetterProcessor processor = new SetterProcessor("test", "content2", "index", "out");
 

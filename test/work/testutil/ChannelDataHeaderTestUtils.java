@@ -9,37 +9,37 @@ import util.Assert;
  */
 public final class ChannelDataHeaderTestUtils {
 
-    public static boolean headerEquals(final ChannelDataHeader _first, final ChannelDataHeader _second){
+    public static boolean headerEquals(final ChannelDataHeader _first, final ChannelDataHeader _second) {
         Assert.notNull(_first);
         Assert.notNull(_second);
-        
+
         boolean result = true;
 
-        if (!_first.getFirstName().equals(_second.getFirstName())){
+        if (!_first.getFirstName().equals(_second.getFirstName())) {
             result = false;
         }
 
-        if (!_first.getLastName().equals(_second.getLastName())){
+        if (!_first.getLastName().equals(_second.getLastName())) {
             result = false;
         }
 
-        if (!_first.getSourceUrl().equals(_second.getSourceUrl())){
+        if (!_first.getSourceUrl().equals(_second.getSourceUrl())) {
             result = false;
         }
 
-        if (!_first.getTitle().equals(_second.getTitle())){
+        if (!_first.getTitle().equals(_second.getTitle())) {
             result = false;
         }
 
-        if (!_first.getLang().equals(_second.getLang())){
+        if (!_first.getLang().equals(_second.getLang())) {
             result = false;
         }
 
-        if (!_first.getGenres().containsAll(_second.getGenres())){
+        if (!_first.getGenres().containsAll(_second.getGenres())) {
             result = false;
         }
 
-        if (!_second.getGenres().containsAll(_first.getGenres())){
+        if (!_second.getGenres().containsAll(_first.getGenres())) {
             result = false;
         }
 

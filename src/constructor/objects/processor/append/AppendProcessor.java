@@ -1,7 +1,6 @@
 package constructor.objects.processor.append;
 
 import constructor.objects.processor.AbstractVariableProcessor;
-import static constructor.objects.processor.VariableProcessorUtils.specified;
 import debug.Snapshot;
 import debug.snapshot.ProcessorSnapshot;
 import util.Assert;
@@ -10,6 +9,8 @@ import variables.Variables;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static constructor.objects.processor.VariableProcessorUtils.specified;
 
 /**
  * Процессор добавления элементов одной переменной к другой

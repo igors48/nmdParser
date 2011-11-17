@@ -121,6 +121,7 @@ public class Section implements FlowTextObject {
     }
 
     //todo некрасиво сделано. м.б. insertTo(Section _section) и нужно ли оно вообще
+
     public void copyFrom(final Section _section) throws SectionException {
         Assert.notNull(_section, "Section is null");
 

@@ -1,13 +1,15 @@
 package research.heuristic;
 
 import junit.framework.TestCase;
-import org.htmlcleaner.*;
+import org.htmlcleaner.HtmlCleaner;
+import org.htmlcleaner.TagNode;
+import org.htmlcleaner.XPatherException;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Igor Usenko
@@ -74,7 +76,7 @@ public class HeuristicResearchTest extends TestCase {
 
         elements.add(getNodeId(_node));
         TagNode parent = _node.getParent();
-        
+
         do {
 
             if (parent != null) {
@@ -93,7 +95,7 @@ public class HeuristicResearchTest extends TestCase {
         StringBuilder result = new StringBuilder();
 
         for (String element : elements) {
-            result.append(element).append("/");    
+            result.append(element).append("/");
         }
 
         return result.toString();

@@ -2,13 +2,14 @@ package app.cli.parser;
 
 import app.api.ApiFacade;
 import app.cli.command.Command;
-import static app.cli.parser.OptionNameTable.*;
 import org.apache.commons.cli.*;
 import util.Assert;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.*;
+
+import static app.cli.parser.OptionNameTable.*;
 
 /**
  * ������ ��� ��������� ������. ������ - �� ��������� ������
@@ -123,6 +124,7 @@ public class CliParser {
     }
 
     // todo !!! �������� !!!
+
     private void createOptions() {
         this.options = new Options();
 

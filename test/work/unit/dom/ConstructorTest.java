@@ -1,14 +1,13 @@
 package work.unit.dom;
 
-import junit.framework.TestCase;
+import app.workingarea.service.NullServiceManager;
 import constructor.dom.*;
 import constructor.dom.constructor.StandardConstructorFactory;
 import constructor.dom.loader.DomStreamLoader;
+import junit.framework.TestCase;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import app.workingarea.service.NullServiceManager;
 
 /**
  * @author Igor Usenko
@@ -21,6 +20,7 @@ public class ConstructorTest extends TestCase {
     }
 
     // тест на установку одного атрибута
+
     public void testSingleAttributeSetting() throws Constructor.ConstructorException {
         ComponentFactory componentFactory = new SampleComponentFactory();
 
@@ -40,6 +40,7 @@ public class ConstructorTest extends TestCase {
     }
 
     // тест на установку двух атрибутов
+
     public void testDualAttributeSetting() throws Constructor.ConstructorException {
         ComponentFactory componentFactory = new SampleComponentFactory();
 
@@ -59,6 +60,7 @@ public class ConstructorTest extends TestCase {
     }
 
     // тест обработки единичного элемента
+
     public void testSingleElementHandling() throws Constructor.ConstructorException {
         ComponentFactory componentFactory = new SampleComponentFactory();
 
@@ -77,6 +79,7 @@ public class ConstructorTest extends TestCase {
     }
 
     // тест обработки единичного элемента и двух аттрибутов
+
     public void testDualAttributesSingleElementHandling() throws Constructor.ConstructorException {
         ComponentFactory componentFactory = new SampleComponentFactory();
 
@@ -97,6 +100,7 @@ public class ConstructorTest extends TestCase {
     }
 
     // тест обработки загрузки вложенного объекта по его идентификатору
+
     public void testNestedObject() throws Constructor.ConstructorException {
         ComponentFactory componentFactory = new SampleComponentFactory();
 
@@ -119,6 +123,7 @@ public class ConstructorTest extends TestCase {
     }
 
     // тест обработки единичного элемента переданного через CDATA и двух аттрибутов
+
     public void testDualAttributesSingleCDataElementHandling() throws Constructor.ConstructorException {
         ComponentFactory componentFactory = new SampleComponentFactory();
 
@@ -139,6 +144,7 @@ public class ConstructorTest extends TestCase {
     }
 
     // тест обработки единичного элемента с пустой строкой и двух аттрибутов
+
     public void testDualAttributesSingleEmptyElementHandling() throws Constructor.ConstructorException {
         ComponentFactory componentFactory = new SampleComponentFactory();
 
@@ -159,6 +165,7 @@ public class ConstructorTest extends TestCase {
     }
 
     // тест обработки единичного элемента в сокращенной форме с пустой строкой и двух аттрибутов
+
     public void testDualAttributesSingleEmptyShortFormElementHandling() throws Constructor.ConstructorException {
         ComponentFactory componentFactory = new SampleComponentFactory();
 

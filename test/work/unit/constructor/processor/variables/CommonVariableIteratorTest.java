@@ -1,8 +1,8 @@
 package work.unit.constructor.processor.variables;
 
 import junit.framework.TestCase;
-import variables.Variables;
 import variables.VariableIterator;
+import variables.Variables;
 
 /**
  * @author Igor Usenko
@@ -15,7 +15,8 @@ public class CommonVariableIteratorTest extends TestCase {
     }
 
     // первоначальный тест
-    public void testSmoke(){
+
+    public void testSmoke() {
         Variables variables = new Variables();
         variables.put("name", "value");
 
@@ -29,9 +30,10 @@ public class CommonVariableIteratorTest extends TestCase {
         assertFalse(iterator.hasNext());
         assertEquals(1, iterator.getIndex());
     }
-    
+
     // тест "разбросанной" переменной
-    public void testScattered(){
+
+    public void testScattered() {
         Variables variables = new Variables();
         variables.put("name", 0, "value0");
         variables.put("name", 56, "value56");
@@ -40,7 +42,7 @@ public class CommonVariableIteratorTest extends TestCase {
         VariableIterator iterator = variables.getIterator("name");
 
         assertEquals(3, iterator.getSize());
-        
+
         assertTrue(iterator.hasNext());
         assertEquals(0, iterator.getIndex());
         assertEquals(0, iterator.getKey());
