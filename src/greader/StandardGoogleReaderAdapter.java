@@ -121,12 +121,9 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
 
             this.log.info(String.format("Testing feed [ %s ] from profile [ %s ]", configuration.getUrl(), _email));
             updateFeed(_handler, profile, configuration);
-        }
-
-        catch (GoogleReaderProvider.GoogleReaderProviderException e) {
+        } catch (GoogleReaderProvider.GoogleReaderProviderException e) {
             throw new GoogleReaderAdapterException(e);
-        }
-        catch (ApiFacade.FatalException e) {
+        } catch (ApiFacade.FatalException e) {
             throw new GoogleReaderAdapterException(e);
         }
     }
@@ -170,14 +167,24 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
         Assert.isValidString(_email, "Email is not valid");
 
         try {
-            Profile profile = getProfile(_email);
+            Profiles profiles = this.profilesStorage.load();
+
+            Profile profile = profiles.find(_email);
+
+            if (profile == null) {
+                throw new GoogleReaderAdapterException(String.format("Can not find profile [ %s ]", _email));
+            }
 
             List<Subscription> subscriptions = this.provider.getSubscriptions(profile.getAccount());
 
             GoogleReaderAdapterTools.synchronize(profile.getFeedConfigurations(), subscriptions);
 
+            this.profilesStorage.store(profiles);
+            
             return profile;
         } catch (GoogleReaderProvider.GoogleReaderProviderException e) {
+            throw new GoogleReaderAdapterException(e);
+        } catch (ProfilesStorage.ProfilesStorageException e) {
             throw new GoogleReaderAdapterException(e);
         }
     }
@@ -194,20 +201,4 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
         return account;
     }
 
-    private Profile getProfile(final String _email) throws GoogleReaderAdapterException {
-
-        try {
-            Profiles profiles = this.profilesStorage.load();
-
-            Profile profile = profiles.find(_email);
-
-            if (profile == null) {
-                throw new GoogleReaderAdapterException(String.format("Can not find profile [ %s ]", _email));
-            }
-
-            return profile;
-        } catch (ProfilesStorage.ProfilesStorageException e) {
-            throw new GoogleReaderAdapterException(e);
-        }
-    }
 }
