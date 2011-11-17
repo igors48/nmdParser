@@ -4,8 +4,12 @@ import http.banned.BannedList;
 import http.cache.InMemoryCache;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
@@ -45,26 +49,28 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
     public StandardHttpRequestHandler(final StandardHttpRequestHandlerContext _context) {
         Assert.notNull(_context, "Context is null");
 
-        Assert.notNull(_context.getUseragent(), "User agent is null");
         this.userAgent = _context.getUseragent();
 
-        final SchemeRegistry schemeRegistry = new SchemeRegistry();
-
-        registerHttpScheme(schemeRegistry);
-        registerHttpsScheme(schemeRegistry);
-
-        final ClientConnectionManager connectionManager = new ThreadSafeClientConnManager(schemeRegistry);
-
+        final ClientConnectionManager connectionManager = createConnectionManager();
         final HttpParams httpParams = new BasicHttpParams();
-
         this.httpClient = new ContentEncodingHttpClient(connectionManager, httpParams);
 
         final HttpRequestRetryHandler retryHandler = new CustomHttpRequestRetryHandler(_context.getRetryCount());
-        httpClient.setHttpRequestRetryHandler(retryHandler);
+        this.httpClient.setHttpRequestRetryHandler(retryHandler);
 
         final HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, _context.getConnectionTimeout());
         HttpConnectionParams.setSoTimeout(params, _context.getSocketTimeout());
+
+        if (_context.isProxyUse()) {
+            this.httpClient.getCredentialsProvider().setCredentials(
+                new AuthScope(_context.getProxyHost(), _context.getProxyPort()),
+                new UsernamePasswordCredentials(_context.getProxyUser(), _context.getProxyPassword()));
+
+            HttpHost proxy = new HttpHost(_context.getProxyHost(), _context.getProxyPort());
+
+            this.httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+        }
 
         this.cache = new InMemoryCache();
 
@@ -94,6 +100,15 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
     public void stop() {
         this.httpClient.getConnectionManager().shutdown();
         this.log.info("StandardHttpRequestHandler stopped");
+    }
+
+    private ClientConnectionManager createConnectionManager() {
+        final SchemeRegistry schemeRegistry = new SchemeRegistry();
+
+        registerHttpScheme(schemeRegistry);
+        registerHttpsScheme(schemeRegistry);
+
+        return new ThreadSafeClientConnManager(schemeRegistry);
     }
 
     private void registerHttpScheme(final SchemeRegistry _schemeRegistry) {
