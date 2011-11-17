@@ -42,13 +42,17 @@ public final class HttpTools {
         Assert.isValidString(_url, "Url is not valid");
         Assert.notNull(_request, "Request is null");
 
-        return _url + _request;
+        return escape(_url) + escape(_request);
     }
 
     public static String getHostFromMethod(final HttpRequestBase _method) {
         Assert.notNull(_method, "Method is null");
 
         return _method.getURI().getHost();
+    }
+
+    private static String escape(String data) {
+        return data.replaceAll(" ", "%20");
     }
 
     private HttpTools() {

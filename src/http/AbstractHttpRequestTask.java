@@ -95,9 +95,11 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
 
                 this.request.setResult(HttpData.EMPTY_DATA);
             } else {
-                this.log.debug(String.format("%s request to [ %s ]", this.requestType, urlWithRequest));
+                this.log.debug(String.format("%s request to [ %s ] started", this.requestType, urlWithRequest));
 
                 handle(method);
+
+                this.log.debug(String.format("%s request to [ %s ] completed with status [ %s ]", this.requestType, urlWithRequest, this.request.getResult().getResult()));
             }
         } catch (Exception e) {
             method.abort();
