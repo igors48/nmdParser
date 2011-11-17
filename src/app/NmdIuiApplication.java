@@ -113,17 +113,15 @@ public class NmdIuiApplication implements MainFrame.Listener, ExitSignalListener
     }
 
     public void onFailureExit(final Throwable _cause) {
-        //this.log.
 
         if (this.mainFrame != null) {
             this.mainFrame.showUnexpectedError(_cause);
         }
-
-        //cleanup();
     }
 
     private void setLookAndFeel() {
 
+/*
         try {
 
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -137,6 +135,7 @@ public class NmdIuiApplication implements MainFrame.Listener, ExitSignalListener
         } catch (Throwable e) {
             log.error("Error setting Nimbus LaF. Default will be used");
         }
+*/
     }
 
     private void loadDefaults() {

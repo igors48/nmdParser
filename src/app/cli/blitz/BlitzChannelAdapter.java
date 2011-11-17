@@ -3,7 +3,6 @@ package app.cli.blitz;
 import app.cli.blitz.request.BlitzRequest;
 import app.cli.blitz.request.CriterionType;
 import app.cli.blitz.request.RequestSourceType;
-import app.controller.NullController;
 import app.iui.flow.custom.SingleProcessInfo;
 import app.workingarea.ServiceManager;
 import constructor.objects.AdapterException;
@@ -20,8 +19,7 @@ import constructor.objects.interpreter.core.standard.SimpleInterpreter;
 import constructor.objects.interpreter.core.standard.StandardInterpreter;
 import dated.item.modification.Modification;
 import dated.item.modification.stream.ModificationList;
-import downloader.BatchLoader;
-import downloader.batchloader.StandardBatchLoader;
+import http.BatchLoader;
 import timeservice.TimeService;
 import util.Assert;
 
@@ -38,7 +36,6 @@ public class BlitzChannelAdapter implements ChannelAdapter {
 
     private final BlitzRequest request;
     private final ModificationList modificationList;
-    private final BatchLoader batchLoader;
     private final ServiceManager serviceManager;
     private final int precachedItemsCount;
 
@@ -59,8 +56,6 @@ public class BlitzChannelAdapter implements ChannelAdapter {
 
         Assert.greater(_precachedItemsCount, 0, "Precached items count < 1");
         this.precachedItemsCount = _precachedItemsCount;
-
-        this.batchLoader = new StandardBatchLoader(this.serviceManager.getDownloader(), new NullController());
 
         this.result = new ChannelDataList();
     }
@@ -91,7 +86,7 @@ public class BlitzChannelAdapter implements ChannelAdapter {
     }
 
     public BatchLoader getPageLoader() throws AdapterException {
-        return this.batchLoader;
+        return this.serviceManager.getBatchLoader();
     }
 
     public List<InterpreterEx> getInterpreters(final Modification _modification) throws AdapterException {
@@ -186,7 +181,7 @@ public class BlitzChannelAdapter implements ChannelAdapter {
 
         return new BlitzInterpreterAdapter(_modification,
                 fragmentAnalyserConfiguration,
-                this.batchLoader,
+                this.serviceManager.getBatchLoader(),
                 getPrecachedItemsCount(),
                 getPauseBetweenRequests());
     }

@@ -16,7 +16,7 @@ import constructor.objects.interpreter.core.standard.StandardInterpreter;
 import constructor.objects.source.core.ModificationListStorage;
 import dated.item.modification.Modification;
 import debug.DebugConsole;
-import downloader.Downloader;
+import http.BatchLoader;
 import timeservice.TimeService;
 import util.Assert;
 
@@ -44,7 +44,7 @@ public class SimplerChannelAdapter extends AbstractChannelAdapter {
                                  final boolean _autoContentFiltering,
                                  final String _coverUrl,
                                  final ChannelDataListStorage _channelDataListStorage,
-                                 final Downloader _downloader,
+                                 final BatchLoader _batchLoader,
                                  final ModificationListStorage _modificationListStorage,
                                  final int _forcedDays,
                                  final TimeService _timeService,
@@ -52,7 +52,7 @@ public class SimplerChannelAdapter extends AbstractChannelAdapter {
                                  final int _precachedItemsCount,
                                  final long _pauseBetweenRequests,
                                  final DebugConsole _debugConsole) {
-        super(_channelDataListStorage, _downloader, _modificationListStorage, _forcedDays, _timeService, _controller, _precachedItemsCount, _pauseBetweenRequests);
+        super(_channelDataListStorage, _batchLoader, _modificationListStorage, _forcedDays, _timeService, _controller, _precachedItemsCount, _pauseBetweenRequests);
 
         Assert.isValidString(_id, "Id is not valid");
         this.id = _id;
@@ -64,7 +64,7 @@ public class SimplerChannelAdapter extends AbstractChannelAdapter {
         this.criterions = _criterions;
 
         this.autoContentFiltering = _autoContentFiltering;
-        
+
         Assert.notNull(_coverUrl, "Cover Url is null");
         this.coverUrl = _coverUrl;
 
@@ -110,10 +110,10 @@ public class SimplerChannelAdapter extends AbstractChannelAdapter {
         final FragmentAnalyserConfiguration fragmentAnalyserConfiguration = autoContentFiltering ?
                 ChannelAdapterTools.createContentFilterConfiguration(SIMPLER_CHAIN_PROCESSOR_ADAPTER_ID, this.debugConsole) :
                 ChannelAdapterTools.createFragmentAnalyserConfiguration(
-                CriterionType.XPATH,
-                this.criterions,
-                SIMPLER_CHAIN_PROCESSOR_ADAPTER_ID,
-                this.debugConsole);
+                        CriterionType.XPATH,
+                        this.criterions,
+                        SIMPLER_CHAIN_PROCESSOR_ADAPTER_ID,
+                        this.debugConsole);
 
         return new BlitzInterpreterAdapter(_modification,
                 fragmentAnalyserConfiguration,

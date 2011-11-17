@@ -1,18 +1,16 @@
 package work.unit.constructor.processor.mock;
 
-import downloader.BatchLoader;
-import downloader.Result;
-import downloader.RequestList;
-import downloader.BatchLoaderFuture;
-import downloader.data.MemoryData;
-
-import java.util.Map;
-import java.util.List;
-import java.util.HashMap;
-import java.io.UnsupportedEncodingException;
-
-import util.Assert;
+import app.controller.Controller;
+import http.BatchLoader;
+import http.Result;
+import http.data.MemoryData;
 import html.HttpData;
+import util.Assert;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Igor Usenko
@@ -28,17 +26,13 @@ public class PageLoaderMock implements BatchLoader {
         this.data = _data.getBytes("UTF-8");
     }
 
-    public Map<String, HttpData> loadUrls(final List<String> _urls, final long _pauseBetweenRequests) {
+    public Map<String, HttpData> loadUrls(final List<String> _urls, final long _pauseBetweenRequests, final Controller _controller) {
         Assert.notNull(_urls, "Urls is null");
-        
+
         Map<String, HttpData> result = new HashMap<String, HttpData>();
         result.put(_urls.get(0), new HttpData(_urls.get(0), new MemoryData(this.data, "UTF-8"), Result.OK));
 
         return result;
-    }
-
-    public Map<RequestList, HttpData> load(List<RequestList> _requests) {
-        return null; 
     }
 
     public HttpData loadUrlWithReferer(final String _url, final String _referer) {
@@ -47,11 +41,15 @@ public class PageLoaderMock implements BatchLoader {
         return new HttpData(_url, new MemoryData(this.data, "UTF-8"), Result.OK);
     }
 
+    public HttpData loadUrl(String _url) {
+        return null;  
+    }
+
     public String getReferer() {
         return this.referer;
     }
 
-    public boolean cancelled() {
-        return false;
+    public void cancel() {
+        // empty
     }
 }

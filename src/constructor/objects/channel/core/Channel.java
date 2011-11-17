@@ -1,5 +1,6 @@
 package constructor.objects.channel.core;
 
+import app.controller.NullController;
 import app.iui.flow.custom.SingleProcessInfo;
 import constructor.objects.AdapterException;
 import constructor.objects.channel.core.stream.ChannelDataList;
@@ -9,7 +10,7 @@ import constructor.objects.interpreter.core.data.InterpreterData;
 import dated.DatedItem;
 import dated.item.modification.Modification;
 import dated.item.modification.stream.ModificationList;
-import downloader.BatchLoader;
+import http.BatchLoader;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import timeservice.TimeService;
@@ -19,9 +20,11 @@ import util.fragment.ListFragmentIterator;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
- * Канал обработки модификаций. Назначение - обработав модификации -
- * получить списки данных канала и сохранить его
+ * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ -
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 07.03.2009
@@ -52,7 +55,7 @@ public class Channel {
             ModificationList modifications = this.adapter.getModificationsList();
             ChannelDataList datas = this.adapter.getChannelDataList();
 
-            List<Modification> candidates = new ArrayList<Modification>();
+            List<Modification> candidates = newArrayList();
 
             ChannelDataList result = new ChannelDataList();
 
@@ -131,7 +134,7 @@ public class Channel {
     }
 
     private void implicitPreCaching(final List<Modification> _modifications) throws AdapterException {
-        this.adapter.getPageLoader().loadUrls(getUrls(_modifications), this.adapter.getPauseBetweenRequests());
+        this.adapter.getPageLoader().loadUrls(getUrls(_modifications), this.adapter.getPauseBetweenRequests(), new NullController());
     }
 
     private List<String> getUrls(final List<Modification> _modifications) {
@@ -177,7 +180,7 @@ public class Channel {
     }
 
     private ChannelData processModification(final Modification _modification) throws AdapterException, ChannelAnalyser.ChannelAnalyserException {
-        List<InterpreterData> datas = new ArrayList<InterpreterData>();
+        List<InterpreterData> datas = newArrayList();
         ChannelDataHeader header = getChannelDataHeader(_modification);
         List<InterpreterEx> interpreters = getInterpreters(_modification);
 
@@ -193,7 +196,7 @@ public class Channel {
         ChannelAnalyser analyser = this.adapter.getAnalyser();
         BatchLoader loader = this.adapter.getPageLoader();
 
-        ChannelDataHeader result = analyser.getHeader(_modification, loader, this.adapter.getCoverUrl(), this.adapter.getPauseBetweenRequests());
+        ChannelDataHeader result = analyser.getHeader(_modification, loader, this.adapter.getCoverUrl());
 
         setGenresOrRemainDefault(result);
         setLangOrRemainDefault(result);
@@ -201,19 +204,19 @@ public class Channel {
         return result;
     }
 
-    private void setLangOrRemainDefault(ChannelDataHeader result) throws AdapterException {
+    private void setLangOrRemainDefault(final ChannelDataHeader _result) throws AdapterException {
         String lang = this.adapter.getLang();
 
         if (!lang.isEmpty()) {
-            result.setLang(lang);
+            _result.setLang(lang);
         }
     }
 
-    private void setGenresOrRemainDefault(ChannelDataHeader result) throws AdapterException {
+    private void setGenresOrRemainDefault(final ChannelDataHeader _result) throws AdapterException {
         List<String> genres = this.adapter.getGenres();
 
         if (!genres.isEmpty()) {
-            result.setGenres(genres);
+            _result.setGenres(genres);
         }
     }
 

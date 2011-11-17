@@ -12,8 +12,8 @@ import converter.format.fb2.resource.resolver.cache.CacheEntry;
 import converter.format.fb2.resource.resolver.cache.InDirectoryStorageAdapter;
 import converter.format.fb2.resource.resolver.cache.StorageAdapter;
 import converter.format.fb2.resource.resolver.cache.StoredItem;
-import downloader.Data;
-import downloader.data.MemoryData;
+import http.Data;
+import http.data.MemoryData;
 
 /**
  * @author Igor Usenko
@@ -27,7 +27,7 @@ public class InDirectoryStorageAdapterTest extends TestCase {
         super(_s);
     }
 
-    // первоначальный тест сохранение и чтение таблицы элементов кэша
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     public void testStoreLoadToc() throws IOException, StorageAdapter.StorageAdapterException {
         String dir = TEST_ROOT + "testStoreLoadToc/";
         CompTestsUtils.cleanupDir(dir);
@@ -57,7 +57,7 @@ public class InDirectoryStorageAdapterTest extends TestCase {
         assertTrue(entry02.equals(loaded.get("address02")));
     }
 
-    // попытка чтения TOC когда его нет 
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ TOC пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ 
     public void testNoToc() throws IOException, StorageAdapter.StorageAdapterException {
         String dir = TEST_ROOT + "testNoToc/";
         CompTestsUtils.cleanupDir(dir);
@@ -69,7 +69,7 @@ public class InDirectoryStorageAdapterTest extends TestCase {
         assertEquals(0, loaded.size());
     }
 
-    // сохранение и загрузка данных
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public void testStoreLoadData() throws IOException, StorageAdapter.StorageAdapterException, Data.DataException {
         String dir = TEST_ROOT + "testStoreLoadData/";
         CompTestsUtils.cleanupDir(dir);
@@ -89,7 +89,7 @@ public class InDirectoryStorageAdapterTest extends TestCase {
         assertTrue(Arrays.equals(buffer, loaded.getData()));
     }
 
-    // получение карты сохраненных данных
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public void testGetMap() throws IOException, StorageAdapter.StorageAdapterException, Data.DataException {
         String dir = TEST_ROOT + "testStoreLoadData/";
         CompTestsUtils.cleanupDir(dir);
@@ -137,7 +137,7 @@ public class InDirectoryStorageAdapterTest extends TestCase {
         assertEquals(3, map.size());
     }
 
-    // получение удаления сохраненных данных
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public void testRemoveData() throws IOException, StorageAdapter.StorageAdapterException, Data.DataException {
         String dir = TEST_ROOT + "testStoreLoadData/";
         CompTestsUtils.cleanupDir(dir);

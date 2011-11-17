@@ -10,7 +10,7 @@ import timeservice.StandardTimeService;
 import timeservice.TimeService;
 import work.testutil.AtdcTestUtils;
 import work.testutil.FlowTextDocumentTestUtils;
-import downloader.Data;
+import http.Data;
 
 /**
  * @author Igor Usenko

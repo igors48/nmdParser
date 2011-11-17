@@ -18,8 +18,8 @@ import converter.ConverterContext;
 import converter.format.fb2.Fb2Converter;
 import converter.format.fb2.resource.Fb2ResourceConversionContext;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
-import downloader.Downloader;
 import flowtext.Document;
+import http.BatchLoader;
 import resource.ConverterFactory;
 import timeservice.TimeService;
 import util.Assert;
@@ -27,14 +27,14 @@ import util.Assert;
 import java.util.List;
 
 /**
- * Стандартный адаптер построителя документа
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 11.04.2009
  */
 public class StandardDocumentBuilderAdapter extends AbstractDocumentBuilderAdapter {
 
-    private final Downloader downloader;
+    private final BatchLoader batchLoader;
     private final ConverterFactory converterFactory;
     private final OutputConfiguration outputConfiguration;
     private final ResourceCache cache;
@@ -51,7 +51,7 @@ public class StandardDocumentBuilderAdapter extends AbstractDocumentBuilderAdapt
                                           final ChannelDataListStorage _channelDataListStorage,
                                           final OutputConfiguration _outputConfiguration,
                                           final TimeService _timeService,
-                                          final Downloader _downloader,
+                                          final BatchLoader _batchLoader,
                                           final ConverterFactory _converterFactory,
                                           final ResourceCache _cache,
                                           final ProcessWrapper _processManager,
@@ -66,8 +66,8 @@ public class StandardDocumentBuilderAdapter extends AbstractDocumentBuilderAdapt
                                           final Controller _controller) {
         super(_timeService, _cloud, _versionInfo, _controller, _forcedDays, _channelDataListStorage);
 
-        Assert.notNull(_downloader, "Downloader is null");
-        this.downloader = _downloader;
+        Assert.notNull(_batchLoader, "Batch loader is null");
+        this.batchLoader = _batchLoader;
 
         Assert.notNull(_outputConfiguration, "Output configuration is null");
         this.outputConfiguration = _outputConfiguration;
@@ -119,7 +119,7 @@ public class StandardDocumentBuilderAdapter extends AbstractDocumentBuilderAdapt
         Assert.notNull(_document, "Document is null.");
 
         try {
-            Fb2Converter converter = new Fb2Converter(this.downloader, this.converterFactory, this.cache, this.dummy, this.conversionContext, this.controller);
+            Fb2Converter converter = new Fb2Converter(this.batchLoader, this.converterFactory, this.cache, this.dummy, this.conversionContext, this.controller);
 
             String name = DocumentBuilderAdapterUtils.getName(_document.getHeader().getBookTitle(), this.maxFileNameLength);
 

@@ -18,9 +18,8 @@ import debug.DebugConsole;
 import debug.console.FileDebugConsole;
 import debug.console.FileDebugConsoleUpdater;
 import debug.console.NullDebugConsole;
-import downloader.Downloader;
-import downloader.StandardDownloader;
-import downloader.StandardDownloaderConfig;
+import greader.HttpSecureAdapter;
+import http.*;
 import greader.GoogleReaderAdapter;
 import greader.GoogleReaderProvider;
 import greader.StandardGoogleReaderAdapter;
@@ -35,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Стандартный менеджер системных сервисов
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 20.04.2009
@@ -49,7 +48,8 @@ public class StandardServiceManager implements ServiceManager {
 
     private TimeService timeService;
     private FetcherFactory fetcherFactory;
-    private Downloader downloader;
+    private HttpRequestHandler httpRequestHandler;
+    private BatchLoader batchLoader;
     private DebugConsole debugConsole;
     private ResourceCache resourceCache;
     private ProcessWrapper processWrapper;
@@ -95,41 +95,35 @@ public class StandardServiceManager implements ServiceManager {
         return this.fetcherFactory;
     }
 
-    public Downloader getDownloader() throws ServiceManagerException {
+    public BatchLoader getBatchLoader() {
 
-        try {
-
-            if (this.downloader == null) {
-
-                StandardDownloaderConfig config = new StandardDownloaderConfig(this.settings.getCorePoolSize(),
-                        this.settings.getMaxPoolSize(),
-                        this.settings.getKeepAliveTime(),
-                        this.settings.getTempDirectory(),
-                        getTimeService(),
-                        this.settings.getCacheStorageTime(),
-                        this.settings.getBannedListTreshold(),
-                        this.settings.getBannedListLimit(),
-                        this.settings.getMaxConnectionsPerHost(),
-                        this.settings.getMaxTotalConnections(),
-                        this.settings.getUserAgent(),
-                        this.settings.isProxyUsed(),
-                        this.settings.getProxyHost(),
-                        this.settings.getProxyPort(),
-                        this.settings.getUserName(),
-                        this.settings.getUserPassword(),
-                        this.settings.getMaxTryCount(),
-                        this.settings.getSocketTimeout(),
-                        this.settings.getErrorTimeout(),
-                        this.settings.getMinTimeout());
-
-                this.downloader = new StandardDownloader(config);
-                this.downloader.start();
-            }
-
-            return this.downloader;
-        } catch (Downloader.DownloaderException e) {
-            throw new ServiceManagerException(e);
+        if (this.batchLoader == null) {
+            this.batchLoader = new StandardBatchLoader(getHttpRequestHandler());
         }
+
+        return this.batchLoader;
+    }
+
+    private HttpRequestHandler getHttpRequestHandler() {
+
+        if (this.httpRequestHandler == null) {
+             StandardHttpRequestHandlerContext standardHttpRequestHandlerContext = new StandardHttpRequestHandlerContext(
+                this.settings.getErrorTimeout(),
+                this.settings.getSocketTimeout(),
+                this.settings.getMaxTryCount(),
+                this.settings.getBannedListTreshold(),
+                this.settings.getBannedListLimit(),
+                this.settings.getUserAgent(),
+                this.settings.isProxyUsed(),
+                this.settings.getProxyHost(),
+                this.settings.getProxyPort(),
+                this.settings.getUserName(),
+                this.settings.getUserPassword()
+            );
+            this.httpRequestHandler = new StandardHttpRequestHandler(standardHttpRequestHandlerContext);
+        }
+
+        return this.httpRequestHandler;
     }
 
     public ConverterFactory getConverterFactory() throws ServiceManagerException {
@@ -218,7 +212,8 @@ public class StandardServiceManager implements ServiceManager {
             }
 
             if (this.googleReaderProvider == null) {
-                this.googleReaderProvider = new GoogleReaderProvider();
+                HttpSecureAdapter httpSecureAdapter = new HttpSecureAdapter(getHttpRequestHandler());
+                this.googleReaderProvider = new GoogleReaderProvider(httpSecureAdapter);
             }
 
             if (this.googleReaderAdapter == null) {
@@ -237,27 +232,14 @@ public class StandardServiceManager implements ServiceManager {
             this.resourceCache.stop();
         }
 
-        if (this.downloader != null) {
-            this.downloader.cancel();
-
-            waitSomeTime();
-
-            this.downloader.stop();
+        if (this.httpRequestHandler != null) {
+            this.httpRequestHandler.stop();
         }
 
         if (this.defaultStorage != null) {
             this.defaultStorage.close();
         }
 
-    }
-
-    private void waitSomeTime() {
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            // empty
-        }
     }
 
     private Preprocessor getContextPreprocessor() {

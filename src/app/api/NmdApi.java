@@ -37,6 +37,7 @@ import constructor.objects.source.core.ModificationListStorage;
 import constructor.objects.source.core.Source;
 import constructor.objects.source.core.SourceAdapter;
 import constructor.objects.storage.Storage;
+import greader.GoogleReaderAdapter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import timeservice.TimeService;
@@ -53,8 +54,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import greader.GoogleReaderAdapter;
 
 /**
  * NMD API
@@ -489,16 +488,6 @@ public class NmdApi implements ApiFacade {
         removeOutputsServiceFiles(_mask);
     }
 
-    public void cancelDownload() throws FatalException {
-        checkWorkspaceAndSettings();
-
-        try {
-            this.serviceManager.getDownloader().cancel();
-        } catch (ServiceManager.ServiceManagerException e) {
-            throw new FatalException("Error cancel download", e);
-        }
-    }
-
     public void createGoogleReaderProfile(final String _email, final String _password) throws FatalException {
         Assert.isValidString(_email, "EMail is not valid");
         Assert.isValidString(_password, "Password is not valid");
@@ -783,7 +772,7 @@ public class NmdApi implements ApiFacade {
         if (configuration instanceof ChannelConfiguration) {
             adapter = new StandardChannelAdapter(this.workspace.getChannelDataListStorage(),
                     (ChannelConfiguration) configuration,
-                    this.serviceManager.getDownloader(),
+                    this.serviceManager.getBatchLoader(),
                     this.workspace.getModificationListStorage(),
                     this.workspace.getConstructorFactory(),
                     _forcedDays,
@@ -816,7 +805,7 @@ public class NmdApi implements ApiFacade {
                     this.workspace.getChannelDataListStorage(),
                     (OutputConfiguration) configuration,
                     this.serviceManager.getTimeService(),
-                    this.serviceManager.getDownloader(),
+                    this.serviceManager.getBatchLoader(),
                     this.serviceManager.getConverterFactory(),
                     this.serviceManager.getResourceCache(),
                     this.serviceManager.getProcessWrapper(),
@@ -845,7 +834,7 @@ public class NmdApi implements ApiFacade {
     private Simpler getSimpler(final SimplerConfiguration _configuration, final int _forcedDays, final Controller _controller) throws ServiceManager.ServiceManagerException, Workspace.WorkspaceException {
         SimplerAdapter adapter = new StandardSimplerAdapter(_configuration,
                 this.serviceManager.getTimeService(),
-                this.serviceManager.getDownloader(),
+                this.serviceManager.getBatchLoader(),
                 this.workspace.getCloud(),
                 _controller,
                 this.serviceManager.getConverterFactory(),

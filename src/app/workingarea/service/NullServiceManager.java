@@ -9,7 +9,8 @@ import constructor.objects.storage.Storage;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
 import debug.DebugConsole;
 import debug.console.NullDebugConsole;
-import downloader.Downloader;
+import http.BatchLoader;
+import http.HttpRequestHandler;
 import resource.ConverterFactory;
 import timeservice.TimeService;
 
@@ -19,7 +20,7 @@ import java.util.Map;
 import greader.GoogleReaderAdapter;
 
 /**
- * Пустой сервис менеджер
+ * пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 05.08.2009
@@ -37,7 +38,7 @@ public final class NullServiceManager implements ServiceManager {
         return null;
     }
 
-    public Downloader getDownloader() throws ServiceManagerException {
+    public BatchLoader getBatchLoader() {
         return null;
     }
 

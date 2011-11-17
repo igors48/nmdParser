@@ -3,7 +3,7 @@ package work.testutil;
 import dated.item.atdc.AtdcItem;
 import dated.item.atdc.Author;
 import dated.item.atdc.HtmlContent;
-import downloader.Data;
+import http.Data;
 import timeservice.TimeService;
 
 import java.util.Date;

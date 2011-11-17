@@ -1,13 +1,13 @@
 package converter.format.fb2.resource.resolver.cache;
 
-import downloader.Data;
+import http.Data;
 import util.Assert;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Хранилище кэша ресурсов расположенное в памяти
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 06.11.2009

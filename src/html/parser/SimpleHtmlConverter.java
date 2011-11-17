@@ -1,7 +1,7 @@
 package html.parser;
 
 import dated.item.atdc.HtmlContent;
-import downloader.Data;
+import http.Data;
 import flowtext.DocumentBuilder;
 import flowtext.DocumentBuilderContext;
 import flowtext.Section;
@@ -71,9 +71,9 @@ public class SimpleHtmlConverter implements Converter {
                 if (buffer.equals(OPEN_BRACE)) {
                     increaseOpenBraceCounter();
 
-                    // учет количества скобок в этом и следующем блоке
-                    // нужен для того, чтобы разрулить ситуацию,
-                    // когда в теле тэга попадаются символы < >
+                    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+                    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ,
+                    // пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ < >
                     if (this.openBraceCounter == 1) {
                         openBraceReceived();
                     }
@@ -106,7 +106,7 @@ public class SimpleHtmlConverter implements Converter {
     private String prepare(final String _data) throws Data.DataException {
         return SimpleHtmlConverterUtil.clearEmptyLines(
                 SimpleHtmlConverterUtil.processIgnoredTags(
-                        /*SimpleHtmlConverterUtil.cleanupHtml*/(_data))); //cleanup приводил к куче неэскейпленных тегов, в ряде случаев       
+                        /*SimpleHtmlConverterUtil.cleanupHtml*/(_data))); //cleanup пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ       
     }
 
     private void textReceived(final String _text) {
@@ -125,9 +125,9 @@ public class SimpleHtmlConverter implements Converter {
     private void decreaseOpenBraceCounter() {
         --this.openBraceCounter;
 
-        // нельзя, чтобы счетчик опускался ниже нуля
-        // это сбивает с ритма весь конвертор
-        // посвящено баге при разборе новостей АТН от 8 мая 2009
+        // пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+        // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ 8 пїЅпїЅпїЅ 2009
         if (this.openBraceCounter < 0) {
             this.openBraceCounter = 0;
         }

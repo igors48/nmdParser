@@ -7,8 +7,8 @@ import converter.format.fb2.resource.resolver.cache.InMemoryStorageAdapter;
 import timeservice.TimeService;
 import timeservice.StandardTimeService;
 import timeservice.StillTimeService;
-import downloader.Data;
-import downloader.data.MemoryData;
+import http.Data;
+import http.data.MemoryData;
 
 import java.util.Arrays;
 
@@ -22,7 +22,7 @@ public class ResourceCacheTest extends TestCase {
         super(_s);
     }
 
-    // первоначальный тест
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     public void testSmoke() throws Data.DataException {
         StorageAdapter adapter = new InMemoryStorageAdapter();
         TimeService timeService = new StandardTimeService();
@@ -43,7 +43,7 @@ public class ResourceCacheTest extends TestCase {
         assertTrue(Arrays.equals(buffer, loaded.getData()));
     }
 
-    // два чтения подряд
+    // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public void testTwoRead() throws Data.DataException {
         StorageAdapter adapter = new InMemoryStorageAdapter();
         TimeService timeService = new StandardTimeService();
@@ -65,7 +65,7 @@ public class ResourceCacheTest extends TestCase {
         assertTrue(Arrays.equals(buffer, loaded.getData()));
     }
 
-    // запись новой поверх старой
+    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public void testNewRewriteOld() throws Data.DataException {
         StorageAdapter adapter = new InMemoryStorageAdapter();
         TimeService timeService = new StandardTimeService();
@@ -94,7 +94,7 @@ public class ResourceCacheTest extends TestCase {
         assertTrue(Arrays.equals(buffer02, loaded.getData()));
     }
 
-    // освобождение памяти
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     /*public void testReserveMemory() throws Data.DataException {
         StorageAdapter adapter = new InMemoryStorageAdapter();
         TimeService timeService = new StandardTimeService();
@@ -125,7 +125,7 @@ public class ResourceCacheTest extends TestCase {
         assertTrue(Arrays.equals(buffer02, loaded02.getData()));
     } */
 
-    // удаление просроченных данных при попытке получить к ним доступ
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public void testRemoveStalledData() throws Data.DataException {
         StorageAdapter adapter = new InMemoryStorageAdapter();
         StillTimeService timeService = new StillTimeService();
@@ -148,7 +148,7 @@ public class ResourceCacheTest extends TestCase {
         assertNull(loaded01);
     }
     
-    // элемент больший максимального размера не вставляется
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public void testNoInsertBiggerThanMax() throws Data.DataException {
         StorageAdapter adapter = new InMemoryStorageAdapter();
         StillTimeService timeService = new StillTimeService();
@@ -168,7 +168,7 @@ public class ResourceCacheTest extends TestCase {
         assertNull(loaded01);
     }
 
-    // аудит : удаление сирот
+    // пїЅпїЅпїЅпїЅпїЅ : пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     public void testRemoveOrphans() throws Data.DataException, StorageAdapter.StorageAdapterException {
         StorageAdapter adapter = new InMemoryStorageAdapter();
         StillTimeService timeService = new StillTimeService();
@@ -188,7 +188,7 @@ public class ResourceCacheTest extends TestCase {
         assertNull(adapter.load(name));
     }
     
-    // аудит : тест удаления из таблицы элементов, элемента, для которого не нашлось сохраненных данных
+    // пїЅпїЅпїЅпїЅпїЅ : пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public void testAudit() throws Data.DataException {
         InMemoryStorageAdapter adapter = new InMemoryStorageAdapter();
         StillTimeService timeService = new StillTimeService();
@@ -210,7 +210,7 @@ public class ResourceCacheTest extends TestCase {
         assertNull(loaded);
     }
 
-    // последующие сессии нормально работают с данными сохраненными предыдущими сессиями
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public void testThisReadsPrevious() throws Data.DataException {
         InMemoryStorageAdapter adapter = new InMemoryStorageAdapter();
         StillTimeService timeService = new StillTimeService();
@@ -258,7 +258,7 @@ public class ResourceCacheTest extends TestCase {
         assertNotNull(cache.get("data02"));
     }
 
-    // тест поведения при превышении размера вариант 01
+    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 01
    /* public void testSpaceLimitOne() throws Data.DataException, InterruptedException {
         InMemoryStorageAdapter adapter = new InMemoryStorageAdapter();
         TimeService timeService = new StandardTimeService();
@@ -294,7 +294,7 @@ public class ResourceCacheTest extends TestCase {
         assertNotNull(loaded04);
     }*/
 
-    // тест поведения при превышении размера вариант 02
+    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 02
    /* public void testSpaceLimitTwo() throws Data.DataException, InterruptedException {
         InMemoryStorageAdapter adapter = new InMemoryStorageAdapter();
         TimeService timeService = new StandardTimeService();

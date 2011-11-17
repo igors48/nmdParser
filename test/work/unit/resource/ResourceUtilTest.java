@@ -3,7 +3,7 @@ package work.unit.resource;
 import junit.framework.TestCase;
 import resource.ResourceType;
 import resource.ResourceUtil;
-import downloader.data.DataFile;
+import http.data.DataFile;
 import work.testutil.CompTestsUtils;
 
 /**

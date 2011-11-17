@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Адаптер блиц-генератора документа
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 30.10.2009
@@ -89,7 +89,7 @@ public class BlitzDocumentBuilderAdapter implements DocumentBuilderAdapter {
         Assert.notNull(_document, "Document is null.");
 
         try {
-            Fb2Converter converter = new Fb2Converter(this.serviceManager.getDownloader(),
+            Fb2Converter converter = new Fb2Converter(this.serviceManager.getBatchLoader(),
                     this.serviceManager.getConverterFactory(),
                     this.serviceManager.getResourceCache(),
                     this.settings.getResourceDummy(),

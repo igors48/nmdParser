@@ -1,7 +1,7 @@
 package converter.format.fb2.resource.resolver.cache;
 
-import downloader.Data;
-import downloader.data.DataFile;
+import http.Data;
+import http.data.DataFile;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import util.Assert;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Хранилище данных ресурсного кэша расположенное в каталоге
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 08.11.2009
@@ -33,8 +33,8 @@ public class InDirectoryStorageAdapter implements StorageAdapter {
     private final Log log;
 
     public InDirectoryStorageAdapter(final String _root) {
-        Assert.isValidString(_root, "Cache storage root is not valid");
-        Assert.isTrue(new File(_root).exists(), "Cache storage root does not exists");
+        Assert.isValidString(_root, String.format("Cache storage root [ %s ] is not valid", _root == null ? "" : _root));
+        Assert.isTrue(new File(_root).exists(), String.format("Cache storage root [ %s ]does not exists", _root == null ? "" : _root));
         this.root = PathTools.normalize(_root);
         this.rootDirectory = new File(this.root);
 

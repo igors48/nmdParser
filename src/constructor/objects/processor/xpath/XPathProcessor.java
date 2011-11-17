@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Процессор обработки упрощенных XPath запросов
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ XPath пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 27.06.2009
@@ -107,11 +107,14 @@ public class XPathProcessor extends AbstractVariableProcessor {
     }
 
     private NodeList getNodes(final String _source, final String _expression) throws XPathExpressionException, ParserConfigurationException, IOException {
-        TagNode cleaned = new HtmlCleaner().clean(_source);
         CleanerProperties cleanerProperties = new CleanerProperties();
         cleanerProperties.setNamespacesAware(false);
-        
-        Document serialized = new DomSerializer(cleanerProperties).createDOM(cleaned);
+
+        HtmlCleaner cleaner = new HtmlCleaner(cleanerProperties);
+        TagNode cleaned = cleaner.clean(_source);
+
+        DomSerializer domSerializer = new DomSerializer(cleanerProperties);
+        Document serialized = domSerializer.createDOM(cleaned);
 
         XPathFactory factory = XPathFactory.newInstance();
         XPath xpath = factory.newXPath();
