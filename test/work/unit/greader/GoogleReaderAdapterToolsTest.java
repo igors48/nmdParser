@@ -21,58 +21,73 @@ public class GoogleReaderAdapterToolsTest extends TestCase {
 
     public void testNotExistItemsAppended() {
         List<FeedConfiguration> feedConfigurations = newArrayList();
+
         List<Subscription> subscriptions = newArrayList();
 
-        Subscription first = new Subscription("f", "f");
+        Subscription first = new Subscription("f", "f", "f");
         subscriptions.add(first);
 
-        Subscription second = new Subscription("s", "s");
+        Subscription second = new Subscription("s", "s", "s");
         subscriptions.add(second);
 
         GoogleReaderAdapterTools.synchronize(feedConfigurations, subscriptions);
 
         assertEquals(2, feedConfigurations.size());
 
-        assertEquals(first.getId(), feedConfigurations.get(0).getUrl());
-        assertEquals(first.getTitle(), feedConfigurations.get(0).getName());
-
-        assertEquals(second.getId(), feedConfigurations.get(1).getUrl());
-        assertEquals(second.getTitle(), feedConfigurations.get(1).getName());
+        assertSubscriptionAndFeedConfigurationEquals(first, feedConfigurations.get(0));
+        assertSubscriptionAndFeedConfigurationEquals(second, feedConfigurations.get(1));
     }
 
     public void testExistItemsNotChanged() {
         List<FeedConfiguration> feedConfigurations = newArrayList();
-        feedConfigurations.add(FeedConfiguration.createForUrlAndName("f", "f"));
+        feedConfigurations.add(FeedConfiguration.createForUrlAndName("f", "f", "f"));
 
         List<Subscription> subscriptions = newArrayList();
 
-        Subscription first = new Subscription("f", "f");
+        Subscription first = new Subscription("f", "f", "f");
         subscriptions.add(first);
 
-        Subscription second = new Subscription("s", "s");
+        Subscription second = new Subscription("s", "s", "s");
         subscriptions.add(second);
 
         GoogleReaderAdapterTools.synchronize(feedConfigurations, subscriptions);
 
         assertEquals(2, feedConfigurations.size());
 
-        assertEquals(first.getId(), feedConfigurations.get(0).getUrl());
-        assertEquals(first.getTitle(), feedConfigurations.get(0).getName());
+        assertSubscriptionAndFeedConfigurationEquals(first, feedConfigurations.get(0));
+        assertSubscriptionAndFeedConfigurationEquals(second, feedConfigurations.get(1));
+    }
 
-        assertEquals(second.getId(), feedConfigurations.get(1).getUrl());
-        assertEquals(second.getTitle(), feedConfigurations.get(1).getName());
+    public void testExistItemsBranchesChanged() {
+        List<FeedConfiguration> feedConfigurations = newArrayList();
+        feedConfigurations.add(FeedConfiguration.createForUrlAndName("f", "f", "c"));
+
+        List<Subscription> subscriptions = newArrayList();
+
+        Subscription first = new Subscription("f", "f", "f");
+        subscriptions.add(first);
+
+        Subscription second = new Subscription("s", "s", "s");
+        subscriptions.add(second);
+
+        GoogleReaderAdapterTools.synchronize(feedConfigurations, subscriptions);
+
+        assertEquals(2, feedConfigurations.size());
+
+        assertSubscriptionAndFeedConfigurationEquals(first, feedConfigurations.get(0));
+        assertSubscriptionAndFeedConfigurationEquals(second, feedConfigurations.get(1));
     }
 
     public void testMissingItemsNotChanged() {
         List<FeedConfiguration> feedConfigurations = newArrayList();
-        feedConfigurations.add(FeedConfiguration.createForUrlAndName("m", "m"));
+        feedConfigurations.add(FeedConfiguration.createForUrlAndName("m", "m", "m"));
 
         List<Subscription> subscriptions = newArrayList();
 
-        Subscription first = new Subscription("f", "f");
+        Subscription first = new Subscription("f", "f", "f");
         subscriptions.add(first);
 
-        Subscription second = new Subscription("s", "s");
+        Subscription second = new Subscription("s", "s", "s");
         subscriptions.add(second);
 
         GoogleReaderAdapterTools.synchronize(feedConfigurations, subscriptions);
@@ -81,11 +96,16 @@ public class GoogleReaderAdapterToolsTest extends TestCase {
 
         assertEquals("m", feedConfigurations.get(0).getUrl());
         assertEquals("m", feedConfigurations.get(0).getName());
+        assertEquals("m", feedConfigurations.get(0).getBranch());
 
-        assertEquals(first.getId(), feedConfigurations.get(1).getUrl());
-        assertEquals(first.getTitle(), feedConfigurations.get(1).getName());
-
-        assertEquals(second.getId(), feedConfigurations.get(2).getUrl());
-        assertEquals(second.getTitle(), feedConfigurations.get(2).getName());
+        assertSubscriptionAndFeedConfigurationEquals(first, feedConfigurations.get(1));
+        assertSubscriptionAndFeedConfigurationEquals(second, feedConfigurations.get(2));
     }
+
+    private void assertSubscriptionAndFeedConfigurationEquals(final Subscription _first, final FeedConfiguration _feedConfiguration) {
+        assertEquals(_first.getId(), _feedConfiguration.getUrl());
+        assertEquals(_first.getTitle(), _feedConfiguration.getName());
+        assertEquals(_first.getCategories()[0].getLabel(), _feedConfiguration.getBranch());
+    }
+
 }

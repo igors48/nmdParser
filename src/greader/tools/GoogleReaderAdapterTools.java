@@ -4,6 +4,7 @@ import app.cli.blitz.request.BlitzRequest;
 import app.cli.blitz.request.CriterionType;
 import constructor.objects.output.configuration.Composition;
 import dated.item.modification.Modification;
+import greader.entities.Category;
 import greader.entities.Subscription;
 import greader.profile.FeedConfiguration;
 import org.apache.commons.logging.Log;
@@ -48,25 +49,42 @@ public final class GoogleReaderAdapterTools {
 
         for (Subscription current : _subscriptions) {
 
-            if (contains(current, _feedConfigurations)) {
+            FeedConfiguration found = find(current, _feedConfigurations);
+
+            if (found != null) {
                 log.debug(String.format("Feed [ %s ] already in profile", current.getId()));
+
+                String newBranch = getBranch(current);
+
+                if (!newBranch.equalsIgnoreCase(found.getBranch())) {
+                    log.debug(String.format("Feed [ %s ] branch changed from [ %s ] to [ %s ]", current.getId(), found.getBranch(), newBranch));
+
+                    found.setBranch(newBranch);
+                }
+
             } else {
-                _feedConfigurations.add(FeedConfiguration.createForUrlAndName(current.getId(), current.getTitle()));
+                _feedConfigurations.add(FeedConfiguration.createForUrlAndName(current.getId(), current.getTitle(), getBranch(current)));
                 log.debug(String.format("Feed [ %s ] append to profile", current.getId()));
             }
         }
     }
 
-    private static boolean contains(final Subscription _subscription, final List<FeedConfiguration> _feedConfigurations) {
+    private static String getBranch(final Subscription _current) {
+        Category[] categories = _current.getCategories();
+
+        return categories == null || categories.length == 0 ? "" : categories[0].getLabel();
+    }
+
+    private static FeedConfiguration find(final Subscription _subscription, final List<FeedConfiguration> _feedConfigurations) {
 
         for (FeedConfiguration candidate : _feedConfigurations) {
 
             if (candidate.getUrl().equalsIgnoreCase(_subscription.getId())) {
-                return true;
+                return candidate;
             }
         }
 
-        return false;
+        return null;
     }
 
     private static String safeString(final String _string) {

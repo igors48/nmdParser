@@ -98,14 +98,16 @@ public class FeedConfiguration {
         this.rewrite = _rewrite;
     }
 
-    public static FeedConfiguration createForUrlAndName(final String _url, final String _name) {
+    public static FeedConfiguration createForUrlAndName(final String _url, final String _name, final String _branch) {
         Assert.isValidString(_url, "Url is not valid");
         Assert.isValidString(_name, "Name is not valid");
+        Assert.notNull(_branch, "Branch is null");
 
         FeedConfiguration result = new FeedConfiguration();
 
         result.setUrl(_url);
         result.setName(_name);
+        result.setBranch(_branch);
 
         return result;
     }
