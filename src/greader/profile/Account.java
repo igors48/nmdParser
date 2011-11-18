@@ -3,6 +3,7 @@ package greader.profile;
 import util.Assert;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
@@ -33,6 +34,7 @@ public class Account {
     }
 
     @XmlElement(name = "password", nillable = false, required = true)
+    @XmlJavaTypeAdapter(value = PasswordEncoder.class)
     public String getPassword() {
         return this.password;
     }
