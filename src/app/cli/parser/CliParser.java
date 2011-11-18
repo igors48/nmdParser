@@ -107,6 +107,7 @@ public class CliParser {
         this.parsers.put(GOOGLE_READER_CHANGE_PROFILE_PASSWORD_OPTION_SHORT_NAME, new GoogleReaderChangeProfilePasswordOptionParser());
         this.parsers.put(GOOGLE_READER_UPDATE_PROFILE_OPTION_SHORT_NAME, new GoogleReaderUpdateProfileOptionParser());
         this.parsers.put(GOOGLE_READER_TEST_PROFILE_FEED_OPTION_SHORT_NAME, new GoogleReaderTestProfileFeedOptionParser());
+        this.parsers.put(GOOGLE_READER_DUMP_REGISTERED_PROFILES_OPTION_SHORT_NAME, new GoogleReaderDumpRegisteredProfilesOptionParser());
     }
 
     private OptionParser getParser(final CommandLine _commandLine) {
@@ -311,6 +312,12 @@ public class CliParser {
         googleReaderTestProfileFeedOption.setOptionalArg(false);
         googleReaderTestProfileFeedOption.setArgs(2);
 
+        Option googleReaderDumpRegisteredProfilesOption = new Option(GOOGLE_READER_DUMP_REGISTERED_PROFILES_OPTION_SHORT_NAME,
+                GOOGLE_READER_DUMP_REGISTERED_PROFILES_OPTION_FULL_NAME,
+                false,
+                GOOGLE_READER_DUMP_REGISTERED_PROFILES_OPTION_DESCRIPTION);
+        googleReaderDumpRegisteredProfilesOption.setArgs(0);
+
         Option baseUrlOption = new Option(BASE_URL_OPTION_SHORT_NAME,
                 BASE_URL_OPTION_FULL_NAME,
                 true,
@@ -401,6 +408,7 @@ public class CliParser {
         mainGroup.addOption(googleReaderChangeProfilePasswordOption);
         mainGroup.addOption(googleReaderUpdateProfileOption);
         mainGroup.addOption(googleReaderTestProfileFeedOption);
+        mainGroup.addOption(googleReaderDumpRegisteredProfilesOption);
 
         this.options.addOptionGroup(mainGroup);
 

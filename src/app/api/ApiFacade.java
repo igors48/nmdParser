@@ -300,6 +300,8 @@ public interface ApiFacade extends BlitzRequestHandler {
      */
     void testGoogleReaderProfile(String _email, String _feed) throws FatalException;
 
+    void dumpRegisteredGoogleReaderProfile() throws FatalException;
+    
     /**
      * Завершает работу с API
      */

@@ -147,6 +147,16 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
         }
     }
 
+    @Override
+    public Profiles getRegisteredProfiles() throws GoogleReaderAdapterException {
+        
+        try {
+            return this.profilesStorage.load();
+        } catch (ProfilesStorage.ProfilesStorageException e) {
+            throw new GoogleReaderAdapterException(e);
+        }
+    }
+
     private void updateFeed(final BlitzRequestHandler _handler, final Profile profile, final FeedConfiguration configuration) throws GoogleReaderProvider.GoogleReaderProviderException, ApiFacade.FatalException {
         List<FeedItem> items = this.provider.getUnreadFeedItems(profile.getAccount(), configuration.getUrl());
 

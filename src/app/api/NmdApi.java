@@ -38,6 +38,9 @@ import constructor.objects.source.core.Source;
 import constructor.objects.source.core.SourceAdapter;
 import constructor.objects.storage.Storage;
 import greader.GoogleReaderAdapter;
+import greader.profile.FeedConfiguration;
+import greader.profile.Profile;
+import greader.profile.Profiles;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import timeservice.TimeService;
@@ -550,6 +553,43 @@ public class NmdApi implements ApiFacade {
         } catch (ServiceManager.ServiceManagerException e) {
             throw new FatalException(e);
         }
+    }
+
+    @Override
+    public void dumpRegisteredGoogleReaderProfile() throws FatalException {
+
+        try {
+            Profiles profiles = this.serviceManager.getGoogleReaderAdapter().getRegisteredProfiles();
+
+            this.log.info(String.format("There is(are) [ %d ] registered Google Reader profiles found", profiles.getProfiles().size()));
+            
+            for (Profile current : profiles.getProfiles()) {
+                dumpProfile(current);
+            }
+            
+        } catch (GoogleReaderAdapter.GoogleReaderAdapterException e) {
+            throw new FatalException(e);
+        } catch (ServiceManager.ServiceManagerException e) {
+            throw new FatalException(e);
+        }
+    }
+
+    private void dumpProfile(final Profile _profile) {
+        this.log.info(" ");
+        this.log.info(String.format("Profile email : [ %s ] feeds count : [ %d ]", _profile.getAccount().getEmail(), _profile.getFeedConfigurations().size()));
+
+        for (FeedConfiguration feedConfiguration : _profile.getFeedConfigurations()) {
+            this.log.info(" ");
+            this.log.info(String.format("Feed URL : [ %s ]", feedConfiguration.getUrl()));
+            this.log.info(String.format("Cover image URL :  [ %s ]", feedConfiguration.getCoverUrl()));
+            this.log.info(String.format("Auto content filtering is : [ %s ]", String.valueOf(feedConfiguration.isAutoContentFiltering())));
+            this.log.info(String.format("Content filtering criterions : [ %s ]", feedConfiguration.getCriterions()));
+            this.log.info(String.format("Stored in branch : [ %s ]", feedConfiguration.getBranch()));
+            this.log.info(String.format("Output file name : [ %s ]", feedConfiguration.getName()));
+            this.log.info(String.format("Rewrite mode is : [ %s ]", feedConfiguration.isRewrite()));
+        }
+        
+        this.log.info(" ");
     }
 
     public void cleanup() {

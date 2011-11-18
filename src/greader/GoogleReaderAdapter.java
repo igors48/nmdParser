@@ -1,6 +1,7 @@
 package greader;
 
 import app.cli.blitz.BlitzRequestHandler;
+import greader.profile.Profiles;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
@@ -18,6 +19,8 @@ public interface GoogleReaderAdapter {
 
     void changeProfilePassword(String _email, String _newPassword) throws GoogleReaderAdapterException;
 
+    Profiles getRegisteredProfiles() throws GoogleReaderAdapterException;
+    
     class GoogleReaderAdapterException extends Exception {
 
         public GoogleReaderAdapterException() {
