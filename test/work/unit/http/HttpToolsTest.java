@@ -25,4 +25,17 @@ public class HttpToolsTest extends TestCase {
 
         Assert.assertEquals("UTF-8", charset);
     }
+
+    public void testPasswordHideIfFound() {
+        final String result = HttpTools.removePasswordFromString("asdfgpass=pass");
+
+        Assert.assertEquals("asdfg[*HIDDEN*]", result);
+    }
+
+    public void testStringNotChangedIfPasswordNotFound() {
+        final String result = HttpTools.removePasswordFromString("asdfgpast=past");
+
+        Assert.assertEquals("asdfgpast=past", result);
+    }
+
 }

@@ -13,8 +13,26 @@ import java.util.regex.Pattern;
  */
 public final class HttpTools {
 
+    private static final String PASSWORD_TOKEN = "PASS";
+    private static final String PASSWORD_REPLACEMENT = "[*HIDDEN*]";
+
     private static final Pattern PATTERN = Pattern.compile("charset=([\\w|-]+);?", Pattern.CASE_INSENSITIVE);
     private static final int GROUP_NO = 1;
+
+    public static String removePasswordFromString(final String _data) {
+        Assert.notNull(_data, "Data is null");
+
+        String result = _data;
+
+        String buffer = _data.toUpperCase();
+        int index = buffer.indexOf(PASSWORD_TOKEN);
+
+        if (index != -1) {
+            result = _data.substring(0, index) + PASSWORD_REPLACEMENT;
+        }
+
+        return result;
+    }
 
     public static String getCharset(final Header[] _headers) {
         Assert.notNull(_headers, "Headers is null");
