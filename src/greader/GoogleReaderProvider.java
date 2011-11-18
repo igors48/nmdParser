@@ -113,7 +113,11 @@ public class GoogleReaderProvider {
             for (FeedItems.Item current : feedResponseItems.getItems()) {
                 FeedItem item = FeedItem.create(current);
 
-                result.add(item);
+                if (item == null) {
+                    this.log.error("Error create feed item because not all necessary data found");
+                } else {
+                    result.add(item);
+                }
             }
 
             return result;
