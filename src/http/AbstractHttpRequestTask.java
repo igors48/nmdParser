@@ -96,9 +96,11 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
             } else {
                 this.log.debug(String.format("%s request to [ %s ] started", this.requestType, removePasswordFromString(urlWithRequest)));
 
+                long startTime = System.currentTimeMillis();
                 handle(method);
+                long finishTime = System.currentTimeMillis();
 
-                this.log.debug(String.format("%s request to [ %s ] completed with status [ %s ]", this.requestType, removePasswordFromString(urlWithRequest), this.request.getResult().getResult()));
+                this.log.debug(String.format("%s request to [ %s ] completed with status [ %s ] in [ %d ] ms", this.requestType, removePasswordFromString(urlWithRequest), this.request.getResult().getResult(), finishTime - startTime));
             }
         } catch (Exception e) {
             method.abort();
