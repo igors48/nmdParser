@@ -561,7 +561,7 @@ public class NmdApi implements ApiFacade {
         try {
             Profiles profiles = this.serviceManager.getGoogleReaderAdapter().getRegisteredProfiles();
 
-            this.log.info(String.format("There is(are) [ %d ] registered Google Reader profiles found", profiles.getProfiles().size()));
+            this.log.info(String.format("There is(are) [ %d ] registered Google Reader profile(s) found", profiles.getProfiles().size()));
             
             for (Profile current : profiles.getProfiles()) {
                 dumpProfile(current);
@@ -576,7 +576,7 @@ public class NmdApi implements ApiFacade {
 
     private void dumpProfile(final Profile _profile) {
         this.log.info(" ");
-        this.log.info(String.format("Profile email : [ %s ] feeds count : [ %d ]", _profile.getAccount().getEmail(), _profile.getFeedConfigurations().size()));
+        this.log.info(String.format("Profile email : [ %s ] feed(s) count : [ %d ]", _profile.getAccount().getEmail(), _profile.getFeedConfigurations().size()));
 
         for (FeedConfiguration feedConfiguration : _profile.getFeedConfigurations()) {
             this.log.info(" ");
