@@ -516,11 +516,11 @@ public class NmdApi implements ApiFacade {
         }
     }
 
-    public void updateGoogleReaderProfile(final String _email) throws FatalException {
+    public List<String> updateGoogleReaderProfile(final String _email) throws FatalException {
         Assert.isValidString(_email, "EMail is not valid");
 
         try {
-            this.serviceManager.getGoogleReaderAdapter().updateProfile(_email, this);
+            return this.serviceManager.getGoogleReaderAdapter().updateProfile(_email, this);
         } catch (GoogleReaderAdapter.GoogleReaderAdapterException e) {
             throw new FatalException(e);
         } catch (ServiceManager.ServiceManagerException e) {
@@ -542,12 +542,12 @@ public class NmdApi implements ApiFacade {
     }
 
 
-    public void testGoogleReaderProfile(final String _email, final String _feed) throws FatalException {
+    public List<String> testGoogleReaderProfile(final String _email, final String _feed) throws FatalException {
         Assert.isValidString(_email, "EMail is not valid");
         Assert.isValidString(_feed, "Feeds is not valid");
 
         try {
-            this.serviceManager.getGoogleReaderAdapter().testProfileFeed(_email, _feed, this);
+            return this.serviceManager.getGoogleReaderAdapter().testProfileFeed(_email, _feed, this);
         } catch (GoogleReaderAdapter.GoogleReaderAdapterException e) {
             throw new FatalException(e);
         } catch (ServiceManager.ServiceManagerException e) {
@@ -562,11 +562,11 @@ public class NmdApi implements ApiFacade {
             Profiles profiles = this.serviceManager.getGoogleReaderAdapter().getRegisteredProfiles();
 
             this.log.info(String.format("There is(are) [ %d ] registered Google Reader profile(s) found", profiles.getProfiles().size()));
-            
+
             for (Profile current : profiles.getProfiles()) {
                 dumpProfile(current);
             }
-            
+
         } catch (GoogleReaderAdapter.GoogleReaderAdapterException e) {
             throw new FatalException(e);
         } catch (ServiceManager.ServiceManagerException e) {
@@ -588,7 +588,7 @@ public class NmdApi implements ApiFacade {
             this.log.info(String.format("Output file name : [ %s ]", feedConfiguration.getName()));
             this.log.info(String.format("Rewrite mode is : [ %s ]", feedConfiguration.isRewrite()));
         }
-        
+
         this.log.info(" ");
     }
 

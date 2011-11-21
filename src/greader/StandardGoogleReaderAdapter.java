@@ -78,7 +78,7 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
         }
     }
 
-    public void updateProfile(final String _email, final BlitzRequestHandler _handler) throws GoogleReaderAdapterException {
+    public List<String> updateProfile(final String _email, final BlitzRequestHandler _handler) throws GoogleReaderAdapterException {
         Assert.isValidString(_email, "Email is not valid");
         Assert.notNull(_handler, "Handler is null");
 
@@ -87,15 +87,18 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
         validate(profile.getAccount().getEmail(), profile.getAccount().getPassword());
 
         try {
+            List<String> result = newArrayList();
 
             for (FeedConfiguration configuration : profile.getFeedConfigurations()) {
                 this.log.info(String.format("Processing feed [ %s ] from profile [ %s ]", configuration.getUrl(), _email));
 
-                updateFeed(_handler, profile, configuration);
+                List<String> files = updateFeed(_handler, profile, configuration);
+                result.addAll(files);
 
                 this.provider.markAllFeedItemsAsRead(profile.getAccount(), configuration.getUrl());
             }
 
+            return result;
         } catch (GoogleReaderProvider.GoogleReaderProviderException e) {
             throw new GoogleReaderAdapterException(e);
         } catch (ApiFacade.FatalException e) {
@@ -103,7 +106,7 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
         }
     }
 
-    public void testProfileFeed(final String _email, final String _feedUrl, final BlitzRequestHandler _handler) throws GoogleReaderAdapterException {
+    public List<String> testProfileFeed(final String _email, final String _feedUrl, final BlitzRequestHandler _handler) throws GoogleReaderAdapterException {
         Assert.isValidString(_email, "Email is not valid");
         Assert.isValidString(_feedUrl, "Feed Url is not valid");
         Assert.notNull(_handler, "Handler is null");
@@ -113,6 +116,8 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
         validate(profile.getAccount().getEmail(), profile.getAccount().getPassword());
 
         try {
+            List<String> result = newArrayList();
+
             FeedConfiguration configuration = profile.findForFeedUrl(_feedUrl);
 
             if (configuration == null) {
@@ -120,7 +125,10 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
             }
 
             this.log.info(String.format("Testing feed [ %s ] from profile [ %s ]", configuration.getUrl(), _email));
-            updateFeed(_handler, profile, configuration);
+            List<String> files = updateFeed(_handler, profile, configuration);
+            result.addAll(files);
+
+            return result;
         } catch (GoogleReaderProvider.GoogleReaderProviderException e) {
             throw new GoogleReaderAdapterException(e);
         } catch (ApiFacade.FatalException e) {
@@ -149,7 +157,7 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
 
     @Override
     public Profiles getRegisteredProfiles() throws GoogleReaderAdapterException {
-        
+
         try {
             return this.profilesStorage.load();
         } catch (ProfilesStorage.ProfilesStorageException e) {
@@ -157,7 +165,7 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
         }
     }
 
-    private void updateFeed(final BlitzRequestHandler _handler, final Profile profile, final FeedConfiguration configuration) throws GoogleReaderProvider.GoogleReaderProviderException, ApiFacade.FatalException {
+    private List<String> updateFeed(final BlitzRequestHandler _handler, final Profile profile, final FeedConfiguration configuration) throws GoogleReaderProvider.GoogleReaderProviderException, ApiFacade.FatalException {
         List<FeedItem> items = this.provider.getUnreadFeedItems(profile.getAccount(), configuration.getUrl());
 
         List<Modification> modifications = newArrayList();
@@ -170,7 +178,7 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
 
         BlitzRequest request = GoogleReaderAdapterTools.createBlitzRequest(configuration, modifications);
 
-        _handler.processBlitzRequest(request, 0);
+        return _handler.processBlitzRequest(request, 0);
     }
 
     private Profile synchronizeProfile(final String _email) throws GoogleReaderAdapterException {
@@ -190,7 +198,7 @@ public class StandardGoogleReaderAdapter implements GoogleReaderAdapter {
             GoogleReaderAdapterTools.synchronize(profile.getFeedConfigurations(), subscriptions);
 
             this.profilesStorage.store(profiles);
-            
+
             return profile;
         } catch (GoogleReaderProvider.GoogleReaderProviderException e) {
             throw new GoogleReaderAdapterException(e);
