@@ -7,6 +7,7 @@ import app.metadata.ObjectMetaData;
 import app.templater.TemplateParameters;
 import constructor.dom.locator.Mask;
 import constructor.objects.simpler.configuration.SimplerConfiguration;
+import greader.profile.Profiles;
 import timeservice.TimeService;
 
 import java.util.List;
@@ -302,7 +303,7 @@ public interface ApiFacade extends BlitzRequestHandler {
      */
     List<String> testGoogleReaderProfile(String _email, String _feed) throws FatalException;
 
-    void dumpRegisteredGoogleReaderProfile() throws FatalException;
+    Profiles getRegisteredGoogleReaderProfiles() throws FatalException;
 
     /**
      * ��������� ������ � API

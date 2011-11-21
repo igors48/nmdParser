@@ -556,40 +556,15 @@ public class NmdApi implements ApiFacade {
     }
 
     @Override
-    public void dumpRegisteredGoogleReaderProfile() throws FatalException {
+    public Profiles getRegisteredGoogleReaderProfiles() throws FatalException {
 
         try {
-            Profiles profiles = this.serviceManager.getGoogleReaderAdapter().getRegisteredProfiles();
-
-            this.log.info(String.format("There is(are) [ %d ] registered Google Reader profile(s) found", profiles.getProfiles().size()));
-
-            for (Profile current : profiles.getProfiles()) {
-                dumpProfile(current);
-            }
-
+            return this.serviceManager.getGoogleReaderAdapter().getRegisteredProfiles();
         } catch (GoogleReaderAdapter.GoogleReaderAdapterException e) {
             throw new FatalException(e);
         } catch (ServiceManager.ServiceManagerException e) {
             throw new FatalException(e);
         }
-    }
-
-    private void dumpProfile(final Profile _profile) {
-        this.log.info(" ");
-        this.log.info(String.format("Profile email : [ %s ] feed(s) count : [ %d ]", _profile.getAccount().getEmail(), _profile.getFeedConfigurations().size()));
-
-        for (FeedConfiguration feedConfiguration : _profile.getFeedConfigurations()) {
-            this.log.info(" ");
-            this.log.info(String.format("Feed URL : [ %s ]", feedConfiguration.getUrl()));
-            this.log.info(String.format("Cover image URL :  [ %s ]", feedConfiguration.getCoverUrl()));
-            this.log.info(String.format("Auto content filtering is : [ %s ]", String.valueOf(feedConfiguration.isAutoContentFiltering())));
-            this.log.info(String.format("Content filtering criterions : [ %s ]", feedConfiguration.getCriterions()));
-            this.log.info(String.format("Stored in branch : [ %s ]", feedConfiguration.getBranch()));
-            this.log.info(String.format("Output file name : [ %s ]", feedConfiguration.getName()));
-            this.log.info(String.format("Rewrite mode is : [ %s ]", feedConfiguration.isRewrite()));
-        }
-
-        this.log.info(" ");
     }
 
     public void cleanup() {
