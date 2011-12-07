@@ -13,6 +13,8 @@ import util.Assert;
 
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
  * Date: 27.08.2011
@@ -47,13 +49,24 @@ public final class GoogleReaderAdapterTools {
         Assert.notNull(_feedConfigurations, "Feed configurations is null");
         Assert.notNull(_subscriptions, "Subscriptions is null");
 
+        List<FeedConfiguration> notFoundConfigurations = newArrayList();
+        notFoundConfigurations.addAll(_feedConfigurations);
+
         for (Subscription current : _subscriptions) {
 
             FeedConfiguration found = find(current, _feedConfigurations);
 
-            if (found != null) {
+            if (found == null) {
+                _feedConfigurations.add(FeedConfiguration.createForUrlAndName(current.getId(), current.getTitle(), getBranch(current)));
+
+                log.debug(String.format("Feed [ %s ] append to profile", current.getId()));
+            } else {
                 log.debug(String.format("Feed [ %s ] already in profile", current.getId()));
 
+                notFoundConfigurations.remove(found);
+
+                found.setActive(true);
+                
                 String newBranch = getBranch(current);
 
                 if (!newBranch.equalsIgnoreCase(found.getBranch())) {
@@ -61,11 +74,11 @@ public final class GoogleReaderAdapterTools {
 
                     found.setBranch(newBranch);
                 }
-
-            } else {
-                _feedConfigurations.add(FeedConfiguration.createForUrlAndName(current.getId(), current.getTitle(), getBranch(current)));
-                log.debug(String.format("Feed [ %s ] append to profile", current.getId()));
             }
+        }
+
+        for (FeedConfiguration configuration : notFoundConfigurations) {
+            configuration.setActive(false);
         }
     }
 

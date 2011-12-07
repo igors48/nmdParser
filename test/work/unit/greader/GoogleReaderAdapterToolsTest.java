@@ -34,11 +34,11 @@ public class GoogleReaderAdapterToolsTest extends TestCase {
 
         assertEquals(2, feedConfigurations.size());
 
-        assertSubscriptionAndFeedConfigurationEquals(first, feedConfigurations.get(0));
-        assertSubscriptionAndFeedConfigurationEquals(second, feedConfigurations.get(1));
+        assertSubscriptionAndFeedConfigurationEqualsAndActive(first, feedConfigurations.get(0));
+        assertSubscriptionAndFeedConfigurationEqualsAndActive(second, feedConfigurations.get(1));
     }
 
-    public void testExistItemsNotChanged() {
+    public void testExistsItemsNotChanged() {
         List<FeedConfiguration> feedConfigurations = newArrayList();
         feedConfigurations.add(FeedConfiguration.createForUrlAndName("f", "f", "f"));
 
@@ -54,8 +54,26 @@ public class GoogleReaderAdapterToolsTest extends TestCase {
 
         assertEquals(2, feedConfigurations.size());
 
-        assertSubscriptionAndFeedConfigurationEquals(first, feedConfigurations.get(0));
-        assertSubscriptionAndFeedConfigurationEquals(second, feedConfigurations.get(1));
+        assertSubscriptionAndFeedConfigurationEqualsAndActive(first, feedConfigurations.get(0));
+        assertSubscriptionAndFeedConfigurationEqualsAndActive(second, feedConfigurations.get(1));
+    }
+
+    public void testExistsItemsActivatedForcibly() {
+        List<FeedConfiguration> feedConfigurations = newArrayList();
+        FeedConfiguration configuration = FeedConfiguration.createForUrlAndName("f", "f", "f");
+        configuration.setActive(false);
+        feedConfigurations.add(configuration);
+
+        List<Subscription> subscriptions = newArrayList();
+
+        Subscription first = new Subscription("f", "f", "f");
+        subscriptions.add(first);
+
+        GoogleReaderAdapterTools.synchronize(feedConfigurations, subscriptions);
+
+        assertEquals(1, feedConfigurations.size());
+
+        assertSubscriptionAndFeedConfigurationEqualsAndActive(first, feedConfigurations.get(0));
     }
 
     public void testExistItemsBranchesChanged() {
@@ -74,11 +92,11 @@ public class GoogleReaderAdapterToolsTest extends TestCase {
 
         assertEquals(2, feedConfigurations.size());
 
-        assertSubscriptionAndFeedConfigurationEquals(first, feedConfigurations.get(0));
-        assertSubscriptionAndFeedConfigurationEquals(second, feedConfigurations.get(1));
+        assertSubscriptionAndFeedConfigurationEqualsAndActive(first, feedConfigurations.get(0));
+        assertSubscriptionAndFeedConfigurationEqualsAndActive(second, feedConfigurations.get(1));
     }
 
-    public void testMissingItemsNotChanged() {
+    public void testMissingItemsMarksAsNotActive() {
         List<FeedConfiguration> feedConfigurations = newArrayList();
         feedConfigurations.add(FeedConfiguration.createForUrlAndName("m", "m", "m"));
 
@@ -97,15 +115,18 @@ public class GoogleReaderAdapterToolsTest extends TestCase {
         assertEquals("m", feedConfigurations.get(0).getUrl());
         assertEquals("m", feedConfigurations.get(0).getName());
         assertEquals("m", feedConfigurations.get(0).getBranch());
+        assertFalse(feedConfigurations.get(0).isActive());
 
-        assertSubscriptionAndFeedConfigurationEquals(first, feedConfigurations.get(1));
-        assertSubscriptionAndFeedConfigurationEquals(second, feedConfigurations.get(2));
+        assertSubscriptionAndFeedConfigurationEqualsAndActive(first, feedConfigurations.get(1));
+        assertSubscriptionAndFeedConfigurationEqualsAndActive(second, feedConfigurations.get(2));
     }
 
-    private void assertSubscriptionAndFeedConfigurationEquals(final Subscription _first, final FeedConfiguration _feedConfiguration) {
-        assertEquals(_first.getId(), _feedConfiguration.getUrl());
-        assertEquals(_first.getTitle(), _feedConfiguration.getName());
-        assertEquals(_first.getCategories()[0].getLabel(), _feedConfiguration.getBranch());
+    private void assertSubscriptionAndFeedConfigurationEqualsAndActive(final Subscription _subscription, final FeedConfiguration _feedConfiguration) {
+        assertEquals(_subscription.getId(), _feedConfiguration.getUrl());
+        assertEquals(_subscription.getTitle(), _feedConfiguration.getName());
+        assertEquals(_subscription.getCategories()[0].getLabel(), _feedConfiguration.getBranch());
+        
+        assertTrue(_feedConfiguration.isActive());
     }
 
 }

@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "feed")
 public class FeedConfiguration {
 
+    private boolean active;
     private String url;
     private String coverUrl;
     private boolean autoContentFiltering;
@@ -21,6 +22,7 @@ public class FeedConfiguration {
     private boolean rewrite;
 
     public FeedConfiguration() {
+        setActive(true);
         setUrl("");
         setCoverUrl("");
         setAutoContentFiltering(false);
@@ -28,6 +30,15 @@ public class FeedConfiguration {
         setBranch("");
         setName("");
         setRewrite(true);
+    }
+
+    @XmlElement(name = "active", nillable = false, required = false)
+    public boolean isActive() {
+        return this.active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @XmlElement(name = "url", nillable = false, required = true)
