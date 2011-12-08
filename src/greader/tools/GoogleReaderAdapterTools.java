@@ -159,7 +159,7 @@ public final class GoogleReaderAdapterTools {
             _configuration.setAutoContentFiltering(false);
 
             if (!newCriterion.isEmpty() && !newCriterion.equalsIgnoreCase(_configuration.getCriterions())) {
-                log.debug(String.format("Feed [ %s ] criterions changed from [ %s ] to [ %s ]", _subscription.getId(), _configuration.getCriterions(), newCriterion));
+                log.debug(String.format("Feed [ %s ] criterion changed from [ %s ] to [ %s ]", _subscription.getId(), _configuration.getCriterions(), newCriterion));
 
                 _configuration.setCriterions(newCriterion);
             }
@@ -169,10 +169,13 @@ public final class GoogleReaderAdapterTools {
     private static void synchronizeBranch(final Subscription _subscription, final FeedConfiguration _configuration) {
         String newBranch = getBranch(_subscription.getCategories());
 
-        if (!newBranch.isEmpty() && !newBranch.equalsIgnoreCase(_configuration.getBranch())) {
-            log.debug(String.format("Feed [ %s ] branch changed from [ %s ] to [ %s ]", _subscription.getId(), _configuration.getBranch(), newBranch));
+        if (!newBranch.isEmpty()) {
+            
+            if (_configuration.getBranch().isEmpty()) {
+                log.debug(String.format("Feed [ %s ] branch changed from [ %s ] to [ %s ]", _subscription.getId(), _configuration.getBranch(), newBranch));
 
-            _configuration.setBranch(newBranch);
+                _configuration.setBranch(newBranch);
+            }
         }
     }
 

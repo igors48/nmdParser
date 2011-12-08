@@ -76,9 +76,37 @@ public class GoogleReaderAdapterToolsTest extends TestCase {
         assertSubscriptionAndFeedConfigurationEqualsAndActive(first, feedConfigurations.get(0));
     }
 
-    public void testExistItemsBranchesChanged() {
+    public void testExistItemsBranchesNotChangedIfItsNotEmpty() {
         List<FeedConfiguration> feedConfigurations = newArrayList();
-        feedConfigurations.add(FeedConfiguration.create("f", "f", "c", ""));
+
+        FeedConfiguration original = FeedConfiguration.create("f", "f", "c", "");
+        feedConfigurations.add(original);
+
+        List<Subscription> subscriptions = newArrayList();
+
+        Subscription first = new Subscription("f", "f", "f");
+        subscriptions.add(first);
+
+        Subscription second = new Subscription("s", "s", "s");
+        subscriptions.add(second);
+
+        GoogleReaderAdapterTools.synchronize(feedConfigurations, subscriptions);
+
+        assertEquals(2, feedConfigurations.size());
+
+        assertEquals("f", feedConfigurations.get(0).getUrl());
+        assertEquals("f", feedConfigurations.get(0).getName());
+        assertEquals("c", feedConfigurations.get(0).getBranch());
+        assertTrue(feedConfigurations.get(0).isActive());
+
+        assertSubscriptionAndFeedConfigurationEqualsAndActive(second, feedConfigurations.get(1));
+    }
+
+    public void testExistItemsBranchesNotChangedIfItsEmpty() {
+        List<FeedConfiguration> feedConfigurations = newArrayList();
+
+        FeedConfiguration original = FeedConfiguration.create("f", "f", "", "");
+        feedConfigurations.add(original);
 
         List<Subscription> subscriptions = newArrayList();
 
