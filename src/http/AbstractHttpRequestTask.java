@@ -23,8 +23,7 @@ import util.Assert;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
-import static http.HttpTools.getHostFromMethod;
-import static http.HttpTools.getUrlWithRequest;
+import static http.HttpTools.*;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
@@ -95,11 +94,13 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
 
                 this.request.setResult(HttpData.EMPTY_DATA);
             } else {
-                this.log.debug(String.format("%s request to [ %s ] started", this.requestType, urlWithRequest));
+                this.log.debug(String.format("%s request to [ %s ] started", this.requestType, removePasswordFromString(urlWithRequest)));
 
+                long startTime = System.currentTimeMillis();
                 handle(method);
+                long finishTime = System.currentTimeMillis();
 
-                this.log.debug(String.format("%s request to [ %s ] completed with status [ %s ]", this.requestType, urlWithRequest, this.request.getResult().getResult()));
+                this.log.debug(String.format("%s request to [ %s ] completed with status [ %s ] in [ %d ] ms", this.requestType, removePasswordFromString(urlWithRequest), this.request.getResult().getResult(), finishTime - startTime));
             }
         } catch (Exception e) {
             method.abort();
@@ -108,7 +109,7 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
 
             this.request.setResult(HttpData.ERROR_DATA);
 
-            this.log.error(String.format("Error in %s request to [ %s ]", this.requestType, urlWithRequest), e);
+            this.log.error(String.format("Error in %s request to [ %s ]", this.requestType, removePasswordFromString(urlWithRequest)), e);
         }
 
         return this.request;

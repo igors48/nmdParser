@@ -64,6 +64,10 @@ public class FeedItem {
             }
         }
 
+        if (_item.getAlternate() == null || _item.getAlternate().length == 0) {
+            return null;
+        }
+
         return new FeedItem(_item.getId(), _item.getAlternate()[0].getHref(), title, summary, _item.getPublished());
     }
 

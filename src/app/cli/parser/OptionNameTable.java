@@ -131,6 +131,10 @@ public final class OptionNameTable {
     public static final String GOOGLE_READER_TEST_PROFILE_FEED_OPTION_ATTRIBUTE_NAME = EMAIL_FEED_URL_TOKEN;
     public static final String GOOGLE_READER_TEST_PROFILE_FEED_OPTION_DESCRIPTION = "Test feed from Google Reader profile";
 
+    public static final String GOOGLE_READER_DUMP_REGISTERED_PROFILES_OPTION_SHORT_NAME = "gl";
+    public static final String GOOGLE_READER_DUMP_REGISTERED_PROFILES_OPTION_FULL_NAME = "google-list";
+    public static final String GOOGLE_READER_DUMP_REGISTERED_PROFILES_OPTION_DESCRIPTION = "Dump registered Google Reader profiles";
+
     private static final String FOR_BLITZ_REQUEST_ONLY_TOKEN = " !!! For blitz requests only !!!";
 
     // b base url [*]

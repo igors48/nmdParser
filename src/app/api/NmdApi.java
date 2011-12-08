@@ -38,6 +38,9 @@ import constructor.objects.source.core.Source;
 import constructor.objects.source.core.SourceAdapter;
 import constructor.objects.storage.Storage;
 import greader.GoogleReaderAdapter;
+import greader.profile.FeedConfiguration;
+import greader.profile.Profile;
+import greader.profile.Profiles;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import timeservice.TimeService;
@@ -513,11 +516,11 @@ public class NmdApi implements ApiFacade {
         }
     }
 
-    public void updateGoogleReaderProfile(final String _email) throws FatalException {
+    public List<String> updateGoogleReaderProfile(final String _email) throws FatalException {
         Assert.isValidString(_email, "EMail is not valid");
 
         try {
-            this.serviceManager.getGoogleReaderAdapter().updateProfile(_email, this);
+            return this.serviceManager.getGoogleReaderAdapter().updateProfile(_email, this);
         } catch (GoogleReaderAdapter.GoogleReaderAdapterException e) {
             throw new FatalException(e);
         } catch (ServiceManager.ServiceManagerException e) {
@@ -539,12 +542,24 @@ public class NmdApi implements ApiFacade {
     }
 
 
-    public void testGoogleReaderProfile(final String _email, final String _feed) throws FatalException {
+    public List<String> testGoogleReaderProfile(final String _email, final String _feed) throws FatalException {
         Assert.isValidString(_email, "EMail is not valid");
         Assert.isValidString(_feed, "Feeds is not valid");
 
         try {
-            this.serviceManager.getGoogleReaderAdapter().testProfileFeed(_email, _feed, this);
+            return this.serviceManager.getGoogleReaderAdapter().testProfileFeed(_email, _feed, this);
+        } catch (GoogleReaderAdapter.GoogleReaderAdapterException e) {
+            throw new FatalException(e);
+        } catch (ServiceManager.ServiceManagerException e) {
+            throw new FatalException(e);
+        }
+    }
+
+    @Override
+    public Profiles getRegisteredGoogleReaderProfiles() throws FatalException {
+
+        try {
+            return this.serviceManager.getGoogleReaderAdapter().getRegisteredProfiles();
         } catch (GoogleReaderAdapter.GoogleReaderAdapterException e) {
             throw new FatalException(e);
         } catch (ServiceManager.ServiceManagerException e) {

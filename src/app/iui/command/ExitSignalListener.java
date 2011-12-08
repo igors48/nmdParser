@@ -17,4 +17,5 @@ public interface ExitSignalListener {
      * Нотификация об аварийном закрытии
      */
     void onFailureExit(Throwable _cause);
+    
 }

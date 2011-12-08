@@ -33,7 +33,7 @@ public class GoogleReaderProvider {
     private final String FEED_PREFIX = "feed/";
 
     private static final String GET_UNREAD_ITEMS_URL = "http://www.google.com/reader/api/0/stream/contents/feed/%s?";
-    private static final String GET_UNREAD_ITEMS_REQUEST = "xt=user/-/state/com.google/read&n=1000";
+    private static final String GET_UNREAD_ITEMS_REQUEST = "xt=user/-/state/com.google/read&n=150";
 
     private static final String GET_TOKEN_URL = "http://www.google.com/reader/api/0/token";
 
@@ -113,7 +113,11 @@ public class GoogleReaderProvider {
             for (FeedItems.Item current : feedResponseItems.getItems()) {
                 FeedItem item = FeedItem.create(current);
 
-                result.add(item);
+                if (item == null) {
+                    this.log.error("Error create feed item because not all necessary data found");
+                } else {
+                    result.add(item);
+                }
             }
 
             return result;

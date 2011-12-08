@@ -10,10 +10,18 @@ public class Subscription {
 
     private String id;
     private String title;
+    private Category[] categories;
 
-    public Subscription(final String _id, final String _title) {
+    public Subscription(final String _id, final String _title, final String _category) {
+        this(_id, _title, new Category[]{new Category(_category, _category)});
+    }
+
+    public Subscription(final String _id, final String _title, final Category[] _categories) {
         setId(_id);
         setTitle(_title);
+
+        Assert.notNull(_categories, "Categories is null");
+        this.categories = _categories;
     }
 
     public String getId() {
@@ -32,6 +40,15 @@ public class Subscription {
     public void setTitle(final String _title) {
         Assert.notNull(_title, "Title is null");
         this.title = _title;
+    }
+
+    public Category[] getCategories() {
+        return this.categories;
+    }
+
+    public void setCategories(final Category[] _categories) {
+        Assert.notNull(_categories, "Categories is null");
+        this.categories = _categories;
     }
 
 }
