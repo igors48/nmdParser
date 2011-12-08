@@ -24,6 +24,8 @@ public final class GoogleReaderAdapterTools {
     public static final String CRITERION_PREFIX = "c:";
     public static final String SLASH_REPLACEMENT = "%";
 
+    private static final String SLASH = "/";
+
     private static final Log log = LogFactory.getLog(GoogleReaderAdapterTools.class);
 
     public static BlitzRequest createBlitzRequest(final FeedConfiguration _feedConfiguration, final List<Modification> _modifications) {
@@ -60,7 +62,10 @@ public final class GoogleReaderAdapterTools {
             FeedConfiguration found = find(current, _feedConfigurations);
 
             if (found == null) {
-                _feedConfigurations.add(FeedConfiguration.create(current.getId(), current.getTitle(), getBranch(current.getCategories())));
+                _feedConfigurations.add(FeedConfiguration.create(current.getId(),
+                        current.getTitle(),
+                        getBranch(current.getCategories()),
+                        getCriterion(current.getCategories())));
 
                 log.debug(String.format("Feed [ %s ] append to profile", current.getId()));
             } else {
@@ -68,15 +73,7 @@ public final class GoogleReaderAdapterTools {
 
                 notFoundConfigurations.remove(found);
 
-                found.setActive(true);
-
-                String newBranch = getBranch(current.getCategories());
-
-                if (!newBranch.equalsIgnoreCase(found.getBranch())) {
-                    log.debug(String.format("Feed [ %s ] branch changed from [ %s ] to [ %s ]", current.getId(), found.getBranch(), newBranch));
-
-                    found.setBranch(newBranch);
-                }
+                synchronize(current, found);
             }
         }
 
@@ -85,10 +82,20 @@ public final class GoogleReaderAdapterTools {
         }
     }
 
+    public static void synchronize(final Subscription _subscription, final FeedConfiguration _configuration) {
+        Assert.notNull(_subscription, "Subscription is null");
+        Assert.notNull(_configuration, "Configuration is null");
+
+        _configuration.setActive(true);
+
+        synchronizeBranch(_subscription, _configuration);
+        synchronizeCriterion(_subscription, _configuration);
+    }
+
     public static String getBranch(final Category[] _categories) {
 
         if (_categories != null) {
-            
+
             for (Category current : _categories) {
                 String label = current.getLabel();
 
@@ -97,7 +104,7 @@ public final class GoogleReaderAdapterTools {
                 }
             }
         }
-        
+
         return "";
     }
 
@@ -109,14 +116,14 @@ public final class GoogleReaderAdapterTools {
                 String label = current.getLabel();
 
                 if (isItCriterion(label)) {
-                    return label;
+                    return label.substring(CRITERION_PREFIX.length()).replaceAll(SLASH_REPLACEMENT, SLASH);
                 }
             }
         }
 
         return "";
     }
-    
+
     private static boolean isItCriterion(final String _data) {
         return _data.startsWith(CRITERION_PREFIX);
     }
@@ -135,6 +142,38 @@ public final class GoogleReaderAdapterTools {
 
     private static String safeString(final String _string) {
         return _string == null ? "" : _string;
+    }
+
+    private static void synchronizeCriterion(final Subscription _subscription, final FeedConfiguration _configuration) {
+        String newCriterion = getCriterion(_subscription.getCategories());
+
+        if (FeedConfiguration.AUTO_FILTER_CRITERION.equals(newCriterion)) {
+
+            if (!_configuration.isAutoContentFiltering()) {
+                log.debug(String.format("Feed [ %s ] criterion changed to automatic filtering", _subscription.getId()));
+
+                _configuration.setAutoContentFiltering(true);
+                _configuration.setCriterions("");
+            }
+        } else {
+            _configuration.setAutoContentFiltering(false);
+
+            if (!newCriterion.isEmpty() && !newCriterion.equalsIgnoreCase(_configuration.getCriterions())) {
+                log.debug(String.format("Feed [ %s ] criterions changed from [ %s ] to [ %s ]", _subscription.getId(), _configuration.getCriterions(), newCriterion));
+
+                _configuration.setCriterions(newCriterion);
+            }
+        }
+    }
+
+    private static void synchronizeBranch(final Subscription _subscription, final FeedConfiguration _configuration) {
+        String newBranch = getBranch(_subscription.getCategories());
+
+        if (!newBranch.equalsIgnoreCase(_configuration.getBranch())) {
+            log.debug(String.format("Feed [ %s ] branch changed from [ %s ] to [ %s ]", _subscription.getId(), _configuration.getBranch(), newBranch));
+
+            _configuration.setBranch(newBranch);
+        }
     }
 
     private GoogleReaderAdapterTools() {

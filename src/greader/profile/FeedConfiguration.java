@@ -12,6 +12,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "feed")
 public class FeedConfiguration {
 
+    public static final String AUTO_FILTER_CRITERION = "filter";
+    
     private boolean active;
     private String url;
     private String coverUrl;
@@ -21,7 +23,7 @@ public class FeedConfiguration {
     private String name;
     private boolean rewrite;
 
-    public FeedConfiguration() {
+    private FeedConfiguration() {
         setActive(true);
         setUrl("");
         setCoverUrl("");
@@ -109,16 +111,25 @@ public class FeedConfiguration {
         this.rewrite = _rewrite;
     }
 
-    public static FeedConfiguration create(final String _url, final String _name, final String _branch) {
+    public static FeedConfiguration create(final String _url, final String _name, final String _branch, final String _criterion) {
         Assert.isValidString(_url, "Url is not valid");
         Assert.isValidString(_name, "Name is not valid");
         Assert.notNull(_branch, "Branch is null");
+        Assert.notNull(_criterion, "Criterion is null");
 
         FeedConfiguration result = new FeedConfiguration();
 
         result.setUrl(_url);
         result.setName(_name);
         result.setBranch(_branch);
+
+        if (AUTO_FILTER_CRITERION.equals(_criterion)) {
+            result.setAutoContentFiltering(true);
+            result.setCriterions("");
+        } else {
+            result.setAutoContentFiltering(false);
+            result.setCriterions(_criterion);
+        }
 
         return result;
     }

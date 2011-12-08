@@ -13,11 +13,15 @@ public class Subscription {
     private Category[] categories;
 
     public Subscription(final String _id, final String _title, final String _category) {
+        this(_id, _title, new Category[]{new Category(_category, _category)});
+    }
+
+    public Subscription(final String _id, final String _title, final Category[] _categories) {
         setId(_id);
         setTitle(_title);
 
-        Assert.notNull(_category, "Category is null");
-        this.categories = new Category[]{new Category(_category, _category)};
+        Assert.notNull(_categories, "Categories is null");
+        this.categories = _categories;
     }
 
     public String getId() {

@@ -5,12 +5,12 @@ import greader.tools.GoogleReaderAdapterTools;
 import junit.framework.TestCase;
 
 /**
- * Author: Igor Usenko ( Igor.Usenko@teamodc.com )
+ * Author: Igor Usenko ( igors48@gmail.com )
  * Date: 08.12.2011
  */
-public class GoogleReaderAdapterToolsCategoriesAndBranchesTest extends TestCase {
+public class GoogleReaderAdapterToolsCriterionsAndBranchesTest extends TestCase {
 
-    public GoogleReaderAdapterToolsCategoriesAndBranchesTest(final String _name) {
+    public GoogleReaderAdapterToolsCriterionsAndBranchesTest(final String _name) {
         super(_name);
     }
 
@@ -60,7 +60,7 @@ public class GoogleReaderAdapterToolsCategoriesAndBranchesTest extends TestCase 
 
         Category[] categories = new Category[] {criterion, branch, anotherCriterion};
 
-        assertEquals(GoogleReaderAdapterTools.CRITERION_PREFIX + "criterion", GoogleReaderAdapterTools.getCriterion(categories));
+        assertEquals("criterion", GoogleReaderAdapterTools.getCriterion(categories));
     }
 
     public void testIfNoCriterionInListEmptyCriterionReturns() throws Exception {
@@ -72,4 +72,12 @@ public class GoogleReaderAdapterToolsCategoriesAndBranchesTest extends TestCase 
         assertEquals("", GoogleReaderAdapterTools.getCriterion(categories));
     }
 
+    public void testCriterionDeEscaped() throws Exception {
+        Category criterion = new Category("second", GoogleReaderAdapterTools.CRITERION_PREFIX + "%%criterion%criterion");
+
+        Category[] categories = new Category[] {criterion};
+
+        assertEquals("//criterion/criterion", GoogleReaderAdapterTools.getCriterion(categories));
+    }
+    
 }
