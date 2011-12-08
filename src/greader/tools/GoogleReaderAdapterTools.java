@@ -21,6 +21,9 @@ import static util.CollectionUtils.newArrayList;
  */
 public final class GoogleReaderAdapterTools {
 
+    public static final String CRITERION_PREFIX = "c:";
+    public static final String SLASH_REPLACEMENT = "%";
+
     private static final Log log = LogFactory.getLog(GoogleReaderAdapterTools.class);
 
     public static BlitzRequest createBlitzRequest(final FeedConfiguration _feedConfiguration, final List<Modification> _modifications) {
@@ -57,7 +60,7 @@ public final class GoogleReaderAdapterTools {
             FeedConfiguration found = find(current, _feedConfigurations);
 
             if (found == null) {
-                _feedConfigurations.add(FeedConfiguration.createForUrlAndName(current.getId(), current.getTitle(), getBranch(current)));
+                _feedConfigurations.add(FeedConfiguration.create(current.getId(), current.getTitle(), getBranch(current.getCategories())));
 
                 log.debug(String.format("Feed [ %s ] append to profile", current.getId()));
             } else {
@@ -66,8 +69,8 @@ public final class GoogleReaderAdapterTools {
                 notFoundConfigurations.remove(found);
 
                 found.setActive(true);
-                
-                String newBranch = getBranch(current);
+
+                String newBranch = getBranch(current.getCategories());
 
                 if (!newBranch.equalsIgnoreCase(found.getBranch())) {
                     log.debug(String.format("Feed [ %s ] branch changed from [ %s ] to [ %s ]", current.getId(), found.getBranch(), newBranch));
@@ -82,10 +85,40 @@ public final class GoogleReaderAdapterTools {
         }
     }
 
-    private static String getBranch(final Subscription _current) {
-        Category[] categories = _current.getCategories();
+    public static String getBranch(final Category[] _categories) {
 
-        return categories == null || categories.length == 0 ? "" : categories[0].getLabel();
+        if (_categories != null) {
+            
+            for (Category current : _categories) {
+                String label = current.getLabel();
+
+                if (!isItCriterion(label)) {
+                    return label;
+                }
+            }
+        }
+        
+        return "";
+    }
+
+    public static String getCriterion(final Category[] _categories) {
+
+        if (_categories != null) {
+
+            for (Category current : _categories) {
+                String label = current.getLabel();
+
+                if (isItCriterion(label)) {
+                    return label;
+                }
+            }
+        }
+
+        return "";
+    }
+    
+    private static boolean isItCriterion(final String _data) {
+        return _data.startsWith(CRITERION_PREFIX);
     }
 
     private static FeedConfiguration find(final Subscription _subscription, final List<FeedConfiguration> _feedConfigurations) {

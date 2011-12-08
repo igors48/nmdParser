@@ -40,7 +40,7 @@ public class GoogleReaderAdapterToolsTest extends TestCase {
 
     public void testExistsItemsNotChanged() {
         List<FeedConfiguration> feedConfigurations = newArrayList();
-        feedConfigurations.add(FeedConfiguration.createForUrlAndName("f", "f", "f"));
+        feedConfigurations.add(FeedConfiguration.create("f", "f", "f"));
 
         List<Subscription> subscriptions = newArrayList();
 
@@ -60,7 +60,7 @@ public class GoogleReaderAdapterToolsTest extends TestCase {
 
     public void testExistsItemsActivatedForcibly() {
         List<FeedConfiguration> feedConfigurations = newArrayList();
-        FeedConfiguration configuration = FeedConfiguration.createForUrlAndName("f", "f", "f");
+        FeedConfiguration configuration = FeedConfiguration.create("f", "f", "f");
         configuration.setActive(false);
         feedConfigurations.add(configuration);
 
@@ -78,7 +78,7 @@ public class GoogleReaderAdapterToolsTest extends TestCase {
 
     public void testExistItemsBranchesChanged() {
         List<FeedConfiguration> feedConfigurations = newArrayList();
-        feedConfigurations.add(FeedConfiguration.createForUrlAndName("f", "f", "c"));
+        feedConfigurations.add(FeedConfiguration.create("f", "f", "c"));
 
         List<Subscription> subscriptions = newArrayList();
 
@@ -98,7 +98,7 @@ public class GoogleReaderAdapterToolsTest extends TestCase {
 
     public void testMissingItemsMarksAsNotActive() {
         List<FeedConfiguration> feedConfigurations = newArrayList();
-        feedConfigurations.add(FeedConfiguration.createForUrlAndName("m", "m", "m"));
+        feedConfigurations.add(FeedConfiguration.create("m", "m", "m"));
 
         List<Subscription> subscriptions = newArrayList();
 
