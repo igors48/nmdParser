@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project name="NMD" default="dist">
 
 	<import file="sampleman.xml"/>
@@ -348,6 +348,8 @@
         <copy file="${dir.base}/workarea/lite/lite.properties.eg" tofile="${dir.dist}/workarea/lite/lite.properties"/>
         <copy file="${dir.base}/workarea/lite/fb2pdf.bat" todir="${dir.dist}/workarea/lite/"/>
         <copy file="${dir.base}/workarea/lite/fb2epub.bat" todir="${dir.dist}/workarea/lite/"/>
+
+        <mkdir dir="${dir.dist}/workarea/greader"/>
 
 		<antcall target="-copy.dist.samples"/>
 		
