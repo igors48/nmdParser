@@ -169,7 +169,7 @@ public final class GoogleReaderAdapterTools {
     private static void synchronizeBranch(final Subscription _subscription, final FeedConfiguration _configuration) {
         String newBranch = getBranch(_subscription.getCategories());
 
-        if (!newBranch.equalsIgnoreCase(_configuration.getBranch())) {
+        if (!newBranch.isEmpty() && !newBranch.equalsIgnoreCase(_configuration.getBranch())) {
             log.debug(String.format("Feed [ %s ] branch changed from [ %s ] to [ %s ]", _subscription.getId(), _configuration.getBranch(), newBranch));
 
             _configuration.setBranch(newBranch);

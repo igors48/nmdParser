@@ -50,6 +50,16 @@ public class FeedConfigurationSynchronizerTest extends TestCase {
         assertEquals("new-branch", configuration.getBranch());
     }
 
+    public void testEmptyBranchInSubscriptionLeftConfigurationBranchNotChanged() {
+        FeedConfiguration configuration = FeedConfiguration.create("url", "name", "branch", "criterion");
+
+        Subscription subscription = new Subscription("id", "title", "");
+
+        GoogleReaderAdapterTools.synchronize(subscription, configuration);
+
+        assertEquals("branch", configuration.getBranch());
+    }
+
     public void testIfCriterionsInSubscriptionAndConfigurationAreTheSameThenConfigurationNotChanged() {
         FeedConfiguration configuration = FeedConfiguration.create("url", "name", "branch", "criterion");
 
