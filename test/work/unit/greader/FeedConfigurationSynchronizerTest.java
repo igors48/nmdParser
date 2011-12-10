@@ -39,7 +39,7 @@ public class FeedConfigurationSynchronizerTest extends TestCase {
 
         assertEquals("branch", configuration.getBranch());
     }
-    
+
     public void testIfBranchInConfigurationIsNotEmptyThenNotChangedWhenSynchronized() {
         FeedConfiguration configuration = FeedConfiguration.create("url", "name", "branch", "criterion");
 

@@ -25,20 +25,14 @@ public interface GoogleReaderAdapter {
 
     class GoogleReaderAdapterException extends Exception {
 
-        public GoogleReaderAdapterException() {
+        public GoogleReaderAdapterException(final String _message) {
+            super(_message);
         }
 
         public GoogleReaderAdapterException(final Throwable _cause) {
             super(_cause);
         }
-
-        public GoogleReaderAdapterException(final String _message) {
-            super(_message);
-        }
-
-        public GoogleReaderAdapterException(final String _message, final Throwable _cause) {
-            super(_message, _cause);
-        }
+        
     }
 
 }

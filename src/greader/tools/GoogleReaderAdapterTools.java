@@ -170,7 +170,7 @@ public final class GoogleReaderAdapterTools {
         String newBranch = getBranch(_subscription.getCategories());
 
         if (!newBranch.isEmpty()) {
-            
+
             if (_configuration.getBranch().isEmpty()) {
                 log.debug(String.format("Feed [ %s ] branch changed from [ %s ] to [ %s ]", _subscription.getId(), _configuration.getBranch(), newBranch));
 

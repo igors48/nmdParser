@@ -78,7 +78,7 @@ public interface Handler {
      */
     void clean(String _root, long _maxAge);
 
-    public class HandlerException extends Exception {
+    class HandlerException extends Exception {
 
         public HandlerException() {
             super();

@@ -22,7 +22,7 @@
 
     <property name="codetools.findbugs.home" location="D:/Program Files/FindBugs/findbugs-1.3.9-rc1/"/>
 
-    <property name="codetools.project.report.directory" value="reports"/>
+    <property name="codetools.project.report.directory" value="E:\reports\"/>
     <property name="codetools.junit.report.directory" value="junit\"/>
     <property name="codetools.junit.work.directory" value="junit\work\"/>
     <property name="codetools.cobertura.report.directory" value="cobertura"/>

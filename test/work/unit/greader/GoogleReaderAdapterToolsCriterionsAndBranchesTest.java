@@ -15,7 +15,7 @@ public class GoogleReaderAdapterToolsCriterionsAndBranchesTest extends TestCase 
     }
 
     public void testEmptyCategoriesListGivesEmptyBranchName() throws Exception {
-        Category[] categories = new Category[] {};
+        Category[] categories = new Category[]{};
 
         assertEquals("", GoogleReaderAdapterTools.getBranch(categories));
     }
@@ -29,7 +29,7 @@ public class GoogleReaderAdapterToolsCriterionsAndBranchesTest extends TestCase 
         Category criterion = new Category("second", GoogleReaderAdapterTools.CRITERION_PREFIX + "criterion");
         Category anotherBranch = new Category("third", "anotherBranch");
 
-        Category[] categories = new Category[] {criterion, branch, anotherBranch};
+        Category[] categories = new Category[]{criterion, branch, anotherBranch};
 
         assertEquals("branch", GoogleReaderAdapterTools.getBranch(categories));
     }
@@ -38,13 +38,13 @@ public class GoogleReaderAdapterToolsCriterionsAndBranchesTest extends TestCase 
         Category criterion = new Category("second", GoogleReaderAdapterTools.CRITERION_PREFIX + "criterion");
         Category anotherCriterion = new Category("third", GoogleReaderAdapterTools.CRITERION_PREFIX + "anotherCriterion");
 
-        Category[] categories = new Category[] {criterion, anotherCriterion};
+        Category[] categories = new Category[]{criterion, anotherCriterion};
 
         assertEquals("", GoogleReaderAdapterTools.getBranch(categories));
     }
 
     public void testEmptyCategoriesListGivesEmptyCriterion() throws Exception {
-        Category[] categories = new Category[] {};
+        Category[] categories = new Category[]{};
 
         assertEquals("", GoogleReaderAdapterTools.getCriterion(categories));
     }
@@ -58,7 +58,7 @@ public class GoogleReaderAdapterToolsCriterionsAndBranchesTest extends TestCase 
         Category criterion = new Category("second", GoogleReaderAdapterTools.CRITERION_PREFIX + "criterion");
         Category anotherCriterion = new Category("third", GoogleReaderAdapterTools.CRITERION_PREFIX + "anotherCriterion");
 
-        Category[] categories = new Category[] {criterion, branch, anotherCriterion};
+        Category[] categories = new Category[]{criterion, branch, anotherCriterion};
 
         assertEquals("criterion", GoogleReaderAdapterTools.getCriterion(categories));
     }
@@ -67,7 +67,7 @@ public class GoogleReaderAdapterToolsCriterionsAndBranchesTest extends TestCase 
         Category branch = new Category("first", "branch");
         Category anotherBranch = new Category("third", "anotherBranch");
 
-        Category[] categories = new Category[] {branch, anotherBranch};
+        Category[] categories = new Category[]{branch, anotherBranch};
 
         assertEquals("", GoogleReaderAdapterTools.getCriterion(categories));
     }
@@ -75,9 +75,9 @@ public class GoogleReaderAdapterToolsCriterionsAndBranchesTest extends TestCase 
     public void testCriterionDeEscaped() throws Exception {
         Category criterion = new Category("second", GoogleReaderAdapterTools.CRITERION_PREFIX + "%%criterion%criterion");
 
-        Category[] categories = new Category[] {criterion};
+        Category[] categories = new Category[]{criterion};
 
         assertEquals("//criterion/criterion", GoogleReaderAdapterTools.getCriterion(categories));
     }
-    
+
 }

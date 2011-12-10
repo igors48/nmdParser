@@ -6,10 +6,6 @@ import app.iui.StringResource;
 import app.iui.entity.Entity;
 import app.iui.flow.handlers.*;
 import app.iui.flow.models.*;
-import app.iui.schedule.Item;
-import app.iui.schedule.Period;
-import app.iui.schedule.Schedule;
-import app.iui.schedule.ScheduleAdapter;
 import app.iui.tools.SwingTools;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -321,39 +317,6 @@ public class FlowController {
             this.log.error(e);
             return new ErrorModel(SwingTools.createErrorText(e), e, ModelType.CHOOSE_MAIN_TASK);
         }
-    }
-
-    public Model handle(final AutoUpdateTasksModel _model) {
-        Assert.notNull(_model, "Model is null");
-
-        try {
-            return putToHistory(new AutoUpdateTasksModelHandler().handle(_model, this));
-        } catch (ModelHandlerException e) {
-            this.log.error(e);
-            return new ErrorModel(SwingTools.createErrorText(e), e, ModelType.CHOOSE_MAIN_TASK);
-        }
-    }
-
-    public Model handle(final AutoUpdateFeedersModel _model) {
-        Assert.notNull(_model, "Model is null");
-
-        try {
-            return putToHistory(new AutoUpdateFeedersModelHandler().handle(_model, this));
-        } catch (ModelHandlerException e) {
-            this.log.error(e);
-            return new ErrorModel(SwingTools.createErrorText(e), e, ModelType.CHOOSE_MAIN_TASK);
-        }
-    }
-
-    public ScheduleAdapter getScheduleAdapter() {
-        final Item first = new Item("myFeeds", "bash", Period.ALWAYS);
-        final Item second = new Item("myBlogs", "gastelllo", Period.ALWAYS);
-
-        final List<Item> items = new ArrayList<Item>();
-        items.add(first);
-        items.add(second);
-
-        return new Schedule(items);
     }
 
     public String getString(final String _key) {

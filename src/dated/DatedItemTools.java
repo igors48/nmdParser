@@ -24,7 +24,7 @@ public final class DatedItemTools {
 
         DatedItem result = null;
 
-        if (_items.size() > 0) {
+        if (!_items.isEmpty()) {
             result = _items.get(0);
 
             for (Dated item : _items) {

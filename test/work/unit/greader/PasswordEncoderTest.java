@@ -23,5 +23,5 @@ public class PasswordEncoderTest extends TestCase {
 
         Assert.assertEquals(fixture, encoded);
     }
-    
+
 }

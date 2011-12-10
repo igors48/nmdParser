@@ -26,7 +26,7 @@ public interface ChainProcessorAdapter extends Debug {
      *
      * @param _adapter адаптер
      */
-    public void addAdapter(VariableProcessorAdapter _adapter);
+    void addAdapter(VariableProcessorAdapter _adapter);
 
     /**
      * Возвращает цепочку процессоров
@@ -42,5 +42,5 @@ public interface ChainProcessorAdapter extends Debug {
      *
      * @return true не продолжать false - продолжать
      */
-    public boolean isCancelled();
+    boolean isCancelled();
 }

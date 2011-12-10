@@ -14,7 +14,6 @@ import java.util.List;
 public class Fb2Body implements Stringable {
 
     private static final String TEMPLATE_START = "<body>";
-
     private static final String TEMPLATE_END = "</body>";
 
     private final List<Fb2Section> sections;
@@ -23,8 +22,8 @@ public class Fb2Body implements Stringable {
         this.sections = new ArrayList<Fb2Section>();
     }
 
-    public void insertSection(Fb2Section _section) {
-        Assert.notNull(_section);
+    public void insertSection(final Fb2Section _section) {
+        Assert.notNull(_section, "Section is null");
 
         this.sections.add(_section);
     }

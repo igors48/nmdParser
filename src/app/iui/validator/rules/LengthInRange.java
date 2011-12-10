@@ -15,6 +15,8 @@ public class LengthInRange extends AbstractRule {
     private final long max;
 
     public LengthInRange(final long _min, final long _max) {
+        super();
+        
         Assert.greaterOrEqual(_max, _min, "Min > Max");
 
         this.min = _min;

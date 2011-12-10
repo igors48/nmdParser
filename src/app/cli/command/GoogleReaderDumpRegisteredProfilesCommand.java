@@ -49,6 +49,7 @@ public class GoogleReaderDumpRegisteredProfilesCommand implements Command {
         for (FeedConfiguration feedConfiguration : _profile.getFeedConfigurations()) {
             this.log.info(" ");
             this.log.info(String.format("Feed URL : [ %s ]", feedConfiguration.getUrl()));
+            this.log.info(String.format("Feed active : [ %s ]", feedConfiguration.isActive() ? "yes" : "no"));
             this.log.info(String.format("Cover image URL :  [ %s ]", feedConfiguration.getCoverUrl()));
             this.log.info(String.format("Auto content filtering is : [ %s ]", String.valueOf(feedConfiguration.isAutoContentFiltering())));
             this.log.info(String.format("Content filtering criterions : [ %s ]", feedConfiguration.getCriterions()));

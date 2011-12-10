@@ -26,7 +26,7 @@ public class SimpleFeederModel extends Model {
         return this.configuration;
     }
 
-    public void setConfiguration(final SimplerConfiguration _configuration) {
+    public final void setConfiguration(final SimplerConfiguration _configuration) {
         Assert.notNull(_configuration, "Configuration is null");
         this.configuration = _configuration;
     }

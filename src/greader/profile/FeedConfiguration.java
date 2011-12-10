@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class FeedConfiguration {
 
     public static final String AUTO_FILTER_CRITERION = "filter";
-    
+
     private boolean active;
     private String url;
     private String coverUrl;

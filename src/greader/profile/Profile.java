@@ -32,7 +32,7 @@ public class Profile {
         return this.account;
     }
 
-    public void setAccount(final Account _account) {
+    public final void setAccount(final Account _account) {
         Assert.notNull(_account, "Account is null");
         this.account = _account;
     }

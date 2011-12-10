@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class OneFragmentPageAnalyser implements PageAnalyser {
 
-    public List<Fragment> getFragments(Page _page) {
+    public List<Fragment> getFragments(final Page _page) {
         Assert.notNull(_page, "Page is null.");
 
         List<Fragment> result = new ArrayList<Fragment>();

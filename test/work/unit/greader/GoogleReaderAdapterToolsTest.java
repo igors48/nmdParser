@@ -153,7 +153,7 @@ public class GoogleReaderAdapterToolsTest extends TestCase {
         assertEquals(_subscription.getId(), _feedConfiguration.getUrl());
         assertEquals(_subscription.getTitle(), _feedConfiguration.getName());
         assertEquals(_subscription.getCategories()[0].getLabel(), _feedConfiguration.getBranch());
-        
+
         assertTrue(_feedConfiguration.isActive());
     }
 

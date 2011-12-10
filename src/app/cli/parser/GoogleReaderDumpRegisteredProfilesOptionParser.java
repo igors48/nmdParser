@@ -2,7 +2,6 @@ package app.cli.parser;
 
 import app.api.ApiFacade;
 import app.cli.command.Command;
-import app.cli.command.GoogleReaderChangeProfilePasswordCommand;
 import app.cli.command.GoogleReaderDumpRegisteredProfilesCommand;
 import app.cli.command.LoadSettingsCommand;
 import org.apache.commons.cli.CommandLine;
