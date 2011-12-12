@@ -7,7 +7,11 @@ import util.Assert;
  *         Date: 31.08.2008
  */
 public enum ResourceType {
-    IMAGE_JPEG, IMAGE_PNG, IMAGE_GIF, UNKNOWN;
+
+    IMAGE_JPEG,
+    IMAGE_PNG,
+    IMAGE_GIF,
+    UNKNOWN;
 
     public static String getType(final ResourceType _type) {
         Assert.notNull(_type, "Resource type is null");
@@ -24,4 +28,5 @@ public enum ResourceType {
 
         return "";
     }
+    
 }

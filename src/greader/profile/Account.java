@@ -28,7 +28,7 @@ public class Account {
         return this.email;
     }
 
-    public void setEmail(final String _email) {
+    public final void setEmail(final String _email) {
         Assert.notNull(_email, "Email is null");
         this.email = _email;
     }
@@ -39,7 +39,7 @@ public class Account {
         return this.password;
     }
 
-    public void setPassword(final String _password) {
+    public final void setPassword(final String _password) {
         Assert.notNull(_password, "Password is null");
         this.password = _password;
     }

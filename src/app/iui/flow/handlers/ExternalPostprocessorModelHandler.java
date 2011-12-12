@@ -35,7 +35,7 @@ public class ExternalPostprocessorModelHandler {
             }
 
             return result;
-        } catch (Throwable e) {
+        } catch (Exception e) {
             throw new ModelHandlerException(e);
         }
     }

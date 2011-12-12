@@ -20,6 +20,7 @@ public class ForEachElementHandler extends AbstractElementHandler {
     private static final String WAIT_KEY = "wait";
 
     protected void handleElement(final Node _node, final Object _blank, final ConstructorFactory _factory) throws ElementHandlerException {
+        // empty
     }
 
     protected void handleAttribute(final Node _node, final Object _blank, final ConstructorFactory _factory) throws AttributeHandler.AttributeHandlerException {

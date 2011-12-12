@@ -13,7 +13,7 @@ import util.Assert;
  */
 public class LangAttributeHandler implements AttributeHandler {
 
-    public void handle(String _id, String _value, Object _blank, ConstructorFactory _factory) throws AttributeHandlerException {
+    public void handle(final String _id, final String _value, final Object _blank, final ConstructorFactory _factory) throws AttributeHandlerException {
         Assert.isValidString(_id, "Id is not valid.");
         Assert.isValidString(_value, "Value is not valid.");
         Assert.notNull(_blank, "Blank is null.");
@@ -21,4 +21,5 @@ public class LangAttributeHandler implements AttributeHandler {
 
         ((ChannelConfiguration) _blank).setLang(_value);
     }
+    
 }

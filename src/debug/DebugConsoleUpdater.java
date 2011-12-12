@@ -24,9 +24,10 @@ public interface DebugConsoleUpdater {
      */
     void clean();
 
-    public class DebugConsoleUpdaterException extends Exception {
+    class DebugConsoleUpdaterException extends Exception {
 
         public DebugConsoleUpdaterException() {
+            super();
         }
 
         public DebugConsoleUpdaterException(final String _s) {
@@ -40,5 +41,7 @@ public interface DebugConsoleUpdater {
         public DebugConsoleUpdaterException(final Throwable _throwable) {
             super(_throwable);
         }
+
     }
+    
 }

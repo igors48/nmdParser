@@ -66,9 +66,11 @@ public final class NullServiceManager implements ServiceManager {
     }
 
     public void activateReflectionMode() {
+        // empty
     }
 
     public void deactivateReflectionMode() {
+        // empty
     }
 
     public Preprocessor getPreprocessor() {
@@ -80,6 +82,7 @@ public final class NullServiceManager implements ServiceManager {
     }
 
     public void cleanup() {
+        // empty
     }
 
 }

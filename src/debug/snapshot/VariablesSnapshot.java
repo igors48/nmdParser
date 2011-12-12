@@ -15,7 +15,7 @@ import static util.CollectionUtils.newHashMap;
  */
 public class VariablesSnapshot implements Snapshot {
 
-    private Map<String, Map<Integer, ValueChangedPair>> items;
+    private final Map<String, Map<Integer, ValueChangedPair>> items;
 
     public VariablesSnapshot() {
         this.items = newHashMap();

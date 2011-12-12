@@ -11,22 +11,22 @@ public interface ProcessWrapper {
     /**
      * Код того, что внешний процесс не вызывался
      */
-    public static final int PROCESS_DONT_RUN = -1;
+    int PROCESS_DONT_RUN = -1;
 
     /**
      * Процесс был прерван по таймауту
      */
-    public static final int PROCESS_TIMEOUT = -2;
+    final int PROCESS_TIMEOUT = -2;
 
     /**
      * Нормально все прошло с процессом
      */
-    public static final int PROCESS_OK = 0;
+    final int PROCESS_OK = 0;
 
     /**
      * Флаг ожидания завершения процесса
      */
-    public static final int WAIT_FOREVER = -1;
+    final int WAIT_FOREVER = -1;
 
     /**
      * Запускает внешний процесс, ожидает его завершения, возвращает exit code процесса

@@ -63,7 +63,8 @@ public class UpdateFeederModel extends Model {
         return this.cause;
     }
 
-    public void setCause(Throwable _cause) {
+    public void setCause(final Throwable _cause) {
         this.cause = _cause;
     }
+    
 }

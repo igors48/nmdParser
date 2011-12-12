@@ -14,20 +14,24 @@ public interface Data {
 
     int size();
 
-    public class DataException extends Exception {
+    class DataException extends Exception {
+
         public DataException() {
+            super();
         }
 
-        public DataException(String s) {
-            super(s);
+        public DataException(final String _s) {
+            super(_s);
         }
 
-        public DataException(String s, Throwable throwable) {
-            super(s, throwable);
+        public DataException(final String _s, final Throwable _throwable) {
+            super(_s, _throwable);
         }
 
-        public DataException(Throwable throwable) {
-            super(throwable);
+        public DataException(final Throwable _throwable) {
+            super(_throwable);
         }
+        
     }
+    
 }

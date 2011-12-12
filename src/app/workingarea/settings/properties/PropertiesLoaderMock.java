@@ -13,12 +13,12 @@ public class PropertiesLoaderMock implements Loader {
 
     public final Map<String, Properties> map;
 
-    public PropertiesLoaderMock(Map<String, Properties> _map) {
+    public PropertiesLoaderMock(final Map<String, Properties> _map) {
         Assert.notNull(_map, "Map is null.");
         this.map = _map;
     }
 
-    public Properties load(String _id) throws LocatorException {
+    public Properties load(final String _id) throws LocatorException {
         Assert.isValidString(_id, "Properties id is not valid.");
 
         Properties result = this.map.get(_id);
@@ -29,4 +29,5 @@ public class PropertiesLoaderMock implements Loader {
 
         return result;
     }
+    
 }

@@ -8,22 +8,27 @@ import html.parser.tag.HtmlTag;
  *         Date: 19.09.2008
  */
 public interface TagHandler {
+    
     void handle(HtmlTag _tag, DocumentBuilder _builder) throws TagHandlerException;
 
-    public class TagHandlerException extends Exception {
+    class TagHandlerException extends Exception {
+
         public TagHandlerException() {
+            super();
         }
 
-        public TagHandlerException(String s) {
-            super(s);
+        public TagHandlerException(final String _s) {
+            super(_s);
         }
 
-        public TagHandlerException(String s, Throwable throwable) {
-            super(s, throwable);
+        public TagHandlerException(final String _s, final Throwable _throwable) {
+            super(_s, _throwable);
         }
 
-        public TagHandlerException(Throwable throwable) {
-            super(throwable);
+        public TagHandlerException(final Throwable _throwable) {
+            super(_throwable);
         }
+
     }
+    
 }

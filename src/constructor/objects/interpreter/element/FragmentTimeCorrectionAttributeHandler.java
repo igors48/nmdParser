@@ -15,7 +15,7 @@ public class FragmentTimeCorrectionAttributeHandler implements AttributeHandler 
 
     private static final String DEFAULT_KEY = "default";
 
-    public void handle(String _id, String _value, Object _blank, ConstructorFactory _factory) throws AttributeHandlerException {
+    public void handle(final String _id, final String _value, final Object _blank, final ConstructorFactory _factory) throws AttributeHandlerException {
         Assert.isValidString(_id, "Id is not valid.");
         Assert.isValidString(_value, "Value is not valid.");
         Assert.notNull(_blank, "Blank is null.");
@@ -25,4 +25,5 @@ public class FragmentTimeCorrectionAttributeHandler implements AttributeHandler 
             ((FragmentAnalyserConfiguration) _blank).setTimeCorrection(_value);
         }
     }
+    
 }

@@ -30,7 +30,7 @@ public class HttpCacheableGetTask extends AbstractHttpRequestTask {
         this.log = LogFactory.getLog(getClass());
     }
 
-    public HttpRequest call() throws Exception {
+    public HttpRequest call() {
         final String urlWithRequest = getUrlWithRequest(this.request.getUrl(), this.request.getRequest());
 
         final InMemoryCacheItem fromCache = this.cache.get(urlWithRequest);

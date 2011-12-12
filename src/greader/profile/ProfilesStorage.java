@@ -65,8 +65,8 @@ public class ProfilesStorage {
 
     public class ProfilesStorageException extends Exception {
 
-        public ProfilesStorageException(Throwable cause) {
-            super(cause);
+        public ProfilesStorageException(final Throwable _cause) {
+            super(_cause);
         }
 
     }

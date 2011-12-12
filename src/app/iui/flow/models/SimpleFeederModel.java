@@ -11,8 +11,9 @@ import util.Assert;
  */
 public class SimpleFeederModel extends Model {
 
+    private final boolean blank;
+
     private SimplerConfiguration configuration;
-    private boolean blank;
 
     public SimpleFeederModel(final SimplerConfiguration _configuration, final boolean _blank) {
         super(ModelType.SIMPLE_FEEDER);

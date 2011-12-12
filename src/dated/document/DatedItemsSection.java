@@ -14,7 +14,7 @@ public class DatedItemsSection {
     private final String title;
     private final List<DatedItem> items;
 
-    public DatedItemsSection(String _title, List<DatedItem> _items) {
+    public DatedItemsSection(final String _title, final List<DatedItem> _items) {
         this.title = _title;
 
         Assert.notNull(_items);
@@ -29,7 +29,7 @@ public class DatedItemsSection {
         return this.items.size();
     }
 
-    public DatedItem get(int _index) {
+    public DatedItem get(final int _index) {
         Assert.greaterOrEqual(_index, 0, "");
         Assert.less(_index, this.items.size(), "");
 
@@ -39,4 +39,5 @@ public class DatedItemsSection {
     public String getTitle() {
         return this.title;
     }
+    
 }
