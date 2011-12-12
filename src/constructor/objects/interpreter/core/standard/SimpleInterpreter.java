@@ -12,7 +12,6 @@ import dated.item.atdc.HtmlContent;
 import dated.item.modification.Modification;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

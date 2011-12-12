@@ -7,7 +7,6 @@ import html.parser.SimpleHtmlConverter;
 import html.parser.SimpleHtmlConverterContext;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

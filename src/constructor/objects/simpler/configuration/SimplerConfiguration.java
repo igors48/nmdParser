@@ -7,7 +7,6 @@ import constructor.objects.storage.local.core.LocalStorage;
 import util.Assert;
 import util.TextTools;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

@@ -5,7 +5,6 @@ import app.iui.flow.Model;
 import app.iui.flow.ModelType;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

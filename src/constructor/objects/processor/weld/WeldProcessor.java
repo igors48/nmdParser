@@ -8,7 +8,6 @@ import util.TextTools;
 import variables.VariableIterator;
 import variables.Variables;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

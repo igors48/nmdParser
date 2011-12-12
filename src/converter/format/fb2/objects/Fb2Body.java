@@ -3,7 +3,6 @@ package converter.format.fb2.objects;
 import converter.format.fb2.Stringable;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

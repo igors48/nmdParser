@@ -3,9 +3,10 @@ package cloud;
 import constructor.dom.ObjectType;
 import util.Assert;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -16,7 +17,7 @@ public class PropertiesCloudMock implements PropertiesCloud {
     private final Map<String, Properties> map;
 
     public PropertiesCloudMock() {
-        this.map = new HashMap<String, Properties>();
+        this.map = newHashMap();
     }
 
     public synchronized void storeProperties(final String _owner, final ObjectType _type, final Properties _properties) throws PropertyCloudException {

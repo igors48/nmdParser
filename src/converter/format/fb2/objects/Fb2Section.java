@@ -5,7 +5,6 @@ import converter.format.fb2.text.Fb2EmptyLine;
 import flowtext.SectionMode;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

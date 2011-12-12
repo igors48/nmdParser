@@ -7,9 +7,9 @@ import constructor.objects.output.configuration.DocumentItemsSortMode;
 import constructor.objects.simpler.configuration.SimplerConfiguration;
 import junit.framework.TestCase;
 
-import java.util.HashMap;
 import java.util.Map;
 
+import static util.CollectionUtils.newHashMap;
 import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
 /**
@@ -23,7 +23,7 @@ public class SimplerConfigurationTest extends TestCase {
     }
 
     public void testWithDefaultFromNewToOld() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("simpler", "<simpler feedUrl=\"feedUrl\" coverUrl=\"coverUrl\" storeDays=\"storeDays\" branch=\"branch\" outName=\"outName\"><xPath>xp01</xPath></simpler>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -44,7 +44,7 @@ public class SimplerConfigurationTest extends TestCase {
     }
 
     public void testPauseBetweenRequests() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("simpler", "<simpler feedUrl=\"feedUrl\" coverUrl=\"coverUrl\" storeDays=\"storeDays\" branch=\"branch\" outName=\"outName\" pauseBetweenRequests=\"48\"><xPath>xp01</xPath><xPath>xp02</xPath><xPath>xp03</xPath></simpler>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -56,7 +56,7 @@ public class SimplerConfigurationTest extends TestCase {
     }
 
     public void testSettedFromNewToOld() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("simpler", "<simpler feedUrl=\"feedUrl\" storeDays=\"storeDays\" branch=\"branch\" outName=\"outName\" fromNewToOld=\"no\"><xPath>xp01</xPath><xPath>xp02</xPath><xPath>xp03</xPath></simpler>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -68,7 +68,7 @@ public class SimplerConfigurationTest extends TestCase {
     }
 
     public void testContentFilterIsSet() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("simpler", "<simpler feedUrl=\"feedUrl\" storeDays=\"storeDays\" branch=\"branch\" outName=\"outName\" fromNewToOld=\"no\"><xPath>xp01</xPath><xPath>xp02</xPath><xPath>xp03</xPath><content-filter/></simpler>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);

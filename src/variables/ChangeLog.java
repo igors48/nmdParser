@@ -2,8 +2,9 @@ package variables;
 
 import util.Assert;
 
-import java.util.HashSet;
 import java.util.Set;
+
+import static util.CollectionUtils.newHashSet;
 
 /**
  * @author Igor Usenko
@@ -14,7 +15,7 @@ public class ChangeLog {
     private final Set<Item> changes;
 
     public ChangeLog() {
-        this.changes = new HashSet<Item>();
+        this.changes = newHashSet();
     }
 
     public void reset() {

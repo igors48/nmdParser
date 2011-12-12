@@ -7,8 +7,9 @@ import util.IOTools;
 import work.testutil.SaxLoaderTestUtils;
 
 import java.io.*;
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -23,7 +24,7 @@ public class PlaceholderPreprocessorTest extends TestCase {
     // первоначальный тест
 
     public void testSmoke() throws Preprocessor.PreprocessorException {
-        Map<String, String> values = new HashMap<String, String>();
+        Map<String, String> values = newHashMap();
         values.put("key01", "value01");
         values.put("key02", "value02");
 
@@ -58,7 +59,7 @@ public class PlaceholderPreprocessorTest extends TestCase {
     // если не хватает данных - выбрасывается исключение
 
     public void testNotEnoughDataException() {
-        Map<String, String> values = new HashMap<String, String>();
+        Map<String, String> values = newHashMap();
         values.put("key01", "value01");
         values.put("key02", "value02");
 

@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static util.CollectionUtils.newHashMap;
+
 /**
  * @author Igor Usenko
  *         Date: 27.09.2009
@@ -30,7 +32,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     // один плейсхолдер
 
     public void testOnePlaceHolder() {
-        Map<String, String> values = new HashMap<String, String>();
+        Map<String, String> values = newHashMap();
         values.put("value", "data");
 
         String placeholder = PlaceHolderUtils.getPlaceholder("value");
@@ -42,7 +44,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     // три одинаковых плейсхолдера
 
     public void testThreePlaceHolder() {
-        Map<String, String> values = new HashMap<String, String>();
+        Map<String, String> values = newHashMap();
         values.put("value", "data");
 
         String result = PlaceHolderUtils.replace("test " + PlaceHolderUtils.getPlaceholder("value") +
@@ -54,7 +56,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     // при остутствии данных плейсхолдер не меняется
 
     public void testSomeDifferent() {
-        Map<String, String> values = new HashMap<String, String>();
+        Map<String, String> values = newHashMap();
         values.put("value", "data");
         values.put("avg", "5");
 
@@ -239,7 +241,7 @@ public class PlaceHolderUtilsTest extends TestCase {
     // короткая строка два плейсхолдера подряд первый заменяется на один символ
 
     public void testOneAfterOneSmallData() {
-        Map<String, String> values = new HashMap<String, String>();
+        Map<String, String> values = newHashMap();
         values.put("first", "f");
         values.put("second", "s");
 

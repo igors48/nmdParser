@@ -9,7 +9,6 @@ import converter.format.fb2.text.Fb2SimpleText;
 import converter.format.fb2.text.Fb2StrongText;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

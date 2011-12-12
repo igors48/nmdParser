@@ -4,7 +4,6 @@ import constructor.dom.Blank;
 import constructor.dom.UsedObject;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

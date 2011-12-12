@@ -19,11 +19,11 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static util.CollectionUtils.newArrayList;
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Локатор объектов расположенных в произвольных подкаталогах рута
@@ -148,7 +148,7 @@ public class JavaStyleLocator implements Locator {
     private void scanObjects() {
         this.rootIndex = JavaStyleLocatorUtils.pathToIndex(this.root);
 
-        this.objects = new HashMap<ObjectType, List<String>>();
+        this.objects = newHashMap();
 
         this.objects.put(ObjectType.CHANNEL, new ArrayList<String>());
         this.objects.put(ObjectType.DATEPARSER, new ArrayList<String>());

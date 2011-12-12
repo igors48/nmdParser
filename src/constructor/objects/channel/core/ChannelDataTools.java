@@ -11,9 +11,12 @@ import http.Data;
 import http.data.DataUtil;
 import util.Assert;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import static util.CollectionUtils.newArrayList;
+import static util.CollectionUtils.newHashSet;
 
 /**
  * ��������� ����� ��� ������ � ������� ������
@@ -88,7 +91,7 @@ public final class ChannelDataTools {
     public static Set<Date> getDateSet(final ChannelDataList _data) {
         Assert.notNull(_data, "Channel data list is null.");
 
-        Set<Date> result = new HashSet<Date>();
+        Set<Date> result = newHashSet();
 
         if (!_data.isEmpty()) {
 
@@ -103,7 +106,7 @@ public final class ChannelDataTools {
     public static Set<Date> getDateSet(final ChannelData _data) {
         Assert.notNull(_data, "Channel data is null.");
 
-        Set<Date> result = new HashSet<Date>();
+        Set<Date> result = newHashSet();
 
         if (!_data.isEmpty()) {
 

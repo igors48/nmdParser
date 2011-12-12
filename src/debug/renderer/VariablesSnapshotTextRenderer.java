@@ -6,7 +6,10 @@ import debug.snapshot.ValueChangedPair;
 import debug.snapshot.VariablesSnapshot;
 import util.Assert;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 import static util.CollectionUtils.newArrayList;
 

@@ -4,7 +4,6 @@ import constructor.objects.output.configuration.DocumentItemsSortMode;
 import util.Assert;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

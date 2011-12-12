@@ -2,7 +2,6 @@ package constructor.objects.output.core.linker;
 
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

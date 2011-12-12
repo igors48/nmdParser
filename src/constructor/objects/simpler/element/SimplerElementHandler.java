@@ -3,8 +3,9 @@ package constructor.objects.simpler.element;
 import constructor.dom.ElementHandler;
 import constructor.dom.loader.MappedElementHandler;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -18,7 +19,8 @@ public class SimplerElementHandler extends MappedElementHandler {
     public SimplerElementHandler() {
         super();
 
-        Map<String, ElementHandler> handlers = new HashMap<String, ElementHandler>();
+        Map<String, ElementHandler> handlers = newHashMap();
+
         handlers.put(XPATH_KEY, new XPathElementHandler());
         handlers.put(CONTENT_FILTER_KEY, new ContentFilterElementHandler());
 

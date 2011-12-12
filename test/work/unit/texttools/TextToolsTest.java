@@ -3,7 +3,6 @@ package work.unit.texttools;
 import junit.framework.TestCase;
 import util.TextTools;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

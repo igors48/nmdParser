@@ -7,10 +7,10 @@ import constructor.dom.UsedObject;
 import constructor.objects.dateparser.configuration.DateParserConfiguration;
 import junit.framework.TestCase;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static util.CollectionUtils.newHashMap;
 import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
 /**
@@ -26,7 +26,7 @@ public class DateParserConfigurationTest extends TestCase {
     // первоначальный тест
 
     public void testSmoke() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("dateParser", "<dateParser><secondsFromEpoch/></dateParser>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -42,7 +42,7 @@ public class DateParserConfigurationTest extends TestCase {
     // тест с параметрами стандартной стратегии
 
     public void testWithStandardParms() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("dateParser", "<dateParser><secondsFromEpoch/><standard><pattern>pattern</pattern><months>months</months></standard></dateParser>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -60,7 +60,7 @@ public class DateParserConfigurationTest extends TestCase {
     // тест зависимостей
 
     public void testDependencies() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("dateParser", "<dateParser><secondsFromEpoch/><standard><pattern>pattern</pattern><months>months</months></standard></dateParser>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);

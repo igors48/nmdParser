@@ -13,7 +13,6 @@ import junit.framework.TestCase;
 import timeservice.StillTimeService;
 import work.testutil.AtdcTestUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

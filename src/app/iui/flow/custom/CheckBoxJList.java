@@ -7,6 +7,8 @@ import java.awt.*;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import static util.CollectionUtils.newHashSet;
+
 /**
  * @author Igor Usenko
  *         Date: 03.10.2010
@@ -21,7 +23,7 @@ public class CheckBoxJList extends JList implements ListSelectionListener {
         listBackground = uid.getColor("List.background");
     }
 
-    HashSet selectionCache = new HashSet();
+    HashSet selectionCache = newHashSet();
 
     int toggleIndex = -1;
     boolean toggleWasSelected;
@@ -43,7 +45,7 @@ public class CheckBoxJList extends JList implements ListSelectionListener {
             removeListSelectionListener(this);
 
             // determine if this selection has added or removed items
-            HashSet newSelections = new HashSet();
+            HashSet newSelections = newHashSet();
             int size = getModel().getSize();
 
             for (int i = 0; i < size; i++) {

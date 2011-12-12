@@ -8,9 +8,10 @@ import http.data.MemoryData;
 import util.Assert;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -29,7 +30,7 @@ public class PageLoaderMock implements BatchLoader {
     public Map<String, HttpData> loadUrls(final List<String> _urls, final long _pauseBetweenRequests, final Controller _controller) {
         Assert.notNull(_urls, "Urls is null");
 
-        Map<String, HttpData> result = new HashMap<String, HttpData>();
+        Map<String, HttpData> result = newHashMap();
         result.put(_urls.get(0), new HttpData(_urls.get(0), new MemoryData(this.data, "UTF-8"), Result.OK));
 
         return result;

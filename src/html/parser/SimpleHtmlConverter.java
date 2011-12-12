@@ -15,9 +15,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import util.Assert;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 import static util.CollectionUtils.newArrayList;
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -189,7 +192,7 @@ public class SimpleHtmlConverter implements Converter {
     }
 
     private void createTagHandlersMap() {
-        this.tagHandlers = new HashMap<String, TagHandler>();
+        this.tagHandlers = newHashMap();
 
         this.tagHandlers.put("B", new StrongTextFormatHandler());
         this.tagHandlers.put("/B", new CancelTextFormatHandler());

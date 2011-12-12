@@ -2,7 +2,6 @@ package util.batchtext;
 
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

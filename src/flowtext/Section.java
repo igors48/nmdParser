@@ -5,7 +5,6 @@ import flowtext.text.EmptyLine;
 import util.Assert;
 import util.TextTools;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

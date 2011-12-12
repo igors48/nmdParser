@@ -7,8 +7,9 @@ import constructor.dom.ElementHandler;
 import constructor.dom.loader.MappedElementHandler;
 import util.Assert;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -34,14 +35,12 @@ public class SampleComponentFactory implements ComponentFactory {
         ElementHandler inner = new InnerElementHandler();
         ElementHandler nested = new NestedElementHandler();
 
-        Map<String, ElementHandler> handlerMap = new HashMap<String, ElementHandler>();
+        Map<String, ElementHandler> handlerMap = newHashMap();
         handlerMap.put("inner", inner);
         handlerMap.put("nested", nested);
 
-        Map<String, AttributeHandler> attributeMap = new HashMap<String, AttributeHandler>();
+        Map<String, AttributeHandler> attributeMap = newHashMap();
 
-        ElementHandler result = new MappedElementHandler(attributeMap, handlerMap);
-
-        return result;
+        return new MappedElementHandler(attributeMap, handlerMap);
     }
 }

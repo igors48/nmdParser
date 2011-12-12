@@ -12,7 +12,6 @@ import http.data.DataUtil;
 import util.Assert;
 import util.fragment.ListFragmentIterator;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;

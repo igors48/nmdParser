@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static util.CollectionUtils.newArrayList;
 

@@ -3,8 +3,9 @@ package constructor.objects.processor.extract_tag.element;
 import constructor.dom.ElementHandler;
 import constructor.dom.loader.MappedElementHandler;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Обработчик элемента extractTag в XML файле
@@ -20,7 +21,8 @@ public class ExtractTagProcessorElementHandler extends MappedElementHandler {
     public ExtractTagProcessorElementHandler() {
         super();
 
-        Map<String, ElementHandler> handlers = new HashMap<String, ElementHandler>();
+        Map<String, ElementHandler> handlers = newHashMap();
+
         handlers.put(PATTERN_KEY, new PatternElementHandler());
         handlers.put(OCCURRENCE_KEY, new OccurrenceElementHandler());
 

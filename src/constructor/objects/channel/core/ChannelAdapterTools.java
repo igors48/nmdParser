@@ -12,7 +12,6 @@ import debug.DebugConsole;
 import util.Assert;
 import variables.Variables;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

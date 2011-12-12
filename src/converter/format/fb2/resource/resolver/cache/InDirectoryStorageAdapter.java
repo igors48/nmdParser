@@ -12,8 +12,9 @@ import util.PathTools;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * ��������� ������ ���������� ���� ������������� � ��������
@@ -67,11 +68,13 @@ public class InDirectoryStorageAdapter implements StorageAdapter {
         try {
             stream = new FileInputStream(getTocName());
             decoder = new XMLDecoder(stream);
+
             result = (Map<String, CacheEntry>) decoder.readObject();
+
             decoder.close();
             stream.close();
         } catch (FileNotFoundException e) {
-            result = new HashMap<String, CacheEntry>();
+            result = newHashMap();
         } catch (IOException e) {
             throw new StorageAdapterException(e);
         } finally {
@@ -120,7 +123,7 @@ public class InDirectoryStorageAdapter implements StorageAdapter {
     }
 
     public Map<String, StoredItem> getMap() {
-        Map<String, StoredItem> result = new HashMap<String, StoredItem>();
+        Map<String, StoredItem> result = newHashMap();
 
         File[] files = this.rootDirectory.listFiles(DATA_FILE_FILTER);
 

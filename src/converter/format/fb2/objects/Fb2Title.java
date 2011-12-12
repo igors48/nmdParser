@@ -4,7 +4,6 @@ import converter.format.fb2.Stringable;
 import converter.format.fb2.text.Fb2EmptyLine;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

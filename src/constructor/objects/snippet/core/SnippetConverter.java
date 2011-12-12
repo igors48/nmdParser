@@ -9,7 +9,6 @@ import util.Assert;
 import util.TextTools;
 import util.sequense.PatternListSequencer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

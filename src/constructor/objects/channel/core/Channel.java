@@ -17,7 +17,6 @@ import timeservice.TimeService;
 import util.Assert;
 import util.fragment.ListFragmentIterator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

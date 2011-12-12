@@ -7,10 +7,10 @@ import constructor.dom.UsedObject;
 import constructor.objects.interpreter.configuration.InterpreterConfiguration;
 import junit.framework.TestCase;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static util.CollectionUtils.newHashMap;
 import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
 /**
@@ -26,7 +26,7 @@ public class InterpreterConfigurationTest extends TestCase {
     // первоначальный тест
 
     public void testSmoke() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("interpreter", "<interpreter><fragment></fragment></interpreter>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -41,7 +41,7 @@ public class InterpreterConfigurationTest extends TestCase {
     // тест с процессорами
 
     public void testWithProcessor() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("interpreter", "<interpreter><fragment content=\"processor\"/></interpreter>");
         streams.put("processor", "<processor><getGroup><occurrence>0</occurrence><pattern>abc(.+?)def</pattern></getGroup></processor>");
 
@@ -57,7 +57,7 @@ public class InterpreterConfigurationTest extends TestCase {
     // тест определения зависимостей
 
     public void testDependencies() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("interpreter", "<interpreter pages=\"pages\" fragments=\"fragments\"><fragment nick=\"nick\" info=\"info\" avatar=\"avatar\" title=\"title\" date=\"date\" content=\"content\" dateParser=\"parser\"/></interpreter>");
 
         streams.put("pages", "<processor></processor>");

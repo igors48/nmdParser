@@ -3,8 +3,9 @@ package constructor.objects.processor.remove_tag.element;
 import constructor.dom.ElementHandler;
 import constructor.dom.loader.MappedElementHandler;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Обработчик элемента removeTag в XML файле
@@ -20,7 +21,8 @@ public class RemoveTagProcessorElementHandler extends MappedElementHandler {
     public RemoveTagProcessorElementHandler() {
         super();
 
-        Map<String, ElementHandler> handlers = new HashMap<String, ElementHandler>();
+        Map<String, ElementHandler> handlers = newHashMap();
+
         handlers.put(PATTERN_KEY, new PatternElementHandler());
         handlers.put(OCCURRENCE_KEY, new OccurrenceElementHandler());
 

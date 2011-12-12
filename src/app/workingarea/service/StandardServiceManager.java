@@ -30,8 +30,9 @@ import timeservice.StandardTimeService;
 import timeservice.TimeService;
 import util.Assert;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * ����������� �������� ��������� ��������
@@ -67,7 +68,7 @@ public class StandardServiceManager implements ServiceManager {
 
         this.debugConsoleEnabled = _debugConsoleEnabled;
 
-        this.context = new HashMap<String, String>();
+        this.context = newHashMap();
 
         deactivateReflectionMode();
     }

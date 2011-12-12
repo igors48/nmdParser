@@ -3,7 +3,6 @@ package work.unit.fragment;
 import junit.framework.TestCase;
 import util.fragment.ListFragmentIterator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

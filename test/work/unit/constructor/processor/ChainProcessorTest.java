@@ -11,9 +11,9 @@ import debug.snapshot.TopLevelObjectSnapshot;
 import junit.framework.TestCase;
 import variables.Variables;
 
-import java.util.HashMap;
 import java.util.Map;
 
+import static util.CollectionUtils.newHashMap;
 import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
 /**
@@ -29,7 +29,7 @@ public class ChainProcessorTest extends TestCase {
     // первоначальный тест
 
     public void testSmoke() throws Constructor.ConstructorException, ConfigurationException, VariableProcessor.VariableProcessorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("processor", "<processor><getGroup in=\"inp\" out=\"sample\"><occurrence>0</occurrence><pattern>abc(.+?)def</pattern></getGroup><getGroup in=\"sample\" out=\"out\"><occurrence>0</occurrence><pattern>z(.+?)z</pattern></getGroup></processor>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -50,7 +50,7 @@ public class ChainProcessorTest extends TestCase {
     // тест снапшота
 
     public void testSnapshot() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("processor", "<processor></processor>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);

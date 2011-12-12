@@ -3,7 +3,6 @@ package debug.renderer;
 import debug.Snapshot;
 import debug.SnapshotTextRenderer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

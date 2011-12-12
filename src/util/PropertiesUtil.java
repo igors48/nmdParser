@@ -2,7 +2,6 @@ package util;
 
 import org.apache.commons.logging.Log;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;

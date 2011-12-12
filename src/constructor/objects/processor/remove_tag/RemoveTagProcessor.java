@@ -11,7 +11,6 @@ import util.html.HtmlTagBounds;
 import util.html.HtmlTagExtractor;
 import variables.Variables;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

@@ -3,7 +3,6 @@ package work.unit.javastylelocator;
 import constructor.dom.locator.MaskUtils;
 import junit.framework.TestCase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

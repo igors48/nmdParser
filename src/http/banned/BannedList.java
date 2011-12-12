@@ -5,8 +5,9 @@ import org.apache.commons.logging.LogFactory;
 import util.Assert;
 
 import java.text.MessageFormat;
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Список забаненных сайтов. Сайт считается забаненным, если в пределах
@@ -32,7 +33,7 @@ public class BannedList {
         this.treshold = _treshold;
         this.limit = _limit;
 
-        this.list = new HashMap<String, Item>();
+        this.list = newHashMap();
 
         this.counter = 0;
 

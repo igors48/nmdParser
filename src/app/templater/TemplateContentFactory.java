@@ -2,12 +2,11 @@ package app.templater;
 
 import util.Assert;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static util.CollectionUtils.newArrayList;
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Фабрика содержимого шаблонов объектов верхнего уровня
@@ -62,6 +61,7 @@ public class TemplateContentFactory {
 
     static {
         processorTemplate = newArrayList();
+
         processorTemplate.add("<processor>");
         processorTemplate.add(INDENT + "<getGroup>");
         processorTemplate.add(INDENT + INDENT + "<pattern><![CDATA[<body(.+?)</body>]]></pattern> ");
@@ -79,6 +79,7 @@ public class TemplateContentFactory {
 
     static {
         outputTemplate = newArrayList();
+
         outputTemplate.add("<output channel=\"" + NAME_HOLDER + ".channel\" branch=\"" + NAME_HOLDER + "\">");
         outputTemplate.add(INDENT + "<many-to-one name=\"" + NAME_HOLDER + "\"/>");
         outputTemplate.add("</output>");
@@ -87,7 +88,8 @@ public class TemplateContentFactory {
     private static Map<TemplateContentType, List<String>> templatesMap;
 
     static {
-        templatesMap = new HashMap<TemplateContentType, List<String>>();
+        templatesMap = newHashMap();
+
         templatesMap.put(TemplateContentType.SOURCE, sourceTemplate);
         templatesMap.put(TemplateContentType.BRIEF_CHANNEL, channelBriefTemplate);
         templatesMap.put(TemplateContentType.FULL_CHANNEL, channelFullTemplate);

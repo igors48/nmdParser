@@ -4,7 +4,6 @@ import junit.framework.TestCase;
 import util.batchtext.BatchTextTools;
 import util.batchtext.Boundary;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

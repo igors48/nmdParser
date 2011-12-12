@@ -12,9 +12,9 @@ import junit.framework.TestCase;
 import timeservice.StillTimeService;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
+import static util.CollectionUtils.newHashMap;
 import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
 /**
@@ -30,7 +30,7 @@ public class DateParserAdapterTest extends TestCase {
     // первоначальный тест 
 
     public void testSmoke() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("dateParser", "<dateParser><standard><pattern>MMMM dd, yyyy, h:mm a</pattern><months>January February March April May June July August September October November December</months></standard></dateParser>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);

@@ -8,8 +8,9 @@ import org.apache.commons.logging.LogFactory;
 import util.Assert;
 import util.PathTools;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Процессор постобработки, вызывающий внешний процесс для реализации своих намерений
@@ -46,8 +47,7 @@ public class ExternalForEachPostProcessor implements ForEachPostProcessor {
         Assert.notNull(_dir, "Directory is null");
         Assert.isValidString(_name, "Name is null");
 
-        Map<String, String> parms = new HashMap<String, String>();
-
+        Map<String, String> parms = newHashMap();
         parms.put(ProcessManagerUtils.DIRECTORY_KEY, PathTools.normalize(_dir));
         parms.put(ProcessManagerUtils.FULL_FILE_NAME_KEY, PathTools.normalize(_dir) + _name);
         parms.put(ProcessManagerUtils.FILE_NAME_KEY, _name);

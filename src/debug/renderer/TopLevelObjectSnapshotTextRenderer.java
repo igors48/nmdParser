@@ -5,7 +5,6 @@ import debug.SnapshotTextRenderer;
 import debug.snapshot.TopLevelObjectSnapshot;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

@@ -6,12 +6,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import util.Assert;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static util.CollectionUtils.newArrayList;
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Отладочная консоль с записью в файл
@@ -36,7 +35,7 @@ public class FileDebugConsole implements DebugConsole {
         this.updater.clean();
 
         this.factory = new SnapshotTextRendererFactory();
-        this.images = new HashMap<String, List<String>>();
+        this.images = newHashMap();
 
         this.log = LogFactory.getLog(getClass());
     }

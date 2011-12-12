@@ -6,8 +6,9 @@ import constructor.dom.constructor.StandardConstructorFactory;
 import constructor.dom.loader.DomStreamLoader;
 import junit.framework.TestCase;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -26,7 +27,7 @@ public class ConstructorTest extends TestCase {
 
         Loader loader = new DomStreamLoader(componentFactory);
 
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("sample01", "<sample01 id=\"sampleId\"></sample01>");
         Locator locator = new LocatorMock(streams);
 
@@ -46,7 +47,7 @@ public class ConstructorTest extends TestCase {
 
         Loader loader = new DomStreamLoader(componentFactory);
 
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("sample01", "<sample01 id=\"sampleId\" name=\"sampleName\"></sample01>");
         Locator locator = new LocatorMock(streams);
 
@@ -66,7 +67,7 @@ public class ConstructorTest extends TestCase {
 
         Loader loader = new DomStreamLoader(componentFactory);
 
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("sample01", "<sample01><inner>48</inner></sample01>");
         Locator locator = new LocatorMock(streams);
 
@@ -85,7 +86,7 @@ public class ConstructorTest extends TestCase {
 
         Loader loader = new DomStreamLoader(componentFactory);
 
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("sample01", "<sample01 id=\"sampleId\" name=\"sampleName\"><inner>48</inner></sample01>");
         Locator locator = new LocatorMock(streams);
 
@@ -106,7 +107,7 @@ public class ConstructorTest extends TestCase {
 
         Loader loader = new DomStreamLoader(componentFactory);
 
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("sample01", "<sample01 id=\"sampleId1\"><nested>sample02</nested></sample01>");
         streams.put("sample02", "<sample01 id=\"sampleId2\" name=\"sampleName2\"/>");
         Locator locator = new LocatorMock(streams);
@@ -129,7 +130,7 @@ public class ConstructorTest extends TestCase {
 
         Loader loader = new DomStreamLoader(componentFactory);
 
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("sample01", "<sample01 id=\"sampleId\" name=\"sampleName\"><inner><![CDATA[<48.+?//>]]></inner></sample01>");
         Locator locator = new LocatorMock(streams);
 
@@ -150,7 +151,7 @@ public class ConstructorTest extends TestCase {
 
         Loader loader = new DomStreamLoader(componentFactory);
 
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("sample01", "<sample01 id=\"sampleId\" name=\"sampleName\"><inner></inner></sample01>");
         Locator locator = new LocatorMock(streams);
 
@@ -171,7 +172,7 @@ public class ConstructorTest extends TestCase {
 
         Loader loader = new DomStreamLoader(componentFactory);
 
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("sample01", "<sample01 id=\"sampleId\" name=\"sampleName\"><inner/></sample01>");
         Locator locator = new LocatorMock(streams);
 

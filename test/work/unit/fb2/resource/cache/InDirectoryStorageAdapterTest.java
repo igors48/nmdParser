@@ -11,8 +11,9 @@ import work.testutil.CompTestsUtils;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -32,7 +33,7 @@ public class InDirectoryStorageAdapterTest extends TestCase {
         String dir = TEST_ROOT + "testStoreLoadToc/";
         CompTestsUtils.cleanupDir(dir);
 
-        Map<String, CacheEntry> entries = new HashMap<String, CacheEntry>();
+        Map<String, CacheEntry> entries = newHashMap();
 
         CacheEntry entry01 = new CacheEntry();
         entry01.setAddress("address01");
@@ -99,7 +100,7 @@ public class InDirectoryStorageAdapterTest extends TestCase {
 
         InDirectoryStorageAdapter adapter = new InDirectoryStorageAdapter(dir);
 
-        Map<String, CacheEntry> entries = new HashMap<String, CacheEntry>();
+        Map<String, CacheEntry> entries = newHashMap();
 
         CacheEntry entry01 = new CacheEntry();
         entry01.setAddress("address01");
@@ -148,7 +149,7 @@ public class InDirectoryStorageAdapterTest extends TestCase {
 
         InDirectoryStorageAdapter adapter = new InDirectoryStorageAdapter(dir);
 
-        Map<String, CacheEntry> entries = new HashMap<String, CacheEntry>();
+        Map<String, CacheEntry> entries = newHashMap();
 
         CacheEntry entry01 = new CacheEntry();
         entry01.setAddress("address01");

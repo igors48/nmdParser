@@ -7,8 +7,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import util.Assert;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * ѕытаетс€ обработать аттрибуты и вложенные элементы с
@@ -38,13 +39,13 @@ public class MappedElementHandler extends AbstractElementHandler {
     public MappedElementHandler(final Map<String, ElementHandler> _elementHandlers) {
         Assert.notNull(_elementHandlers, "Element handlers is null.");
 
-        this.attributeHandlers = new HashMap<String, AttributeHandler>();
+        this.attributeHandlers = newHashMap();
         this.elementHandlers = _elementHandlers;
     }
 
     public MappedElementHandler() {
-        this.attributeHandlers = new HashMap<String, AttributeHandler>();
-        this.elementHandlers = new HashMap<String, ElementHandler>();
+        this.attributeHandlers = newHashMap();
+        this.elementHandlers = newHashMap();
     }
 
     protected void handleElement(final Node _node, final Object _blank, final ConstructorFactory _factory) throws ElementHandlerException {

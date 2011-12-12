@@ -32,7 +32,7 @@ public interface GoogleReaderAdapter {
         public GoogleReaderAdapterException(final Throwable _cause) {
             super(_cause);
         }
-        
+
     }
 
 }

@@ -2,8 +2,9 @@ package app.templater;
 
 import util.Assert;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Утилиты для фабрики шаблонов фидов
@@ -16,7 +17,7 @@ public final class TemplatesFactoryUtils {
     public static Map<String, String> createParametersMap(final TemplateParameters _parameters) {
         Assert.notNull(_parameters, "Template parameters is null");
 
-        Map<String, String> result = new HashMap<String, String>();
+        Map<String, String> result = newHashMap();
 
         result.put(TemplateContentFactory.RSS_URL_ID, _parameters.getRssUrl());
         result.put(TemplateContentFactory.NAME_ID, _parameters.getName());

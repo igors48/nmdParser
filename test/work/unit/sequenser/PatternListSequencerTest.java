@@ -4,7 +4,6 @@ import junit.framework.TestCase;
 import util.sequense.PatternListSequencer;
 import util.sequense.SequenceGenerationParams;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

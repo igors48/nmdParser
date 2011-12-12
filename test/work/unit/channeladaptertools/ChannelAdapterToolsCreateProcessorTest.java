@@ -10,7 +10,6 @@ import constructor.objects.processor.xpath.XPathProcessor;
 import debug.console.NullDebugConsole;
 import junit.framework.TestCase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

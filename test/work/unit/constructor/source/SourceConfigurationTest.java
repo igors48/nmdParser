@@ -8,10 +8,10 @@ import constructor.objects.source.configuration.FetcherType;
 import constructor.objects.source.configuration.SourceConfiguration;
 import junit.framework.TestCase;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static util.CollectionUtils.newHashMap;
 import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
 /**
@@ -27,7 +27,7 @@ public class SourceConfigurationTest extends TestCase {
     // первоначальный тест
 
     public void testSmoke() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("processor", "<processor><getGroup in=\"inp\" out=\"sample\"><occurrence>0</occurrence><pattern>abc(.+?)def</pattern></getGroup><getGroup in=\"sample\" out=\"out\"><occurrence>0</occurrence><pattern>z(.+?)z</pattern></getGroup></processor>");
         streams.put("source", "<source><store days=\"48\"/><update mode=\"auto\"/><rss>http://k.img.com.ua/rss/ru/news.xml</rss><processor id=\"processor\"/></source>");
 
@@ -47,7 +47,7 @@ public class SourceConfigurationTest extends TestCase {
     // тест на простые урлы
 
     public void testSimpleUrls() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("source", "<source><store days=\"48\"/><update mode=\"auto\"/><url>url1</url><url>url2</url></source>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -66,7 +66,7 @@ public class SourceConfigurationTest extends TestCase {
     // тест на генератор последовательности урлов
 
     public void testUrlsGeneration() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("source", "<source><store days=\"48\"/><update mode=\"auto\"/><url>url1</url><url from=\"1\" to=\"5\" step=\"2\">url*2</url></source>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -92,7 +92,7 @@ public class SourceConfigurationTest extends TestCase {
     // тест на зависимости - зависимостей нет
 
     public void testNoDependencies() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("source", "<source><store days=\"48\"/><url>url1</url></source>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -108,7 +108,7 @@ public class SourceConfigurationTest extends TestCase {
     // тест на зависимости - зависимость от кастом детектора модификаций
 
     public void testDependensCustomFetcher() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
 
         streams.put("fetcher", "<processor></processor>");
         streams.put("source", "<source><store days=\"48\"/><custom id=\"fetcher\"/></source>");
@@ -129,7 +129,7 @@ public class SourceConfigurationTest extends TestCase {
     // тест на зависимости - зависимость от постпроцессора
 
     public void testDependensPostprocessor() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
 
         streams.put("postprocessor", "<processor></processor>");
         streams.put("source", "<source><store days=\"48\"/><custom id=\"postprocessor\"/></source>");
@@ -150,7 +150,7 @@ public class SourceConfigurationTest extends TestCase {
     // тест на зависимости - зависимость от кастом детектора модификаций и от постпроцессора
 
     public void testDependensFetcherPostprocessor() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
 
         streams.put("fetcher", "<processor></processor>");
         streams.put("post", "<processor></processor>");

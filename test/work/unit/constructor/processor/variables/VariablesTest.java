@@ -5,7 +5,6 @@ import debug.snapshot.VariablesSnapshot;
 import junit.framework.TestCase;
 import variables.Variables;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

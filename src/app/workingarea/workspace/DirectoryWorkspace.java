@@ -23,8 +23,9 @@ import util.Assert;
 import util.PathTools;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * –абочее пространство расположенное в каталоге
@@ -61,8 +62,7 @@ public class DirectoryWorkspace implements Workspace {
         Assert.notNull(_serviceManager, "Service manager is null");
         this.serviceManager = _serviceManager;
 
-        this.storages = new HashMap<String, Storage>();
-
+        this.storages = newHashMap();
         this.log = LogFactory.getLog(getClass());
     }
 

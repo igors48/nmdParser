@@ -8,7 +8,6 @@ import constructor.dom.UsedObject;
 import junit.framework.TestCase;
 import work.unit.dom.SampleObject01;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

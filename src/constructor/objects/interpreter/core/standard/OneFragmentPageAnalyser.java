@@ -5,7 +5,6 @@ import constructor.objects.interpreter.core.Page;
 import constructor.objects.interpreter.core.PageAnalyser;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

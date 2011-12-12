@@ -6,8 +6,9 @@ import util.Assert;
 import util.DateTools;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
+
+import static util.CollectionUtils.newHashSet;
 
 /**
  * Утилитный класс для работы с данными интерпретатора
@@ -26,7 +27,7 @@ public final class InterpreterDataTools {
     public static Set<Date> getDateSet(final InterpreterData _data) {
         Assert.notNull(_data, "Interpreter data is null.");
 
-        Set<Date> result = new HashSet<Date>();
+        Set<Date> result = newHashSet();
 
         for (DatedItem item : _data.getItems()) {
             result.add(DateTools.getDateWithoutTime(item.getDate()));

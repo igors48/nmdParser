@@ -7,7 +7,6 @@ import constructor.objects.simpler.configuration.SimplerConfiguration;
 import util.Assert;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

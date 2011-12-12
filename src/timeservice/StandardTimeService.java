@@ -9,7 +9,7 @@ import java.util.Date;
  *         Date: 01.12.2008
  */
 public class StandardTimeService implements TimeService {
-    
+
     private final long sessionStartTime;
 
     public StandardTimeService() {
@@ -31,5 +31,5 @@ public class StandardTimeService implements TimeService {
     public long getSessionStartTime() {
         return this.sessionStartTime;
     }
-    
+
 }

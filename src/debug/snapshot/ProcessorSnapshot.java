@@ -3,7 +3,6 @@ package debug.snapshot;
 import debug.Snapshot;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

@@ -4,7 +4,6 @@ import app.cli.blitz.request.BlitzRequest;
 import app.cli.blitz.request.RequestSourceType;
 import org.apache.commons.cli.CommandLine;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

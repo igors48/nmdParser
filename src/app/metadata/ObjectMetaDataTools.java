@@ -6,9 +6,12 @@ import constructor.dom.ObjectType;
 import constructor.dom.UsedObject;
 import util.Assert;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import static util.CollectionUtils.newArrayList;
+import static util.CollectionUtils.*;
 
 /**
  * Утилиты для работы с метаданными
@@ -122,7 +125,7 @@ public final class ObjectMetaDataTools {
     }
 
     private static List<String> getSources(final List<ObjectMetaData> _metaDatas) {
-        Set<String> result = new HashSet<String>();
+        Set<String> result = newHashSet();
 
         for (ObjectMetaData current : _metaDatas) {
             result.add(current.getSourceFile());
@@ -132,7 +135,7 @@ public final class ObjectMetaDataTools {
     }
 
     private static Map<String, String> getPlaceHolders(final List<ObjectMetaData> _metaDatas) {
-        Map<String, String> result = new HashMap<String, String>();
+        Map<String, String> result = newHashMap();
 
         for (ObjectMetaData current : _metaDatas) {
             List<PlaceHolderInfo> placeHolders = current.getPlaceholders();

@@ -5,7 +5,6 @@ import converter.format.fb2.footnotes.Fb2FootNoteList;
 import converter.format.fb2.resource.Fb2ResourceBundle;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

@@ -8,7 +8,6 @@ import org.apache.commons.logging.LogFactory;
 import util.Assert;
 import util.PathTools;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

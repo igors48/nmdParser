@@ -14,8 +14,9 @@ import http.BatchLoader;
 import resource.ConverterFactory;
 import timeservice.TimeService;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * ������ ������ ��������
@@ -49,7 +50,7 @@ public final class NullServiceManager implements ServiceManager {
     }
 
     public Map<String, String> getExternalContext() {
-        return new HashMap<String, String>();
+        return newHashMap();
     }
 
     public ResourceCache getResourceCache() {

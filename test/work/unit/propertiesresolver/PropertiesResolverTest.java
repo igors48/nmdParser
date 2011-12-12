@@ -4,9 +4,10 @@ import app.workingarea.settings.properties.PropertiesLoaderMock;
 import app.workingarea.settings.properties.PropertiesResolver;
 import junit.framework.TestCase;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -25,7 +26,7 @@ public class PropertiesResolverTest extends TestCase {
         pack01.setProperty("first", "firstValue");
         pack01.setProperty("second", "secondValue");
 
-        Map<String, Properties> map = new HashMap<String, Properties>();
+        Map<String, Properties> map = newHashMap();
         map.put("pack01", pack01);
 
         PropertiesLoaderMock loader = new PropertiesLoaderMock(map);
@@ -50,7 +51,7 @@ public class PropertiesResolverTest extends TestCase {
         pack02.setProperty("third", "thirdValue");
         pack02.setProperty("fourth", "fourthValue");
 
-        Map<String, Properties> map = new HashMap<String, Properties>();
+        Map<String, Properties> map = newHashMap();
         map.put("pack02", pack02);
         map.put("zpack01", zpack01);
 
@@ -83,7 +84,7 @@ public class PropertiesResolverTest extends TestCase {
         pack03.setProperty("extends", "pack02");
         pack03.setProperty("fifth", "fifthValue");
 
-        Map<String, Properties> map = new HashMap<String, Properties>();
+        Map<String, Properties> map = newHashMap();
         map.put("pack01", pack01);
         map.put("pack02", pack02);
         map.put("pack03", pack03);
@@ -108,7 +109,7 @@ public class PropertiesResolverTest extends TestCase {
         pack01.setProperty("first", "firstValue");
         pack01.setProperty("second", "secondValue");
 
-        Map<String, Properties> map = new HashMap<String, Properties>();
+        Map<String, Properties> map = newHashMap();
         map.put("pack01", pack01);
 
         PropertiesLoaderMock loader = new PropertiesLoaderMock(map);
@@ -134,7 +135,7 @@ public class PropertiesResolverTest extends TestCase {
         pack02.setProperty("third", "thirdValue");
         pack02.setProperty("fourth", "fourthValue");
 
-        Map<String, Properties> map = new HashMap<String, Properties>();
+        Map<String, Properties> map = newHashMap();
         map.put("pack01", pack01);
         map.put("pack02", pack02);
 
@@ -160,7 +161,7 @@ public class PropertiesResolverTest extends TestCase {
         another.setProperty("extends", "defaults");
         another.setProperty("api.temp.directory", "E:/temp/_cache_nmd_2/");
 
-        Map<String, Properties> map = new HashMap<String, Properties>();
+        Map<String, Properties> map = newHashMap();
         map.put("defaults", defaults);
         map.put("another", another);
 

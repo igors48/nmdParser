@@ -19,12 +19,11 @@ import util.IOTools;
 import util.PathTools;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static util.CollectionUtils.newArrayList;
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -77,7 +76,7 @@ public class Fb2ResourceBundleResolver implements Controller {
     public void resolve(final List<Fb2ResourceItem> _resources) {
         Assert.notNull(_resources, "Resources is null");
 
-        this.itemMap = new HashMap<Fb2ResourceItem, String>();
+        this.itemMap = newHashMap();
 
         List<String> list = createRequests(_resources);
 

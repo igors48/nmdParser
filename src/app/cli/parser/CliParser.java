@@ -7,10 +7,13 @@ import util.Assert;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 import static app.cli.parser.OptionNameTable.*;
 import static util.CollectionUtils.newArrayList;
+import static util.CollectionUtils.newHashMap;
 
 /**
  * ������ ��� ��������� ������. ������ - �� ��������� ������
@@ -87,7 +90,7 @@ public class CliParser {
     }
 
     private void createParsersMap() {
-        this.parsers = new HashMap<String, OptionParser>();
+        this.parsers = newHashMap();
 
         this.parsers.put(CREATE_WORKSPACE_OPTION_SHORT_NAME, new CreateWorkspaceOptionParser());
         this.parsers.put(UPDATE_SOURCES_OPTION_SHORT_NAME, new UpdateSourcesOptionParser());

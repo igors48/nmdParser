@@ -8,7 +8,6 @@ import junit.framework.TestCase;
 import work.testutil.AtdcTestUtils;
 import work.testutil.InterpreterDataTestUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static util.CollectionUtils.newArrayList;

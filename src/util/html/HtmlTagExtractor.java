@@ -3,7 +3,6 @@ package util.html;
 import util.Assert;
 
 import javax.swing.text.html.HTMLEditorKit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
