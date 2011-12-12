@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 07.01.2009
@@ -20,7 +22,7 @@ public class Fb2FootNoteList implements Stringable {
     private final List<Fb2FootNote> notes;
 
     public Fb2FootNoteList() {
-        this.notes = new ArrayList<Fb2FootNote>();
+        this.notes = newArrayList();
     }
 
     public String appendFootNote(final String _content) {
@@ -37,7 +39,7 @@ public class Fb2FootNoteList implements Stringable {
     }
 
     public String[] getStrings() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         if (this.notes.size() > 0) {
             result.add(NOTES_START_LINE_1);

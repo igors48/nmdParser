@@ -11,6 +11,8 @@ import variables.Variables;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Утилиты для стандартного анализатора фрагмента
  *
@@ -30,7 +32,7 @@ public final class StandardFragmentAnalyserUtils {
     public static List<String> callProcessorForList(final Fragment _fragment, final ChainProcessorAdapter _adapter) throws VariableProcessor.VariableProcessorException {
         Assert.notNull(_fragment, "Fragment is null");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         if (_adapter != null) {
             ChainProcessor processor = new ChainProcessor(_adapter);

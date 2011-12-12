@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static constructor.objects.processor.VariableProcessorUtils.specified;
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Процессор добавления элементов одной переменной к другой
@@ -44,7 +45,7 @@ public class AppendProcessor extends AbstractVariableProcessor {
         String secondName = specified(this.second) ? this.second : Variables.DEFAULT_OUTPUT_VARIABLE_NAME;
 
         VariableIterator iterator = _variables.getIterator(firstName);
-        List<String> values = new ArrayList<String>();
+        List<String> values = newArrayList();
 
         while (iterator.hasNext()) {
             values.add((String) iterator.next());

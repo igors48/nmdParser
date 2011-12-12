@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Утилитный класс для работы с кодом HTML тега
  *
@@ -57,7 +59,7 @@ public final class HtmlTagTools {
     }
 
     private static List<String> getMatches(final String _data, final Pattern _pattern) {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         Matcher matcher = _pattern.matcher(_data);
 

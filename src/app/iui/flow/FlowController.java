@@ -18,6 +18,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 27.11.2010
@@ -417,7 +419,7 @@ public class FlowController {
     }
 
     public List<Entity> filterSimpleFeeders() {
-        List<Entity> result = new ArrayList<Entity>();
+        List<Entity> result = newArrayList();
 
         for (Entity candidate : this.feeders) {
 

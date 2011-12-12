@@ -10,6 +10,8 @@ import variables.Variables;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Модифицирует урл модификации с помощью процессора переменных
  *
@@ -29,7 +31,7 @@ public class UrlModificator implements ModificationProcessor {
         Assert.notNull(_modifications);
 
         try {
-            List<Modification> result = new ArrayList<Modification>();
+            List<Modification> result = newArrayList();
 
             for (Modification modification : _modifications) {
                 Variables variables = new Variables();

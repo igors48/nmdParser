@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * ������� ������������� - ������ ����� ���������� �� �����������
  *
@@ -51,7 +53,7 @@ public class SimpleInterpreter implements InterpreterEx {
 
             AtdcItem item = new AtdcItem(author, title, date, htmlContent);
 
-            List<DatedItem> items = new ArrayList<DatedItem>();
+            List<DatedItem> items = newArrayList();
             items.add(item);
 
             return new InterpreterData(this.adapter.getId(), items);

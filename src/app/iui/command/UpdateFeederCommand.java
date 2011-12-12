@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 05.12.2010
@@ -46,7 +48,7 @@ public class UpdateFeederCommand implements Command, Controller {
         Assert.notNull(_listener, "Listener is null");
         this.listener = _listener;
 
-        this.files = new ArrayList<String>();
+        this.files = newArrayList();
     }
 
     public List<String> getFiles() {

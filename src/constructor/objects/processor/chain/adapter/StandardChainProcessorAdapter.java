@@ -14,6 +14,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Стандартный адаптер цепного процессора
  *
@@ -33,7 +35,7 @@ public class StandardChainProcessorAdapter implements Blank, ChainProcessorAdapt
         Assert.notNull(_debugConsole, "Debug console is null");
         this.debugConsole = _debugConsole;
 
-        this.adapters = new ArrayList<VariableProcessorAdapter>();
+        this.adapters = newArrayList();
 
         this.cancelled = false;
     }
@@ -48,7 +50,7 @@ public class StandardChainProcessorAdapter implements Blank, ChainProcessorAdapt
     }
 
     public List<VariableProcessor> getProcessors() throws ConfigurationException {
-        List<VariableProcessor> processors = new ArrayList<VariableProcessor>();
+        List<VariableProcessor> processors = newArrayList();
 
         for (VariableProcessorAdapter adapter : this.adapters) {
             processors.add(adapter.getProcessor());
@@ -63,7 +65,7 @@ public class StandardChainProcessorAdapter implements Blank, ChainProcessorAdapt
     }
 
     public List<UsedObject> getUsedObjects() {
-        return new ArrayList<UsedObject>();
+        return newArrayList();
     }
 
     public void setId(String _id) {

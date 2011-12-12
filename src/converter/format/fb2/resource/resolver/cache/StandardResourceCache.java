@@ -8,6 +8,8 @@ import util.Assert;
 
 import java.util.*;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * ��� ��������
  *
@@ -265,7 +267,7 @@ public class StandardResourceCache implements ResourceCache {
     }
 
     private List<StoredItem> getStoredItems() throws StorageAdapter.StorageAdapterException {
-        List<StoredItem> result = new ArrayList<StoredItem>();
+        List<StoredItem> result = newArrayList();
 
         result.addAll(this.adapter.getMap().values());
 

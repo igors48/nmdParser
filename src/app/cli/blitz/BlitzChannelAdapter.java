@@ -26,6 +26,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * ������� ����-������ ��������� �����������
  *
@@ -92,7 +94,7 @@ public class BlitzChannelAdapter implements ChannelAdapter {
     public List<InterpreterEx> getInterpreters(final Modification _modification) throws AdapterException {
         Assert.notNull(_modification, "Modification is null");
 
-        List<InterpreterEx> result = new ArrayList<InterpreterEx>();
+        List<InterpreterEx> result = newArrayList();
 
         if (isSimpleHandling()) {
             result.add(new SimpleInterpreter(new SimpleInterpreterAdapter(_modification)));

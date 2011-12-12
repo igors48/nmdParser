@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 28.11.2009
@@ -24,7 +26,7 @@ public class UrlModificatorTest extends TestCase {
     public void testSmoke() throws ModificationProcessor.ModificationProcessorException {
         UrlModificator modificator = new UrlModificator(new MockProcessor("", ""));
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
         Modification modification = new Modification(new Date(), "url");
         modifications.add(modification);
 
@@ -39,7 +41,7 @@ public class UrlModificatorTest extends TestCase {
     public void testThreeMods() throws ModificationProcessor.ModificationProcessorException {
         UrlModificator modificator = new UrlModificator(new MockProcessor("", ""));
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
         Modification modification01 = new Modification(new Date(), "url01");
         Modification modification02 = new Modification(new Date(), "url02");
         Modification modification03 = new Modification(new Date(), "url03");
@@ -60,7 +62,7 @@ public class UrlModificatorTest extends TestCase {
     public void testPostMoreThanOne() throws ModificationProcessor.ModificationProcessorException {
         UrlModificator modificator = new UrlModificator(new DoublerMockProcessor("", ""));
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
         Modification modification = new Modification(new Date(), "url");
         modifications.add(modification);
 

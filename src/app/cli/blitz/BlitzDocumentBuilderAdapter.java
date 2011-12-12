@@ -26,6 +26,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * ������� ����-���������� ���������
  *
@@ -98,7 +100,7 @@ public class BlitzDocumentBuilderAdapter implements DocumentBuilderAdapter {
 
             String name = DocumentBuilderAdapterUtils.getName(_document.getHeader().getBookTitle(), this.settings.getMaxFileNameLength());
 
-            List<Storage> storages = new ArrayList<Storage>();
+            List<Storage> storages = newArrayList();
             storages.add(this.workspace.getStorage(this.request.getStorage()));
 
             ConverterContext context = new ConverterContext(_document,

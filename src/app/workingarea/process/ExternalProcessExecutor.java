@@ -12,6 +12,7 @@ import java.util.concurrent.*;
 
 import static app.workingarea.process.StreamDumper.createErrorStreamDumper;
 import static app.workingarea.process.StreamDumper.createOutputStreamDumper;
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Инициатор внешнего процесса
@@ -113,7 +114,7 @@ public class ExternalProcessExecutor implements ProcessWrapper {
     }
 
     private List<String> createArguments(final String _id, final String _cmd) {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         result.add(correctSeparator(_id));
 

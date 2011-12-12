@@ -12,6 +12,8 @@ import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Менеджер рабочих пространств расположенных в подкаталогах
  * основного каталога
@@ -40,7 +42,7 @@ public class WorkspaceDirectoriesManager implements WorkspaceManager {
     }
 
     public List<String> getWorkspacesIdList() throws WorkspaceManagerException {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         File[] list = new File(this.root).listFiles(DIRECTORY_FILTER);
 

@@ -11,6 +11,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Вспомогательный класс для сериализаии/десериализации ChannelData
  *
@@ -24,11 +26,11 @@ public class ChannelDataHelperBean implements StreamHelperBean {
 
     public ChannelDataHelperBean() {
         this.header = new ChannelDataHeader("", "", "", "", "", ChannelDataTools.DEFAULT_GENRES, "");
-        this.data = new ArrayList<InterpreterData>();
+        this.data = newArrayList();
     }
 
     public List<InterpreterDataHelperBean> getData() {
-        List<InterpreterDataHelperBean> result = new ArrayList<InterpreterDataHelperBean>();
+        List<InterpreterDataHelperBean> result = newArrayList();
 
         for (InterpreterData interpreterData : this.data) {
             InterpreterDataHelperBean bean = new InterpreterDataHelperBean();
@@ -43,7 +45,7 @@ public class ChannelDataHelperBean implements StreamHelperBean {
     public void setData(List<InterpreterDataHelperBean> _data) {
         Assert.notNull(_data);
 
-        List<InterpreterData> result = new ArrayList<InterpreterData>();
+        List<InterpreterData> result = newArrayList();
 
         for (InterpreterDataHelperBean bean : _data) {
             result.add(bean.restore());
@@ -82,7 +84,7 @@ public class ChannelDataHelperBean implements StreamHelperBean {
     }
 
     private List<InterpreterData> copyList(List<InterpreterData> _list) {
-        List<InterpreterData> result = new ArrayList<InterpreterData>();
+        List<InterpreterData> result = newArrayList();
 
         for (InterpreterData item : _list) {
             InterpreterDataHelperBean helper = new InterpreterDataHelperBean();

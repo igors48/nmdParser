@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 05.03.2011
@@ -65,7 +67,7 @@ public class Builder {
     }
 
     private static List<Section> createContentSections(final List<DatedItem> _items, final DatedItemConverterContext _context) {
-        List<Section> result = new ArrayList<Section>();
+        List<Section> result = newArrayList();
 
         for (DatedItem current : _items) {
             result.add(current.getSectionConverter().convert(current, _context));

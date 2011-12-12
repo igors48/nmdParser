@@ -9,6 +9,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Рендерер процессорного снапшота
  *
@@ -25,7 +27,7 @@ public class ProcessorSnapshotTextRenderer implements SnapshotTextRenderer {
         Assert.notNull(_snapshot, "Snapshot is null");
         Assert.isTrue(_snapshot instanceof ProcessorSnapshot, "This is not processor snapshot");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         StringBuilder buffer = new StringBuilder();
         buffer.append(((ProcessorSnapshot) _snapshot).getName());

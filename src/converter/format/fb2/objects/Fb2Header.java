@@ -5,6 +5,8 @@ import util.Assert;
 
 import java.util.*;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 08.08.2008
@@ -100,7 +102,7 @@ public class Fb2Header implements Stringable {
     }
 
     public String[] getStrings() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         store(result);
 

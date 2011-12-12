@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 20.05.2009
@@ -111,7 +113,7 @@ public class VariablesTest extends TestCase {
     // тест сохранения в переменной списка целиком
 
     public void testPutAll() {
-        List<String> datas = new ArrayList<String>();
+        List<String> datas = newArrayList();
         datas.add("1");
         datas.add("2");
         datas.add("3");
@@ -128,7 +130,7 @@ public class VariablesTest extends TestCase {
     // тест формирования снапшота
 
     public void testSnapshot() {
-        List<String> firstDatas = new ArrayList<String>();
+        List<String> firstDatas = newArrayList();
         firstDatas.add("1");
 
         Variables variables = new Variables();
@@ -160,7 +162,7 @@ public class VariablesTest extends TestCase {
     // тест сброса флагов модификации после получения снапшота
 
     public void testChangeLogReset() {
-        List<String> firstDatas = new ArrayList<String>();
+        List<String> firstDatas = newArrayList();
         firstDatas.add("1");
 
         Variables variables = new Variables();
@@ -196,7 +198,7 @@ public class VariablesTest extends TestCase {
         variables.put("result", 0, "0e");
         variables.put("result", 48, "48e");
 
-        List<String> appended = new ArrayList<String>();
+        List<String> appended = newArrayList();
         appended.add("1a");
         appended.add("2a");
 
@@ -215,7 +217,7 @@ public class VariablesTest extends TestCase {
     public void testAppendListToNonExistent() {
         Variables variables = new Variables();
 
-        List<String> appended = new ArrayList<String>();
+        List<String> appended = newArrayList();
         appended.add("1a");
         appended.add("2a");
 

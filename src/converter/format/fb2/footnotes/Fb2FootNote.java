@@ -7,6 +7,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 07.01.2009
@@ -35,7 +37,7 @@ public class Fb2FootNote implements Stringable {
     }
 
     public String[] getStrings() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         result.add(SECTION_START_PREFIX + this.id + SECTION_START_POSTFIX);
         result.add(TITLE_START);

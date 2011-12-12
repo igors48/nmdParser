@@ -9,6 +9,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Контейнер для данных о найденном объекте
  *
@@ -36,8 +38,8 @@ public class ObjectMetaData {
         Assert.notNull(_blank, "Blank is null");
         this.blank = _blank;
 
-        this.placeholders = new ArrayList<PlaceHolderInfo>();
-        this.dependencies = new ArrayList<UsedObject>();
+        this.placeholders = newArrayList();
+        this.dependencies = newArrayList();
 
         this.sourceFile = "";
     }

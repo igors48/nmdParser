@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  *  онтейнерный класс хран€щий данные полученные от интерпретатора
  * в ходе его работы
@@ -56,7 +58,7 @@ public class InterpreterData {
 
         Date testDate = DateTools.getDateWithoutTime(_date);
 
-        List<DatedItem> result = new ArrayList<DatedItem>();
+        List<DatedItem> result = newArrayList();
 
         for (DatedItem candidate : this.items) {
             Date candidateDate = DateTools.getDateWithoutTime(candidate.getDate());

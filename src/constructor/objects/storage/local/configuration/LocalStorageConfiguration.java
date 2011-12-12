@@ -7,6 +7,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Конфигурация локального хранилища выходных документов
  *
@@ -27,7 +29,7 @@ public class LocalStorageConfiguration implements Blank {
     }
 
     public List<UsedObject> getUsedObjects() {
-        return new ArrayList<UsedObject>();
+        return newArrayList();
     }
 
     public void setRoot(final String _value) {

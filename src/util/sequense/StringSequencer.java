@@ -5,6 +5,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * √енератор последовательности строк. Ќа вход шаблон строки,
  * с указанным местом вставки номера и параметры формировани€ номера
@@ -24,7 +26,7 @@ public final class StringSequencer {
         Assert.greaterOrEqual(_len, 0, "Length < 0");
         Assert.notNull(_pad, "Padding sequence is null");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         if (_pattern.contains(WILDCARD)) {
             NumericSequencer sequencer = new NumericSequencer(_start, _stop, _step, _mult);

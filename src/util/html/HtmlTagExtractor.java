@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static util.CollectionUtils.newArrayList;
 import static util.html.HtmlUtils.CLOSE_TAG_PATTERN;
 import static util.html.HtmlUtils.OPEN_TAG_PATTERN;
 
@@ -34,7 +35,7 @@ public class HtmlTagExtractor extends HTMLEditorKit.ParserCallback {
         Assert.isValidString(_pattern);
         Assert.isValidString(_image);
 
-        List<HtmlTagBounds> result = new ArrayList<HtmlTagBounds>();
+        List<HtmlTagBounds> result = newArrayList();
 
         Pattern pattern = Pattern.compile(_pattern, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(_image);

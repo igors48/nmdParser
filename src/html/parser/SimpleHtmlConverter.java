@@ -17,6 +17,8 @@ import util.Assert;
 
 import java.util.*;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 19.09.2008
@@ -57,7 +59,7 @@ public class SimpleHtmlConverter implements Converter {
         builder.createCurrentParagraph();
         builder.createCurrentSection();
 
-        List<Section> result = new ArrayList<Section>();
+        List<Section> result = newArrayList();
 
         try {
 

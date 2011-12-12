@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 07.09.2008
@@ -21,11 +23,11 @@ public class Fb2Title implements Stringable {
     private final List<Stringable> content;
 
     public Fb2Title() {
-        this.content = new ArrayList<Stringable>();
+        this.content = newArrayList();
     }
 
     public String[] getStrings() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
         StringBuffer buffer = new StringBuffer();
 
         result.add(OPEN_TAG);
@@ -46,7 +48,7 @@ public class Fb2Title implements Stringable {
     }
 
     private String[] getContentStrings() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         for (Stringable current : this.content) {
             String[] image = current.getStrings();

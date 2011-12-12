@@ -22,6 +22,8 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 06.09.2008
@@ -112,7 +114,7 @@ public class Fb2ResourceItem implements Stringable {
     }
 
     private List<ImageTypeAndData> getImages() {
-        List<ImageTypeAndData> result = new ArrayList<ImageTypeAndData>();
+        List<ImageTypeAndData> result = newArrayList();
 
         BufferedImage originalImage;
         byte[] data;
@@ -150,7 +152,7 @@ public class Fb2ResourceItem implements Stringable {
     }
 
     private List<ImageTypeAndData> processImage(final BufferedImage _image, final ImageProcessingContext _processingContext) {
-        List<ImageTypeAndData> result = new ArrayList<ImageTypeAndData>();
+        List<ImageTypeAndData> result = newArrayList();
 
         for (SplitItem current : _processingContext.getSplitItems()) {
             result.add(processClipItem(_image, current.getTop(), current.getLeft(), current.getWidth(), current.getHeight(), _processingContext.getScale(), _processingContext.getRotate(), this.conversionContext.isGrayscale()));

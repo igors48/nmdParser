@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 22.12.2010
@@ -111,7 +113,7 @@ public class ChooseFetchModeModelHandler {
     }
 
     private List<Entity> filterForFetchMode(final List<Entity> _feeders, final ChooseFetchModeModel.FetchMode _fetchMode) {
-        List<Entity> result = new ArrayList<Entity>();
+        List<Entity> result = newArrayList();
 
         for (Entity candidate : _feeders) {
 

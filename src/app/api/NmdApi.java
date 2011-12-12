@@ -56,6 +56,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * NMD API
  *
@@ -162,7 +164,7 @@ public class NmdApi implements ApiFacade {
         ConstructorFactory factory = null;
 
         try {
-            List<ObjectMetaData> result = new ArrayList<ObjectMetaData>();
+            List<ObjectMetaData> result = newArrayList();
 
             Locator locator = this.workspace.getLocator();
             factory = this.workspace.getConstructorFactory();
@@ -230,7 +232,7 @@ public class NmdApi implements ApiFacade {
         Assert.notNull(_context, "External context is null");
         Assert.notNull(_externalConverterContext, "External converter context is null");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         if (!_controller.isCancelled()) {
             updateSource(_sourceId, _controller, _context);
@@ -581,7 +583,7 @@ public class NmdApi implements ApiFacade {
     }
 
     private List<ObjectMetaData> getMetaDatas(final Locator _locator, final ConstructorFactory _factory, final ObjectType _type) throws Locator.LocatorException, Constructor.ConstructorException {
-        List<ObjectMetaData> result = new ArrayList<ObjectMetaData>();
+        List<ObjectMetaData> result = newArrayList();
 
         List<String> ids = _locator.locateAll(_type, new Mask(new ArrayList<String>(), new ArrayList<String>()));
 
@@ -811,7 +813,7 @@ public class NmdApi implements ApiFacade {
         DocumentBuilderAdapter adapter = null;
 
         if (configuration instanceof OutputConfiguration) {
-            List<Storage> storages = new ArrayList<Storage>();
+            List<Storage> storages = newArrayList();
             storages.add(this.workspace.getStorage(((OutputConfiguration) configuration).getStorageId()));
 
             adapter = new StandardDocumentBuilderAdapter(this.workspace.getCloud(),

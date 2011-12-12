@@ -12,6 +12,8 @@ import util.sequense.PatternListSequencer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Конвертирует сниппет в блиц запрос
  *
@@ -61,7 +63,7 @@ public class SnippetConverter {
     }
 
     private static List<String> createAdresses(final SnippetConfiguration _configuration) throws SnippetConverterException {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         checkUrls(_configuration);
 

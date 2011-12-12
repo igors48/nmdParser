@@ -8,6 +8,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 25.01.2009
@@ -17,7 +19,7 @@ public class FlowList implements FlowTextObject {
     private final List<ListItem> items;
 
     public FlowList() {
-        this.items = new ArrayList<ListItem>();
+        this.items = newArrayList();
     }
 
     public FlowTextType getType() {

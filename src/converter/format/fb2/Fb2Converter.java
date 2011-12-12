@@ -25,6 +25,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 //todo �������� ���� �� ���������. �����!
 
 /**
@@ -67,7 +69,7 @@ public class Fb2Converter implements Converter {
         Assert.notNull(_context, "Converter context is null");
 
         try {
-            List<String> result = new ArrayList<String>();
+            List<String> result = newArrayList();
 
             this.context = _context;
 
@@ -86,7 +88,7 @@ public class Fb2Converter implements Converter {
     }
 
     private List<String> saveToStorages(final ConverterContext _context, final String _tempFile) throws Storage.StorageException {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         // todo �������� ����������: �������� �����, � ������������� �� ���� ���� 
         for (Storage storage : _context.getStorages()) {

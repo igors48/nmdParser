@@ -10,6 +10,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * ������ ����-�������
  *
@@ -94,7 +96,7 @@ public class BlitzRequest {
 
         this.forced = true;
 
-        this.genres = new ArrayList<String>();
+        this.genres = newArrayList();
         this.genres.add(ChannelDataTools.DEFAULT_GENRE);
 
         this.lang = ChannelDataTools.DEFAULT_LANG;

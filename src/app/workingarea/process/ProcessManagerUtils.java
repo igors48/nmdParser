@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Утилиты для менеджера процессов
  *
@@ -50,7 +52,7 @@ public final class ProcessManagerUtils {
     public static List<String> getOutput(final InputStream _inputStream) {
         Assert.notNull(_inputStream, "Input stream is null");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         Reader reader = new InputStreamReader(_inputStream);
         BufferedReader bufferedReader = new BufferedReader(reader);

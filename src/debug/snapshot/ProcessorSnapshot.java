@@ -6,6 +6,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Отладочный снимок процессора
  *
@@ -22,7 +24,7 @@ public class ProcessorSnapshot implements Snapshot {
         Assert.isValidString(_name, "Name is not valid");
         this.name = _name;
 
-        this.parameters = new ArrayList<NameValuePair>();
+        this.parameters = newArrayList();
     }
 
     public void addParameter(final String _name, final String _value) {

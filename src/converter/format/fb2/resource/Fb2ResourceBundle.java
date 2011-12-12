@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 06.09.2008
@@ -63,7 +65,7 @@ public class Fb2ResourceBundle implements Stringable {
         Assert.notNull(_controller, "Controller is null");
         this.controller = _controller;
 
-        this.content = new ArrayList<Fb2ResourceItem>();
+        this.content = newArrayList();
     }
 
     public String appendResourceItem(final String _base, final String _address) {
@@ -83,7 +85,7 @@ public class Fb2ResourceBundle implements Stringable {
     }
 
     public String[] getStrings() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         int index = 0;
 

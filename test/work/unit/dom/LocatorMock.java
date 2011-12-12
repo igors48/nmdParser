@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 14.03.2009
@@ -47,7 +49,7 @@ public class LocatorMock implements Locator {
     }
 
     public List<String> locateAll(final ObjectType _type, final Mask _mask) throws LocatorException {
-        return new ArrayList<String>();
+        return newArrayList();
     }
 
     public void storeTemplates(String _name, List<Template> _templates) throws LocatorException {

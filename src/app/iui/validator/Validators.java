@@ -5,6 +5,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 31.10.2010
@@ -14,7 +16,7 @@ public class Validators {
     private final List<Validator> validators;
 
     public Validators() {
-        this.validators = new ArrayList<Validator>();
+        this.validators = newArrayList();
     }
 
     public void addValidator(final Validator _validator) {

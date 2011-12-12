@@ -9,6 +9,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Конфигурация канала
  *
@@ -32,7 +34,7 @@ public class ChannelConfiguration implements Blank {
     private static final String YES_TOKEN = "yes";
 
     public ChannelConfiguration() {
-        this.genres = new ArrayList<String>();
+        this.genres = newArrayList();
         this.lang = ChannelDataTools.DEFAULT_LANG;
         this.cover = "";
         this.pauseBetweenRequests = 0;
@@ -62,7 +64,7 @@ public class ChannelConfiguration implements Blank {
     }
 
     public List<UsedObject> getUsedObjects() {
-        List<UsedObject> result = new ArrayList<UsedObject>();
+        List<UsedObject> result = newArrayList();
 
         result.add(new UsedObject(this.sourceId, ObjectType.SOURCE));
 

@@ -6,6 +6,8 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 11.11.2009
@@ -19,7 +21,7 @@ public class MaskUtilsTest extends TestCase {
     // тест парсинга включаемых
 
     public void testParseAccepted() {
-        List<String> fixture = new ArrayList<String>();
+        List<String> fixture = newArrayList();
         fixture.add("first");
         fixture.add("^second");
 
@@ -32,7 +34,7 @@ public class MaskUtilsTest extends TestCase {
     // тест парсинга исключаемых
 
     public void testParseExcepted() {
-        List<String> fixture = new ArrayList<String>();
+        List<String> fixture = newArrayList();
         fixture.add("first");
         fixture.add("^second");
 

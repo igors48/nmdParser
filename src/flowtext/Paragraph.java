@@ -7,6 +7,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 25.08.2008
@@ -17,7 +19,7 @@ public class Paragraph implements FlowTextObject {
     private final List<FlowTextObject> content;
 
     public Paragraph() {
-        this.content = new ArrayList<FlowTextObject>();
+        this.content = newArrayList();
     }
 
     public void insertSimpleText(String _text) {

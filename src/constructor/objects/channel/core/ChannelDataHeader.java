@@ -5,6 +5,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 31.12.2008
@@ -87,7 +89,7 @@ public class ChannelDataHeader {
     public List<String> getGenres() {
 
         if (this.genres == null || this.genres.isEmpty()) {
-            genres = new ArrayList<String>();
+            genres = newArrayList();
             genres.add(ChannelDataTools.DEFAULT_GENRE);
         }
 

@@ -7,6 +7,8 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 25.07.2010
@@ -23,7 +25,7 @@ public final class SimplerConfigurationTools {
     public static List<String> render(final SimplerConfiguration _configuration) {
         Assert.notNull(_configuration, "Configuration is null");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
 
         String first = MessageFormat.format(FIRST_LINE_TEMPLATE,

@@ -13,6 +13,7 @@ import java.util.Map;
 
 import static app.cli.parser.OptionNameTable.CREATE_WORKSPACE_OPTION_SHORT_NAME;
 import static app.cli.parser.OptionNameTable.SETTINGS_OPTION_SHORT_NAME;
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Парсер опции "создать рабочее пространство"
@@ -27,7 +28,7 @@ public class CreateWorkspaceOptionParser implements OptionParser {
         Assert.notNull(_api, "Api is null.");
         Assert.notNull(_context, "Context is null.");
 
-        List<Command> result = new ArrayList<Command>();
+        List<Command> result = newArrayList();
 
         String settingsName = _api.getDefaultSettingsName();
 

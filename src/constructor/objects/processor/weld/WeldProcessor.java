@@ -11,6 +11,8 @@ import variables.Variables;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Процессор склейки элементов переменной с использованием
  * опционального разделителя
@@ -42,7 +44,7 @@ public class WeldProcessor extends AbstractVariableProcessor {
             dividerText = dividerText == null ? "" : dividerText;
         }
 
-        List<String> values = new ArrayList<String>();
+        List<String> values = newArrayList();
         VariableIterator iterator = _variables.getIterator(this.input);
 
         while (iterator.hasNext()) {

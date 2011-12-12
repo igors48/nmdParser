@@ -17,8 +17,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
- * ����������� �������������. �������� �� ���� ������ �����������.
+ * ??????????? ?????????????. ???????? ?? ???? ?????? ???????????.
  *
  * @author Igor Usenko
  *         Date: 09.04.2009
@@ -39,7 +41,7 @@ public class StandardInterpreter implements InterpreterEx {
             Page mainPage = new Page(this.adapter.getModification(), this.adapter.getModification().getUrl(), mainPageImage);
             List<PageListItem> pagesUrls = parseMainPage(mainPage);
             Collections.reverse(pagesUrls);
-            List<DatedItem> items = new ArrayList<DatedItem>();
+            List<DatedItem> items = newArrayList();
 
             ListFragmentIterator<PageListItem> iterator = new ListFragmentIterator<PageListItem>(pagesUrls, this.adapter.getPrecachedItemsCount());
 
@@ -72,7 +74,7 @@ public class StandardInterpreter implements InterpreterEx {
     }
 
     private List<Page> loadPages(final List<PageListItem> _items) throws AdapterException {
-        List<Page> result = new ArrayList<Page>();
+        List<Page> result = newArrayList();
 
         List<String> urls = createUrlList(_items);
 
@@ -82,7 +84,7 @@ public class StandardInterpreter implements InterpreterEx {
             HttpData dataItem = data.get(item.getUrl());
             String image = DataUtil.getDataImage(dataItem.getData());
 
-            // ����������� feed proxies. ������ ������ ����������� ����������� ����� ������ ������ �����
+            // ??????????? feed proxies. ?????? ?????? ??????????? ??????????? ????? ?????? ?????? ?????
             Page page = new Page(item.getModification(), dataItem.getUrl(), image);
             result.add(page);
         }
@@ -91,7 +93,7 @@ public class StandardInterpreter implements InterpreterEx {
     }
 
     private List<String> createUrlList(final List<PageListItem> _items) {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         for (PageListItem item : _items) {
             result.add(item.getUrl());
@@ -101,7 +103,7 @@ public class StandardInterpreter implements InterpreterEx {
     }
 
     private List<DatedItem> parsePages(final List<Page> _pages, final int _current, final int _max) throws AdapterException {
-        List<DatedItem> result = new ArrayList<DatedItem>();
+        List<DatedItem> result = newArrayList();
 
         for (Page page : _pages) {
             List<DatedItem> items = parsePage(page);
@@ -116,7 +118,7 @@ public class StandardInterpreter implements InterpreterEx {
     }
 
     private List<DatedItem> parsePage(final Page _page) throws AdapterException {
-        List<DatedItem> result = new ArrayList<DatedItem>();
+        List<DatedItem> result = newArrayList();
 
         List<Fragment> fragments = this.adapter.getPageAnalyser().getFragments(_page);
 

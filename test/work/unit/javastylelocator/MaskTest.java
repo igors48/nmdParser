@@ -6,6 +6,8 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 11.11.2009
@@ -19,10 +21,10 @@ public class MaskTest extends TestCase {
     // первоначальный тест есть оба списка
 
     public void testSmoke() {
-        List<String> accepted = new ArrayList<String>();
+        List<String> accepted = newArrayList();
         accepted.add("test");
 
-        List<String> excepted = new ArrayList<String>();
+        List<String> excepted = newArrayList();
         excepted.add("test.conf");
 
         Mask mask = new Mask(accepted, excepted);
@@ -34,9 +36,9 @@ public class MaskTest extends TestCase {
     // пустые списки
 
     public void testEmptyLists() {
-        List<String> accepted = new ArrayList<String>();
+        List<String> accepted = newArrayList();
 
-        List<String> excepted = new ArrayList<String>();
+        List<String> excepted = newArrayList();
 
         Mask mask = new Mask(accepted, excepted);
 
@@ -46,10 +48,10 @@ public class MaskTest extends TestCase {
     // есть список включаемых список исключаемых пуст
 
     public void testAccepted() {
-        List<String> accepted = new ArrayList<String>();
+        List<String> accepted = newArrayList();
         accepted.add("test");
 
-        List<String> excepted = new ArrayList<String>();
+        List<String> excepted = newArrayList();
 
         Mask mask = new Mask(accepted, excepted);
 
@@ -60,9 +62,9 @@ public class MaskTest extends TestCase {
     // есть список исключаемых список включаемых пуст
 
     public void testExcepted() {
-        List<String> accepted = new ArrayList<String>();
+        List<String> accepted = newArrayList();
 
-        List<String> excepted = new ArrayList<String>();
+        List<String> excepted = newArrayList();
         excepted.add("test");
 
         Mask mask = new Mask(accepted, excepted);

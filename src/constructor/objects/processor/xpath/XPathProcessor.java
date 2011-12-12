@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * ��������� ��������� ���������� XPath ��������
  *
@@ -82,7 +84,7 @@ public class XPathProcessor extends AbstractVariableProcessor {
     }
 
     public List<String> evaluateXPath(String _source, String _expression, XPathProcessorMode _mode) throws IOException, XPathExpressionException, ParserConfigurationException {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         NodeList nodes = getNodes(_source, _expression);
 

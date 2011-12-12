@@ -6,6 +6,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Очередь с поддержкой счетчиков попыток и задержек между попытками
  *
@@ -22,7 +24,7 @@ public class TimeTable {
         Assert.notNull(_timeService, "Time service is null.");
         this.timeService = _timeService;
 
-        this.timeTable = new ArrayList<TimeTableItem>();
+        this.timeTable = newArrayList();
     }
 
     public void add(final String _id, final int _attempts, final long _timeout) {

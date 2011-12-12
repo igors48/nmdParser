@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 05.12.2010
@@ -132,7 +134,7 @@ public class ChooseFeedersForm extends AbstractForm implements ActionListener, L
     protected void onApprove() {
 
         if (this.nextButton.isEnabled()) {
-            List<Entity> selected = new ArrayList<Entity>();
+            List<Entity> selected = newArrayList();
 
             for (int current : this.feedersList.getSelectedIndices()) {
                 selected.add(this.model.getFeeders().get(current));

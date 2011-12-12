@@ -20,6 +20,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.*;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Получение списка модификаций из RSS канала
  *
@@ -53,7 +55,7 @@ public class RssFeedFetcher implements ModificationFetcher {
     }
 
     public List<Modification> getModifications() {
-        List<Modification> result = new ArrayList<Modification>();
+        List<Modification> result = newArrayList();
 
         if (this.url.length() > 1) {
             this.log.debug("Load feeds from " + this.url);
@@ -66,7 +68,7 @@ public class RssFeedFetcher implements ModificationFetcher {
     }
 
     private List<Modification> mapEntries(final List<SyndEntry> _entries) {
-        List<Modification> result = new ArrayList<Modification>();
+        List<Modification> result = newArrayList();
 
         for (SyndEntry entry : _entries) {
             Modification modification = mapEntry(entry);
@@ -125,7 +127,7 @@ public class RssFeedFetcher implements ModificationFetcher {
     }
 
     private List<SyndEntry> getEntries(final String _url) {
-        List<SyndEntry> result = new ArrayList<SyndEntry>();
+        List<SyndEntry> result = newArrayList();
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
 
@@ -169,7 +171,7 @@ public class RssFeedFetcher implements ModificationFetcher {
         return new Callable<List<SyndEntry>>() {
 
             public List<SyndEntry> call() {
-                List<SyndEntry> result = new ArrayList<SyndEntry>();
+                List<SyndEntry> result = newArrayList();
 
                 try {
                     URL feedUrl = new URL(_url);

@@ -60,16 +60,6 @@ public class LoadProcessor extends AbstractVariableProcessor {
             referer = referer == null ? "" : referer;
         }
 
-        /*
-        List<String> pages = new ArrayList<String>();
-        pages.add(inputValue);
-        */
-
-        //����� ����� ��������� ����� ���� �� ������
-        /*
-        Map<String, HttpData> map = loader.loadUrls(pages, 0);
-        HttpData data = map.get(inputValue);
-        */
         HttpData data = loader.loadUrlWithReferer(inputValue, referer);
 
         if (data.getResult() == Result.OK) {

@@ -11,6 +11,8 @@ import util.PathTools;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 26.10.2008
@@ -41,7 +43,7 @@ public class DocumentBuilder {
 
         this.storedFootNote = "";
 
-        this.lists = new ArrayList<FlowList>();
+        this.lists = newArrayList();
 
         this.log = LogFactory.getLog(getClass());
     }

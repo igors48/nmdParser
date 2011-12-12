@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import static app.cli.parser.OptionNameTable.*;
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Парсер опции "обновить все генераторы выходных документов"
@@ -26,7 +27,7 @@ public class UpdateAllOutputsOptionParser implements OptionParser {
         Assert.notNull(_api, "Api is null.");
         Assert.notNull(_context, "Context is null.");
 
-        List<Command> result = new ArrayList<Command>();
+        List<Command> result = newArrayList();
 
         String settingsName = _api.getDefaultSettingsName();
 

@@ -12,6 +12,8 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 05.12.2010
@@ -38,7 +40,7 @@ public class LoadWorkspaceAndFeedersScript implements Command, LoadWorkspaceComm
         Assert.notNull(_listener, "Listener is null");
         this.listener = _listener;
 
-        this.entities = new ArrayList<Entity>();
+        this.entities = newArrayList();
     }
 
     public List<Entity> getEntities() {

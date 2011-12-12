@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 29.11.2010
@@ -40,7 +42,7 @@ public final class ExternalToolsUtils {
         Assert.isFalse(_files.isEmpty(), "File list is empty");
 
         for (String file : _files) {
-            java.util.List<String> arguments = new ArrayList<String>();
+            java.util.List<String> arguments = newArrayList();
 
             arguments.add(_pathToExecutable);
             arguments.add(file);
@@ -55,7 +57,7 @@ public final class ExternalToolsUtils {
         Assert.notNull(_files, "File list is null");
         Assert.isFalse(_files.isEmpty(), "File list is empty");
 
-        java.util.List<String> arguments = new ArrayList<String>();
+        java.util.List<String> arguments = newArrayList();
 
         arguments.add(_pathToExecutable);
         arguments.addAll(_files);

@@ -5,6 +5,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Генератор последовательностей на основании списка параметров генерации
  *
@@ -16,7 +18,7 @@ public class PatternListSequencer {
     public static List<String> getSequence(final List<SequenceGenerationParams> _sequenceGenerationParams) {
         Assert.notNull(_sequenceGenerationParams, "Generation parameters list is null");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         for (SequenceGenerationParams current : _sequenceGenerationParams) {
             List<String> candidates = StringSequencer.getSequence(current.getPattern(),

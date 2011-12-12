@@ -7,6 +7,8 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 26.07.2009
@@ -20,7 +22,7 @@ public class JavaStyleLocatorUtilsTest extends TestCase {
     // первоначальный тест
 
     public void testSmoke() {
-        List<String> list = new ArrayList<String>();
+        List<String> list = newArrayList();
         list.add("test");
         list.add("supertest");
 
@@ -36,11 +38,11 @@ public class JavaStyleLocatorUtilsTest extends TestCase {
     // тест c одной маской
 
     public void testWithOneMask() {
-        List<String> list = new ArrayList<String>();
+        List<String> list = newArrayList();
         list.add("test.test.object");
         list.add("supertest");
 
-        List<String> masks = new ArrayList<String>();
+        List<String> masks = newArrayList();
         masks.add("test.test");
         Mask mask = new Mask(masks, new ArrayList<String>());
 
@@ -53,12 +55,12 @@ public class JavaStyleLocatorUtilsTest extends TestCase {
     // тест c более чем одной маской
 
     public void testWithManyMask() {
-        List<String> list = new ArrayList<String>();
+        List<String> list = newArrayList();
         list.add("test.test.object");
         list.add("real.test.object");
         list.add("supertest");
 
-        List<String> masks = new ArrayList<String>();
+        List<String> masks = newArrayList();
         masks.add("test.test");
         masks.add("real");
         Mask mask = new Mask(masks, new ArrayList<String>());

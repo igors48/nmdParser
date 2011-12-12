@@ -6,6 +6,8 @@ import debug.SnapshotTextRenderer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Рендерер для пустого снапшота
  *
@@ -17,7 +19,7 @@ public class EmptySnapshotTextRenderer implements SnapshotTextRenderer {
     private static final String PREFIX = "E:";
 
     public List<String> render(final Snapshot _snapshot) {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         result.add("Empty snapshot");
 

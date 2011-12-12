@@ -7,6 +7,8 @@ import util.sequense.SequenceGenerationParams;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 28.02.2010
@@ -24,7 +26,7 @@ public class PatternListSequencerTest extends TestCase {
         SequenceGenerationParams fixture02 = new SequenceGenerationParams("c*d", 1, 2, 1, 1, 0, "");
         SequenceGenerationParams fixture03 = new SequenceGenerationParams("ef", 1, 2, 1, 1, 0, "");
 
-        List<SequenceGenerationParams> fixture = new ArrayList<SequenceGenerationParams>();
+        List<SequenceGenerationParams> fixture = newArrayList();
 
         fixture.add(fixture01);
         fixture.add(fixture02);

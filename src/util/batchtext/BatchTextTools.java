@@ -5,6 +5,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Класс для пакетного удаления/извлечения фрагментов строки
  *
@@ -75,7 +77,7 @@ public final class BatchTextTools {
     public static List<Boundary> joinList(final List<Boundary> _boundaries) {
         Assert.notNull(_boundaries, "Boundaries list is null.");
 
-        List<Boundary> result = new ArrayList<Boundary>();
+        List<Boundary> result = newArrayList();
 
         if (!_boundaries.isEmpty()) {
             result.add(_boundaries.get(0));
@@ -98,7 +100,7 @@ public final class BatchTextTools {
     }
 
     private static Boundary createJoined(final Boundary _boundary, final List<Boundary> _intersections) {
-        List<Boundary> joinedList = new ArrayList<Boundary>();
+        List<Boundary> joinedList = newArrayList();
         joinedList.add(_boundary);
         joinedList.addAll(_intersections);
 
@@ -106,7 +108,7 @@ public final class BatchTextTools {
     }
 
     private static List<Boundary> findIntersections(final Boundary _boundary, final List<Boundary> _boundaries) {
-        List<Boundary> result = new ArrayList<Boundary>();
+        List<Boundary> result = newArrayList();
 
         for (Boundary boundary : _boundaries) {
 

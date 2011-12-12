@@ -27,6 +27,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * ����������� ������� ������
  *
@@ -81,7 +83,7 @@ public class StandardChannelAdapter extends AbstractChannelAdapter {
         Assert.notNull(_modification, "Modification is null.");
 
         try {
-            List<InterpreterEx> result = new ArrayList<InterpreterEx>();
+            List<InterpreterEx> result = newArrayList();
 
             if (isSimpleHandling()) {
                 InterpreterConfiguration configuration = new InterpreterConfiguration();

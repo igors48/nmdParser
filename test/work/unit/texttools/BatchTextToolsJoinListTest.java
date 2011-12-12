@@ -7,6 +7,8 @@ import util.batchtext.Boundary;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 24.05.2009
@@ -23,7 +25,7 @@ public class BatchTextToolsJoinListTest extends TestCase {
         Boundary boundary01 = new Boundary(2, 10);
         Boundary boundary02 = new Boundary(8, 12);
 
-        List<Boundary> list = new ArrayList<Boundary>();
+        List<Boundary> list = newArrayList();
         list.add(boundary01);
         list.add(boundary02);
 
@@ -37,7 +39,7 @@ public class BatchTextToolsJoinListTest extends TestCase {
     // тест на пустой список
 
     public void testEmpty() {
-        List<Boundary> list = new ArrayList<Boundary>();
+        List<Boundary> list = newArrayList();
 
         List<Boundary> result = BatchTextTools.joinList(list);
 
@@ -50,7 +52,7 @@ public class BatchTextToolsJoinListTest extends TestCase {
         Boundary boundary01 = new Boundary(2, 6);
         Boundary boundary02 = new Boundary(8, 12);
 
-        List<Boundary> list = new ArrayList<Boundary>();
+        List<Boundary> list = newArrayList();
         list.add(boundary01);
         list.add(boundary02);
 
@@ -70,7 +72,7 @@ public class BatchTextToolsJoinListTest extends TestCase {
         Boundary boundary02 = new Boundary(8, 12);
         Boundary boundary03 = new Boundary(4, 10);
 
-        List<Boundary> list = new ArrayList<Boundary>();
+        List<Boundary> list = newArrayList();
         list.add(boundary01);
         list.add(boundary02);
         list.add(boundary03);

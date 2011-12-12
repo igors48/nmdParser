@@ -23,6 +23,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 07.07.2010
@@ -83,7 +85,7 @@ public class SimplerChannelAdapter extends AbstractChannelAdapter {
     public List<InterpreterEx> getInterpreters(final Modification _modification) throws AdapterException {
         Assert.notNull(_modification, "Modification is null");
 
-        List<InterpreterEx> result = new ArrayList<InterpreterEx>();
+        List<InterpreterEx> result = newArrayList();
 
         if (isSimpleHandling()) {
             result.add(new SimpleInterpreter(new SimpleInterpreterAdapter(_modification)));

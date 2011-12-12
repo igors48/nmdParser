@@ -8,6 +8,8 @@ import util.Assert;
 
 import java.util.*;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * �������� �������� ����������
  *
@@ -25,7 +27,7 @@ public class VariablesSnapshotTextRenderer implements SnapshotTextRenderer {
         Assert.notNull(_snapshot, "Snapshot is null");
         Assert.isTrue(_snapshot instanceof VariablesSnapshot, "This is not variables snapshot");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         Map<String, Map<Integer, ValueChangedPair>> items = ((VariablesSnapshot) _snapshot).getItems();
         List<String> names = getVariablesList(items);

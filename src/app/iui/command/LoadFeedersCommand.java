@@ -10,6 +10,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 05.12.2010
@@ -28,7 +30,7 @@ public class LoadFeedersCommand implements Command {
         Assert.notNull(_listener, "Listener is null");
         this.listener = _listener;
 
-        this.entities = new ArrayList<Entity>();
+        this.entities = newArrayList();
     }
 
     public String toString() {
@@ -51,7 +53,7 @@ public class LoadFeedersCommand implements Command {
     }
 
     private List<Entity> getKeyEntities() throws ApiFacade.FatalException {
-        List<Entity> result = new ArrayList<Entity>();
+        List<Entity> result = newArrayList();
         List<ObjectMetaData> metaDatas = this.api.getObjectsMetaData();
 
         parseOutputs(result, metaDatas);

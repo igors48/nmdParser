@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import static app.cli.parser.OptionNameTable.FORCED_MODE_OPTION_SHORT_NAME;
+import static util.CollectionUtils.newArrayList;
 
 /**
  * ����������� ������ ����-��������
@@ -30,7 +31,7 @@ public abstract class AbstractBlitzRequestOptionParser implements OptionParser {
         Assert.notNull(_api, "Api is null.");
         Assert.notNull(_context, "Context is null.");
 
-        List<Command> result = new ArrayList<Command>();
+        List<Command> result = newArrayList();
 
         String settingsName = _api.getDefaultSettingsName();
 

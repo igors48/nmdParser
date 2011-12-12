@@ -11,6 +11,8 @@ import work.testutil.InterpreterDataTestUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 09.03.2009
@@ -27,7 +29,7 @@ public class InterpreterDataHelperBeanTest extends TestCase {
         AtdcItem item01 = AtdcTestUtils.getAtdcFullItem(1);
         AtdcItem item02 = AtdcTestUtils.getAtdcFullItem(2);
 
-        List<DatedItem> originalList = new ArrayList<DatedItem>();
+        List<DatedItem> originalList = newArrayList();
         originalList.add(item01);
         originalList.add(item02);
 

@@ -6,6 +6,8 @@ import util.TextTools;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 04.11.2008
@@ -70,7 +72,7 @@ public class TextToolsTest extends TestCase {
     // тест сварки с разделителем
 
     public void testWeldWithDivider() {
-        List<String> fixture = new ArrayList<String>();
+        List<String> fixture = newArrayList();
         fixture.add("a");
         fixture.add("b");
         fixture.add("c");
@@ -83,7 +85,7 @@ public class TextToolsTest extends TestCase {
     // тест сварки без разделителя
 
     public void testWeldWithoutDivider() {
-        List<String> fixture = new ArrayList<String>();
+        List<String> fixture = newArrayList();
         fixture.add("a");
         fixture.add("b");
         fixture.add("c");

@@ -138,7 +138,7 @@ public class Channel {
     }
 
     private List<String> getUrls(final List<Modification> _modifications) {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         for (Modification modification : _modifications) {
             result.add(modification.getUrl());

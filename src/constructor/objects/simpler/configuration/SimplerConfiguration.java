@@ -10,6 +10,8 @@ import util.TextTools;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 06.07.2010
@@ -113,7 +115,7 @@ public class SimplerConfiguration implements Blank {
     }
 
     public List<UsedObject> getUsedObjects() {
-        return new ArrayList<UsedObject>();
+        return newArrayList();
     }
 
     public String getId() {

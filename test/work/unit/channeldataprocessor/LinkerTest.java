@@ -16,6 +16,8 @@ import work.testutil.AtdcTestUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 27.02.2011
@@ -238,7 +240,7 @@ public class LinkerTest extends TestCase {
         ChannelDataHeader header = new ChannelDataHeader(_title, _firstName, _lastName, _sourceUrl, _coverUrl);
 
         InterpreterData interpreterData = createSameDatedInterpreterItems(_from, _to);
-        List<InterpreterData> interpreterDataList = new ArrayList<InterpreterData>();
+        List<InterpreterData> interpreterDataList = newArrayList();
         interpreterDataList.add(interpreterData);
 
         return new ChannelData(header, interpreterDataList);
@@ -248,14 +250,14 @@ public class LinkerTest extends TestCase {
         ChannelDataHeader header = new ChannelDataHeader(_title, _firstName, _lastName, _sourceUrl, _coverUrl);
 
         InterpreterData interpreterData = createDifferentDatesInterpreterItems(_from, _to);
-        List<InterpreterData> interpreterDataList = new ArrayList<InterpreterData>();
+        List<InterpreterData> interpreterDataList = newArrayList();
         interpreterDataList.add(interpreterData);
 
         return new ChannelData(header, interpreterDataList);
     }
 
     private InterpreterData createSameDatedInterpreterItems(final int _from, final int _to) {
-        List<DatedItem> datedItemList = new ArrayList<DatedItem>();
+        List<DatedItem> datedItemList = newArrayList();
 
         for (int i = _from; i <= _to; ++i) {
             datedItemList.add(AtdcTestUtils.getAtdcFullItem(i));
@@ -265,7 +267,7 @@ public class LinkerTest extends TestCase {
     }
 
     private InterpreterData createDifferentDatesInterpreterItems(final int _from, final int _to) {
-        List<DatedItem> datedItemList = new ArrayList<DatedItem>();
+        List<DatedItem> datedItemList = newArrayList();
 
         StillTimeService timeService = new StillTimeService();
 

@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.*;
 
 import static app.cli.parser.OptionNameTable.*;
+import static util.CollectionUtils.newArrayList;
 
 /**
  * ������ ��� ��������� ������. ������ - �� ��������� ������
@@ -50,7 +51,7 @@ public class CliParser {
         Assert.notNull(_args, "Arguments list is null.");
 
         try {
-            List<Command> script = new ArrayList<Command>();
+            List<Command> script = newArrayList();
             Properties properties = null;
 
             CommandLineParser parser = new GnuParser();

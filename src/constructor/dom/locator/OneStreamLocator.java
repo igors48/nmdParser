@@ -10,6 +10,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Локатор для одного потока с сохраненным объектом.
  * На все запросы возвращает только его
@@ -44,7 +46,7 @@ public class OneStreamLocator implements Locator {
         Assert.notNull(_type, "Type is null.");
         Assert.notNull(_mask, "Mask is null.");
 
-        return new ArrayList<String>();
+        return newArrayList();
     }
 
     public void storeTemplates(final String _name, final List<Template> _templates) throws LocatorException {

@@ -15,6 +15,8 @@ import variables.Variables;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 10.07.2010
@@ -56,7 +58,7 @@ public final class ChannelAdapterTools {
     public static List<String> parseExpressionsList(String _expressions) {
         Assert.isValidString(_expressions, "Criterion expressions list is not valid");
 
-        List<String> expressions = new ArrayList<String>();
+        List<String> expressions = newArrayList();
 
         String[] parts = _expressions.split(SEMICOLON);
 

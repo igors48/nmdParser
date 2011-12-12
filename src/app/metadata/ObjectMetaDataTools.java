@@ -8,6 +8,8 @@ import util.Assert;
 
 import java.util.*;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Утилиты для работы с метаданными
  *
@@ -38,7 +40,7 @@ public final class ObjectMetaDataTools {
 
         Entity result = null;
 
-        List<ObjectMetaData> objects = new ArrayList<ObjectMetaData>();
+        List<ObjectMetaData> objects = newArrayList();
 
         ObjectMetaData output = findMetaData(_outputId, ObjectType.OUTPUT, _metaDatas);
 
@@ -144,7 +146,7 @@ public final class ObjectMetaDataTools {
     }
 
     private static List<ObjectMetaData> getDepsMetaDatas(final ObjectMetaData _object, final List<ObjectMetaData> _metaDatas) {
-        List<ObjectMetaData> result = new ArrayList<ObjectMetaData>();
+        List<ObjectMetaData> result = newArrayList();
 
         for (UsedObject current : _object.getDependencies()) {
             ObjectMetaData metaData = findUsedObjectMetaData(current, _metaDatas);
@@ -165,7 +167,7 @@ public final class ObjectMetaDataTools {
         Assert.notNull(_type, "Object type is null");
         Assert.notNull(_dependencies, "Meta data list is null");
 
-        List<UsedObject> result = new ArrayList<UsedObject>();
+        List<UsedObject> result = newArrayList();
 
         for (UsedObject current : _dependencies) {
 

@@ -8,6 +8,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 15.03.2009
@@ -64,6 +66,6 @@ public class SampleObject01 implements Blank {
     }
 
     public List<UsedObject> getUsedObjects() {
-        return new ArrayList<UsedObject>();
+        return newArrayList();
     }
 }

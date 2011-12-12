@@ -118,7 +118,7 @@ public final class ChannelDataTools {
     public static List<DatedItem> getFlat(final ChannelDataList _data) {
         Assert.notNull(_data, "Channel data list is null.");
 
-        List<DatedItem> result = new ArrayList<DatedItem>();
+        List<DatedItem> result = newArrayList();
 
         if (!_data.isEmpty()) {
 
@@ -133,7 +133,7 @@ public final class ChannelDataTools {
     public static List<DatedItem> getFlat(final ChannelData _data) {
         Assert.notNull(_data, "Channel data is null.");
 
-        List<DatedItem> result = new ArrayList<DatedItem>();
+        List<DatedItem> result = newArrayList();
 
         if (!_data.isEmpty()) {
 
@@ -149,7 +149,7 @@ public final class ChannelDataTools {
         Assert.notNull(_data, "Channel data list is null.");
         Assert.notNull(_date, "Date is null");
 
-        List<DatedItem> result = new ArrayList<DatedItem>();
+        List<DatedItem> result = newArrayList();
 
         if (!_data.isEmpty()) {
 
@@ -165,7 +165,7 @@ public final class ChannelDataTools {
         Assert.notNull(_data, "Channel data list is null.");
         Assert.notNull(_date, "Date is null");
 
-        List<DatedItem> result = new ArrayList<DatedItem>();
+        List<DatedItem> result = newArrayList();
 
         if (!_data.isEmpty()) {
 

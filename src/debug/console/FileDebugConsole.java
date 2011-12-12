@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Отладочная консоль с записью в файл
  *
@@ -87,7 +89,7 @@ public class FileDebugConsole implements DebugConsole {
         List<String> result = this.images.get(this.current);
 
         if (result == null) {
-            result = new ArrayList<String>();
+            result = newArrayList();
             this.images.put(this.current, result);
         }
 

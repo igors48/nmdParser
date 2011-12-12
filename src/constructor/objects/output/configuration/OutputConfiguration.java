@@ -10,6 +10,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Конфигурация формирователя выходного документа
  *
@@ -87,7 +89,7 @@ public class OutputConfiguration implements Blank {
     }
 
     public List<UsedObject> getUsedObjects() {
-        List<UsedObject> result = new ArrayList<UsedObject>();
+        List<UsedObject> result = newArrayList();
 
         result.add(new UsedObject(this.channel, ObjectType.CHANNEL));
 

@@ -10,6 +10,8 @@ import util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 
 /**
  * @author Igor Usenko
@@ -20,7 +22,7 @@ public final class HtmlConverterTestUtils {
     private static final String FAKE_URL = "www.fake.com";
 
     public static List<FlowTextType> getTypesSnapshot(Paragraph _paragraph) {
-        List<FlowTextType> result = new ArrayList<FlowTextType>();
+        List<FlowTextType> result = newArrayList();
 
         for (FlowTextObject object : _paragraph.getContent()) {
             result.add(object.getType());

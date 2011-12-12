@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 24.09.2008
@@ -87,7 +89,7 @@ public class Fb2ResourceBundleResolver implements Controller {
     }
 
     private List<String> createRequests(final List<Fb2ResourceItem> _resources) {
-        List<String> list = new ArrayList<String>();
+        List<String> list = newArrayList();
 
         for (Fb2ResourceItem item : _resources) {
             String request = createRequest(item);

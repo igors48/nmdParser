@@ -14,6 +14,8 @@ import variables.Variables;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * –еализует удаление содержимого тэга. “эг задаетс€ регул€рным выражением,
  * что позвол€ет "узнать его в толпе"
@@ -69,7 +71,7 @@ public class RemoveTagProcessor extends AbstractVariableProcessor {
     }
 
     private List<Boundary> getBoundaries(final List<HtmlTagBounds> _bounds) {
-        List<Boundary> result = new ArrayList<Boundary>();
+        List<Boundary> result = newArrayList();
 
         for (int index = 0; index < _bounds.size(); ++index) {
 

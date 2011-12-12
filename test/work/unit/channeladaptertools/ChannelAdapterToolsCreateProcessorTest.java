@@ -13,6 +13,8 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 28.07.2011
@@ -24,7 +26,7 @@ public class ChannelAdapterToolsCreateProcessorTest extends TestCase {
     }
 
     public void testCreateOneExpressionXPath() throws ConfigurationException {
-        List<String> expressions = new ArrayList<String>();
+        List<String> expressions = newArrayList();
         expressions.add("e1");
 
         StandardChainProcessorAdapter result = ChannelAdapterTools.createChainProcessorAdapter(CriterionType.XPATH, expressions, "id", new NullDebugConsole());
@@ -36,7 +38,7 @@ public class ChannelAdapterToolsCreateProcessorTest extends TestCase {
     }
 
     public void testCreateOneExpressionRegExp() throws ConfigurationException {
-        List<String> expressions = new ArrayList<String>();
+        List<String> expressions = newArrayList();
         expressions.add("e1");
 
         StandardChainProcessorAdapter result = ChannelAdapterTools.createChainProcessorAdapter(CriterionType.REGEXP, expressions, "id", new NullDebugConsole());
@@ -48,7 +50,7 @@ public class ChannelAdapterToolsCreateProcessorTest extends TestCase {
     }
 
     public void testCreateTwoExpressionsXPath() throws ConfigurationException {
-        List<String> expressions = new ArrayList<String>();
+        List<String> expressions = newArrayList();
         expressions.add("e1");
         expressions.add("e2");
 

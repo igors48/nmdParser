@@ -10,6 +10,7 @@ import work.testutil.ModificationTestUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
 import static work.testutil.SourceTestUtils.bothExists;
 import static work.testutil.SourceTestUtils.getForUrl;
 
@@ -34,7 +35,7 @@ public class SourceUtilsTest extends TestCase {
         ModificationList modificationList = new ModificationList();
         modificationList.add(modification01);
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
         modifications.add(modification02);
 
         ModificationList result = SourceUtils.mergeModifications(modificationList, modifications);
@@ -55,7 +56,7 @@ public class SourceUtilsTest extends TestCase {
         modificationList.add(modification01);
         modificationList.add(modification02);
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
         modifications.add(modification02);
 
         ModificationList result = SourceUtils.mergeModifications(modificationList, modifications);
@@ -78,7 +79,7 @@ public class SourceUtilsTest extends TestCase {
 
         timeService.changeDay(2);
         Modification modification03 = new Modification(timeService.getCurrentDate(), "URL02");
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
         modifications.add(modification03);
 
         ModificationList result = SourceUtils.mergeModifications(modificationList, modifications);
@@ -104,7 +105,7 @@ public class SourceUtilsTest extends TestCase {
 
         timeService.changeDay(-2);
         Modification modification03 = new Modification(timeService.getCurrentDate(), "URL02");
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
         modifications.add(modification03);
 
         ModificationList result = SourceUtils.mergeModifications(modificationList, modifications);
@@ -128,7 +129,7 @@ public class SourceUtilsTest extends TestCase {
         modificationList.add(modification01);
         modificationList.add(modification02);
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
 
         timeService.changeDay(-2);
         Modification modification03 = new Modification(timeService.getCurrentDate(), "URL02");
@@ -159,7 +160,7 @@ public class SourceUtilsTest extends TestCase {
         modificationList.add(modification01);
         modificationList.add(modification02);
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
 
         timeService.changeDay(2);
         Modification modification03 = new Modification(timeService.getCurrentDate(), "URL02");
@@ -190,7 +191,7 @@ public class SourceUtilsTest extends TestCase {
         modificationList.add(modification01);
         modificationList.add(modification02);
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
 
         timeService.changeDay(2);
         Modification modification03 = new Modification(timeService.getCurrentDate(), "URL02");
@@ -218,7 +219,7 @@ public class SourceUtilsTest extends TestCase {
 
         ModificationList modificationList = new ModificationList();
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
         modifications.add(modification01);
 
         ModificationList result = SourceUtils.mergeModifications(modificationList, modifications);
@@ -235,7 +236,7 @@ public class SourceUtilsTest extends TestCase {
         StillTimeService timeService = new StillTimeService();
 
         ModificationList modificationList = new ModificationList();
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
         ModificationList result = SourceUtils.mergeModifications(modificationList, modifications);
 
         assertEquals(0, result.size());
@@ -253,7 +254,7 @@ public class SourceUtilsTest extends TestCase {
         modificationList.add(modification01);
         modificationList.add(modification02);
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
 
         ModificationList result = SourceUtils.mergeModifications(modificationList, modifications);
 
@@ -272,7 +273,7 @@ public class SourceUtilsTest extends TestCase {
         Modification modification02 = new Modification(timeService.getCurrentDate(), "3");
         Modification modification03 = new Modification(timeService.getCurrentDate(), "a");
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
 
         modifications.add(modification01);
         modifications.add(modification02);

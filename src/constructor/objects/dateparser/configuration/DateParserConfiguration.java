@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Конфигурация парсера даты
  *
@@ -40,7 +42,7 @@ public class DateParserConfiguration implements Blank {
     }
 
     public List<UsedObject> getUsedObjects() {
-        return new ArrayList<UsedObject>();
+        return newArrayList();
     }
 
     public void addStrategy(final String _pattern, final ParsingStrategy _strategy) {

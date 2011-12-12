@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static util.CollectionUtils.newArrayList;
+
 public class LocalHandlerMock implements Handler {
 
     private final Map<String, List<String>> root;
@@ -79,7 +81,7 @@ public class LocalHandlerMock implements Handler {
         List<String> result = this.root.get(_directory);
 
         if (result == null) {
-            result = new ArrayList<String>();
+            result = newArrayList();
         }
 
         return result;

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 31.08.2008
@@ -19,7 +21,7 @@ public class Fb2Body implements Stringable {
     private final List<Fb2Section> sections;
 
     public Fb2Body() {
-        this.sections = new ArrayList<Fb2Section>();
+        this.sections = newArrayList();
     }
 
     public void insertSection(final Fb2Section _section) {
@@ -29,7 +31,7 @@ public class Fb2Body implements Stringable {
     }
 
     public String[] getStrings() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         result.add(TEMPLATE_START);
 

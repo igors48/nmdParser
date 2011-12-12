@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * Локатор объектов расположенных в произвольных подкаталогах рута
  *
@@ -84,7 +86,7 @@ public class JavaStyleLocator implements Locator {
         Assert.notNull(_type, "Object type is null");
         Assert.notNull(_mask, "Mask is null");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         List<String> ids = this.objects.get(_type);
 

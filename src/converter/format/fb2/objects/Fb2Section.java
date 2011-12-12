@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
  * @author Igor Usenko
  *         Date: 31.08.2008
@@ -28,7 +30,7 @@ public class Fb2Section implements Stringable {
         Assert.isValidString(_id);
 
         this.id = _id;
-        this.content = new ArrayList<Stringable>();
+        this.content = newArrayList();
 
         this.mode = SectionMode.UNDEFINED;
     }
@@ -76,7 +78,7 @@ public class Fb2Section implements Stringable {
     }
 
     public String[] getStrings() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
         StringBuffer buffer = new StringBuffer();
 
         buffer.append(OPEN_TAG);
@@ -90,7 +92,7 @@ public class Fb2Section implements Stringable {
     }
 
     private String[] getContentStrings() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         for (Stringable current : this.content) {
             String[] image = current.getStrings();
