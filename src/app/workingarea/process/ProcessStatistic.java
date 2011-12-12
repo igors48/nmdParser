@@ -26,4 +26,5 @@ public class ProcessStatistic {
     public int getSucceded() {
         return this.succeded;
     }
+    
 }

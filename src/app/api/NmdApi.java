@@ -161,13 +161,11 @@ public class NmdApi implements ApiFacade {
     public List<ObjectMetaData> getObjectsMetaData() throws FatalException {
         checkWorkspaceAndSettings();
 
-        ConstructorFactory factory = null;
-
         try {
             List<ObjectMetaData> result = newArrayList();
 
             Locator locator = this.workspace.getLocator();
-            factory = this.workspace.getConstructorFactory();
+            ConstructorFactory factory = this.workspace.getConstructorFactory();
 
             this.serviceManager.activateReflectionMode();
 
@@ -251,26 +249,6 @@ public class NmdApi implements ApiFacade {
         }
 
         return result;
-    }
-
-    private void convertFilesExternal(final List<String> _files, final Controller _controller, final ExternalConverterContext _externalConverterContext) {
-        int index = 0;
-
-        for (String current : _files) {
-            _controller.onProgress(_files.size() == 1 ? new SingleProcessInfo(EXTERNAL_POSTPROCESSING) : new SingleProcessInfo(EXTERNAL_POSTPROCESSING, index++, _files.size()));
-            convertFileExternal(current, _externalConverterContext);
-        }
-    }
-
-    private void convertFileExternal(final String _file, final ExternalConverterContext _externalConverterContext) {
-        ForEachPostProcessor postProcessor = ForEachPostProcessorUtils.createForEachPostProcessor(this.serviceManager.getProcessWrapper(), _externalConverterContext.getPath(), _externalConverterContext.getPattern(), _externalConverterContext.getTimeout());
-
-        File target = new File(_file);
-
-        String path = PathTools.normalize(target.getParent());
-        String name = target.getName();
-
-        postProcessor.process(path, name);
     }
 
     public List<String> getSourcesNames(final Mask _mask) throws FatalException {
@@ -541,7 +519,6 @@ public class NmdApi implements ApiFacade {
         }
     }
 
-
     public List<String> testGoogleReaderProfile(final String _email, final String _feed) throws FatalException {
         Assert.isValidString(_email, "EMail is not valid");
         Assert.isValidString(_feed, "Feeds is not valid");
@@ -580,6 +557,26 @@ public class NmdApi implements ApiFacade {
         if (this.settings != null) {
             cleanTempDirectory();
         }
+    }
+
+    private void convertFilesExternal(final List<String> _files, final Controller _controller, final ExternalConverterContext _externalConverterContext) {
+        int index = 0;
+
+        for (String current : _files) {
+            _controller.onProgress(_files.size() == 1 ? new SingleProcessInfo(EXTERNAL_POSTPROCESSING) : new SingleProcessInfo(EXTERNAL_POSTPROCESSING, index++, _files.size()));
+            convertFileExternal(current, _externalConverterContext);
+        }
+    }
+
+    private void convertFileExternal(final String _file, final ExternalConverterContext _externalConverterContext) {
+        ForEachPostProcessor postProcessor = ForEachPostProcessorUtils.createForEachPostProcessor(this.serviceManager.getProcessWrapper(), _externalConverterContext.getPath(), _externalConverterContext.getPattern(), _externalConverterContext.getTimeout());
+
+        File target = new File(_file);
+
+        String path = PathTools.normalize(target.getParent());
+        String name = target.getName();
+
+        postProcessor.process(path, name);
     }
 
     private List<ObjectMetaData> getMetaDatas(final Locator _locator, final ConstructorFactory _factory, final ObjectType _type) throws Locator.LocatorException, Constructor.ConstructorException {
@@ -900,6 +897,5 @@ public class NmdApi implements ApiFacade {
 
         return result;
     }
-
 
 }

@@ -4,7 +4,7 @@ import app.api.ApiFacade;
 import app.api.NmdApi;
 import app.cli.command.Command;
 import app.cli.parser.CliParser;
-import app.cli.parser.CliParserResult;
+import app.cli.parser.Script;
 import app.workingarea.Defaults;
 import app.workingarea.SettingsManager;
 import app.workingarea.WorkspaceManager;
@@ -17,7 +17,6 @@ import util.PropertiesUtil;
 import util.TimeTools;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * !!!
@@ -102,8 +101,8 @@ public class NmdCliApplication {
         this.startTime = System.currentTimeMillis();
 
         try {
-            CliParserResult parserResult = parseCommandLine(_args);
-            execute(parserResult.getScript());
+            Script script = parseCommandLine(_args);
+            execute(script);
 
         } catch (CliParser.CliParserException e) {
             log.error("Error parsing command line [ " + e.getMessage() + " ].", e);
@@ -114,13 +113,13 @@ public class NmdCliApplication {
 
     }
 
-    private CliParserResult parseCommandLine(final String[] _args) throws CliParser.CliParserException {
+    private Script parseCommandLine(final String[] _args) throws CliParser.CliParserException {
         return this.cliParser.parse(_args);
     }
 
-    private void execute(final List<Command> _script) throws Command.CommandExecutionException {
+    private void execute(final Script _script) throws Command.CommandExecutionException {
 
-        for (Command command : _script) {
+        for (Command command : _script.getCommands()) {
             command.execute();
         }
     }

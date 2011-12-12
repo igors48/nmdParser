@@ -40,5 +40,4 @@ public class FullTextFeedTemplatesFactory implements TemplatesFactory {
         return result;
     }
 
-
 }

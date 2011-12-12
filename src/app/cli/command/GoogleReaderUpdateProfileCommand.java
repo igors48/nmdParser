@@ -35,4 +35,5 @@ public class GoogleReaderUpdateProfileCommand implements Command {
             throw new CommandExecutionException(e);
         }
     }
+    
 }

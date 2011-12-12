@@ -50,7 +50,7 @@ public class CliParser {
         createParsersMap();
     }
 
-    public CliParserResult parse(final String[] _args) throws CliParserException {
+    public Script parse(final String[] _args) throws CliParserException {
         Assert.notNull(_args, "Arguments list is null.");
 
         try {
@@ -70,7 +70,7 @@ public class CliParser {
                 script = optionParser.parse(commandLine, this.api, OptionParserUtils.convert(properties));
             }
 
-            return new CliParserResult(script);
+            return new Script(script);
         } catch (ParseException e) {
             printUsage();
 

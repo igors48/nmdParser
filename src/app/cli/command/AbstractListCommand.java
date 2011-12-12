@@ -106,4 +106,5 @@ public abstract class AbstractListCommand implements Command {
             throw new CommandExecutionException("Command interrupted.");
         }
     }
+    
 }

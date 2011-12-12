@@ -11,16 +11,17 @@ import java.util.List;
  * @author Igor Usenko
  *         Date: 08.10.2009
  */
-public class CliParserResult {
+public class Script {
 
-    private final List<Command> script;
+    private final List<Command> commands;
 
-    public CliParserResult(final List<Command> _script) {
+    public Script(final List<Command> _script) {
         Assert.notNull(_script, "Script is null");
-        this.script = _script;
+        this.commands = _script;
     }
 
-    public List<Command> getScript() {
-        return this.script;
+    public List<Command> getCommands() {
+        return this.commands;
     }
+    
 }

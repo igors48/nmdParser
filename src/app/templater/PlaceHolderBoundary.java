@@ -10,8 +10,8 @@ import util.Assert;
  */
 public class PlaceHolderBoundary {
 
-    private int start;
-    private int stop;
+    private final int start;
+    private final int stop;
 
     public PlaceHolderBoundary(final int _start, final int _stop) {
         Assert.greaterOrEqual(_start, 0, "Start index < 0");
@@ -28,4 +28,5 @@ public class PlaceHolderBoundary {
     public int getStop() {
         return this.stop;
     }
+    
 }

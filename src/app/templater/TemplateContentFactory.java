@@ -28,6 +28,7 @@ public class TemplateContentFactory {
 
     static {
         sourceTemplate = newArrayList();
+        
         sourceTemplate.add("<source>");
         sourceTemplate.add(INDENT + "<store days=\"7\"/>");
         sourceTemplate.add(INDENT + "<rss>" + RSS_URL_HOLDER + "</rss>");
@@ -38,6 +39,7 @@ public class TemplateContentFactory {
 
     static {
         channelBriefTemplate = newArrayList();
+
         channelBriefTemplate.add("<channel source=\"" + NAME_HOLDER + ".source\"/>");
     }
 
@@ -45,6 +47,7 @@ public class TemplateContentFactory {
 
     static {
         channelFullTemplate = newArrayList();
+
         channelFullTemplate.add("<channel source=\"" + NAME_HOLDER + ".source\" interpreter=\"" + NAME_HOLDER + ".interpreter\"/>");
     }
 
@@ -109,4 +112,5 @@ public class TemplateContentFactory {
 
         return templatesMap.get(_type);
     }
+
 }

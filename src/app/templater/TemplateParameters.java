@@ -45,4 +45,5 @@ public class TemplateParameters {
     public String getRssUrl() {
         return this.rssUrl;
     }
+    
 }

@@ -42,4 +42,5 @@ public class UpdateAllSourcesCommand extends UpdateSourcesCommand {
             throw new CommandExecutionException(e);
         }
     }
+    
 }

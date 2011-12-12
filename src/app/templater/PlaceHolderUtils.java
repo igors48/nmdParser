@@ -143,20 +143,8 @@ public final class PlaceHolderUtils {
         return result;
     }
 
-    /*
-    private static StringBuilder replacePlaceholder(final StringBuilder _template, final String _key, final String _value){
-        String placeHolder = getPlaceholder(_key);
-        int index;
-
-        while ((index = _template.indexOf(placeHolder)) != -1) {
-            _template.replace(index, index + placeHolder.length(), _value);
-        }
-
-        return _template;
-    }
-    */
-
     private PlaceHolderUtils() {
         // empty
     }
+    
 }

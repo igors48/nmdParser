@@ -40,4 +40,5 @@ public class BlitzRequestCommand implements Command {
             throw new CommandExecutionException(e);
         }
     }
+    
 }

@@ -39,4 +39,5 @@ public class GoogleReaderChangeProfilePasswordCommand implements Command {
             throw new CommandExecutionException(e);
         }
     }
+    
 }

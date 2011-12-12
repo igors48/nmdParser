@@ -29,4 +29,5 @@ public class FeedTemplatesFactory implements TemplatesFactory {
 
         return factories.get(_parameters.getType()).createTemplates(_parameters);
     }
+    
 }

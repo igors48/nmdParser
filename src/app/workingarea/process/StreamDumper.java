@@ -39,9 +39,8 @@ public class StreamDumper extends Thread {
         final InputStreamReader inputStreamReader = new InputStreamReader(this.inputStream);
         final BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
-        String line = null;
-
         try {
+            String line;
 
             while ((line = bufferedReader.readLine()) != null) {
                 logLine(line);
@@ -65,8 +64,10 @@ public class StreamDumper extends Thread {
     }
 
     private enum StreamDumperType {
+
         ERROR,
         OUTPUT
+        
     }
 
     public static StreamDumper createOutputStreamDumper(final InputStream _inputStream) {

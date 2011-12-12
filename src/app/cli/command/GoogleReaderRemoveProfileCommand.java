@@ -35,4 +35,5 @@ public class GoogleReaderRemoveProfileCommand implements Command {
             throw new CommandExecutionException(e);
         }
     }
+    
 }
