@@ -27,5 +27,5 @@ public class OccurrenceElementHandler extends AbstractElementHandler {
     protected void handleAttribute(final Node _node, final Object _blank, final ConstructorFactory _factory) throws AttributeHandler.AttributeHandlerException {
         // empty
     }
-    
+
 }

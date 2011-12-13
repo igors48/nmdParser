@@ -39,5 +39,5 @@ public class DatedItemsSection {
     public String getTitle() {
         return this.title;
     }
-    
+
 }

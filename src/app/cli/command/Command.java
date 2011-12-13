@@ -31,7 +31,7 @@ public interface Command {
         public CommandExecutionException(Throwable _throwable) {
             super(_throwable);
         }
-        
+
     }
 
 }

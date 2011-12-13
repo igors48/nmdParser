@@ -28,7 +28,7 @@ public class TemplateContentFactory {
 
     static {
         sourceTemplate = newArrayList();
-        
+
         sourceTemplate.add("<source>");
         sourceTemplate.add(INDENT + "<store days=\"7\"/>");
         sourceTemplate.add(INDENT + "<rss>" + RSS_URL_HOLDER + "</rss>");

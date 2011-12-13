@@ -21,5 +21,5 @@ public class BranchAttributeHandler implements AttributeHandler {
 
         ((OutputConfiguration) _blank).setBranch(_value);
     }
-    
+
 }

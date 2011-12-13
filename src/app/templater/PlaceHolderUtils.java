@@ -146,5 +146,5 @@ public final class PlaceHolderUtils {
     private PlaceHolderUtils() {
         // empty
     }
-    
+
 }

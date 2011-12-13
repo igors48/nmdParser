@@ -21,5 +21,5 @@ public class XmlFileNameFilter implements FilenameFilter {
 
         return _s.toUpperCase().endsWith(XML_EXTENSION);
     }
-    
+
 }

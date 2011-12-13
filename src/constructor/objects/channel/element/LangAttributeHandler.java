@@ -21,5 +21,5 @@ public class LangAttributeHandler implements AttributeHandler {
 
         ((ChannelConfiguration) _blank).setLang(_value);
     }
-    
+
 }

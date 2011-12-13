@@ -28,5 +28,5 @@ public class ProcessSnippetsCommand extends AbstractListCommand {
         this.facade.processSnippet(_name, this.forcedDays, this.context);
         this.log.info("Snippet [ " + _name + " ] successfully processed.");
     }
-    
+
 }

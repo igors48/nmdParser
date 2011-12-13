@@ -8,7 +8,7 @@ import html.parser.tag.HtmlTag;
  *         Date: 19.09.2008
  */
 public interface TagHandler {
-    
+
     void handle(HtmlTag _tag, DocumentBuilder _builder) throws TagHandlerException;
 
     class TagHandlerException extends Exception {
@@ -30,5 +30,5 @@ public interface TagHandler {
         }
 
     }
-    
+
 }

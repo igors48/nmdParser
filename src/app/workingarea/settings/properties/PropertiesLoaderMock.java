@@ -29,5 +29,5 @@ public class PropertiesLoaderMock implements Loader {
 
         return result;
     }
-    
+
 }

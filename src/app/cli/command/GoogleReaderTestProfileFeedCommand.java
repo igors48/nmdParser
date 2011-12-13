@@ -39,5 +39,5 @@ public class GoogleReaderTestProfileFeedCommand implements Command {
             throw new CommandExecutionException(e);
         }
     }
-    
+
 }

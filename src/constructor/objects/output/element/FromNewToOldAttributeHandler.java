@@ -21,5 +21,5 @@ public class FromNewToOldAttributeHandler implements AttributeHandler {
 
         ((OutputConfiguration) _blank).setFromNewToOld(_value);
     }
-    
+
 }

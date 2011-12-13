@@ -13,7 +13,7 @@ import util.Assert;
  *         Date: 28.09.2009
  */
 public class CreateTemplatesCommand implements Command {
-    
+
     private final TemplateParameters parameters;
     private final ApiFacade facade;
 
@@ -37,5 +37,5 @@ public class CreateTemplatesCommand implements Command {
             throw new CommandExecutionException(e);
         }
     }
-    
+
 }

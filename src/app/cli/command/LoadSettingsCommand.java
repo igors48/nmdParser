@@ -37,5 +37,5 @@ public class LoadSettingsCommand implements Command {
             throw new CommandExecutionException(e);
         }
     }
-    
+
 }

@@ -23,5 +23,5 @@ public class Script {
     public List<Command> getCommands() {
         return this.commands;
     }
-    
+
 }
