@@ -28,5 +28,5 @@ public class PlaceHolderBoundary {
     public int getStop() {
         return this.stop;
     }
-    
+
 }

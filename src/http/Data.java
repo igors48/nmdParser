@@ -31,7 +31,7 @@ public interface Data {
         public DataException(final Throwable _throwable) {
             super(_throwable);
         }
-        
+
     }
-    
+
 }

@@ -45,5 +45,5 @@ public class BriefTextFeedTemplatesFactory implements TemplatesFactory {
 
         return result;
     }
-    
+
 }

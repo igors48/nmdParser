@@ -28,5 +28,5 @@ public enum ResourceType {
 
         return "";
     }
-    
+
 }

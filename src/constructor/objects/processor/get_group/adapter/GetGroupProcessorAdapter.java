@@ -58,14 +58,12 @@ public class GetGroupProcessorAdapter implements VariableProcessorAdapter {
     public VariableProcessor getProcessor() throws ConfigurationException {
         validate();
 
-        //todo выбиваетс€ из общей схемы, но на первый раз - оставим
         return new GetGroupProcessor(this.in, this.pattern, this.occurrences, this.group, this.out);
     }
 
     private void validate() throws ConfigurationException {
 
         try {
-            //Integer.valueOf(this.occurrences);
             Pattern.compile(this.pattern, Pattern.CASE_INSENSITIVE);
         } catch (Exception e) {
             throw new ConfigurationException(e);

@@ -37,5 +37,5 @@ public class CreateWorkspaceCommand implements Command {
             throw new CommandExecutionException(e);
         }
     }
-    
+
 }

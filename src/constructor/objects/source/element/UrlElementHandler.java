@@ -67,5 +67,5 @@ public class UrlElementHandler extends AbstractElementHandler {
             ((SourceConfiguration) _blank).setPadd(value);
         }
     }
-    
+
 }

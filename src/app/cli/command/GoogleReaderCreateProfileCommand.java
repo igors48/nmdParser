@@ -39,5 +39,5 @@ public class GoogleReaderCreateProfileCommand implements Command {
             throw new CommandExecutionException(e);
         }
     }
-    
+
 }

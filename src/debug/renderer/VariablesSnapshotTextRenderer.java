@@ -68,13 +68,7 @@ public class VariablesSnapshotTextRenderer implements SnapshotTextRenderer {
     private void renderElement(final int _index, final String _value, final boolean _changed, final List<String> _result) {
         StringBuffer buffer = new StringBuffer();
 
-        //TODO consider repalce with ternary
-        if (_changed) {
-            buffer.append(CHANGED_PREFIX);
-        } else {
-            buffer.append(NO_CHANGED_PREFIX);
-        }
-
+        buffer.append(_changed ? CHANGED_PREFIX : NO_CHANGED_PREFIX);
         buffer.append(_index).append(INDEX_VALUE_DIVIDER).append(_value);
 
         _result.add(buffer.toString());

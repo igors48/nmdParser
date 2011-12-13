@@ -22,5 +22,5 @@ public class EnableDebugConsoleCommand implements Command {
     public void execute() throws CommandExecutionException {
         this.facade.enableDebugConsole();
     }
-    
+
 }

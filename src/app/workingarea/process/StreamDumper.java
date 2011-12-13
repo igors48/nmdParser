@@ -67,7 +67,7 @@ public class StreamDumper extends Thread {
 
         ERROR,
         OUTPUT
-        
+
     }
 
     public static StreamDumper createOutputStreamDumper(final InputStream _inputStream) {

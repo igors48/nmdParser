@@ -25,5 +25,5 @@ public class FragmentTimeCorrectionAttributeHandler implements AttributeHandler 
             ((FragmentAnalyserConfiguration) _blank).setTimeCorrection(_value);
         }
     }
-    
+
 }

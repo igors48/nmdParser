@@ -23,5 +23,5 @@ public interface TemplatesFactory {
      * @return комплект шаблонов
      */
     List<Template> createTemplates(TemplateParameters _parameters);
-    
+
 }

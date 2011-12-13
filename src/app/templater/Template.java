@@ -11,7 +11,7 @@ import java.util.List;
  *         Date: 27.09.2009
  */
 public class Template {
-    
+
     private final String name;
     private final List<String> image;
 
@@ -30,5 +30,5 @@ public class Template {
     public String getName() {
         return this.name;
     }
-    
+
 }

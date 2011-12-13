@@ -37,6 +37,6 @@ public class LoadWorkspaceCommand implements Command {
             throw new CommandExecutionException(e);
         }
     }
-    
+
 }
 
