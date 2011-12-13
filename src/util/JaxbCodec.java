@@ -28,6 +28,7 @@ public final class JaxbCodec<T> {
 
         try {
             Marshaller marshaller = this.context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
             marshaller.marshal(object, writer);
 
