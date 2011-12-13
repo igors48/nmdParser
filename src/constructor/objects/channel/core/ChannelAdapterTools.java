@@ -81,7 +81,9 @@ public final class ChannelAdapterTools {
         for (String expression : _expressions) {
             String outputVariableName = createOutputVariableName(index);
 
-            adapter.addAdapter(_criterionType == CriterionType.REGEXP ? createGetGroupProcessorAdapter(expression, outputVariableName) : createXPathProcessorAdapter(expression, outputVariableName));
+            adapter.addAdapter(_criterionType == CriterionType.REGEXP ?
+                    createGetGroupProcessorAdapter(expression, outputVariableName) :
+                    createXPathProcessorAdapter(expression, outputVariableName));
 
             if (index > 0) {
                 adapter.addAdapter(createAppendProcessorAdapter(outputVariableName));
@@ -133,4 +135,5 @@ public final class ChannelAdapterTools {
     private ChannelAdapterTools() {
         // empty
     }
+
 }

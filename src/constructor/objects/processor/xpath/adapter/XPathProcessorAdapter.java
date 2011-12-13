@@ -21,6 +21,7 @@ public class XPathProcessorAdapter implements VariableProcessorAdapter {
     private XPathProcessorMode mode;
 
     private static final String TAG_TOKEN = "tag";
+    private static final String DELETE_TOKEN = "delete";
 
     public XPathProcessorAdapter() {
         this.mode = XPathProcessorMode.INNER;
@@ -45,6 +46,10 @@ public class XPathProcessorAdapter implements VariableProcessorAdapter {
 
         if (TAG_TOKEN.equalsIgnoreCase(_value)) {
             this.mode = XPathProcessorMode.TAG;
+        }
+
+        if (DELETE_TOKEN.equalsIgnoreCase(_value)) {
+            this.mode = XPathProcessorMode.DELETE;
         }
     }
 

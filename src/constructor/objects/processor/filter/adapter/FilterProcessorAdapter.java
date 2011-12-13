@@ -33,4 +33,5 @@ public class FilterProcessorAdapter implements VariableProcessorAdapter {
         Assert.notNull(_value, "Filter : out value is null");
         this.out = _value;
     }
+
 }
