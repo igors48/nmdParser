@@ -32,8 +32,9 @@ public class ChannelAdapterToolsCreateProcessorTest extends TestCase {
 
         assertEquals("id", result.getId());
 
-        assertEquals(1, result.getProcessors().size());
+        assertEquals(2, result.getProcessors().size());
         assertTrue(result.getProcessors().get(0) instanceof XPathProcessor);
+        assertTrue(result.getProcessors().get(1) instanceof XPathProcessor);
     }
 
     public void testCreateOneExpressionRegExp() throws ConfigurationException {
@@ -44,8 +45,9 @@ public class ChannelAdapterToolsCreateProcessorTest extends TestCase {
 
         assertEquals("id", result.getId());
 
-        assertEquals(1, result.getProcessors().size());
-        assertTrue(result.getProcessors().get(0) instanceof GetGroupProcessor);
+        assertEquals(2, result.getProcessors().size());
+        assertTrue(result.getProcessors().get(0) instanceof XPathProcessor);
+        assertTrue(result.getProcessors().get(1) instanceof GetGroupProcessor);
     }
 
     public void testCreateTwoExpressionsXPath() throws ConfigurationException {
@@ -57,10 +59,11 @@ public class ChannelAdapterToolsCreateProcessorTest extends TestCase {
 
         assertEquals("id", result.getId());
 
-        assertEquals(3, result.getProcessors().size());
+        assertEquals(4, result.getProcessors().size());
         assertTrue(result.getProcessors().get(0) instanceof XPathProcessor);
         assertTrue(result.getProcessors().get(1) instanceof XPathProcessor);
-        assertTrue(result.getProcessors().get(2) instanceof AppendProcessor);
+        assertTrue(result.getProcessors().get(2) instanceof XPathProcessor);
+        assertTrue(result.getProcessors().get(3) instanceof AppendProcessor);
     }
 
 }

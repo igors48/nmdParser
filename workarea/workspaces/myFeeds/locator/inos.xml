@@ -1,0 +1,4 @@
+<simpler feedUrl="http://www.inosmi.ru/misc/export/xml/rss/translation.xml" coverUrl="" storeDays="7" branch="news"
+         outName="inos" fromNewToOld="yes">
+    <xPath>//div[@class='text_article']</xPath>
+</simpler>
