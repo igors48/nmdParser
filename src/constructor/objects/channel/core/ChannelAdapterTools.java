@@ -7,6 +7,7 @@ import constructor.objects.processor.append.adapter.AppendProcessorAdapter;
 import constructor.objects.processor.chain.adapter.StandardChainProcessorAdapter;
 import constructor.objects.processor.filter.adapter.FilterProcessorAdapter;
 import constructor.objects.processor.get_group.adapter.GetGroupProcessorAdapter;
+import constructor.objects.processor.xpath.XPathProcessorMode;
 import constructor.objects.processor.xpath.adapter.XPathProcessorAdapter;
 import debug.DebugConsole;
 import util.Assert;
@@ -24,6 +25,7 @@ public final class ChannelAdapterTools {
 
     private static final String SEMICOLON = ";";
     private static final String OUTPUT_VARIABLE_NAME_PREFIX = "output";
+    private static final String SCRIPT_XPATH = "//script";
 
     public static FragmentAnalyserConfiguration createFragmentAnalyserConfiguration(final CriterionType _criterionType, final String _expressions, final String _id, final DebugConsole _debugConsole) {
         Assert.notNull(_criterionType, "Criterion type is null");
@@ -76,6 +78,8 @@ public final class ChannelAdapterTools {
 
         adapter.setId(_id);
 
+        adapter.addAdapter(createScriptsRemover());
+
         int index = 0;
 
         for (String expression : _expressions) {
@@ -93,6 +97,16 @@ public final class ChannelAdapterTools {
         }
 
         return adapter;
+    }
+
+    private static XPathProcessorAdapter createScriptsRemover() {
+        XPathProcessorAdapter scriptsRemover = new XPathProcessorAdapter();
+
+        scriptsRemover.setElementExpression(SCRIPT_XPATH);
+        scriptsRemover.setMode(XPathProcessorMode.DELETE);
+        scriptsRemover.setAttributeOut(Variables.DEFAULT_INPUT_VARIABLE_NAME);
+
+        return scriptsRemover;
     }
 
     private static String createOutputVariableName(int index) {

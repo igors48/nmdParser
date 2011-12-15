@@ -58,4 +58,10 @@ public class XPathProcessorAdapter implements VariableProcessorAdapter {
 
         this.expression = _value;
     }
+
+    public void setMode(final XPathProcessorMode _mode) {
+        Assert.notNull(_mode, "Mode is null");
+        this.mode = _mode;
+    }
+
 }
