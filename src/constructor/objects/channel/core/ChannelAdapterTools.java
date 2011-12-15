@@ -4,6 +4,7 @@ import app.cli.blitz.request.CriterionType;
 import constructor.objects.interpreter.configuration.FragmentAnalyserConfiguration;
 import constructor.objects.processor.VariableProcessorAdapter;
 import constructor.objects.processor.append.adapter.AppendProcessorAdapter;
+import constructor.objects.processor.chain.adapter.FirstOneProcessorAdapter;
 import constructor.objects.processor.chain.adapter.StandardChainProcessorAdapter;
 import constructor.objects.processor.filter.adapter.FilterProcessorAdapter;
 import constructor.objects.processor.get_group.adapter.GetGroupProcessorAdapter;
@@ -80,22 +81,16 @@ public final class ChannelAdapterTools {
 
         adapter.addAdapter(createScriptsRemover());
 
-        int index = 0;
-
+        FirstOneProcessorAdapter firstOneProcessorAdapter = new FirstOneProcessorAdapter(_debugConsole);
+        
         for (String expression : _expressions) {
-            String outputVariableName = createOutputVariableName(index);
-
             adapter.addAdapter(_criterionType == CriterionType.REGEXP ?
-                    createGetGroupProcessorAdapter(expression, outputVariableName) :
-                    createXPathProcessorAdapter(expression, outputVariableName));
-
-            if (index > 0) {
-                adapter.addAdapter(createAppendProcessorAdapter(outputVariableName));
-            }
-
-            ++index;
+                    createGetGroupProcessorAdapter(expression, Variables.DEFAULT_OUTPUT_VARIABLE_NAME) :
+                    createXPathProcessorAdapter(expression, Variables.DEFAULT_OUTPUT_VARIABLE_NAME));
         }
 
+        //adapter.addAdapter(firstOneProcessorAdapter);
+        
         return adapter;
     }
 
