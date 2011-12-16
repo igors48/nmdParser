@@ -20,4 +20,5 @@ public abstract class AbstractVariableProcessor implements VariableProcessor {
         this.input = specified(_in) ? _in : Variables.DEFAULT_INPUT_VARIABLE_NAME;
         this.output = specified(_out) ? _out : Variables.DEFAULT_OUTPUT_VARIABLE_NAME;
     }
+    
 }

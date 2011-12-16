@@ -62,4 +62,9 @@ public class FirstOneProcessor extends AbstractVariableProcessor {
     public Snapshot getSnapshot() {
         return new TopLevelObjectSnapshot(this.adapter.getId());
     }
+
+    public FirstOneProcessorAdapter getAdapter() {
+        return adapter;
+    }
+    
 }

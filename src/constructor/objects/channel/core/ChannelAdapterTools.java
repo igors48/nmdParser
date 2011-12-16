@@ -4,6 +4,7 @@ import app.cli.blitz.request.CriterionType;
 import constructor.objects.interpreter.configuration.FragmentAnalyserConfiguration;
 import constructor.objects.processor.VariableProcessorAdapter;
 import constructor.objects.processor.append.adapter.AppendProcessorAdapter;
+import constructor.objects.processor.chain.adapter.FirstOneProcessorAdapter;
 import constructor.objects.processor.chain.adapter.StandardChainProcessorAdapter;
 import constructor.objects.processor.filter.adapter.FilterProcessorAdapter;
 import constructor.objects.processor.get_group.adapter.GetGroupProcessorAdapter;
@@ -24,7 +25,6 @@ import static util.CollectionUtils.newArrayList;
 public final class ChannelAdapterTools {
 
     private static final String SEMICOLON = ";";
-    private static final String OUTPUT_VARIABLE_NAME_PREFIX = "output";
     private static final String SCRIPT_XPATH = "//script";
 
     public static FragmentAnalyserConfiguration createFragmentAnalyserConfiguration(final CriterionType _criterionType, final String _expressions, final String _id, final DebugConsole _debugConsole) {
@@ -80,22 +80,16 @@ public final class ChannelAdapterTools {
 
         adapter.addAdapter(createScriptsRemover());
 
-        int index = 0;
-
+        FirstOneProcessorAdapter firstOneProcessorAdapter = new FirstOneProcessorAdapter(_debugConsole);
+        
         for (String expression : _expressions) {
-            String outputVariableName = createOutputVariableName(index);
-
-            adapter.addAdapter(_criterionType == CriterionType.REGEXP ?
-                    createGetGroupProcessorAdapter(expression, outputVariableName) :
-                    createXPathProcessorAdapter(expression, outputVariableName));
-
-            if (index > 0) {
-                adapter.addAdapter(createAppendProcessorAdapter(outputVariableName));
-            }
-
-            ++index;
+            firstOneProcessorAdapter.addAdapter(_criterionType == CriterionType.REGEXP ?
+                    createGetGroupProcessorAdapter(expression, Variables.DEFAULT_OUTPUT_VARIABLE_NAME) :
+                    createXPathProcessorAdapter(expression, Variables.DEFAULT_OUTPUT_VARIABLE_NAME));
         }
 
+        adapter.addAdapter(firstOneProcessorAdapter);
+        
         return adapter;
     }
 
@@ -107,10 +101,6 @@ public final class ChannelAdapterTools {
         scriptsRemover.setAttributeOut(Variables.DEFAULT_INPUT_VARIABLE_NAME);
 
         return scriptsRemover;
-    }
-
-    private static String createOutputVariableName(int index) {
-        return index == 0 ? "" : OUTPUT_VARIABLE_NAME_PREFIX + String.valueOf(index);
     }
 
     private static VariableProcessorAdapter createXPathProcessorAdapter(final String _expression, final String _outputVariableName) {
@@ -133,15 +123,6 @@ public final class ChannelAdapterTools {
         if (!_outputVariableName.isEmpty()) {
             result.setAttributeOut(_outputVariableName);
         }
-
-        return result;
-    }
-
-    private static VariableProcessorAdapter createAppendProcessorAdapter(final String _variableName) {
-        AppendProcessorAdapter result = new AppendProcessorAdapter();
-
-        result.setAttributeFirst(_variableName);
-        result.setAttributeSecond(Variables.DEFAULT_OUTPUT_VARIABLE_NAME);
 
         return result;
     }
