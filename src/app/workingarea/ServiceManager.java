@@ -30,8 +30,6 @@ public interface ServiceManager {
 
     DebugConsole getDebugConsole();
 
-    Map<String, String> getExternalContext();
-
     ResourceCache getResourceCache();
 
     ProcessWrapper getProcessWrapper();

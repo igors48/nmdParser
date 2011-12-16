@@ -29,7 +29,7 @@ public class HttpToolsTest extends TestCase {
     public void testPasswordHideIfFound() {
         final String result = HttpTools.removePasswordFromString("asdfgpass=pass");
 
-        Assert.assertEquals("asdfg[*HIDDEN*]", result);
+        Assert.assertEquals("asdfg*HIDDEN*", result);
     }
 
     public void testStringNotChangedIfPasswordNotFound() {

@@ -33,7 +33,7 @@ public class GoogleReaderProvider {
     private final String FEED_PREFIX = "feed/";
 
     private static final String GET_UNREAD_ITEMS_URL = "http://www.google.com/reader/api/0/stream/contents/feed/%s?";
-    private static final String GET_UNREAD_ITEMS_REQUEST = "xt=user/-/state/com.google/read&n=150";
+    private static final String GET_UNREAD_ITEMS_REQUEST = "xt=user/-/state/com.google/read&n=%d";
 
     private static final String GET_TOKEN_URL = "http://www.google.com/reader/api/0/token";
 
@@ -41,12 +41,16 @@ public class GoogleReaderProvider {
     private static final String MARK_ALL_AS_READ_REQUEST = "client=scroll&s=feed/%s&T=%s";
 
     private final HttpSecureAdapter httpSecureAdapter;
+    private final int maxItemsPerRequest;
 
     private final Log log;
 
-    public GoogleReaderProvider(final HttpSecureAdapter _httpSecureAdapter) {
+    public GoogleReaderProvider(final HttpSecureAdapter _httpSecureAdapter, final int _maxItemsPerRequest) {
         Assert.notNull(_httpSecureAdapter, "Batch loader is null");
         this.httpSecureAdapter = _httpSecureAdapter;
+
+        Assert.greater(_maxItemsPerRequest, 0, "Max items per request <= 0");
+        this.maxItemsPerRequest = _maxItemsPerRequest;
 
         this.log = LogFactory.getLog(getClass());
     }
@@ -100,9 +104,10 @@ public class GoogleReaderProvider {
         try {
             this.log.debug(String.format("Try to get unread items for feed [ %s ]", _feedUrl));
 
-            final String url = String.format(GET_UNREAD_ITEMS_URL, _feedUrl);
+            String url = String.format(GET_UNREAD_ITEMS_URL, _feedUrl);
+            String unreadItemsRequest = String.format(GET_UNREAD_ITEMS_REQUEST, this.maxItemsPerRequest);
 
-            String feedResponse = this.httpSecureAdapter.getForString(url, GET_UNREAD_ITEMS_REQUEST);
+            String feedResponse = this.httpSecureAdapter.getForString(url, unreadItemsRequest);
 
             FeedItems feedResponseItems = new Gson().fromJson(feedResponse, FeedItems.class);
 

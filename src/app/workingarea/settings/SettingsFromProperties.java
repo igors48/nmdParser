@@ -296,8 +296,8 @@ public class SettingsFromProperties implements Settings {
         return this.googleReaderRoot;
     }
 
-    public void valid() throws SettingsException {
-        // not implemented yet
+    public int getGoogleReaderMaxItemsPerRequest() {
+        return 150;
     }
 
     private void mapProperties() throws SettingsException {

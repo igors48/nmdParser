@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public final class HttpTools {
 
     private static final String PASSWORD_TOKEN = "PASS";
-    private static final String PASSWORD_REPLACEMENT = "[*HIDDEN*]";
+    private static final String PASSWORD_REPLACEMENT = "*HIDDEN*";
 
     private static final Pattern PATTERN = Pattern.compile("charset=([\\w|-]+);?", Pattern.CASE_INSENSITIVE);
     private static final int GROUP_NO = 1;
