@@ -37,4 +37,5 @@ public class FilterProcessor extends AbstractVariableProcessor {
 
         return result;
     }
+
 }

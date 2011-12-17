@@ -87,6 +87,9 @@ public class SettingsFromProperties implements Settings {
     private static final String DOCUMENT_SORT_FROM_NEW_TO_OLD_KEY = "document.sort.from.new.to.old";
     private static final String DOCUMENT_SORT_FROM_NEW_TO_OLD_DEFAULT = "false";
 
+    private static final String GOOGLE_READER_MAX_ITEMS_PER_REQUEST_KEY = "google.reader.max.items.per.request";
+    private static final String GOOGLE_READER_MAX_ITEMS_PER_REQUEST_DEFAULT = "200";
+
     private final Properties properties;
 
     private final String defaultStorageRoot;
@@ -120,6 +123,7 @@ public class SettingsFromProperties implements Settings {
     private boolean imageGrayscale;
     private boolean fromNewToOld;
     private int precachedItemsCount;
+    private int googleReaderMaxItemsPerRequest;
 
     private byte[] dummy;
 
@@ -296,8 +300,8 @@ public class SettingsFromProperties implements Settings {
         return this.googleReaderRoot;
     }
 
-    public void valid() throws SettingsException {
-        // not implemented yet
+    public int getGoogleReaderMaxItemsPerRequest() {
+        return this.googleReaderMaxItemsPerRequest;
     }
 
     private void mapProperties() throws SettingsException {
@@ -337,6 +341,8 @@ public class SettingsFromProperties implements Settings {
             this.fromNewToOld = TRUE_LITERAL.equalsIgnoreCase(this.properties.getProperty(DOCUMENT_SORT_FROM_NEW_TO_OLD_KEY, DOCUMENT_SORT_FROM_NEW_TO_OLD_DEFAULT));
 
             this.precachedItemsCount = Integer.valueOf(this.properties.getProperty(PRECACHED_ITEMS_COUNT_KEY, PRECACHED_ITEMS_COUNT_DEFAULT));
+
+            this.googleReaderMaxItemsPerRequest = Integer.valueOf(this.properties.getProperty(GOOGLE_READER_MAX_ITEMS_PER_REQUEST_KEY, GOOGLE_READER_MAX_ITEMS_PER_REQUEST_DEFAULT));
         } catch (Exception e) {
             throw new SettingsException(e);
         }
@@ -381,5 +387,8 @@ public class SettingsFromProperties implements Settings {
         this.log.debug(DOCUMENT_SORT_FROM_NEW_TO_OLD_KEY + EQUALS_LITERAL + this.fromNewToOld);
 
         this.log.debug(PRECACHED_ITEMS_COUNT_KEY + EQUALS_LITERAL + this.precachedItemsCount);
+
+        this.log.debug(GOOGLE_READER_MAX_ITEMS_PER_REQUEST_KEY + EQUALS_LITERAL + this.googleReaderMaxItemsPerRequest);
     }
+    
 }

@@ -100,6 +100,19 @@ public class XPathProcessorTest extends TestCase {
         assertEquals("<div>a&b</div>", variables.get(Variables.DEFAULT_OUTPUT_VARIABLE_NAME));
     }
 
+    public void testDeleteNodes() throws VariableProcessor.VariableProcessorException {
+        String fixture = "<html><head/><body><div>f</div><p>p</p><div>l</div></body></html>";
+
+        Variables variables = new Variables();
+        variables.put(Variables.DEFAULT_INPUT_VARIABLE_NAME, fixture);
+
+        XPathProcessor processor = new XPathProcessor("", "//div", XPathProcessorMode.DELETE, "");
+        processor.process(variables);
+
+        assertEquals(1, variables.getSize(Variables.DEFAULT_OUTPUT_VARIABLE_NAME));
+        assertEquals("<html><head/><body><p>p</p></body></html>", variables.get(Variables.DEFAULT_OUTPUT_VARIABLE_NAME));
+    }
+
     // тест снапшота
 
     public void testSnapshot() {

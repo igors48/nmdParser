@@ -2,16 +2,20 @@
 
 <processor>
 
-	<firstOne>
-	
-		<xPath>
-			<expression>//div[@class='text_article']</expression>
-		</xPath>
-		
-		<xPath>
-			<expression>//div[@class='topbox']</expression>
-		</xPath>
-		
-	</firstOne>
-	
+    <firstOne>
+
+        <xPath>
+            <expression>//div[@class='text_article']</expression>
+        </xPath>
+
+        <xPath>
+            <expression>//div[@class='topbox']</expression>
+        </xPath>
+
+    </firstOne>
+
+    <xPath in="output" mode="delete">
+        <expression>//script</expression>
+    </xPath>
+
 </processor>

@@ -140,10 +140,6 @@ public class StandardServiceManager implements ServiceManager {
         return this.debugConsole;
     }
 
-    public Map<String, String> getExternalContext() {
-        return this.context;
-    }
-
     public ResourceCache getResourceCache() {
 
         if (this.resourceCache == null) {
@@ -214,7 +210,7 @@ public class StandardServiceManager implements ServiceManager {
 
             if (this.googleReaderProvider == null) {
                 HttpSecureAdapter httpSecureAdapter = new HttpSecureAdapter(getHttpRequestHandler());
-                this.googleReaderProvider = new GoogleReaderProvider(httpSecureAdapter);
+                this.googleReaderProvider = new GoogleReaderProvider(httpSecureAdapter, this.settings.getGoogleReaderMaxItemsPerRequest());
             }
 
             if (this.googleReaderAdapter == null) {

@@ -20,4 +20,5 @@ public final class JsonCodec {
     private JsonCodec() {
         // empty
     }
+
 }

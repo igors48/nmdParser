@@ -30,7 +30,8 @@ public class FileDefaults implements Defaults {
     private static final String DEFAULT_WORKSPACE_NAME_KEY = "default.workspace.name";
     private static final String SETTINGS_DIRECTORY_NAME_KEY = "settings.directory.name";
     private static final String WORKSPACES_DIRECTORY_NAME_KEY = "workspaces.directory.name";
-    private static final String GOOGLE_READER_DIRECTORY_NAME_KEY = "workspaces.google.reader.directory.name";
+    private static final String GOOGLE_READER_DIRECTORY_NAME_KEY = "google.reader.directory.name";
+    
     private static final int DEFAULT_STORAGE_PERIOD_DEFAULT = 7;
     private static final String DEFAULT_STORAGE_ROOT_DEFAULT = "./workarea/root/";
     private static final String SETTINGS_DIRECTORY_NAME_DEFAULT = "./workarea/settings/";

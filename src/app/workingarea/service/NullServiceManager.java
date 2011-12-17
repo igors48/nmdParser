@@ -16,8 +16,6 @@ import timeservice.TimeService;
 
 import java.util.Map;
 
-import static util.CollectionUtils.newHashMap;
-
 /**
  * ������ ������ ��������
  *
@@ -47,10 +45,6 @@ public final class NullServiceManager implements ServiceManager {
 
     public DebugConsole getDebugConsole() {
         return new NullDebugConsole();
-    }
-
-    public Map<String, String> getExternalContext() {
-        return newHashMap();
     }
 
     public ResourceCache getResourceCache() {

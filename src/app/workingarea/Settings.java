@@ -228,12 +228,7 @@ public interface Settings {
      */
     String getGoogleReaderRoot();
 
-    /**
-     * Валидирует рабочие установки
-     *
-     * @throws SettingsException если установки не валидны
-     */
-    void valid() throws SettingsException;
+    int getGoogleReaderMaxItemsPerRequest();
 
     public class SettingsException extends Exception {
 
