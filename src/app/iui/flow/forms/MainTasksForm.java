@@ -17,7 +17,7 @@ public class MainTasksForm extends AbstractForm implements ActionListener {
 
     private static final String MAIN_TASKS_FORM_CAPTION = "iui.main.tasks.form.caption";
     private static final String UPDATE_FEEDERS_BUTTON_LABEL = "iui.main.tasks.form.update.feeders.button.label";
-    private static final String AUTO_UPDATE_FEEDERS_BUTTON_LABEL = "iui.main.tasks.form.auto.update.feeders.button.label";
+    private static final String GOOGLE_READER_BUTTON_LABEL = "iui.main.tasks.form.google.reader.button.label";
     private static final String MANAGE_FEEDERS_BUTTON_LABEL = "iui.main.tasks.form.manage.feeders.button.label";
     private static final String MANAGE_WORKSPACES_BUTTON_LABEL = "iui.main.tasks.form.manage.workspaces.button.label";
     private static final String CHANGE_SETTINGS_BUTTON_LABEL = "iui.main.tasks.form.change.settings.button.label";
@@ -27,7 +27,7 @@ public class MainTasksForm extends AbstractForm implements ActionListener {
     private final Listener listener;
 
     private JButton updateFeedersButton;
-    private JButton autoUpdateFeedersButton;
+    private JButton googleReaderButton;
     private JButton manageFeedersButton;
     private JButton manageWorkspacesButton;
     private JButton changeSettingsButton;
@@ -51,11 +51,9 @@ public class MainTasksForm extends AbstractForm implements ActionListener {
         getContentPanel().add(this.updateFeedersButton, createConstraint().alignCenter().largeButton().gapY(30).wrap().toString());
         setDefaultButton(this.updateFeedersButton);
 
-        /*
-        this.autoUpdateFeedersButton = new JButton(getString(AUTO_UPDATE_FEEDERS_BUTTON_LABEL));
-        this.autoUpdateFeedersButton.addActionListener(this);
-        getContentPanel().add(this.autoUpdateFeedersButton, createConstraint().largeButton().alignCenter().wrap().toString());
-        */
+        this.googleReaderButton = new JButton(getString(GOOGLE_READER_BUTTON_LABEL));
+        this.googleReaderButton.addActionListener(this);
+        getContentPanel().add(this.googleReaderButton, createConstraint().largeButton().alignCenter().wrap().toString());
 
         this.manageFeedersButton = new JButton(getString(MANAGE_FEEDERS_BUTTON_LABEL));
         this.manageFeedersButton.addActionListener(this);
@@ -92,9 +90,11 @@ public class MainTasksForm extends AbstractForm implements ActionListener {
             submit(MainTasksModel.MainTask.UPDATE_FEEDERS);
         }
 
+        /*
         if (_event.getSource() == this.autoUpdateFeedersButton) {
             submit(MainTasksModel.MainTask.AUTO_UPDATE_FEEDERS);
         }
+        */
 
         if (_event.getSource() == this.manageFeedersButton) {
             submit(MainTasksModel.MainTask.MANAGE_FEEDERS);
