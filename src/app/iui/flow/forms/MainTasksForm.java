@@ -90,11 +90,9 @@ public class MainTasksForm extends AbstractForm implements ActionListener {
             submit(MainTasksModel.MainTask.UPDATE_FEEDERS);
         }
 
-        /*
-        if (_event.getSource() == this.autoUpdateFeedersButton) {
-            submit(MainTasksModel.MainTask.AUTO_UPDATE_FEEDERS);
+        if (_event.getSource() == this.googleReaderButton) {
+            submit(MainTasksModel.MainTask.GOOGLE_READER);
         }
-        */
 
         if (_event.getSource() == this.manageFeedersButton) {
             submit(MainTasksModel.MainTask.MANAGE_FEEDERS);

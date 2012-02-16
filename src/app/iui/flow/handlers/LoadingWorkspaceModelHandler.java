@@ -59,27 +59,8 @@ public class LoadingWorkspaceModelHandler {
             }
 
             return result;
-        } catch (Throwable t) {
-            throw new ModelHandlerException(t);
+        } catch (Exception e) {
+            throw new ModelHandlerException(e);
         }
     }
 }
-
-/*
-        Assert.notNull(_model, "Model is null");
-
-        Model result;
-
-        if (_model.isApproved()) {
-            this.feeders = _model.getEntities();
-            this.log.debug(MessageFormat.format("Found [ {0} ] feeders", this.feeders.size()));
-
-            result = createKeyModel(ModelType.CHOOSE_FETCH_MODE);
-        } else {
-            result = new ErrorModel(MessageFormat.format(this.stringResource.getString(ERROR_LOADING_WORKSPACE), _model.getWorkspaceName()), _model.getCause(), false);
-            this.log.error("Error loading workspace", _model.getCause());
-        }
-
-        return putToHistory(result);
-
- */

@@ -46,7 +46,8 @@ public class MainFrame extends JFrame implements
         ChooseFeederDebugActionForm.Listener,
         ChangeSettingsForm.Listener,
         ExternalToolsSettingsForm.Listener,
-        ExternalPostprocessingSettingsForm.Listener {
+        ExternalPostprocessingSettingsForm.Listener,
+        GoogleReaderChooseTaskForm.Listener {
 
     private static final String TITLE_KEY = "iui.main.frame.title";
 
@@ -248,6 +249,12 @@ public class MainFrame extends JFrame implements
     }
 
     public void submit(final ExternalPostprocessorModel _model) {
+        Assert.notNull(_model, "Model is null");
+
+        replaceCurrentForm(this.flowController.handle(_model));
+    }
+
+    public void submit(final GoogleReaderChooseTaskModel _model) {
         Assert.notNull(_model, "Model is null");
 
         replaceCurrentForm(this.flowController.handle(_model));

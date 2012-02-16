@@ -138,6 +138,10 @@ public class FormFactory {
             result = new ExternalPostprocessingSettingsForm(this.owner, this.validatorFactory, FORM_WIDTH, FORM_HEIGHT, this.stringResource, (ExternalPostprocessorModel) _model, (ExternalPostprocessingSettingsForm.Listener) _listener);
         }
 
+        if (ModelType.GOOGLE_READER_CHOOSE_TASK == _model.getType()) {
+            result = new GoogleReaderChooseTaskForm(this.owner, FORM_WIDTH, FORM_HEIGHT, this.stringResource, (GoogleReaderChooseTaskModel) _model, (GoogleReaderChooseTaskForm.Listener) _listener);
+        }
+
         return result;
     }
 

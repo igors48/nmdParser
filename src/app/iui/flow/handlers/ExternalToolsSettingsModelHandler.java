@@ -44,8 +44,8 @@ public class ExternalToolsSettingsModelHandler {
             }
 
             return result;
-        } catch (Throwable t) {
-            throw new ModelHandlerException(t);
+        } catch (Exception e) {
+            throw new ModelHandlerException(e);
         }
     }
 }

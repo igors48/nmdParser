@@ -30,7 +30,7 @@ public class MainTasksModel extends Model {
 
     public enum MainTask {
         UPDATE_FEEDERS,
-        AUTO_UPDATE_FEEDERS,
+        GOOGLE_READER,
         MANAGE_FEEDERS,
         MANAGE_WORKSPACES,
         CHANGE_SETTINGS,

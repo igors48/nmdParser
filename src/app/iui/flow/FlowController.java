@@ -320,6 +320,17 @@ public class FlowController {
         }
     }
 
+    public Model handle(final GoogleReaderChooseTaskModel _model) {
+        Assert.notNull(_model, "Model is null");
+
+        try {
+            return putToHistory(new GoogleReaderChooseTaskModelHandler().handle(_model, this));
+        } catch (ModelHandlerException e) {
+            this.log.error(e);
+            return new ErrorModel(SwingTools.createErrorText(e), e, ModelType.CHOOSE_MAIN_TASK);
+        }
+    }
+
     public String getString(final String _key) {
         Assert.isValidString(_key, "Key is not valid");
 
@@ -479,7 +490,6 @@ public class FlowController {
 
     public enum Mode {
         UPDATE_FEEDERS,
-        AUTO_UPDATE_FEEDERS,
         MANAGE_FEEDERS,
         CREATE_WORKSPACE,
         RENAME_WORKSPACE,

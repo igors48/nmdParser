@@ -98,30 +98,8 @@ public class ChooseFeedersModelHandler {
             }
 
             return result;
-        } catch (Throwable t) {
-            throw new ModelHandlerException(t);
+        } catch (Exception e) {
+            throw new ModelHandlerException(e);
         }
     }
 }
-
-/*
-        Assert.notNull(_model, "Model is null");
-
-        Model result;
-
-        if (_model.isApproved()) {
-            this.selectedFeeders = _model.getSelected();
-
-            if (ChooseFetchModeModel.FetchMode.STANDARD == this.fetchMode) {
-                result = createUpdateModel();
-            } else if (ChooseFetchModeModel.FetchMode.FORCED == this.fetchMode) {
-                result = new ForcedUpdatePeriodModel();
-            } else {
-                result = new UpdateContextModel(this.selectedFeeders.get(0).getPlaceHolders());
-            }
-        } else {
-            result = createKeyModel(ModelType.CHOOSE_FETCH_MODE);
-        }
-
-        return putToHistory(result);
-*/

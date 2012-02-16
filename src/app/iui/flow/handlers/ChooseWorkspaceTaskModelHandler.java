@@ -57,7 +57,7 @@ public class ChooseWorkspaceTaskModelHandler {
             }
 
             return result;
-        } catch (Throwable e) {
+        } catch (Exception e) {
             throw new ModelHandlerException(e);
         }
     }
