@@ -5,17 +5,16 @@ import app.iui.flow.Model;
 import app.iui.flow.ModelHandlerException;
 import app.iui.flow.models.GoogleReaderChooseTaskModel;
 import app.iui.flow.models.GoogleReaderManageProfilesModel;
-import app.iui.flow.models.MainTasksModel;
 import app.iui.flow.models.NotImplementedModel;
 import util.Assert;
 
 /**
  * Author: Igor Usenko ( igors48@gmail.com )
- * Date: 16.02.2012
+ * Date: 04.04.12
  */
-public class GoogleReaderChooseTaskModelHandler {
+public class GoogleReaderManageProfilesModelHandler {
 
-    public Model handle(final GoogleReaderChooseTaskModel _model, final FlowController _controller) throws ModelHandlerException {
+    public Model handle(final GoogleReaderManageProfilesModel _model, final FlowController _controller) throws ModelHandlerException {
         Assert.notNull(_model, "Model is null");
         Assert.notNull(_controller, "Controller is null");
 
@@ -25,17 +24,22 @@ public class GoogleReaderChooseTaskModelHandler {
             if (_model.isApproved()) {
 
                 switch (_model.getTask()) {
-                    case MANAGE_PROFILES: {
-                        result = new GoogleReaderManageProfilesModel();
-
+                    case ADD_PROFILE: {
+                        break;
+                    }
+                    case EDIT_PROFILE: {
+                        break;
+                    }
+                    case DELETE_PROFILE: {
                         break;
                     }
                 }
             } else {
-                result = new MainTasksModel();
+                result = new GoogleReaderChooseTaskModel();
             }
 
             return result;
+
         } catch (Exception e) {
             throw new ModelHandlerException(e);
         }

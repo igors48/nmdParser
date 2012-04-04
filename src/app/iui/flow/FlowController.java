@@ -331,6 +331,17 @@ public class FlowController {
         }
     }
 
+    public Model handle(GoogleReaderManageProfilesModel _model) {
+        Assert.notNull(_model, "Model is null");
+
+        try {
+            return putToHistory(new GoogleReaderManageProfilesModelHandler().handle(_model, this));
+        } catch (ModelHandlerException e) {
+            this.log.error(e);
+            return new ErrorModel(SwingTools.createErrorText(e), e, ModelType.CHOOSE_MAIN_TASK);
+        }
+    }
+
     public String getString(final String _key) {
         Assert.isValidString(_key, "Key is not valid");
 

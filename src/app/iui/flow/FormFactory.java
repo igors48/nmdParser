@@ -142,6 +142,10 @@ public class FormFactory {
             result = new GoogleReaderChooseTaskForm(this.owner, FORM_WIDTH, FORM_HEIGHT, this.stringResource, (GoogleReaderChooseTaskModel) _model, (GoogleReaderChooseTaskForm.Listener) _listener);
         }
 
+        if (ModelType.GOOGLE_READER_MANAGE_PROFILES == _model.getType()) {
+            result = new GoogleReaderManageProfilesForm(this.owner, FORM_WIDTH, FORM_HEIGHT, this.stringResource, (GoogleReaderManageProfilesModel) _model, (GoogleReaderManageProfilesForm.Listener) _listener);
+        }
+
         return result;
     }
 
