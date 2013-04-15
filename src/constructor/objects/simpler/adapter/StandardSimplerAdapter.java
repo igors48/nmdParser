@@ -220,7 +220,7 @@ public class StandardSimplerAdapter implements SimplerAdapter {
     }
 
     public boolean isLinksAsFootnotes() {
-        return false/*true*/;
+        return false;
     }
 
     public boolean removeExists() {
