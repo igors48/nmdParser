@@ -1,3 +1,0 @@
-<output channel="mr.issue_channel" linksAsFootnotes="no" resolveImageLinks="yes" fromNewToOld="no" branch="Polden">
-	<many-to-one name="Polden${issue|0}"/>
-</output>

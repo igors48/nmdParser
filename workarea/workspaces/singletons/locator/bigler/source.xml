@@ -1,7 +1,0 @@
-<source>
-
-	<store days="0"/>
-	
-	<url from="${from|1}" to="${to|1}">http://www.bigler.ru/story.php?part=*&amp;cat=${cat|0}</url>
-	
-</source>

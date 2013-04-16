@@ -1,7 +1,0 @@
-<processor>
-
-    <xPath>
-        <expression>/html/body/div[@class='chapter']/div[@class='titlepage']/div[1]/div/h2[@class='title']</expression>
-    </xPath>
-	
-</processor>

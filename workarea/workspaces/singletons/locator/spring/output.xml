@@ -1,3 +1,0 @@
-<output channel="spring.channel" branch="spring" storage="common.storage.root">
-    <many-to-one name="spring"/>
-</output>

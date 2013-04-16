@@ -1,7 +1,0 @@
-<processor>
-
-    <xPath>
-        <expression>//table/tbody/tr/td[position()=3]</expression>
-    </xPath>
-	
-</processor>
