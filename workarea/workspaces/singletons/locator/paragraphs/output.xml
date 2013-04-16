@@ -1,0 +1,3 @@
+<output channel="paragraphs.channel" branch="paragraphs" storage="common.storage.root">
+    <many-to-one name="paragraphs"/>
+</output>

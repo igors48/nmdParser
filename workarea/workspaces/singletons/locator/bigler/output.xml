@@ -1,0 +1,3 @@
+<output channel="bigler.channel" branch="humor" storage="common.storage.root" removeExists="no">
+	<many-to-one name="bigler-${from|1}-${to|1}"/>
+</output>

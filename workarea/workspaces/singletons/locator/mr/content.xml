@@ -1,0 +1,24 @@
+<processor>
+
+	<load in="url" out="page_content"/>
+	
+	<xPath in="page_content" out="print_link_relative">
+		<expression>//li[@class='print_ver' and position()=2]/a/..</expression>
+	</xPath>
+	
+	<getGroup in="print_link_relative" out="print_link_relative">
+		<pattern><![CDATA[&apos;(.*?)&apos;]]></pattern>
+		<occurrence>0</occurrence>
+	</getGroup>
+	
+	<set value="http://www.vokrugsveta.ru" out="host"/>
+	
+	<concat first="host" second="print_link_relative" out="print_link"/>
+	
+	<load in="print_link" referer="url" out="print_page_content"/>
+	
+	<xPath in="print_page_content">
+		<expression>/html/body/div[@id='main_part']/div[@class='content']/div[@class='content']</expression>
+	</xPath>
+	
+</processor>

@@ -1,0 +1,9 @@
+<source>
+
+	<store days="0"/>
+
+	<custom id="mr.issue_custom_source"/>
+	
+	<processor id="mr.issue_custom_postprocessor"/>
+	
+</source>
