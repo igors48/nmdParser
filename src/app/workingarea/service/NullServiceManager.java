@@ -9,7 +9,6 @@ import constructor.objects.storage.Storage;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
 import debug.DebugConsole;
 import debug.console.NullDebugConsole;
-import greader.GoogleReaderAdapter;
 import http.BatchLoader;
 import resource.ConverterFactory;
 import timeservice.TimeService;
@@ -69,10 +68,6 @@ public final class NullServiceManager implements ServiceManager {
 
     public Preprocessor getPreprocessor() {
         return new NullPreprocessor();
-    }
-
-    public GoogleReaderAdapter getGoogleReaderAdapter() {
-        return null;
     }
 
     public void cleanup() {

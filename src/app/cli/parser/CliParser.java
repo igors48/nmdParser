@@ -106,12 +106,6 @@ public class CliParser {
         this.parsers.put(BLITZ_FEED_REQUEST_OPTION_SHORT_NAME, new BlitzFeedRequestOptionParser());
         this.parsers.put(REMOVE_SERVICE_FILES_OPTION_SHORT_NAME, new RemoveServiceFilesOptionParser());
         this.parsers.put(PROCESS_SNIPPET_OPTION_SHORT_NAME, new ProcessSnippetsOptionParser());
-        this.parsers.put(GOOGLE_READER_CREATE_PROFILE_OPTION_SHORT_NAME, new GoogleReaderCreateProfileOptionParser());
-        this.parsers.put(GOOGLE_READER_DELETE_PROFILE_OPTION_SHORT_NAME, new GoogleReaderDeleteProfileOptionParser());
-        this.parsers.put(GOOGLE_READER_CHANGE_PROFILE_PASSWORD_OPTION_SHORT_NAME, new GoogleReaderChangeProfilePasswordOptionParser());
-        this.parsers.put(GOOGLE_READER_UPDATE_PROFILE_OPTION_SHORT_NAME, new GoogleReaderUpdateProfileOptionParser());
-        this.parsers.put(GOOGLE_READER_TEST_PROFILE_FEED_OPTION_SHORT_NAME, new GoogleReaderTestProfileFeedOptionParser());
-        this.parsers.put(GOOGLE_READER_DUMP_REGISTERED_PROFILES_OPTION_SHORT_NAME, new GoogleReaderDumpRegisteredProfilesOptionParser());
     }
 
     private OptionParser getParser(final CommandLine _commandLine) {
@@ -271,57 +265,6 @@ public class CliParser {
         blitzFeedRequestOption.setOptionalArg(false);
         blitzFeedRequestOption.setArgs(ONE_ARG);
 
-        Option googleReaderCreateProfileOption = new Option(GOOGLE_READER_CREATE_PROFILE_OPTION_SHORT_NAME,
-                GOOGLE_READER_CREATE_PROFILE_OPTION_FULL_NAME,
-                false,
-                GOOGLE_READER_CREATE_PROFILE_OPTION_DESCRIPTION);
-        googleReaderCreateProfileOption.setArgName(GOOGLE_READER_CREATE_PROFILE_OPTION_ATTRIBUTE_NAME);
-        googleReaderCreateProfileOption.setRequired(true);
-        googleReaderCreateProfileOption.setOptionalArg(false);
-        googleReaderCreateProfileOption.setArgs(2);
-
-        Option googleReaderChangeProfilePasswordOption = new Option(GOOGLE_READER_CHANGE_PROFILE_PASSWORD_OPTION_SHORT_NAME,
-                GOOGLE_READER_CHANGE_PROFILE_PASSWORD_OPTION_FULL_NAME,
-                false,
-                GOOGLE_READER_CHANGE_PROFILE_PASSWORD_OPTION_DESCRIPTION);
-        googleReaderChangeProfilePasswordOption.setArgName(GOOGLE_READER_CHANGE_PROFILE_PASSWORD_OPTION_ATTRIBUTE_NAME);
-        googleReaderChangeProfilePasswordOption.setRequired(true);
-        googleReaderChangeProfilePasswordOption.setOptionalArg(false);
-        googleReaderChangeProfilePasswordOption.setArgs(2);
-
-        Option googleReaderDeleteProfileOption = new Option(GOOGLE_READER_DELETE_PROFILE_OPTION_SHORT_NAME,
-                GOOGLE_READER_DELETE_PROFILE_OPTION_FULL_NAME,
-                false,
-                GOOGLE_READER_DELETE_PROFILE_OPTION_DESCRIPTION);
-        googleReaderDeleteProfileOption.setArgName(GOOGLE_READER_DELETE_PROFILE_OPTION_ATTRIBUTE_NAME);
-        googleReaderDeleteProfileOption.setRequired(true);
-        googleReaderDeleteProfileOption.setOptionalArg(false);
-        googleReaderDeleteProfileOption.setArgs(1);
-
-        Option googleReaderUpdateProfileOption = new Option(GOOGLE_READER_UPDATE_PROFILE_OPTION_SHORT_NAME,
-                GOOGLE_READER_UPDATE_PROFILE_OPTION_FULL_NAME,
-                false,
-                GOOGLE_READER_UPDATE_PROFILE_OPTION_DESCRIPTION);
-        googleReaderUpdateProfileOption.setArgName(GOOGLE_READER_UPDATE_PROFILE_OPTION_ATTRIBUTE_NAME);
-        googleReaderUpdateProfileOption.setRequired(true);
-        googleReaderUpdateProfileOption.setOptionalArg(false);
-        googleReaderUpdateProfileOption.setArgs(1);
-
-        Option googleReaderTestProfileFeedOption = new Option(GOOGLE_READER_TEST_PROFILE_FEED_OPTION_SHORT_NAME,
-                GOOGLE_READER_TEST_PROFILE_FEED_OPTION_FULL_NAME,
-                false,
-                GOOGLE_READER_TEST_PROFILE_FEED_OPTION_DESCRIPTION);
-        googleReaderTestProfileFeedOption.setArgName(GOOGLE_READER_TEST_PROFILE_FEED_OPTION_ATTRIBUTE_NAME);
-        googleReaderTestProfileFeedOption.setRequired(true);
-        googleReaderTestProfileFeedOption.setOptionalArg(false);
-        googleReaderTestProfileFeedOption.setArgs(2);
-
-        Option googleReaderDumpRegisteredProfilesOption = new Option(GOOGLE_READER_DUMP_REGISTERED_PROFILES_OPTION_SHORT_NAME,
-                GOOGLE_READER_DUMP_REGISTERED_PROFILES_OPTION_FULL_NAME,
-                false,
-                GOOGLE_READER_DUMP_REGISTERED_PROFILES_OPTION_DESCRIPTION);
-        googleReaderDumpRegisteredProfilesOption.setArgs(0);
-
         Option baseUrlOption = new Option(BASE_URL_OPTION_SHORT_NAME,
                 BASE_URL_OPTION_FULL_NAME,
                 true,
@@ -407,12 +350,6 @@ public class CliParser {
         mainGroup.addOption(blitzPageRequestOption);
         mainGroup.addOption(blitzFeedRequestOption);
         mainGroup.addOption(removeServiceFilesOption);
-        mainGroup.addOption(googleReaderCreateProfileOption);
-        mainGroup.addOption(googleReaderDeleteProfileOption);
-        mainGroup.addOption(googleReaderChangeProfilePasswordOption);
-        mainGroup.addOption(googleReaderUpdateProfileOption);
-        mainGroup.addOption(googleReaderTestProfileFeedOption);
-        mainGroup.addOption(googleReaderDumpRegisteredProfilesOption);
 
         this.options.addOptionGroup(mainGroup);
 
@@ -436,18 +373,6 @@ public class CliParser {
     }
 
     public static class CliParserException extends Exception {
-
-        public CliParserException() {
-            super();
-        }
-
-        public CliParserException(final String _s) {
-            super(_s);
-        }
-
-        public CliParserException(final String _s, final Throwable _throwable) {
-            super(_s, _throwable);
-        }
 
         public CliParserException(final Throwable _throwable) {
             super(_throwable);

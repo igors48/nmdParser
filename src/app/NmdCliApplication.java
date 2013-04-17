@@ -143,7 +143,7 @@ public class NmdCliApplication {
     }
 
     private void createSettingsManager() {
-        this.settingsManager = new FileSettingsManager(this.defaults.getSettingsDirectory(), this.defaults.getDefaultStorageRoot(), this.defaults.getDefaultStoragePeriod(), this.defaults.getGoogleReaderDirectory());
+        this.settingsManager = new FileSettingsManager(this.defaults.getSettingsDirectory(), this.defaults.getDefaultStorageRoot(), this.defaults.getDefaultStoragePeriod());
     }
 
     private void createApi() {

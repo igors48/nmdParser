@@ -1,14 +1,13 @@
 package dated.item.modification;
 
 import dated.Dated;
-import greader.entities.FeedItem;
 import util.Assert;
 
 import java.util.Date;
 
 /**
- * Класс хранит урл с которого нужно выкачивать информацию.
- * Попутно хранит дату получения, возможно заголовок и описание
+ * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 21.11.2008
@@ -18,7 +17,6 @@ public class Modification implements Dated {
     private final String url;
     private final String title;
     private final String description;
-    private static final int SECONDS_TO_MILLIS = 1000;
 
     public Modification(final Date _date, final String _url, final String _title, final String _description) {
         Assert.notNull(_date, "Date is null");
@@ -85,14 +83,6 @@ public class Modification implements Dated {
         result = 31 * result + title.hashCode();
         result = 31 * result + description.hashCode();
         return result;
-    }
-
-    public static Modification createModification(final FeedItem _item) {
-
-        return new Modification(new Date(_item.getPublished() * SECONDS_TO_MILLIS),
-                _item.getUrl(),
-                _item.getTitle(),
-                _item.getSummary());
     }
 
 }

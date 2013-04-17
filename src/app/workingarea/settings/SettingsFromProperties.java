@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Установки хранящиеся в пропертях
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 16.04.2009
@@ -87,14 +87,10 @@ public class SettingsFromProperties implements Settings {
     private static final String DOCUMENT_SORT_FROM_NEW_TO_OLD_KEY = "document.sort.from.new.to.old";
     private static final String DOCUMENT_SORT_FROM_NEW_TO_OLD_DEFAULT = "false";
 
-    private static final String GOOGLE_READER_MAX_ITEMS_PER_REQUEST_KEY = "google.reader.max.items.per.request";
-    private static final String GOOGLE_READER_MAX_ITEMS_PER_REQUEST_DEFAULT = "200";
-
     private final Properties properties;
 
     private final String defaultStorageRoot;
     private final long defaultStoragePeriod;
-    private final String googleReaderRoot;
 
     private String tempDirectory;
     private String resourceDummy;
@@ -123,13 +119,12 @@ public class SettingsFromProperties implements Settings {
     private boolean imageGrayscale;
     private boolean fromNewToOld;
     private int precachedItemsCount;
-    private int googleReaderMaxItemsPerRequest;
 
     private byte[] dummy;
 
     private final Log log;
 
-    public SettingsFromProperties(final Properties _properties, final String _defaultStorageRoot, final long _defaultStoragePeriod, final String _googleReaderRoot) throws SettingsException {
+    public SettingsFromProperties(final Properties _properties, final String _defaultStorageRoot, final long _defaultStoragePeriod) throws SettingsException {
         Assert.notNull(_properties, "Properties is null.");
         this.properties = _properties;
 
@@ -138,9 +133,6 @@ public class SettingsFromProperties implements Settings {
 
         Assert.greaterOrEqual(_defaultStoragePeriod, 0, "Default storage period < 0");
         this.defaultStoragePeriod = _defaultStoragePeriod;
-
-        Assert.isValidString(_googleReaderRoot, "Google Reader root is not valid");
-        this.googleReaderRoot = _googleReaderRoot;
 
         this.log = LogFactory.getLog(getClass());
 
@@ -296,14 +288,6 @@ public class SettingsFromProperties implements Settings {
                 5);
     }
 
-    public String getGoogleReaderRoot() {
-        return this.googleReaderRoot;
-    }
-
-    public int getGoogleReaderMaxItemsPerRequest() {
-        return this.googleReaderMaxItemsPerRequest;
-    }
-
     private void mapProperties() throws SettingsException {
 
         try {
@@ -341,8 +325,6 @@ public class SettingsFromProperties implements Settings {
             this.fromNewToOld = TRUE_LITERAL.equalsIgnoreCase(this.properties.getProperty(DOCUMENT_SORT_FROM_NEW_TO_OLD_KEY, DOCUMENT_SORT_FROM_NEW_TO_OLD_DEFAULT));
 
             this.precachedItemsCount = Integer.valueOf(this.properties.getProperty(PRECACHED_ITEMS_COUNT_KEY, PRECACHED_ITEMS_COUNT_DEFAULT));
-
-            this.googleReaderMaxItemsPerRequest = Integer.valueOf(this.properties.getProperty(GOOGLE_READER_MAX_ITEMS_PER_REQUEST_KEY, GOOGLE_READER_MAX_ITEMS_PER_REQUEST_DEFAULT));
         } catch (Exception e) {
             throw new SettingsException(e);
         }
@@ -387,8 +369,6 @@ public class SettingsFromProperties implements Settings {
         this.log.debug(DOCUMENT_SORT_FROM_NEW_TO_OLD_KEY + EQUALS_LITERAL + this.fromNewToOld);
 
         this.log.debug(PRECACHED_ITEMS_COUNT_KEY + EQUALS_LITERAL + this.precachedItemsCount);
-
-        this.log.debug(GOOGLE_READER_MAX_ITEMS_PER_REQUEST_KEY + EQUALS_LITERAL + this.googleReaderMaxItemsPerRequest);
     }
-    
+
 }

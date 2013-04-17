@@ -7,7 +7,6 @@ import app.metadata.ObjectMetaData;
 import app.templater.TemplateParameters;
 import constructor.dom.locator.Mask;
 import constructor.objects.simpler.configuration.SimplerConfiguration;
-import greader.profile.Profiles;
 import timeservice.TimeService;
 
 import java.util.List;
@@ -257,53 +256,6 @@ public interface ApiFacade extends BlitzRequestHandler {
      * @throws FatalException ���� �� ����������
      */
     void removeServiceFiles(Mask _mask) throws FatalException;
-
-    /**
-     * ������� Google Reader �������
-     *
-     * @param _email    ����� ��. �����
-     * @param _password ������
-     * @throws FatalException ���� �� ����������
-     */
-    void createGoogleReaderProfile(String _email, String _password) throws FatalException;
-
-    /**
-     * ������� Google Reader �������
-     *
-     * @param _email ����� ��. �����
-     * @throws FatalException ���� �� ����������
-     */
-    void deleteGoogleReaderProfile(String _email) throws FatalException;
-
-    /**
-     * ��������� ���� Google Reader ��������
-     *
-     * @param _email ����� ��. �����
-     * @return ������ ������ ���� �������������� ������
-     * @throws FatalException ���� �� ����������
-     */
-    List<String> updateGoogleReaderProfile(String _email) throws FatalException;
-
-    /**
-     * �������� ������ Google Reader ��������
-     *
-     * @param _email       ����� ��. �����
-     * @param _newPassword ����� ������
-     * @throws FatalException ���� �� ����������
-     */
-    void changeGoogleReaderProfilePassword(String _email, String _newPassword) throws FatalException;
-
-    /**
-     * ��������� ���� Google Reader ��������
-     *
-     * @param _email ����� ��. �����
-     * @param _feed  ��� �� ������� ����������� ��� ������������
-     * @return ������ ������ ���� �������������� ������
-     * @throws FatalException ���� �� ����������
-     */
-    List<String> testGoogleReaderProfile(String _email, String _feed) throws FatalException;
-
-    Profiles getRegisteredGoogleReaderProfiles() throws FatalException;
 
     /**
      * ��������� ������ � API

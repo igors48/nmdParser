@@ -14,9 +14,6 @@ public final class OptionNameTable {
     private static final String URL_TOKEN = "url";
     private static final String URLS_TOKEN = "url(s)";
     private static final String TEMPLATES_TOKEN = "name rss_url";
-    private static final String EMAIL_PASSWORD_TOKEN = "email password";
-    private static final String EMAIL_FEED_URL_TOKEN = "email feed_url";
-    private static final String EMAIL_TOKEN = "email";
 
     public static final String DEBUG_MODE_OPTION_SHORT_NAME = "d";
     public static final String DEBUG_MODE_OPTION_FULL_NAME = "debug";
@@ -106,34 +103,6 @@ public final class OptionNameTable {
     public static final String BLITZ_FEED_REQUEST_OPTION_ATTRIBUTE_NAME = URL_TOKEN;
     public static final String BLITZ_FEED_REQUEST_OPTION_DESCRIPTION = "Process blitz request for given feed";
 
-    public static final String GOOGLE_READER_CREATE_PROFILE_OPTION_SHORT_NAME = "gc";
-    public static final String GOOGLE_READER_CREATE_PROFILE_OPTION_FULL_NAME = "google-create";
-    public static final String GOOGLE_READER_CREATE_PROFILE_OPTION_ATTRIBUTE_NAME = EMAIL_PASSWORD_TOKEN;
-    public static final String GOOGLE_READER_CREATE_PROFILE_OPTION_DESCRIPTION = "Create Google Reader profile";
-
-    public static final String GOOGLE_READER_DELETE_PROFILE_OPTION_SHORT_NAME = "gd";
-    public static final String GOOGLE_READER_DELETE_PROFILE_OPTION_FULL_NAME = "google-delete";
-    public static final String GOOGLE_READER_DELETE_PROFILE_OPTION_ATTRIBUTE_NAME = EMAIL_TOKEN;
-    public static final String GOOGLE_READER_DELETE_PROFILE_OPTION_DESCRIPTION = "Delete Google Reader profile";
-
-    public static final String GOOGLE_READER_CHANGE_PROFILE_PASSWORD_OPTION_SHORT_NAME = "gp";
-    public static final String GOOGLE_READER_CHANGE_PROFILE_PASSWORD_OPTION_FULL_NAME = "google-password";
-    public static final String GOOGLE_READER_CHANGE_PROFILE_PASSWORD_OPTION_ATTRIBUTE_NAME = EMAIL_PASSWORD_TOKEN;
-    public static final String GOOGLE_READER_CHANGE_PROFILE_PASSWORD_OPTION_DESCRIPTION = "Change Google Reader profile password";
-
-    public static final String GOOGLE_READER_UPDATE_PROFILE_OPTION_SHORT_NAME = "gu";
-    public static final String GOOGLE_READER_UPDATE_PROFILE_OPTION_FULL_NAME = "google-update";
-    public static final String GOOGLE_READER_UPDATE_PROFILE_OPTION_ATTRIBUTE_NAME = EMAIL_TOKEN;
-    public static final String GOOGLE_READER_UPDATE_PROFILE_OPTION_DESCRIPTION = "Update Google Reader profile";
-
-    public static final String GOOGLE_READER_TEST_PROFILE_FEED_OPTION_SHORT_NAME = "gt";
-    public static final String GOOGLE_READER_TEST_PROFILE_FEED_OPTION_FULL_NAME = "google-test";
-    public static final String GOOGLE_READER_TEST_PROFILE_FEED_OPTION_ATTRIBUTE_NAME = EMAIL_FEED_URL_TOKEN;
-    public static final String GOOGLE_READER_TEST_PROFILE_FEED_OPTION_DESCRIPTION = "Test feed from Google Reader profile";
-
-    public static final String GOOGLE_READER_DUMP_REGISTERED_PROFILES_OPTION_SHORT_NAME = "gl";
-    public static final String GOOGLE_READER_DUMP_REGISTERED_PROFILES_OPTION_FULL_NAME = "google-list";
-    public static final String GOOGLE_READER_DUMP_REGISTERED_PROFILES_OPTION_DESCRIPTION = "Dump registered Google Reader profiles";
 
     private static final String FOR_BLITZ_REQUEST_ONLY_TOKEN = " !!! For blitz requests only !!!";
 

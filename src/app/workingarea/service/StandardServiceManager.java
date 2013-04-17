@@ -18,11 +18,6 @@ import debug.DebugConsole;
 import debug.console.FileDebugConsole;
 import debug.console.FileDebugConsoleUpdater;
 import debug.console.NullDebugConsole;
-import greader.GoogleReaderAdapter;
-import greader.GoogleReaderProvider;
-import greader.HttpSecureAdapter;
-import greader.StandardGoogleReaderAdapter;
-import greader.profile.ProfilesStorage;
 import http.*;
 import resource.ConverterFactory;
 import resource.ResourceConverterFactory;
@@ -55,10 +50,6 @@ public class StandardServiceManager implements ServiceManager {
     private ResourceCache resourceCache;
     private ProcessWrapper processWrapper;
     private LocalStorage defaultStorage;
-
-    private ProfilesStorage profilesStorage;
-    private GoogleReaderProvider googleReaderProvider;
-    private GoogleReaderAdapter googleReaderAdapter;
 
     private boolean reflectionMode;
 
@@ -199,28 +190,6 @@ public class StandardServiceManager implements ServiceManager {
 
     public Preprocessor getPreprocessor() {
         return getContextPreprocessor();
-    }
-
-    public GoogleReaderAdapter getGoogleReaderAdapter() throws ServiceManagerException {
-
-        try {
-            if (this.profilesStorage == null) {
-                this.profilesStorage = new ProfilesStorage(this.settings.getGoogleReaderRoot());
-            }
-
-            if (this.googleReaderProvider == null) {
-                HttpSecureAdapter httpSecureAdapter = new HttpSecureAdapter(getHttpRequestHandler());
-                this.googleReaderProvider = new GoogleReaderProvider(httpSecureAdapter, this.settings.getGoogleReaderMaxItemsPerRequest());
-            }
-
-            if (this.googleReaderAdapter == null) {
-                this.googleReaderAdapter = new StandardGoogleReaderAdapter(this.googleReaderProvider, this.profilesStorage);
-            }
-
-            return this.googleReaderAdapter;
-        } catch (ProfilesStorage.ProfilesStorageException e) {
-            throw new ServiceManagerException(e);
-        }
     }
 
     public void cleanup() {

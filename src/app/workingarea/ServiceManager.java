@@ -5,7 +5,6 @@ import constructor.objects.source.core.FetcherFactory;
 import constructor.objects.storage.Storage;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
 import debug.DebugConsole;
-import greader.GoogleReaderAdapter;
 import http.BatchLoader;
 import resource.ConverterFactory;
 import timeservice.TimeService;
@@ -42,22 +41,9 @@ public interface ServiceManager {
 
     Preprocessor getPreprocessor();
 
-    GoogleReaderAdapter getGoogleReaderAdapter() throws ServiceManagerException;
-
     void cleanup();
 
     public class ServiceManagerException extends Exception {
-
-        public ServiceManagerException() {
-        }
-
-        public ServiceManagerException(String _s) {
-            super(_s);
-        }
-
-        public ServiceManagerException(String _s, Throwable _throwable) {
-            super(_s, _throwable);
-        }
 
         public ServiceManagerException(Throwable _throwable) {
             super(_throwable);

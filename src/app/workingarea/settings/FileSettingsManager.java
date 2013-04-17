@@ -9,8 +9,8 @@ import util.Assert;
 import java.io.File;
 
 /**
- * Менеджер установок хранящихся в файлах. Все файлы установок хранятся
- * в одном каталоге
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+ * пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 16.04.2009
@@ -20,9 +20,8 @@ public class FileSettingsManager implements SettingsManager {
     private final PropertiesResolver resolver;
     private final String defaultStorageRoot;
     private final long defaultStoragePeriod;
-    private final String googleReaderRoot;
 
-    public FileSettingsManager(final String _root, final String _defaultStorageRoot, final long _defaultStoragePeriod, final String _googleReaderRoot) {
+    public FileSettingsManager(final String _root, final String _defaultStorageRoot, final long _defaultStoragePeriod) {
         Assert.isValidString(_root, "Settings manager root path is not valid.");
         Assert.isTrue(new File(_root).exists(), "Settings manager root path [ " + _root + " ] is not exists.");
 
@@ -33,20 +32,14 @@ public class FileSettingsManager implements SettingsManager {
 
         Assert.greaterOrEqual(_defaultStoragePeriod, 0, "Default storage period < 0");
         this.defaultStoragePeriod = _defaultStoragePeriod;
-
-        Assert.isValidString(_googleReaderRoot, "Google Reader root path is not valid.");
-        Assert.isTrue(new File(_root).exists(), "Google Reader root path [ " + _root + " ] is not exists.");
-        this.googleReaderRoot = _googleReaderRoot;
     }
 
     public Settings getSettings(final String _id) throws SettingsManagerException {
         Assert.isValidString(_id, "Properties id is not valid.");
 
         try {
-            return new SettingsFromProperties(this.resolver.resolve(_id), this.defaultStorageRoot, this.defaultStoragePeriod, this.googleReaderRoot);
-        } catch (PropertiesResolver.PropertyResolverException e) {
-            throw new SettingsManagerException(e);
-        } catch (Settings.SettingsException e) {
+            return new SettingsFromProperties(this.resolver.resolve(_id), this.defaultStorageRoot, this.defaultStoragePeriod);
+        } catch (PropertiesResolver.PropertyResolverException | Settings.SettingsException e) {
             throw new SettingsManagerException(e);
         }
     }
