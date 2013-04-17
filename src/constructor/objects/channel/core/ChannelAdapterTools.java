@@ -3,7 +3,6 @@ package constructor.objects.channel.core;
 import app.cli.blitz.request.CriterionType;
 import constructor.objects.interpreter.configuration.FragmentAnalyserConfiguration;
 import constructor.objects.processor.VariableProcessorAdapter;
-import constructor.objects.processor.append.adapter.AppendProcessorAdapter;
 import constructor.objects.processor.chain.adapter.FirstOneProcessorAdapter;
 import constructor.objects.processor.chain.adapter.StandardChainProcessorAdapter;
 import constructor.objects.processor.filter.adapter.FilterProcessorAdapter;
@@ -81,7 +80,7 @@ public final class ChannelAdapterTools {
         adapter.addAdapter(createScriptsRemover());
 
         FirstOneProcessorAdapter firstOneProcessorAdapter = new FirstOneProcessorAdapter(_debugConsole);
-        
+
         for (String expression : _expressions) {
             firstOneProcessorAdapter.addAdapter(_criterionType == CriterionType.REGEXP ?
                     createGetGroupProcessorAdapter(expression, Variables.DEFAULT_OUTPUT_VARIABLE_NAME) :
@@ -89,7 +88,7 @@ public final class ChannelAdapterTools {
         }
 
         adapter.addAdapter(firstOneProcessorAdapter);
-        
+
         return adapter;
     }
 

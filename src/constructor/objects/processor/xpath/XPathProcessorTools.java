@@ -29,7 +29,7 @@ public final class XPathProcessorTools {
         Assert.isValidString(_source, "Source is not valid");
         Assert.isValidString(_expression, "Expression is not valid");
         Assert.notNull(_mode, "Mode is null");
-        
+
         List<String> result = newArrayList();
 
         NodeList nodes = getNodes(_source, _expression);

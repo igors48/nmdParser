@@ -85,7 +85,7 @@ public class ChannelAdapterToolsCreateProcessorTest extends TestCase {
             } else {
                 assertTrue(current instanceof GetGroupProcessor);
             }
-        }    
+        }
     }
 
 }
