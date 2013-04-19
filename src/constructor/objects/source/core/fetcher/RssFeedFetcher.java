@@ -4,17 +4,20 @@ import com.sun.syndication.feed.synd.SyndContentImpl;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.SyndFeedInput;
-import com.sun.syndication.io.XmlReader;
 import constructor.objects.source.core.ModificationFetcher;
 import dated.item.modification.Modification;
+import html.HttpData;
 import http.BatchLoader;
+import http.Result;
+import http.data.DataUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import timeservice.TimeService;
 import util.Assert;
 import util.TimeoutTools;
 
-import java.net.URL;
+import java.io.Reader;
+import java.io.StringReader;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.List;
@@ -35,21 +38,28 @@ public class RssFeedFetcher implements ModificationFetcher {
     private final int tryCount;
     private final int timeOut;
     private final int minTimeOut;
+    private final BatchLoader batchLoader;
 
     private final Log log;
 
     public RssFeedFetcher(final String _url, final TimeService _timeService, final int _tryCount, final int _timeOut, final int _minTimeOut, final BatchLoader _batchLoader) {
-        Assert.notNull(_timeService, "Time service is null.");
         Assert.isValidString(_url, "URL is not valid.");
-        Assert.greater(_tryCount, 0, "Try count <= 0");
-        Assert.greater(_timeOut, 0, "Time out <= 0");
-        Assert.greater(_minTimeOut, 0, "Minimum time out <= 0");
-
         this.url = _url;
+
+        Assert.notNull(_timeService, "Time service is null.");
         this.timeService = _timeService;
+
+        Assert.greater(_tryCount, 0, "Try count <= 0");
         this.tryCount = _tryCount;
+
+        Assert.greater(_timeOut, 0, "Time out <= 0");
         this.timeOut = _timeOut;
+
+        Assert.greater(_minTimeOut, 0, "Minimum time out <= 0");
         this.minTimeOut = _minTimeOut;
+
+        Assert.notNull(_batchLoader, "Batch loader is null");
+        this.batchLoader = _batchLoader;
 
         this.log = LogFactory.getLog(getClass());
     }
@@ -174,10 +184,17 @@ public class RssFeedFetcher implements ModificationFetcher {
                 List<SyndEntry> result = newArrayList();
 
                 try {
-                    URL feedUrl = new URL(_url);
+                    HttpData feedData = batchLoader.loadUrl(_url);
+
+                    if (feedData.getResult() != Result.OK) {
+                        return result;
+                    }
+
+                    String feedAsString = DataUtil.getString(feedData.getData());
+                    Reader feedAsReader = new StringReader(feedAsString);
 
                     SyndFeedInput input = new SyndFeedInput();
-                    SyndFeed feed = input.build(new XmlReader(feedUrl));
+                    SyndFeed feed = input.build(feedAsReader);
 
                     for (int i = 0; i < feed.getEntries().size(); i++) {
                         SyndEntry entry = (SyndEntry) feed.getEntries().get(i);
