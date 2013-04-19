@@ -26,10 +26,8 @@ import java.util.concurrent.*;
 import static util.CollectionUtils.newArrayList;
 
 /**
- * ��������� ������ ����������� �� RSS ������
- *
- * @author Igor Usenko
- *         Date: 23.11.2008
+ * Author: Igor Usenko ( igors48@gmail.com )
+ * Date: 23.11.2008
  */
 public class RssFeedFetcher implements ModificationFetcher {
 
@@ -40,7 +38,7 @@ public class RssFeedFetcher implements ModificationFetcher {
     private final int minTimeOut;
     private final BatchLoader batchLoader;
 
-    private final Log log;
+    private static final Log LOG = LogFactory.getLog(RssFeedFetcher.class);
 
     public RssFeedFetcher(final String _url, final TimeService _timeService, final int _tryCount, final int _timeOut, final int _minTimeOut, final BatchLoader _batchLoader) {
         Assert.isValidString(_url, "URL is not valid.");
@@ -60,15 +58,13 @@ public class RssFeedFetcher implements ModificationFetcher {
 
         Assert.notNull(_batchLoader, "Batch loader is null");
         this.batchLoader = _batchLoader;
-
-        this.log = LogFactory.getLog(getClass());
     }
 
     public List<Modification> getModifications() {
         List<Modification> result = newArrayList();
 
         if (this.url.length() > 1) {
-            this.log.debug("Load feeds from " + this.url);
+            LOG.debug("Load feeds from " + this.url);
 
             List<SyndEntry> entries = getEntries(this.url);
             result = mapEntries(entries);
@@ -103,7 +99,6 @@ public class RssFeedFetcher implements ModificationFetcher {
         String feedLink = _entry.getLink();
         String title = _entry.getTitle();
 
-        // ��� ����� ���� � ��
         if ((title == null) || (title.isEmpty())) {
             title = feedLink;
         }
@@ -150,20 +145,20 @@ public class RssFeedFetcher implements ModificationFetcher {
 
             try {
                 int timeout = TimeoutTools.getTimeout(this.minTimeOut, this.timeOut, this.tryCount - tryLeft, this.tryCount);
-                this.log.debug(MessageFormat.format("Calculated feed fetcher timeout is [ {0} ] milliseconds", timeout));
+                LOG.debug(MessageFormat.format("Calculated feed fetcher timeout is [ {0} ] milliseconds", timeout));
 
                 result = future.get(this.timeOut, TimeUnit.MILLISECONDS);
                 done = true;
             } catch (InterruptedException e) {
-                this.log.error("Error reading RSS feed", e);
+                LOG.error("Error reading RSS feed", e);
                 future.cancel(true);
                 done = true;
             } catch (ExecutionException e) {
-                this.log.error("Error reading RSS feed", e);
+                LOG.error("Error reading RSS feed", e);
                 future.cancel(true);
                 done = true;
             } catch (TimeoutException e) {
-                this.log.error("Timeout error reading RSS feed. Try left [ " + tryLeft + " ]", e);
+                LOG.error("Timeout error reading RSS feed. Try left [ " + tryLeft + " ]", e);
                 future.cancel(true);
             }
 
@@ -190,6 +185,7 @@ public class RssFeedFetcher implements ModificationFetcher {
                         return result;
                     }
 
+                    //TODO fix encoding
                     String feedAsString = DataUtil.getString(feedData.getData());
                     Reader feedAsReader = new StringReader(feedAsString);
 
@@ -200,8 +196,8 @@ public class RssFeedFetcher implements ModificationFetcher {
                         SyndEntry entry = (SyndEntry) feed.getEntries().get(i);
                         result.add(entry);
                     }
-                } catch (Throwable e) {
-                    log.error("Error reading RSS feed", e);
+                } catch (Exception e) {
+                    LOG.error("Error reading RSS feed", e);
                 }
 
                 return result;

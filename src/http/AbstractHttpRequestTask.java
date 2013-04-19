@@ -41,11 +41,6 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
     private static final String ACCEPT_CHARSET_HEADER_NAME = "Accept-Charset";
     private static final String ACCEPT_CHARSET_HEADER_VALUE = "windows-1251,utf-8;q=0.7,*;q=0.3";
 
-    /*
-    private static final String ACCEPT_LANGUAGE_HEADER_NAME = "Accept-Language";
-    private static final String ACCEPT_LANGUAGE_HEADER_VALUE = "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4";
-    */
-
     private static final String ACCEPT_ENCODING_HEADER_NAME = "Accept-Encoding";
     private static final String ACCEPT_ENCODING_HEADER_VALUE = "gzip,deflate";
 
