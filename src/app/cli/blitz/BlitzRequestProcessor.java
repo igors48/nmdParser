@@ -17,7 +17,7 @@ import util.Assert;
 import java.util.List;
 
 /**
- * Обработчик блиц запроса
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 28.10.2009
@@ -79,7 +79,7 @@ public class BlitzRequestProcessor {
     }
 
     private ModificationList getModificationList() throws Source.SourceException, ServiceManager.ServiceManagerException {
-        BlitzSourceAdapter adapter = new BlitzSourceAdapter(this.request, this.serviceManager.getTimeService(), this.settings);
+        BlitzSourceAdapter adapter = new BlitzSourceAdapter(this.request, this.serviceManager.getTimeService(), this.serviceManager.getBatchLoader(), this.settings);
         Source source = new Source(adapter);
 
         source.process();

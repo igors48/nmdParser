@@ -17,13 +17,14 @@ import constructor.objects.strategies.store.StoreMaxAgeStrategy;
 import constructor.objects.strategies.store.StoreNeverStrategy;
 import constructor.objects.strategies.update.EveryTimeUpdateStrategy;
 import dated.item.modification.stream.ModificationList;
+import http.BatchLoader;
 import timeservice.TimeService;
 import util.Assert;
 
 import java.util.Date;
 
 /**
- * Адаптер блиц-источника модификаций
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 28.10.2009
@@ -32,18 +33,22 @@ public class BlitzSourceAdapter implements SourceAdapter {
 
     private final BlitzRequest request;
     private final TimeService timeService;
+    private final BatchLoader batchLoader;
     private final Settings settings;
 
     private ModificationList result;
 
     private static final String BLITZ_SOURCE_ADAPTER_ID = "blitz_source_adapter";
 
-    public BlitzSourceAdapter(final BlitzRequest _request, final TimeService _timeService, final Settings _settings) {
+    public BlitzSourceAdapter(final BlitzRequest _request, final TimeService _timeService, final BatchLoader _batchLoader, final Settings _settings) {
         Assert.notNull(_request, "Request is null");
         this.request = _request;
 
         Assert.notNull(_timeService, "Time service is null");
         this.timeService = _timeService;
+
+        Assert.notNull(_batchLoader, "Batch loader is null");
+        this.batchLoader = _batchLoader;
 
         Assert.notNull(_settings, "Settings is null");
         this.settings = _settings;
@@ -60,7 +65,7 @@ public class BlitzSourceAdapter implements SourceAdapter {
 
         switch (this.request.getSourceType()) {
             case RSS: {
-                result = new RssFeedFetcher(this.request.getAddresses().get(0), this.timeService, this.settings.getMaxTryCount(), this.settings.getErrorTimeout(), this.settings.getMinTimeout());
+                result = new RssFeedFetcher(this.request.getAddresses().get(0), this.timeService, this.settings.getMaxTryCount(), this.settings.getErrorTimeout(), this.settings.getMinTimeout(), this.batchLoader);
                 break;
             }
             case URLS: {

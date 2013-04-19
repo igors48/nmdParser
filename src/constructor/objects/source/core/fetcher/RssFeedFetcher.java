@@ -7,6 +7,7 @@ import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 import constructor.objects.source.core.ModificationFetcher;
 import dated.item.modification.Modification;
+import http.BatchLoader;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import timeservice.TimeService;
@@ -22,7 +23,7 @@ import java.util.concurrent.*;
 import static util.CollectionUtils.newArrayList;
 
 /**
- * Получение списка модификаций из RSS канала
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ RSS пїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 23.11.2008
@@ -37,7 +38,7 @@ public class RssFeedFetcher implements ModificationFetcher {
 
     private final Log log;
 
-    public RssFeedFetcher(final String _url, final TimeService _timeService, final int _tryCount, final int _timeOut, final int _minTimeOut) {
+    public RssFeedFetcher(final String _url, final TimeService _timeService, final int _tryCount, final int _timeOut, final int _minTimeOut, final BatchLoader _batchLoader) {
         Assert.notNull(_timeService, "Time service is null.");
         Assert.isValidString(_url, "URL is not valid.");
         Assert.greater(_tryCount, 0, "Try count <= 0");
@@ -92,7 +93,7 @@ public class RssFeedFetcher implements ModificationFetcher {
         String feedLink = _entry.getLink();
         String title = _entry.getTitle();
 
-        // вот такое было в ЖЖ
+        // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ
         if ((title == null) || (title.isEmpty())) {
             title = feedLink;
         }

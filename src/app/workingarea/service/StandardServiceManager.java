@@ -81,7 +81,7 @@ public class StandardServiceManager implements ServiceManager {
     public FetcherFactory getFetcherFactory() throws ServiceManagerException {
 
         if (this.fetcherFactory == null) {
-            this.fetcherFactory = new StandardFetcherFactory();
+            this.fetcherFactory = new StandardFetcherFactory(getBatchLoader());
         }
 
         return this.fetcherFactory;
