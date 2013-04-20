@@ -18,6 +18,8 @@ import util.TimeoutTools;
 
 import java.io.Reader;
 import java.io.StringReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +33,7 @@ import static util.CollectionUtils.newArrayList;
  */
 public class RssFeedFetcher implements ModificationFetcher {
 
-    private String url;
+    private final String url;
     private final TimeService timeService;
     private final int tryCount;
     private final int timeOut;
@@ -97,6 +99,18 @@ public class RssFeedFetcher implements ModificationFetcher {
         }
 
         String feedLink = _entry.getLink();
+
+        try {
+            URL feedUrl = new URL(feedLink);
+            String host = feedUrl.getHost();
+
+            if (host.isEmpty()) {
+                return null;
+            }
+        } catch (MalformedURLException e) {
+            return null;
+        }
+
         String title = _entry.getTitle();
 
         if ((title == null) || (title.isEmpty())) {
@@ -188,7 +202,6 @@ public class RssFeedFetcher implements ModificationFetcher {
                         return result;
                     }
 
-                    //TODO fix encoding
                     String feedAsString = DataUtil.getString(feedData.getData());
                     Reader feedAsReader = new StringReader(feedAsString);
 
