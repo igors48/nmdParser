@@ -106,7 +106,10 @@ public class RssFeedFetcher implements ModificationFetcher {
         String description = getDescription(_entry);
 
         if (feedLink.length() > 0) {
-            result = new Modification(date, feedLink, DataUtil.convertToUtf8(title), DataUtil.convertToUtf8(description));
+            String titleInUtf8 = DataUtil.convertToUtf8(title);
+            String descriptionInUtf8 = DataUtil.convertToUtf8(description);
+
+            result = new Modification(date, feedLink, titleInUtf8, descriptionInUtf8);
         }
 
         return result;
