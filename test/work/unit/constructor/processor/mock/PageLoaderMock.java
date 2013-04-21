@@ -43,14 +43,11 @@ public class PageLoaderMock implements BatchLoader {
     }
 
     public HttpData loadUrl(String _url) {
-        return null;
+        return this.loadUrlWithReferer(_url, "");
     }
 
     public String getReferer() {
         return this.referer;
     }
 
-    public void cancel() {
-        // empty
-    }
 }

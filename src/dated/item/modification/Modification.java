@@ -6,13 +6,11 @@ import util.Assert;
 import java.util.Date;
 
 /**
- * ����� ������ ��� � �������� ����� ���������� ����������.
- * ������� ������ ���� ���������, �������� ��������� � ��������
- *
  * @author Igor Usenko
  *         Date: 21.11.2008
  */
 public class Modification implements Dated {
+
     private final Date date;
     private final String url;
     private final String title;
@@ -64,24 +62,26 @@ public class Modification implements Dated {
 
     public boolean equals(final Object o) {
         if (this == o) return true;
+
         if (!(o instanceof Modification)) return false;
 
         Modification that = (Modification) o;
 
-        if (!date.equals(that.date)) return false;
-        if (!description.equals(that.description)) return false;
-        if (!title.equals(that.title)) return false;
-        if (!url.equals(that.url)) return false;
+        return date.equals(that.date) &&
+                description.equals(that.description) &&
+                title.equals(that.title) &&
+                url.equals(that.url);
 
-        return true;
     }
 
     public int hashCode() {
         int result;
+
         result = date.hashCode();
         result = 31 * result + url.hashCode();
         result = 31 * result + title.hashCode();
         result = 31 * result + description.hashCode();
+
         return result;
     }
 
