@@ -1,3 +1,4 @@
+.idea
 reports
 dist
 doc
@@ -7,4 +8,6 @@ out
 *.ipr
 *.iws
 *.rar
+*.fb2
+
 
