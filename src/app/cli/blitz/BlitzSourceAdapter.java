@@ -2,7 +2,6 @@ package app.cli.blitz;
 
 import app.cli.blitz.request.BlitzRequest;
 import app.iui.flow.custom.SingleProcessInfo;
-import app.workingarea.Settings;
 import constructor.objects.AdapterException;
 import constructor.objects.source.core.ModificationFetcher;
 import constructor.objects.source.core.ModificationProcessor;
@@ -24,8 +23,6 @@ import util.Assert;
 import java.util.Date;
 
 /**
- * ������� ����-��������� �����������
- *
  * @author Igor Usenko
  *         Date: 28.10.2009
  */
@@ -34,13 +31,12 @@ public class BlitzSourceAdapter implements SourceAdapter {
     private final BlitzRequest request;
     private final TimeService timeService;
     private final BatchLoader batchLoader;
-    private final Settings settings;
 
     private ModificationList result;
 
     private static final String BLITZ_SOURCE_ADAPTER_ID = "blitz_source_adapter";
 
-    public BlitzSourceAdapter(final BlitzRequest _request, final TimeService _timeService, final BatchLoader _batchLoader, final Settings _settings) {
+    public BlitzSourceAdapter(final BlitzRequest _request, final TimeService _timeService, final BatchLoader _batchLoader) {
         Assert.notNull(_request, "Request is null");
         this.request = _request;
 
@@ -49,9 +45,6 @@ public class BlitzSourceAdapter implements SourceAdapter {
 
         Assert.notNull(_batchLoader, "Batch loader is null");
         this.batchLoader = _batchLoader;
-
-        Assert.notNull(_settings, "Settings is null");
-        this.settings = _settings;
 
         this.result = new ModificationList();
     }
@@ -65,7 +58,7 @@ public class BlitzSourceAdapter implements SourceAdapter {
 
         switch (this.request.getSourceType()) {
             case RSS: {
-                result = new RssFeedFetcher(this.request.getAddresses().get(0), this.timeService, this.settings.getMaxTryCount(), this.settings.getErrorTimeout(), this.settings.getMinTimeout(), this.batchLoader);
+                result = new RssFeedFetcher(this.request.getAddresses().get(0), this.timeService, this.batchLoader);
                 break;
             }
             case URLS: {

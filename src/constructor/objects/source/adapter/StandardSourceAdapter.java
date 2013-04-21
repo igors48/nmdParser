@@ -1,7 +1,6 @@
 package constructor.objects.source.adapter;
 
 import app.controller.Controller;
-import app.workingarea.Settings;
 import cloud.PropertiesCloud;
 import constructor.objects.AdapterException;
 import constructor.objects.processor.chain.ChainProcessor;
@@ -16,8 +15,6 @@ import timeservice.TimeService;
 import util.Assert;
 
 /**
- * Стандартный адаптер источника модификаций
- *
  * @author Igor Usenko
  *         Date: 23.03.2009
  */
@@ -25,18 +22,15 @@ public class StandardSourceAdapter extends AbstractSourceAdapter {
 
     private final SourceConfiguration configuration;
     private final FetcherFactory factory;
-    private final Settings settings;
 
-    public StandardSourceAdapter(final PropertiesCloud _cloud, final SourceConfiguration _configuration, final FetcherFactory _factory, final ModificationListStorage _storage, final TimeService _timeService, final Settings _settings, final Controller _controller) {
+    public StandardSourceAdapter(final PropertiesCloud _cloud, final SourceConfiguration _configuration, final FetcherFactory _factory, final ModificationListStorage _storage, final TimeService _timeService, final Controller _controller) {
         super(_timeService, _controller, _cloud, _storage);
 
         Assert.notNull(_configuration, "Configuration is null.");
-        Assert.notNull(_factory, "Factory is null.");
-        Assert.notNull(_settings, "Settings is null");
-
         this.configuration = _configuration;
+
+        Assert.notNull(_factory, "Factory is null.");
         this.factory = _factory;
-        this.settings = _settings;
     }
 
     public String getId() throws AdapterException {
@@ -51,7 +45,7 @@ public class StandardSourceAdapter extends AbstractSourceAdapter {
             if (this.configuration.getFetcherType() == FetcherType.CUSTOM) {
                 result = new CustomFetcher(new ChainProcessor(this.configuration.getCustomAdapter()), this.timeService);
             } else {
-                result = this.factory.createFetcher(this.configuration.getFetcherType(), this.configuration.getFetchedUrls(), this.timeService, this.settings);
+                result = this.factory.createFetcher(this.configuration.getFetcherType(), this.configuration.getFetchedUrls(), this.timeService);
             }
 
             return result;

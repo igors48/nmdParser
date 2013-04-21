@@ -642,7 +642,6 @@ public class NmdApi implements ApiFacade {
                     this.serviceManager.getFetcherFactory(),
                     this.workspace.getModificationListStorage(),
                     this.serviceManager.getTimeService(),
-                    this.settings,
                     _controller);
         }
 

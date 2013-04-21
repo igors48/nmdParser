@@ -1,6 +1,5 @@
 package constructor.objects.source.core.fetcher;
 
-import app.workingarea.Settings;
 import constructor.objects.source.configuration.FetcherType;
 import constructor.objects.source.core.FetcherFactory;
 import constructor.objects.source.core.ModificationFetcher;
@@ -25,16 +24,15 @@ public class StandardFetcherFactory implements FetcherFactory {
         this.batchLoader = _batchLoader;
     }
 
-    public ModificationFetcher createFetcher(final FetcherType _type, final List<String> _urls, final TimeService _timeService, final Settings _settings) throws FetcherFactoryException {
+    public ModificationFetcher createFetcher(final FetcherType _type, final List<String> _urls, final TimeService _timeService) throws FetcherFactoryException {
         Assert.notNull(_type, "Fetcher type is null.");
         Assert.notNull(_urls, "Url list is null.");
         Assert.notNull(_timeService, "Time service is null.");
-        Assert.notNull(_settings, "Settings is null.");
 
         ModificationFetcher result = null;
 
         if (_type == FetcherType.RSS) {
-            result = new RssFeedFetcher(_urls.get(0), _timeService, _settings.getMaxTryCount(), _settings.getErrorTimeout(), _settings.getMinTimeout(), this.batchLoader);
+            result = new RssFeedFetcher(_urls.get(0), _timeService, this.batchLoader);
         }
 
         if (_type == FetcherType.URL) {

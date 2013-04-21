@@ -14,16 +14,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import timeservice.TimeService;
 import util.Assert;
-import util.TimeoutTools;
 
 import java.io.Reader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.MessageFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.*;
 
 import static util.CollectionUtils.newArrayList;
 
@@ -35,28 +32,16 @@ public class RssFeedFetcher implements ModificationFetcher {
 
     private final String url;
     private final TimeService timeService;
-    private final int tryCount;
-    private final int timeOut;
-    private final int minTimeOut;
     private final BatchLoader batchLoader;
 
     private static final Log LOG = LogFactory.getLog(RssFeedFetcher.class);
 
-    public RssFeedFetcher(final String _url, final TimeService _timeService, final int _tryCount, final int _timeOut, final int _minTimeOut, final BatchLoader _batchLoader) {
+    public RssFeedFetcher(final String _url, final TimeService _timeService, final BatchLoader _batchLoader) {
         Assert.isValidString(_url, "URL is not valid.");
         this.url = _url;
 
         Assert.notNull(_timeService, "Time service is null.");
         this.timeService = _timeService;
-
-        Assert.greater(_tryCount, 0, "Try count <= 0");
-        this.tryCount = _tryCount;
-
-        Assert.greater(_timeOut, 0, "Time out <= 0");
-        this.timeOut = _timeOut;
-
-        Assert.greater(_minTimeOut, 0, "Minimum time out <= 0");
-        this.minTimeOut = _minTimeOut;
 
         Assert.notNull(_batchLoader, "Batch loader is null");
         this.batchLoader = _batchLoader;
@@ -68,7 +53,7 @@ public class RssFeedFetcher implements ModificationFetcher {
         if (this.url.length() > 1) {
             LOG.debug("Load feeds from " + this.url);
 
-            List<SyndEntry> entries = getEntries(this.url);
+            List<SyndEntry> entries = loadEntries(this.url);
             result = mapEntries(entries);
         }
 
@@ -148,76 +133,31 @@ public class RssFeedFetcher implements ModificationFetcher {
         return result.isEmpty() ? title : result;
     }
 
-    private List<SyndEntry> getEntries(final String _url) {
+    private List<SyndEntry> loadEntries(final String _url) {
+
         List<SyndEntry> result = newArrayList();
 
-        ExecutorService executor = Executors.newSingleThreadExecutor();
+        try {
+            HttpData feedData = batchLoader.loadUrl(_url);
 
-        int tryLeft = this.tryCount;
-        boolean done = false;
-
-        while (!done && tryLeft > 0) {
-
-            Future<List<SyndEntry>> future = executor.submit(getCallableWrapper(_url));
-
-            try {
-                int timeout = TimeoutTools.getTimeout(this.minTimeOut, this.timeOut, this.tryCount - tryLeft, this.tryCount);
-                LOG.debug(MessageFormat.format("Calculated feed fetcher timeout is [ {0} ] milliseconds", timeout));
-
-                result = future.get(this.timeOut, TimeUnit.MILLISECONDS);
-                done = true;
-            } catch (InterruptedException e) {
-                LOG.error("Error reading RSS feed", e);
-                future.cancel(true);
-                done = true;
-            } catch (ExecutionException e) {
-                LOG.error("Error reading RSS feed", e);
-                future.cancel(true);
-                done = true;
-            } catch (TimeoutException e) {
-                LOG.error("Timeout error reading RSS feed. Try left [ " + tryLeft + " ]", e);
-                future.cancel(true);
-            }
-
-            --tryLeft;
-        }
-
-        executor.shutdown();
-
-        return result;
-
-    }
-
-    private Callable<List<SyndEntry>> getCallableWrapper(final String _url) {
-
-        return new Callable<List<SyndEntry>>() {
-
-            public List<SyndEntry> call() {
-                List<SyndEntry> result = newArrayList();
-
-                try {
-                    HttpData feedData = batchLoader.loadUrl(_url);
-
-                    if (feedData.getResult() != Result.OK) {
-                        return result;
-                    }
-
-                    String feedAsString = DataUtil.getString(feedData.getData());
-                    Reader feedAsReader = new StringReader(feedAsString);
-
-                    SyndFeedInput input = new SyndFeedInput();
-                    SyndFeed feed = input.build(feedAsReader);
-
-                    for (int i = 0; i < feed.getEntries().size(); i++) {
-                        SyndEntry entry = (SyndEntry) feed.getEntries().get(i);
-                        result.add(entry);
-                    }
-                } catch (Exception e) {
-                    LOG.error("Error reading RSS feed", e);
-                }
-
+            if (feedData.getResult() != Result.OK) {
                 return result;
             }
-        };
+
+            String feedAsString = DataUtil.getString(feedData.getData());
+            Reader feedAsReader = new StringReader(feedAsString);
+
+            SyndFeedInput input = new SyndFeedInput();
+            SyndFeed feed = input.build(feedAsReader);
+
+            for (int i = 0; i < feed.getEntries().size(); i++) {
+                SyndEntry entry = (SyndEntry) feed.getEntries().get(i);
+                result.add(entry);
+            }
+        } catch (Exception e) {
+            LOG.error("Error reading RSS feed", e);
+        }
+
+        return result;
     }
 }
