@@ -18,5 +18,6 @@
     <property file="${codetools.properties.base.dir}/junit/junit.properties"/>
     <property file="${codetools.properties.base.dir}/pmd/pmd.properties"/>
     <property file="${codetools.properties.base.dir}/simian/simian.properties"/>
+    <property file="${codetools.properties.base.dir}/jacoco/jacoco.properties"/>
 
 </project>
