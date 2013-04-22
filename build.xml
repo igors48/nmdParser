@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <project name="nmd" default="release">
 
-    <!-- 1. set source folders -->
-    <!-- 2. set version property file -->
+    <import file="sampleman.xml"/>
 
     <record name="build.log"/>
 
@@ -286,7 +285,6 @@
 
         <mkdir dir="${dir.release}/lib/"/>
 
-        <!-- <jar jarfile="${dir.release}/lib/${ant.project.name}.jar" compress="true"> -->
         <jar jarfile="${dir.release}/lib/${project.name.and.version}.jar" compress="true">
             <fileset dir="${dir.build}"/>
         </jar>
@@ -304,10 +302,45 @@
             <fileset dir="${dir.base}/scripts/"/>
         </copy>
 
-        <!-- <zip destfile="${dir.release}/${ant.project.name}-${version}.${build}.zip" basedir="${dir.release}"/> -->
+        <antcall target="-finish_release"/>
+
         <zip destfile="${dir.release}/${project.name.and.version}.zip" basedir="${dir.release}"/>
 
     </target>
 
+
+    <target name="-finish_release">
+
+        <mkdir dir="${dir.release}/etc/"/>
+
+        <copy todir="${dir.release}/etc/">
+            <fileset file="${dir.base}/etc/notSupFmt.jpg"/>
+        </copy>
+
+        <copy file="${dir.base}/etc/defaults.properties.eg" tofile="${dir.release}/etc/defaults.properties"/>
+
+        <mkdir dir="${dir.release}/log/"/>
+
+        <mkdir dir="${dir.release}/work/"/>
+        <mkdir dir="${dir.release}/work/cache/"/>
+        <mkdir dir="${dir.release}/work/debug/"/>
+        <mkdir dir="${dir.release}/work/resources/"/>
+
+        <mkdir dir="${dir.release}/workarea/"/>
+
+        <mkdir dir="${dir.release}/workarea/settings/"/>
+        <touch file="${dir.release}/workarea/settings/default.properties"/>
+
+        <mkdir dir="${dir.release}/workarea/workspaces"/>
+
+        <mkdir dir="${dir.release}/workarea/lite"/>
+        <copy file="${dir.base}/workarea/lite/lite.properties.eg"
+              tofile="${dir.release}/workarea/lite/lite.properties"/>
+        <copy file="${dir.base}/workarea/lite/fb2pdf.bat" todir="${dir.release}/workarea/lite/"/>
+        <copy file="${dir.base}/workarea/lite/fb2epub.bat" todir="${dir.release}/workarea/lite/"/>
+
+        <antcall target="-copy.dist.samples"/>
+
+    </target>
 
 </project>

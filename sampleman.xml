@@ -62,200 +62,41 @@
         </antcall>
 
         <antcall target="-copy.sample">
-                <param name="from.workspace" value="sample"/>
-                <param name="sample.name" value="inopressa"/>
-                <param name="to.workspace" value="sample"/>
+            <param name="from.workspace" value="sample"/>
+            <param name="sample.name" value="inopressa"/>
+            <param name="to.workspace" value="sample"/>
         </antcall>
 
         <antcall target="-copy.sample">
-                <param name="from.workspace" value="sample"/>
-                <param name="sample.name" value="inosmi"/>
-                <param name="to.workspace" value="sample"/>
+            <param name="from.workspace" value="sample"/>
+            <param name="sample.name" value="inosmi"/>
+            <param name="to.workspace" value="sample"/>
         </antcall>
 
         <antcall target="-copy.sample">
-                <param name="from.workspace" value="sample"/>
-                <param name="sample.name" value="ithappens"/>
-                <param name="to.workspace" value="sample"/>
+            <param name="from.workspace" value="sample"/>
+            <param name="sample.name" value="ithappens"/>
+            <param name="to.workspace" value="sample"/>
         </antcall>
 
         <antcall target="-copy.sample">
-                <param name="from.workspace" value="sample"/>
-                <param name="sample.name" value="membrana"/>
-                <param name="to.workspace" value="sample"/>
+            <param name="from.workspace" value="sample"/>
+            <param name="sample.name" value="membrana"/>
+            <param name="to.workspace" value="sample"/>
         </antcall>
 
         <antcall target="-copy.sample">
-                <param name="from.workspace" value="sample"/>
-                <param name="sample.name" value="popmech"/>
-                <param name="to.workspace" value="sample"/>
+            <param name="from.workspace" value="sample"/>
+            <param name="sample.name" value="popmech"/>
+            <param name="to.workspace" value="sample"/>
         </antcall>
 
         <antcall target="-copy.sample">
-                <param name="from.workspace" value="sample"/>
-                <param name="sample.name" value="zadolbali"/>
-                <param name="to.workspace" value="sample"/>
+            <param name="from.workspace" value="sample"/>
+            <param name="sample.name" value="zadolbali"/>
+            <param name="to.workspace" value="sample"/>
         </antcall>
 
-        <!--
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="3DNewsEditorial"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="anekdot-ru"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-        -->
-
-        <!--
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="bash"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="bbc"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="computerra"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="digitlife"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="contr-tv"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="ebook"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="exler"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="habr"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="itogi"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="ixbtarticles"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="ixbtnews"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="korrespondent"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="kp"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="lebedev"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="lg"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="ng"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="nkj"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="nzg"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="og"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="rbc"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="tupichok"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="zavtra"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="zn"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-
-            <antcall target="-copy.sample">
-                    <param name="from.workspace" value="sample"/>
-                    <param name="sample.name" value="exler"/>
-                    <param name="to.workspace" value="sample"/>
-            </antcall>
-        -->
     </target>
 
     <target name="-copy.forums">
@@ -272,7 +113,7 @@
             <param name="to.workspace" value="forums"/>
         </antcall>
 
-	</target>
+    </target>
 
     <target name="-copy.magazines">
 
@@ -305,15 +146,15 @@
         <echo message="${workspace.name}"/>
 
         <!--create directory structure-->
-        <mkdir dir="${dir.dist}/workarea/workspaces/${workspace.name}/"/>
-        <mkdir dir="${dir.dist}/workarea/workspaces/${workspace.name}/channels/"/>
-        <mkdir dir="${dir.dist}/workarea/workspaces/${workspace.name}/modifications/"/>
-        <mkdir dir="${dir.dist}/workarea/workspaces/${workspace.name}/cloud/"/>
-        <mkdir dir="${dir.dist}/workarea/workspaces/${workspace.name}/locator/"/>
+        <mkdir dir="${dir.release}/workarea/workspaces/${workspace.name}/"/>
+        <mkdir dir="${dir.release}/workarea/workspaces/${workspace.name}/channels/"/>
+        <mkdir dir="${dir.release}/workarea/workspaces/${workspace.name}/modifications/"/>
+        <mkdir dir="${dir.release}/workarea/workspaces/${workspace.name}/cloud/"/>
+        <mkdir dir="${dir.release}/workarea/workspaces/${workspace.name}/locator/"/>
 
         <echo message="${workspace.name}"/>
         <!-- copy default storage -->
-        <copy todir="${dir.dist}/workarea/workspaces/${workspace.name}/locator/common/">
+        <copy todir="${dir.release}/workarea/workspaces/${workspace.name}/locator/common/">
             <fileset dir="${dir.base}/workarea/workspaces/${workspace.name}/locator/common/" includes="**/*.*"/>
         </copy>
 
@@ -321,7 +162,7 @@
 
     <target name="-copy.sample">
 
-        <copy todir="${dir.dist}/workarea/workspaces/${to.workspace}/locator/${sample.name}/">
+        <copy todir="${dir.release}/workarea/workspaces/${to.workspace}/locator/${sample.name}/">
             <fileset dir="${dir.base}/workarea/workspaces/${from.workspace}/locator/${sample.name}/" includes="**/*.*"/>
         </copy>
 
@@ -329,7 +170,7 @@
 
     <target name="-copy.simpler">
 
-        <copy todir="${dir.dist}/workarea/workspaces/${to.workspace}/locator/">
+        <copy todir="${dir.release}/workarea/workspaces/${to.workspace}/locator/">
             <fileset file="${dir.base}/workarea/workspaces/${from.workspace}/locator/${sample.name}/"/>
         </copy>
 
