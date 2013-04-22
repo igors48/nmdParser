@@ -1,7 +1,7 @@
 .idea
 reports
-dist
-doc
+release
+build
 out
 *.log
 *.iml

@@ -3,7 +3,7 @@ package app;
 import util.Assert;
 
 /**
- * Информация о версии
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 14.11.2009
@@ -34,6 +34,6 @@ public class VersionInfo {
     }
 
     public final String getVersionAndBuild() {
-        return this.version + this.build;
+        return this.version + "." + this.build;
     }
 }
