@@ -1,15 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<project name="biny" default="release">
+<project name="nmd" default="release">
 
-    <!-- task for create empty project structure -->
-    <!-- design build files dependencies -->
-    <!-- test overriding properties with -D -->
-    <!-- replace tabs with spaces -->
-    <!-- learn default excludes -->
-    <!-- test existing directory - http://stackoverflow.com/questions/1163998/do-i-have-any-way-to-check-the-existence-of-a-directory-in-ant-not-a-file -->
-    <!-- create own version of prepare directory task for code-tools-core -->
-
-    <!-- Removed misconfigured rule: LoosePackageCoupling in PMD-->
+    <!-- 1. set source folders -->
+    <!-- 2. set version property file -->
 
     <record name="build.log"/>
 
@@ -17,9 +10,9 @@
     <property name="dir.build" value="${dir.base}/build/"/>
     <property name="dir.release" value="${dir.base}/release/"/>
 
-    <property name="dir.source" value="${dir.base}/src/"/>
-    <property name="dir.source.main.java" value="${dir.source}/main/java"/>
-    <property name="dir.source.test.java" value="${dir.source}/test/java"/>
+    <property name="dir.source" value="${dir.base}/"/>
+    <property name="dir.source.main.java" value="${dir.source}/src/"/>
+    <property name="dir.source.test.java" value="${dir.source}/test/"/>
     <property name="dir.source.test.filter.java" value="**/*Test.java"/>
 
 
@@ -29,7 +22,7 @@
     <property name="dir.dependencies.runtime" value="${dir.dependencies}/runtime/"/>
     <property name="dir.dependencies.test" value="${dir.dependencies}/test/"/>
 
-    <property name="version.property.file.path" value="biny/core/version.properties"/>
+    <property name="version.property.file.path" value="app/version.properties"/>
 
 
     <property name="debug" value="off"/>

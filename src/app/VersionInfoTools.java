@@ -8,14 +8,12 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Инструмент получения информации о версии приложения
- *
  * @author Igor Usenko
  *         Date: 13.04.2010
  */
 public final class VersionInfoTools {
 
-    private static final String VERSION_FILE = "resources.properties";
+    private static final String VERSION_FILE = "version.properties";
     private static final String UNKNOWN_TOKEN = "UNKNOWN";
     private static final String BUILD_PROPERTY_KEY = "build";
     private static final String VERSION_PROPERTY_KEY = "version";
