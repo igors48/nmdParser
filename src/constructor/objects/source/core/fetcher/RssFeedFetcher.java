@@ -1,6 +1,5 @@
 package constructor.objects.source.core.fetcher;
 
-import com.sun.syndication.feed.synd.SyndContentImpl;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.SyndFeedInput;
@@ -17,11 +16,11 @@ import util.Assert;
 
 import java.io.Reader;
 import java.io.StringReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Date;
 import java.util.List;
 
+import static constructor.objects.source.core.fetcher.RssFeedFetcherTools.*;
+import static http.data.DataUtil.convertToUtf8;
 import static util.CollectionUtils.newArrayList;
 
 /**
@@ -75,62 +74,20 @@ public class RssFeedFetcher implements ModificationFetcher {
     }
 
     private Modification mapEntry(final SyndEntry _entry) {
-        Modification result = null;
-
-        Date date = _entry.getPublishedDate();
-
-        if (date == null) {
-            date = this.timeService.getCurrentDate();
-        }
-
         String feedLink = _entry.getLink();
 
-        try {
-            URL feedUrl = new URL(feedLink);
-            String host = feedUrl.getHost();
-
-            if (host.isEmpty()) {
-                return null;
-            }
-        } catch (MalformedURLException e) {
+        if (!urlValid(feedLink)) {
             return null;
         }
 
-        String title = _entry.getTitle();
+        Date date = createDate(_entry.getPublishedDate(), this.timeService.getCurrentDate());
+        String title = createTitle(_entry.getTitle(), feedLink);
+        String description = createDescription(_entry);
 
-        if ((title == null) || (title.isEmpty())) {
-            title = feedLink;
-        }
+        String titleInUtf8 = convertToUtf8(title);
+        String descriptionInUtf8 = convertToUtf8(description);
 
-        String description = getDescription(_entry);
-
-        if (feedLink.length() > 0) {
-            String titleInUtf8 = DataUtil.convertToUtf8(title);
-            String descriptionInUtf8 = DataUtil.convertToUtf8(description);
-
-            result = new Modification(date, feedLink, titleInUtf8, descriptionInUtf8);
-        }
-
-        return result;
-    }
-
-    private String getDescription(final SyndEntry _entry) {
-        String title = _entry.getTitle();
-        List contentsList = _entry.getContents();
-        StringBuilder contents = new StringBuilder();
-
-        if (contentsList != null && (!contentsList.isEmpty())) {
-
-            for (Object current : contentsList) {
-                contents.append(((SyndContentImpl) current).getValue());
-            }
-        }
-
-        String description = _entry.getDescription() == null ? "" : _entry.getDescription().getValue();
-
-        String result = contents.length() != 0 ? contents.toString() : description;
-
-        return result.isEmpty() ? title : result;
+        return new Modification(date, feedLink, titleInUtf8, descriptionInUtf8);
     }
 
     private List<SyndEntry> loadEntries(final String _url) {
@@ -138,7 +95,7 @@ public class RssFeedFetcher implements ModificationFetcher {
         List<SyndEntry> result = newArrayList();
 
         try {
-            HttpData feedData = batchLoader.loadUrl(_url);
+            HttpData feedData = this.batchLoader.loadUrl(_url);
 
             if (feedData.getResult() != Result.OK) {
                 return result;
