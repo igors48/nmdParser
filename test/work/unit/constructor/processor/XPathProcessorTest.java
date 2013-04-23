@@ -20,7 +20,7 @@ public class XPathProcessorTest extends TestCase {
         super(_s);
     }
 
-    // первоначальный тест
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
     public void testSmoke() throws VariableProcessor.VariableProcessorException {
         String fixture = "<html><body><div><div><p>asd</p></div></div><div>def</div></body></html>";
@@ -40,7 +40,7 @@ public class XPathProcessorTest extends TestCase {
         assertEquals("<div>def</div>", variables.get("out02"));
     }
 
-    // тест куска HTML кода
+    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ HTML пїЅпїЅпїЅпїЅ
 
     public void testIllformed() throws VariableProcessor.VariableProcessorException {
         String fixture = "<div><div><p>asd</p></div></div><div>def</div>";
@@ -55,7 +55,7 @@ public class XPathProcessorTest extends TestCase {
         assertEquals("<div><p>asd</p></div>", variables.get(Variables.DEFAULT_OUTPUT_VARIABLE_NAME));
     }
 
-    // тест на извлечение тега а не его содержимого
+    // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
     public void testTag() throws VariableProcessor.VariableProcessorException {
         String fixture = "<div><div a=b b=c><p>asd</p></div></div><div>def</div>";
@@ -70,7 +70,7 @@ public class XPathProcessorTest extends TestCase {
         assertEquals("<div a=\"b\" b=\"c\" />", variables.get(Variables.DEFAULT_OUTPUT_VARIABLE_NAME));
     }
 
-    // тест на извлечение аттрибута тега
+    // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
     public void testAttribute() throws VariableProcessor.VariableProcessorException {
         String fixture = "<div><div a=\"b\" b=\"c\"><p>asd</p></div></div><div>def</div>";
@@ -85,7 +85,7 @@ public class XPathProcessorTest extends TestCase {
         assertEquals("b", variables.get(Variables.DEFAULT_OUTPUT_VARIABLE_NAME));
     }
 
-    // тест на двойное экранирование амперсанда
+    // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
     public void testDoubleEscape() throws VariableProcessor.VariableProcessorException {
         String fixture = "<div>a&b</div>";
@@ -113,7 +113,7 @@ public class XPathProcessorTest extends TestCase {
         assertEquals("<html><head/><body><p>p</p></body></html>", variables.get(Variables.DEFAULT_OUTPUT_VARIABLE_NAME));
     }
 
-    // тест снапшота
+    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
     public void testSnapshot() {
         XPathProcessor processor = new XPathProcessor("test", "content2", XPathProcessorMode.INNER, "out");
