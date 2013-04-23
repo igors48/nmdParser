@@ -1,3 +1,0 @@
-<simpler feedUrl="http://www.dailytechinfo.org/engine/rss.php" coverUrl="http://www.dailytechinfo.org/ngbaner.png" storeDays="14" branch="tech" outName="dailytechinfo" fromNewToOld="no">
-<xPath>//div[@class='content clear' and position()=2]/div[position()=1]</xPath>
-</simpler>

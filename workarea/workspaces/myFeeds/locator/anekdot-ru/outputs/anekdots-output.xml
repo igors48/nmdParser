@@ -1,3 +1,0 @@
-<output channel="anekdot-ru.channels.anekdots-channel" branch="humor.anekdot-ru">
-	<many-to-one name="anekdots"/>
-</output>

@@ -1,3 +1,0 @@
-<output channel="membrana.channel" branch="science">
-	<many-to-one name="membrana"/>
-</output>

@@ -1,3 +1,0 @@
-<output channel="oneGadget.channel" branch="tech">
-    <many-to-one name="oneGadget"/>
-</output>

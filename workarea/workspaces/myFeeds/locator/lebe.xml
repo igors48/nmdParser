@@ -1,3 +1,0 @@
-<simpler feedUrl="http://www.artlebedev.ru/kovodstvo/business-lynch/business-lynch.rdf" coverUrl="" storeDays="7" branch="" outName="lebe" fromNewToOld="no">
-<xPath>//div[@id='LynchComments']/* | //center/div[@id='Lynch']/img</xPath>
-</simpler>

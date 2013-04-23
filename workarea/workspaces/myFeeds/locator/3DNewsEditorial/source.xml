@@ -1,5 +1,0 @@
-<source>
-    <store days="16"/>
-    <rss>http://www.3dnews.ru/editorial/rss/</rss>
-	<processor id="3DNewsEditorial.postprocessor"/>
-</source>
