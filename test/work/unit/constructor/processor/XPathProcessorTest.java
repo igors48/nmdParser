@@ -97,7 +97,7 @@ public class XPathProcessorTest extends TestCase {
         processor01.process(variables);
 
         assertEquals(1, variables.getSize(Variables.DEFAULT_OUTPUT_VARIABLE_NAME));
-        assertEquals("<div>a&amp;b</div>", variables.get(Variables.DEFAULT_OUTPUT_VARIABLE_NAME));
+        assertEquals("<div>a&b</div>", variables.get(Variables.DEFAULT_OUTPUT_VARIABLE_NAME));
     }
 
     public void testDeleteNodes() throws VariableProcessor.VariableProcessorException {
