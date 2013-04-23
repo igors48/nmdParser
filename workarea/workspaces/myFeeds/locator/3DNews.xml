@@ -1,0 +1,4 @@
+<simpler feedUrl="http://www.3dnews.ru/news/rss" coverUrl="http://www.3dnews.ru/i/3dn.gif?4231271" storeDays="7" branch="" outName="3DNews" fromNewToOld="yes">
+<xPath></xPath>
+<content-filter/>
+</simpler>

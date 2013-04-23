@@ -1,0 +1,4 @@
+<simpler feedUrl="http://inosmi.ru/export/rss2/index.xml" coverUrl="http://www.inosmi.ru/i/logotype.png" storeDays="7" branch="" outName="inosmi" fromNewToOld="no">
+<xPath></xPath>
+<content-filter/>
+</simpler>
