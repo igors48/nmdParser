@@ -1,6 +1,0 @@
-<processor>
-	<getGroup>
-		<pattern><![CDATA[<div class="catalog-element">(.+?)<div id="footer">]]></pattern> 
-		<occurrence>0</occurrence>
-	</getGroup>
-</processor>

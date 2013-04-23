@@ -1,3 +1,0 @@
-<simpler feedUrl="http://www.the-ebook.org/?feed=rss" coverUrl="" storeDays="7" branch="" outName="ebook" fromNewToOld="yes">
-<xPath>//div[@class='entry']</xPath>
-</simpler>

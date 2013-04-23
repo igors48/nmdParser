@@ -1,3 +1,0 @@
-<simpler feedUrl="http://habrahabr.ru/rss/" coverUrl="http://habrahabr.ru/i/bg-multilogo.png" storeDays="7" branch="tech" outName="habr" fromNewToOld="yes">
-	<xPath>//div[@class='content']</xPath>
-</simpler>

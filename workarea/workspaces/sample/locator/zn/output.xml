@@ -1,3 +1,0 @@
-<output channel="zn.channel" branch="news">
-	<many-to-one name="ZN"/>
-</output>

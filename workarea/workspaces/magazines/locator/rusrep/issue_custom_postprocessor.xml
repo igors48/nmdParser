@@ -1,7 +1,0 @@
-<processor>
-
-	<set value="http://rusrep.ru" out="host"/>
-	
-	<concat first="host" second="input" out="output"/>
-
-</processor>

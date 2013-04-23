@@ -1,7 +1,0 @@
-<processor>
-
-    <xPath>
-        <expression>//div[@class='bodytext']</expression>
-    </xPath>
-
-</processor>

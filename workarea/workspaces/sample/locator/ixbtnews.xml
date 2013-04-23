@@ -1,3 +1,0 @@
-<simpler feedUrl="http://www.ixbt.com/export/news.rss" coverUrl="http://www.ixbt.com/images/ixbt-logo-new.jpg" storeDays="7" branch="tech" outName="ixbt-news" fromNewToOld="yes">
-<xPath>//div[@class='news_body']</xPath>
-</simpler>

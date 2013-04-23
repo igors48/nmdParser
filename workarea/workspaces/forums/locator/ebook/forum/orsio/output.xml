@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="cp1251"?>
-	<!-- Orsio-->
-
-<output channel="ebook.forum.orsio.channel" branch="ebook.forum.orsio">
-	<one-to-one/>
-</output>

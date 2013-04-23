@@ -1,5 +1,0 @@
-<source>
-	<store days="31"/>
-	<rss>http://www.exler.ru/rss-bannizm.xml</rss>
-	<processor id="exler.ban.postprocessor"/>
-</source>

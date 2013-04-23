@@ -1,3 +1,0 @@
-<output channel="tupichok.channel" branch="entertaitment">
-	<many-to-one name="tupichok-goblina"/>
-</output>

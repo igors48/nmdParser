@@ -1,5 +1,0 @@
-<source>
-	<store days="14"/>
-	<rss><![CDATA[http://www.robotreviews.com/chat/rss.php]]></rss>
-	<processor id="robots.robotreviews.processors.robotreviews-source-processor"/> 
-</source>

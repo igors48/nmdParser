@@ -1,3 +1,0 @@
-<output channel="og.channel" branch="news">
-    <many-to-one name="og"/>
-</output>

@@ -1,3 +1,0 @@
-<output channel="kp.channel" branch="news">
-	<many-to-one name="kp"/>
-</output>

@@ -1,3 +1,0 @@
-<output channel="dt.channel" branch="news">
-	<many-to-one name="DT"/>
-</output>

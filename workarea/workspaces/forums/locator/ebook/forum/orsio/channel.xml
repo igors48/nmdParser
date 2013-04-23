@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="cp1251"?>
-	<!-- Orsio-->
-
-<channel source="ebook.forum.orsio.source" header="ebook.forum.header-processor" interpreter="ebook.forum.interpreter" lastitems="100" forced="yes"/>

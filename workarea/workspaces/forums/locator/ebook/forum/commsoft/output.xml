@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="cp1251"?>
-	<!-- Общий раздел по программному обеспечению-->
-
-<output channel="ebook.forum.commsoft.channel" branch="ebook.forum.commsoft">
-	<one-to-one/>
-</output>

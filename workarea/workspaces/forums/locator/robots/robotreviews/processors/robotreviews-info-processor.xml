@@ -1,6 +1,0 @@
-<processor>
-	<extractTag>
-		<pattern><![CDATA[<dl class="postprofile]]></pattern> 
-		<occurrence>0</occurrence>
-	</extractTag>
-</processor>

@@ -1,5 +1,0 @@
-<processor>
-	<xPath>
-		<expression>//div[@class='_reachbanner_']</expression> 
-	</xPath>
-</processor>

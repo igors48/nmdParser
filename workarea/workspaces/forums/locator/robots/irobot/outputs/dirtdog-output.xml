@@ -1,3 +1,0 @@
-<output channel="robots.irobot.channels.dirtdog-channel" branch="robots.irobot.dirtdog" storage="common.storage.root">
-	<one-to-one/>
-</output>

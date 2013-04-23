@@ -1,7 +1,0 @@
-<processor>
-
-	<xPath>
-		<expression>/html/body/table/tbody/tr[2]/td/table/tbody/tr/td[2]/table/tbody/tr[1]/td/table/tbody/tr[5]/td[1]/table/tbody/tr/td</expression>
-	</xPath>
-	
-</processor>

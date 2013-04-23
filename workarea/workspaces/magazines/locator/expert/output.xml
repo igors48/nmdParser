@@ -1,3 +1,0 @@
-<output channel="expert.channel" branch="expert">
-	<many-to-one name="${name}"/>
-</output>

@@ -1,8 +1,0 @@
-<processor>
-
-	<getGroup>
-		<pattern><![CDATA[<span class="name">(.+?)<td class="spaceRow"]]></pattern> 
-		<occurrence>-1</occurrence>
-	</getGroup>	
-	
-</processor>

@@ -1,5 +1,0 @@
-<processor>
-	<xPath>
-		<expression>/body/div[@id='posts']/div/div[@class='page']/div/div/table[@class='tborder']/tbody</expression> 
-	</xPath>
-</processor>

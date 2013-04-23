@@ -1,3 +1,0 @@
-<output channel="ng.channel" branch="news">
-	<many-to-one name="novaya_gazeta"/>
-</output>

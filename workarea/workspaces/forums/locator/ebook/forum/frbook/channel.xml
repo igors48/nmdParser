@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="cp1251"?>
-	<!-- FR Book-->
-
-<channel source="ebook.forum.frbook.source" header="ebook.forum.header-processor" interpreter="ebook.forum.interpreter" lastitems="100" forced="yes"/>

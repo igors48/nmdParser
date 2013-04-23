@@ -1,3 +1,0 @@
-<output channel="weather.wunderground.channel" branch="weather">
-	<many-to-one name="wunderground"/>
-</output>

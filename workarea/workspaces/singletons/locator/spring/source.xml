@@ -1,5 +1,0 @@
-<source>
-    <store days="0"/>
-    <custom id="spring.custom"/>
-	<processor id="spring.postprocessor"/>
-</source>

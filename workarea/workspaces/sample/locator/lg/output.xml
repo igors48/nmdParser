@@ -1,3 +1,0 @@
-<output channel="lg.channel" branch="news">
-    <many-to-one name="lg"/>
-</output>

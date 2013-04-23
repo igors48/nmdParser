@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="cp1251"?>
-	<!-- FR Book-->
-
-<output channel="ebook.forum.frbook.channel" branch="ebook.forum.frbook">
-	<one-to-one/>
-</output>

@@ -1,3 +1,0 @@
-<output channel="contr-tv.channel" branch="news">
-    <many-to-one name="contr-tv"/>
-</output>

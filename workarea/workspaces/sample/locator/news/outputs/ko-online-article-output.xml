@@ -1,3 +1,0 @@
-<output channel="news.channels.ko-online-article-channel" branch="tech.ko">
-	<many-to-one name="ko-online-article"/>
-</output>

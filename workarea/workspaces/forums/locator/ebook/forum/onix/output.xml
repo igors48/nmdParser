@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="cp1251"?>
-	<!-- Планшетные устройства-->
-
-<output channel="ebook.forum.onix.channel" branch="ebook.forum.onix">
-	<one-to-one/>
-</output>

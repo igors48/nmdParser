@@ -1,7 +1,0 @@
-<processor>
-    
-	<xPath>
-        <expression>//div[@class='content_tbl']</expression>
-    </xPath>
-
-</processor>

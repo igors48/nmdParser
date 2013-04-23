@@ -1,3 +1,0 @@
-<output channel="ithappens.channel" branch="humor">
-	<many-to-one name="ithappens"/>
-</output>

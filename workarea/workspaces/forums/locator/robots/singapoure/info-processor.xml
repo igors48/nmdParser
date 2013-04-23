@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="cp1251"?>
-
-<processor>
-	<getGroup>
-		<pattern><![CDATA[<div>(Join Date:.+?)</div>]]></pattern> 
-		<occurrence>0</occurrence>
-	</getGroup>
-</processor>

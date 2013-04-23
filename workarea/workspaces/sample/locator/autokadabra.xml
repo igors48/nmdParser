@@ -1,3 +1,0 @@
-<simpler feedUrl="http://autokadabra.ru/rss/all/" coverUrl="http://autokadabra.ru/i/logo_sign.png" storeDays="7" branch="auto" outName="autokadabra" fromNewToOld="yes">
-<xPath>//div[@class='post']</xPath>
-</simpler>

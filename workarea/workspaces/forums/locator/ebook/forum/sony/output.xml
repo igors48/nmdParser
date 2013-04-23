@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="cp1251"?>
-	<!-- Sony Librie, Sony Reader-->
-
-<output channel="ebook.forum.sony.channel" branch="ebook.forum.sony">
-	<one-to-one/>
-</output>
