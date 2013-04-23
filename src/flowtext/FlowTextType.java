@@ -12,6 +12,7 @@ public enum FlowTextType {
     STRONG_TEXT,
     EMPHASIS_TEXT,
     CODE_TEXT,
+    STRIKETHROUGH_TEXT,
     EMPTY_LINE,
     RESOURCE,
     FOOT_NOTE,

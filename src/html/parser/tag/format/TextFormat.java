@@ -5,5 +5,8 @@ package html.parser.tag.format;
  *         Date: 17.09.2008
  */
 public enum TextFormat {
-    SIMPLE, STRONG, EMPHASIS
+    SIMPLE,
+    STRONG,
+    EMPHASIS,
+    STRIKETHROUGH
 }

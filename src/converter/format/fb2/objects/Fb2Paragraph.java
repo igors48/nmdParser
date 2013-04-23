@@ -3,10 +3,7 @@ package converter.format.fb2.objects;
 import converter.format.fb2.Stringable;
 import converter.format.fb2.footnotes.Fb2FootNoteLink;
 import converter.format.fb2.resource.Fb2ResourceLink;
-import converter.format.fb2.text.Fb2CodeText;
-import converter.format.fb2.text.Fb2EmphasisText;
-import converter.format.fb2.text.Fb2SimpleText;
-import converter.format.fb2.text.Fb2StrongText;
+import converter.format.fb2.text.*;
 import util.Assert;
 
 import java.util.Arrays;
@@ -51,6 +48,12 @@ public class Fb2Paragraph implements Stringable {
         Assert.isValidString(_text);
 
         this.content.add(new Fb2CodeText(_text));
+    }
+
+    public void insertStrikethroughText(String _text) {
+        Assert.isValidString(_text);
+
+        this.content.add(new Fb2StrikethroughText(_text));
     }
 
     public void insertResource(String _tag) {

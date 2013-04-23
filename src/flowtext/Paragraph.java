@@ -14,7 +14,7 @@ import static util.CollectionUtils.newArrayList;
  */
 public class Paragraph implements FlowTextObject {
 
-    //TODO Section, Paragraph, Title пахнут как FlowTextObjectContainer
+    //TODO Section, Paragraph, Title пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ FlowTextObjectContainer
     private final List<FlowTextObject> content;
 
     public Paragraph() {
@@ -43,6 +43,12 @@ public class Paragraph implements FlowTextObject {
         Assert.isValidString(_text);
 
         this.content.add(new CodeText(_text));
+    }
+
+    public void insertStrikethroughText(String _text) {
+        Assert.isValidString(_text);
+
+        this.content.add(new StrikethroughText(_text));
     }
 
     public void insertFootNote(String _text, String _base) {
@@ -99,7 +105,7 @@ public class Paragraph implements FlowTextObject {
         return result;
     }
 
-    //todo проверка типов
+    //todo пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
     public void addContent(List<FlowTextObject> _content) {
         Assert.notNull(_content);

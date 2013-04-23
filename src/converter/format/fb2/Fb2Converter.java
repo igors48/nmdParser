@@ -231,6 +231,10 @@ public class Fb2Converter implements Converter {
 
                     break;
                 }
+                case STRIKETHROUGH_TEXT:
+                    result.insertStrikethroughText(((FlowTextObjectText) current).getText());
+
+                    break;
                 case RESOURCE: {
                     String tag = _resources.appendResourceItem(((Resource) current).getBase(), ((Resource) current).getAddress());
                     result.insertResource(tag);
