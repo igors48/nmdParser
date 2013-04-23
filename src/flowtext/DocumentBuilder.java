@@ -233,6 +233,12 @@ public class DocumentBuilder {
             case STRIKETHROUGH:
                 this.currentParagraph.insertStrikethroughText(_data);
                 break;
+            case SUBSCRIPT:
+                this.currentParagraph.insertSubscriptText(_data);
+                break;
+            case SUPERSCRIPT:
+                this.currentParagraph.insertSuperscriptText(_data);
+                break;
         }
     }
 

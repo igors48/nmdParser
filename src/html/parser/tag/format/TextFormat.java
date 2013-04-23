@@ -8,5 +8,7 @@ public enum TextFormat {
     SIMPLE,
     STRONG,
     EMPHASIS,
-    STRIKETHROUGH
+    STRIKETHROUGH,
+    SUBSCRIPT,
+    SUPERSCRIPT
 }

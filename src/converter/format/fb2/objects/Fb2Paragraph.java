@@ -56,6 +56,18 @@ public class Fb2Paragraph implements Stringable {
         this.content.add(new Fb2StrikethroughText(_text));
     }
 
+    public void insertSubscriptText(String _text) {
+        Assert.isValidString(_text);
+
+        this.content.add(new Fb2SubscriptText(_text));
+    }
+
+    public void insertSuperscriptText(String _text) {
+        Assert.isValidString(_text);
+
+        this.content.add(new Fb2SuperscriptText(_text));
+    }
+
     public void insertResource(String _tag) {
         Assert.isValidString(_tag);
 

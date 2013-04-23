@@ -56,7 +56,7 @@ public final class SimpleHtmlConverterUtil {
             "<ol.*?>", "</ol>",
             //"<li>", "</li>",
             "<dir>", "</dir>",
-            "<sup.*?>", "</sup>",
+            //"<sup.*?>", "</sup>",
             //"<dl>", "</dl>",
             //"<dt>, </dt>",
             //"<dd>, </dd>",

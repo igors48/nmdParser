@@ -235,6 +235,14 @@ public class Fb2Converter implements Converter {
                     result.insertStrikethroughText(((FlowTextObjectText) current).getText());
 
                     break;
+                case SUBSCRIPT_TEXT:
+                    result.insertSubscriptText(((FlowTextObjectText) current).getText());
+
+                    break;
+                case SUPERSCRIPT_TEXT:
+                    result.insertSuperscriptText(((FlowTextObjectText) current).getText());
+
+                    break;
                 case RESOURCE: {
                     String tag = _resources.appendResourceItem(((Resource) current).getBase(), ((Resource) current).getAddress());
                     result.insertResource(tag);

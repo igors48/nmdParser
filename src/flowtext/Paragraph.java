@@ -51,6 +51,18 @@ public class Paragraph implements FlowTextObject {
         this.content.add(new StrikethroughText(_text));
     }
 
+    public void insertSubscriptText(String _text) {
+        Assert.isValidString(_text);
+
+        this.content.add(new SubscriptText(_text));
+    }
+
+    public void insertSuperscriptText(String _text) {
+        Assert.isValidString(_text);
+
+        this.content.add(new SuperscriptText(_text));
+    }
+
     public void insertFootNote(String _text, String _base) {
         Assert.isValidString(_text);
         Assert.notNull(_base);
