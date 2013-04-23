@@ -302,14 +302,15 @@
             <fileset dir="${dir.base}/scripts/"/>
         </copy>
 
-        <antcall target="-finish_release"/>
+        <antcall target="-finish_release_directory_structure"/>
+        <antcall target="-copy_release_samples"/>
 
         <zip destfile="${dir.release}/${project.name.and.version}.zip" basedir="${dir.release}"/>
 
     </target>
 
 
-    <target name="-finish_release">
+    <target name="-finish_release_directory_structure">
 
         <mkdir dir="${dir.release}/etc/"/>
 
@@ -338,8 +339,6 @@
               tofile="${dir.release}/workarea/lite/lite.properties"/>
         <copy file="${dir.base}/workarea/lite/fb2pdf.bat" todir="${dir.release}/workarea/lite/"/>
         <copy file="${dir.base}/workarea/lite/fb2epub.bat" todir="${dir.release}/workarea/lite/"/>
-
-        <antcall target="-copy.dist.samples"/>
 
     </target>
 

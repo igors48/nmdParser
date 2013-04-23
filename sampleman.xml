@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="sampleman">
 
-    <target name="-copy.dist.samples">
+    <target name="-copy_release_samples">
 
-        <antcall target="-create.workspace">
+        <antcall target="-create_workspace">
             <param name="workspace.name" value="sample"/>
         </antcall>
 
-        <antcall target="-create.workspace">
+        <antcall target="-create_workspace">
             <param name="workspace.name" value="forums"/>
         </antcall>
 
-        <antcall target="-create.workspace">
+        <antcall target="-create_workspace">
             <param name="workspace.name" value="magazines"/>
         </antcall>
 
-        <antcall target="-create.workspace">
+        <antcall target="-create_workspace">
             <param name="workspace.name" value="singletons"/>
         </antcall>
 
-        <antcall target="-copy.samples"/>
+        <antcall target="-copy_samples"/>
 
-        <antcall target="-copy.forums"/>
+        <antcall target="-copy_forums"/>
 
-        <antcall target="-copy.magazines"/>
+        <antcall target="-copy_magazines"/>
 
-        <antcall target="-copy.singletones"/>
+        <antcall target="-copy_singletones"/>
 
     </target>
 
-    <target name="-copy.samples">
+    <target name="-copy_samples">
 
-        <antcall target="-copy.simpler">
+        <antcall target="-copy_simpler">
             <param name="from.workspace" value="sample"/>
             <param name="sample.name" value="3DNews.xml"/>
             <param name="to.workspace" value="sample"/>
         </antcall>
 
-        <antcall target="-copy.simpler">
+        <antcall target="-copy_simpler">
             <param name="from.workspace" value="sample"/>
             <param name="sample.name" value="habr.xml"/>
             <param name="to.workspace" value="sample"/>
         </antcall>
 
-        <antcall target="-copy.simpler">
+        <antcall target="-copy_simpler">
             <param name="from.workspace" value="sample"/>
             <param name="sample.name" value="bash.xml"/>
             <param name="to.workspace" value="sample"/>
         </antcall>
 
-        <antcall target="-copy.simpler">
+        <antcall target="-copy_simpler">
             <param name="from.workspace" value="sample"/>
             <param name="sample.name" value="ixbtarticles.xml"/>
             <param name="to.workspace" value="sample"/>
         </antcall>
 
-        <antcall target="-copy.simpler">
+        <antcall target="-copy_simpler">
             <param name="from.workspace" value="sample"/>
             <param name="sample.name" value="ixbtnews.xml"/>
             <param name="to.workspace" value="sample"/>
         </antcall>
 
-        <antcall target="-copy.sample">
+        <antcall target="-copy_sample">
             <param name="from.workspace" value="sample"/>
             <param name="sample.name" value="inopressa"/>
             <param name="to.workspace" value="sample"/>
         </antcall>
 
-        <antcall target="-copy.sample">
+        <antcall target="-copy_sample">
             <param name="from.workspace" value="sample"/>
             <param name="sample.name" value="inosmi"/>
             <param name="to.workspace" value="sample"/>
         </antcall>
 
-        <antcall target="-copy.sample">
+        <antcall target="-copy_sample">
             <param name="from.workspace" value="sample"/>
             <param name="sample.name" value="ithappens"/>
             <param name="to.workspace" value="sample"/>
         </antcall>
 
-        <antcall target="-copy.sample">
+        <antcall target="-copy_sample">
             <param name="from.workspace" value="sample"/>
             <param name="sample.name" value="membrana"/>
             <param name="to.workspace" value="sample"/>
         </antcall>
 
-        <antcall target="-copy.sample">
+        <antcall target="-copy_sample">
             <param name="from.workspace" value="sample"/>
             <param name="sample.name" value="popmech"/>
             <param name="to.workspace" value="sample"/>
         </antcall>
 
-        <antcall target="-copy.sample">
+        <antcall target="-copy_sample">
             <param name="from.workspace" value="sample"/>
             <param name="sample.name" value="zadolbali"/>
             <param name="to.workspace" value="sample"/>
@@ -99,15 +99,15 @@
 
     </target>
 
-    <target name="-copy.forums">
+    <target name="-copy_forums">
 
-        <antcall target="-copy.sample">
+        <antcall target="-copy_sample">
             <param name="from.workspace" value="forums"/>
             <param name="sample.name" value="ebook"/>
             <param name="to.workspace" value="forums"/>
         </antcall>
 
-        <antcall target="-copy.sample">
+        <antcall target="-copy_sample">
             <param name="from.workspace" value="forums"/>
             <param name="sample.name" value="ixbtforum"/>
             <param name="to.workspace" value="forums"/>
@@ -115,15 +115,15 @@
 
     </target>
 
-    <target name="-copy.magazines">
+    <target name="-copy_magazines">
 
-        <antcall target="-copy.sample">
+        <antcall target="-copy_sample">
             <param name="from.workspace" value="magazines"/>
             <param name="sample.name" value="popmech"/>
             <param name="to.workspace" value="magazines"/>
         </antcall>
 
-        <antcall target="-copy.sample">
+        <antcall target="-copy_sample">
             <param name="from.workspace" value="magazines"/>
             <param name="sample.name" value="vs"/>
             <param name="to.workspace" value="magazines"/>
@@ -131,9 +131,9 @@
 
     </target>
 
-    <target name="-copy.singletones">
+    <target name="-copy_singletones">
 
-        <antcall target="-copy.sample">
+        <antcall target="-copy_sample">
             <param name="from.workspace" value="singletons"/>
             <param name="sample.name" value="wiki"/>
             <param name="to.workspace" value="singletons"/>
@@ -141,7 +141,7 @@
 
     </target>
 
-    <target name="-create.workspace">
+    <target name="-create_workspace">
 
         <echo message="${workspace.name}"/>
 
@@ -160,7 +160,7 @@
 
     </target>
 
-    <target name="-copy.sample">
+    <target name="-copy_sample">
 
         <copy todir="${dir.release}/workarea/workspaces/${to.workspace}/locator/${sample.name}/">
             <fileset dir="${dir.base}/workarea/workspaces/${from.workspace}/locator/${sample.name}/" includes="**/*.*"/>
@@ -168,7 +168,7 @@
 
     </target>
 
-    <target name="-copy.simpler">
+    <target name="-copy_simpler">
 
         <copy todir="${dir.release}/workarea/workspaces/${to.workspace}/locator/">
             <fileset file="${dir.base}/workarea/workspaces/${from.workspace}/locator/${sample.name}/"/>
