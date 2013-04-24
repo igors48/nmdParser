@@ -7,6 +7,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+import static app.workingarea.process.StreamDumper.createErrorStreamDumper;
+import static app.workingarea.process.StreamDumper.createOutputStreamDumper;
 import static util.CollectionUtils.newArrayList;
 
 /**
@@ -46,8 +48,7 @@ public final class ExternalToolsUtils {
             arguments.add(_pathToExecutable);
             arguments.add(file);
 
-            ProcessBuilder builder = new ProcessBuilder(arguments);
-            builder.start();
+            startExternalProcess(arguments);
         }
     }
 
@@ -61,8 +62,15 @@ public final class ExternalToolsUtils {
         arguments.add(_pathToExecutable);
         arguments.addAll(_files);
 
-        ProcessBuilder builder = new ProcessBuilder(arguments);
-        builder.start();
+        startExternalProcess(arguments);
+    }
+
+    private static void startExternalProcess(final java.util.List<String> _arguments) throws IOException {
+        ProcessBuilder builder = new ProcessBuilder(_arguments);
+        Process process = builder.start();
+
+        createOutputStreamDumper(process.getInputStream()).start();
+        createErrorStreamDumper(process.getErrorStream()).start();
     }
 
     private ExternalToolsUtils() {
