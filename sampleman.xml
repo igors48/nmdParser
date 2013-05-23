@@ -6,7 +6,7 @@
         <antcall target="-create_workspace">
             <param name="workspace.name" value="sample"/>
         </antcall>
-
+        <!--
         <antcall target="-create_workspace">
             <param name="workspace.name" value="forums"/>
         </antcall>
@@ -18,25 +18,50 @@
         <antcall target="-create_workspace">
             <param name="workspace.name" value="singletons"/>
         </antcall>
-
+        -->
         <antcall target="-copy_samples"/>
-
+        <!--
         <antcall target="-copy_forums"/>
 
         <antcall target="-copy_magazines"/>
 
         <antcall target="-copy_singletones"/>
-
+         -->
     </target>
 
     <target name="-copy_samples">
 
         <antcall target="-copy_simpler">
-            <param name="from.workspace" value="sample"/>
+            <param name="from.workspace" value="myFeeds"/>
             <param name="sample.name" value="3DNews.xml"/>
             <param name="to.workspace" value="sample"/>
         </antcall>
 
+        <antcall target="-copy_simpler">
+            <param name="from.workspace" value="myFeeds"/>
+            <param name="sample.name" value="3DNewsEditorial.xml"/>
+            <param name="to.workspace" value="sample"/>
+        </antcall>
+
+        <antcall target="-copy_simpler">
+            <param name="from.workspace" value="myFeeds"/>
+            <param name="sample.name" value="ithappens.xml"/>
+            <param name="to.workspace" value="sample"/>
+        </antcall>
+
+        <antcall target="-copy_simpler">
+            <param name="from.workspace" value="myFeeds"/>
+            <param name="sample.name" value="inopressa.xml"/>
+            <param name="to.workspace" value="sample"/>
+        </antcall>
+
+        <antcall target="-copy_simpler">
+            <param name="from.workspace" value="myFeeds"/>
+            <param name="sample.name" value="inosmi.xml"/>
+            <param name="to.workspace" value="sample"/>
+        </antcall>
+
+        <!--
         <antcall target="-copy_simpler">
             <param name="from.workspace" value="sample"/>
             <param name="sample.name" value="habr.xml"/>
@@ -96,9 +121,9 @@
             <param name="sample.name" value="zadolbali"/>
             <param name="to.workspace" value="sample"/>
         </antcall>
-
+        -->
     </target>
-
+    <!--
     <target name="-copy_forums">
 
         <antcall target="-copy_sample">
@@ -140,7 +165,7 @@
         </antcall>
 
     </target>
-
+    -->
     <target name="-create_workspace">
 
         <echo message="${workspace.name}"/>
@@ -154,7 +179,7 @@
 
         <echo message="${workspace.name}"/>
         <!-- copy default storage -->
-        <copy todir="${dir.release}/workarea/workspaces/${workspace.name}/locator/common/">
+        <copy todir="${dir.release}/workarea/workspaces/${workspace.name}/locator/common/" failonerror="false">
             <fileset dir="${dir.base}/workarea/workspaces/${workspace.name}/locator/common/" includes="**/*.*"/>
         </copy>
 
