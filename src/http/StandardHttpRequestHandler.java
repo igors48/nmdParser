@@ -8,6 +8,7 @@ import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpRequestRetryHandler;
+import org.apache.http.client.RedirectStrategy;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.conn.scheme.PlainSocketFactory;
@@ -57,6 +58,9 @@ public class StandardHttpRequestHandler implements HttpRequestHandler {
 
         final HttpRequestRetryHandler retryHandler = new CustomHttpRequestRetryHandler(_context.getRetryCount());
         this.httpClient.setHttpRequestRetryHandler(retryHandler);
+
+        final RedirectStrategy redirectStrategy = new CustomRedirectStrategy();
+        this.httpClient.setRedirectStrategy(redirectStrategy);
 
         final HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, _context.getConnectionTimeout());
