@@ -1,0 +1,4 @@
+<simpler feedUrl="http://habrahabr.ru/rss/" coverUrl="" storeDays="7" branch="" outName="habr" fromNewToOld="no">
+    <xPath></xPath>
+    <content-filter/>
+</simpler>
