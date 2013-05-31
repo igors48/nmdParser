@@ -120,8 +120,7 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
     protected void setHeaders(final HttpRequestBase _request) {
         Assert.notNull(_request, "Request is null");
 
-        //final String urlWithRequest = this.request.getReferer().isEmpty() ? "" : getUrlWithRequest(this.request.getReferer(), "");
-        final String urlWithRequest = this.request.getUrl() + "a";
+        final String urlWithRequest = this.request.getReferer().isEmpty() ? "" : getUrlWithRequest(this.request.getReferer(), "");
 
         _request.setHeader(REFERER_HEADER_NAME, urlWithRequest);
 

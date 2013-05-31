@@ -67,36 +67,13 @@ public class CustomRedirectStrategy implements RedirectStrategy {
         if (response == null) {
             throw new IllegalArgumentException("HTTP response may not be null");
         }
-        //get the location header to find out where to redirect to
-        Header locationHeader = response.getFirstHeader("location");
-        String location;
 
-        if (locationHeader == null) {
-            // got a redirect response, but no location header
-            try {
-                String content = EntityUtils.toString(response.getEntity());
+        String location = getLocation(response);
 
-                Matcher matcher = META_PATTERN.matcher(content);
-
-                if (matcher.find()) {
-                    location = matcher.group(1);
-                } else {
-                    throw new ProtocolException(
-                            "Received redirect response " + response.getStatusLine()
-                                    + " but no location header");
-                }
-
-            } catch (IOException e) {
-                throw new ProtocolException(
-                        "Received redirect response " + response.getStatusLine()
-                                + " but no location header");
-            }
-            /*throw new ProtocolException(
+        if (location.isEmpty()) {
+            throw new ProtocolException(
                     "Received redirect response " + response.getStatusLine()
-                            + " but no location header");
-             */
-        } else {
-            location = locationHeader.getValue();
+                            + " but no location header neither location in response body");
         }
 
         if (this.log.isDebugEnabled()) {
@@ -163,6 +140,25 @@ public class CustomRedirectStrategy implements RedirectStrategy {
         }
 
         return uri;
+    }
+
+    private String getLocation(HttpResponse response) throws ProtocolException {
+        Header locationHeader = response.getFirstHeader("location");
+
+        return locationHeader == null ? getLocationFromResponseBody(response) : locationHeader.getValue();
+    }
+
+    private String getLocationFromResponseBody(HttpResponse response) throws ProtocolException {
+
+        try {
+            String content = EntityUtils.toString(response.getEntity());
+
+            Matcher matcher = META_PATTERN.matcher(content);
+
+            return matcher.find() ? matcher.group(1) : "";
+        } catch (IOException e) {
+            throw new ProtocolException("Error reading response body", e);
+        }
     }
 
     /**
