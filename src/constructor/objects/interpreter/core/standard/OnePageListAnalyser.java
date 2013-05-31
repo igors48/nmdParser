@@ -5,8 +5,9 @@ import constructor.objects.interpreter.core.PageListAnalyser;
 import constructor.objects.interpreter.core.PageListItem;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Анализатор для модификации расположенной только на одной странице
@@ -19,7 +20,7 @@ public class OnePageListAnalyser implements PageListAnalyser {
     public List<PageListItem> getPageList(final Page _page) {
         Assert.notNull(_page, "Page is null");
 
-        List<PageListItem> result = new ArrayList<PageListItem>();
+        List<PageListItem> result = newArrayList();
 
         PageListItem item = new PageListItem(_page.getModification(), _page.getModification().getUrl());
         result.add(item);

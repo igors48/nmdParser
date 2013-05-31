@@ -5,8 +5,9 @@ import dated.item.modification.Modification;
 import timeservice.TimeService;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Формирует список модификаций из списка содержащихся в нем урлов
@@ -29,7 +30,7 @@ public class UrlFetcher implements ModificationFetcher {
     }
 
     public List<Modification> getModifications() throws ModificationFetcherException {
-        List<Modification> result = new ArrayList<Modification>();
+        List<Modification> result = newArrayList();
 
         for (String current : this.urls) {
             result.add(new Modification(this.timeService.getCurrentDate(), current));

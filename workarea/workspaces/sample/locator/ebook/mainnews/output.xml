@@ -1,3 +1,0 @@
-<output channel="ebook.mainnews.channel" branch="ebook.mainnews">
-    <many-to-one name="ebook.mainnews"/>
-</output>

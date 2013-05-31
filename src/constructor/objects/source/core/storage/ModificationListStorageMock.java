@@ -4,8 +4,9 @@ import constructor.objects.source.core.ModificationListStorage;
 import dated.item.modification.stream.ModificationList;
 import util.Assert;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -16,7 +17,7 @@ public class ModificationListStorageMock implements ModificationListStorage {
     private final Map<String, ModificationList> map;
 
     public ModificationListStorageMock() {
-        this.map = new HashMap<String, ModificationList>();
+        this.map = newHashMap();
     }
 
     public synchronized void store(String _sourceId, ModificationList _list) throws ModificationListStorageException {

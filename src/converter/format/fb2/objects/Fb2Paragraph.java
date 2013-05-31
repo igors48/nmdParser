@@ -3,15 +3,13 @@ package converter.format.fb2.objects;
 import converter.format.fb2.Stringable;
 import converter.format.fb2.footnotes.Fb2FootNoteLink;
 import converter.format.fb2.resource.Fb2ResourceLink;
-import converter.format.fb2.text.Fb2CodeText;
-import converter.format.fb2.text.Fb2EmphasisText;
-import converter.format.fb2.text.Fb2SimpleText;
-import converter.format.fb2.text.Fb2StrongText;
+import converter.format.fb2.text.*;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -25,7 +23,7 @@ public class Fb2Paragraph implements Stringable {
     private final List<Stringable> content;
 
     public Fb2Paragraph() {
-        this.content = new ArrayList<Stringable>();
+        this.content = newArrayList();
     }
 
     public void insertSimpleText(String _text) {
@@ -52,6 +50,24 @@ public class Fb2Paragraph implements Stringable {
         this.content.add(new Fb2CodeText(_text));
     }
 
+    public void insertStrikethroughText(String _text) {
+        Assert.isValidString(_text);
+
+        this.content.add(new Fb2StrikethroughText(_text));
+    }
+
+    public void insertSubscriptText(String _text) {
+        Assert.isValidString(_text);
+
+        this.content.add(new Fb2SubscriptText(_text));
+    }
+
+    public void insertSuperscriptText(String _text) {
+        Assert.isValidString(_text);
+
+        this.content.add(new Fb2SuperscriptText(_text));
+    }
+
     public void insertResource(String _tag) {
         Assert.isValidString(_tag);
 
@@ -65,7 +81,7 @@ public class Fb2Paragraph implements Stringable {
     }
 
     private String[] getContentStrings() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         for (Stringable current : this.content) {
             result.addAll(Arrays.asList(current.getStrings()));
@@ -75,7 +91,7 @@ public class Fb2Paragraph implements Stringable {
     }
 
     public String[] getStrings() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         result.add(OPEN_TAG);
         result.addAll(Arrays.asList(getContentStrings()));

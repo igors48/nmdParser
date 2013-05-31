@@ -1,21 +1,21 @@
 package work.unit.constructor.dateparser;
 
-import junit.framework.TestCase;
-
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Date;
-
-import constructor.dom.ConstructorFactory;
 import constructor.dom.Constructor;
+import constructor.dom.ConstructorFactory;
 import constructor.dom.ObjectType;
-import constructor.objects.dateparser.configuration.DateParserConfiguration;
-import constructor.objects.dateparser.core.DateParserAdapter;
-import constructor.objects.dateparser.core.DateParser;
-import constructor.objects.dateparser.core.DateParserTools;
 import constructor.objects.dateparser.adapter.StandardDateParserAdapter;
-import static work.testutil.ConstructorTestUtils.createConstructorFactory;
+import constructor.objects.dateparser.configuration.DateParserConfiguration;
+import constructor.objects.dateparser.core.DateParser;
+import constructor.objects.dateparser.core.DateParserAdapter;
+import constructor.objects.dateparser.core.DateParserTools;
+import junit.framework.TestCase;
 import timeservice.StillTimeService;
+
+import java.util.Date;
+import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
+import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
 /**
  * @author Igor Usenko
@@ -28,8 +28,9 @@ public class DateParserAdapterTest extends TestCase {
     }
 
     // первоначальный тест 
+
     public void testSmoke() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("dateParser", "<dateParser><standard><pattern>MMMM dd, yyyy, h:mm a</pattern><months>January February March April May June July August September October November December</months></standard></dateParser>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);

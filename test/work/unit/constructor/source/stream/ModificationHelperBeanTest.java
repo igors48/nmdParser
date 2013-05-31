@@ -19,6 +19,7 @@ public class ModificationHelperBeanTest extends TestCase {
     }
 
     // проверка на идентичность сохраненной и восстановленной модификации
+
     public void testStoreRestore() {
         Modification modification = new Modification(new Date(), "url", "title", "description");
 
@@ -30,6 +31,7 @@ public class ModificationHelperBeanTest extends TestCase {
     }
 
     // проверка на идентичность сохраненной и восстановленной неполной модификации
+
     public void testStoreRestoreBrief() {
         Modification modification = new Modification(new Date(), "url");
 

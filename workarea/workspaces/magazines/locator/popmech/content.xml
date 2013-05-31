@@ -1,7 +1,0 @@
-<processor>
-	
-	<xPath>
-		<expression>//td[@class='t_justify']</expression>
-	</xPath>
-	
-</processor>

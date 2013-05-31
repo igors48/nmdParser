@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="cp1251"?>
-	<!-- О проекте-->
-
-<output channel="ebook.forum.about.channel" branch="ebook.forum.about" fromNewToOld="no">
-	<one-to-one/>
-</output>

@@ -1,22 +1,22 @@
 package work.unit.constructor.snippet;
 
-import junit.framework.TestCase;
+import app.cli.blitz.request.CriterionType;
+import app.cli.blitz.request.RequestSourceType;
 import constructor.dom.Constructor;
 import constructor.dom.ConstructorFactory;
 import constructor.dom.ObjectType;
 import constructor.dom.UsedObject;
-import constructor.objects.snippet.configuration.SnippetConfiguration;
 import constructor.objects.output.configuration.Composition;
+import constructor.objects.snippet.configuration.SnippetConfiguration;
 import constructor.objects.storage.local.core.LocalStorage;
-
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-
-import static work.testutil.ConstructorTestUtils.createConstructorFactory;
-import app.cli.blitz.request.RequestSourceType;
-import app.cli.blitz.request.CriterionType;
+import junit.framework.TestCase;
 import util.sequense.PatternListSequencer;
+
+import java.util.List;
+import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
+import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
 /**
  * @author Igor Usenko
@@ -29,8 +29,9 @@ public class SnippetConfigurationTest extends TestCase {
     }
 
     // первоначальный тест - конфигурация для RSS + XPath
+
     public void testRssXPathConfiguration() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("snippet", "<snippet><rss>rss</rss><xPath>xPath</xPath><forced/><base>base</base><genre>genre1</genre><genre>genre2</genre><storage name=\"storage\"/><many-to-one name=\"mto\"/><branch name=\"branch\"/><noLinksAsFootnotes/><noRemoveExists/><noResolveImageLinks/><cover>cover</cover></snippet>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -69,8 +70,9 @@ public class SnippetConfigurationTest extends TestCase {
     }
 
     // тест - конфигурация для URLS + REGEXP
+
     public void testUrlsRegExpConfiguration() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("snippet", "<snippet><url>url1</url><url>url2</url><url>url3</url><regExp>regExp</regExp><forced/><base>base</base><genre>genre1</genre><genre>genre2</genre><storage name=\"storage\"/><many-to-one name=\"mto\"/><branch name=\"branch\"/><noLinksAsFootnotes/><noRemoveExists/><noResolveImageLinks/></snippet>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -109,8 +111,9 @@ public class SnippetConfigurationTest extends TestCase {
     }
 
     // тест обработки параметров генерации последовательностей
+
     public void testUrlsWithSequenceParametersConfiguration() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("snippet", "<snippet><url from=\"1\" to=\"2\" step=\"3\" mult=\"4\" len=\"5\" padd=\"6\">url1</url><regExp>regExp</regExp><forced/><base>base</base><genre>genre1</genre><genre>genre2</genre><storage name=\"storage\"/><many-to-one name=\"mto\"/><branch name=\"branch\"/><noLinksAsFootnotes/><noRemoveExists/><noResolveImageLinks/></snippet>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -130,8 +133,9 @@ public class SnippetConfigurationTest extends TestCase {
     }
 
     // тест определения зависимостей
+
     public void testExistentDependencyDetection() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("snippet", "<snippet><url from=\"1\" to=\"2\" step=\"3\" mult=\"4\" len=\"5\" padd=\"6\">url1</url><regExp>regExp</regExp><forced/><base>base</base><genre>genre1</genre><genre>genre2</genre><storage name=\"storage\"/><many-to-one name=\"mto\"/><branch name=\"branch\"/><noLinksAsFootnotes/><noRemoveExists/><noResolveImageLinks/></snippet>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -147,8 +151,9 @@ public class SnippetConfigurationTest extends TestCase {
     }
 
     // тест отсутствия зависимостей
+
     public void testNoDependencyDetection() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("snippet", "<snippet><url from=\"1\" to=\"2\" step=\"3\" mult=\"4\" len=\"5\" padd=\"6\">url1</url><regExp>regExp</regExp><forced/><base>base</base><genre>genre1</genre><genre>genre2</genre><many-to-one name=\"mto\"/><branch name=\"branch\"/><noLinksAsFootnotes/><noRemoveExists/><noResolveImageLinks/></snippet>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -162,4 +167,22 @@ public class SnippetConfigurationTest extends TestCase {
         assertEquals(LocalStorage.DEFAULT_STORAGE_ID, usedObjects.get(0).getId());
         assertEquals(ObjectType.STORAGE, usedObjects.get(0).getType());
     }
+
+    // тест подлючения фильтра контента
+
+    public void testRssWithFilterConfiguration() throws Constructor.ConstructorException {
+        Map<String, String> streams = newHashMap();
+        streams.put("snippet", "<snippet><rss>rss</rss><content-filter/><forced/><many-to-one name=\"mto\"/><branch name=\"branch\"/></snippet>");
+
+        ConstructorFactory constructorFactory = createConstructorFactory(streams);
+        Constructor constructor = constructorFactory.getConstructor();
+
+        SnippetConfiguration configuration = (SnippetConfiguration) constructor.create("snippet", ObjectType.SNIPPET);
+
+        assertNotNull(configuration);
+        assertEquals("snippet", configuration.getId());
+
+        assertEquals(CriterionType.FILTER, configuration.getCriterionType());
+    }
+
 }

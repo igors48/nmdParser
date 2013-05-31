@@ -41,7 +41,7 @@ public class ChangeSettingsModelHandler {
             }
 
             return result;
-        } catch (Throwable t) {
+        } catch (Exception t) {
             throw new ModelHandlerException(t);
         }
     }

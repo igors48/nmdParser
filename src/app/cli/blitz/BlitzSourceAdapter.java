@@ -1,16 +1,14 @@
 package app.cli.blitz;
 
 import app.cli.blitz.request.BlitzRequest;
-import app.cli.blitz.request.RequestSourceType;
 import app.iui.flow.custom.SingleProcessInfo;
-import app.workingarea.Settings;
 import constructor.objects.AdapterException;
 import constructor.objects.source.core.ModificationFetcher;
 import constructor.objects.source.core.ModificationProcessor;
 import constructor.objects.source.core.SourceAdapter;
+import constructor.objects.source.core.fetcher.ModificationsListFetcher;
 import constructor.objects.source.core.fetcher.RssFeedFetcher;
 import constructor.objects.source.core.fetcher.UrlFetcher;
-import constructor.objects.source.core.fetcher.ModificationsListFetcher;
 import constructor.objects.source.core.processor.NoopModificationProcessor;
 import constructor.objects.strategies.StoreStrategy;
 import constructor.objects.strategies.UpdateStrategy;
@@ -18,14 +16,13 @@ import constructor.objects.strategies.store.StoreMaxAgeStrategy;
 import constructor.objects.strategies.store.StoreNeverStrategy;
 import constructor.objects.strategies.update.EveryTimeUpdateStrategy;
 import dated.item.modification.stream.ModificationList;
+import http.BatchLoader;
 import timeservice.TimeService;
 import util.Assert;
 
 import java.util.Date;
 
 /**
- * Адаптер блиц-источника модификаций
- *
  * @author Igor Usenko
  *         Date: 28.10.2009
  */
@@ -33,21 +30,21 @@ public class BlitzSourceAdapter implements SourceAdapter {
 
     private final BlitzRequest request;
     private final TimeService timeService;
-    private final Settings settings;
+    private final BatchLoader batchLoader;
 
     private ModificationList result;
 
     private static final String BLITZ_SOURCE_ADAPTER_ID = "blitz_source_adapter";
 
-    public BlitzSourceAdapter(final BlitzRequest _request, final TimeService _timeService, final Settings _settings) {
+    public BlitzSourceAdapter(final BlitzRequest _request, final TimeService _timeService, final BatchLoader _batchLoader) {
         Assert.notNull(_request, "Request is null");
         this.request = _request;
 
         Assert.notNull(_timeService, "Time service is null");
         this.timeService = _timeService;
 
-        Assert.notNull(_settings, "Settings is null");
-        this.settings = _settings;
+        Assert.notNull(_batchLoader, "Batch loader is null");
+        this.batchLoader = _batchLoader;
 
         this.result = new ModificationList();
     }
@@ -61,7 +58,7 @@ public class BlitzSourceAdapter implements SourceAdapter {
 
         switch (this.request.getSourceType()) {
             case RSS: {
-                result = new RssFeedFetcher(this.request.getAddresses().get(0), this.timeService, this.settings.getMaxTryCount(), this.settings.getErrorTimeout(), this.settings.getMinTimeout());
+                result = new RssFeedFetcher(this.request.getAddresses().get(0), this.timeService, this.batchLoader);
                 break;
             }
             case URLS: {

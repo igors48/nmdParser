@@ -10,12 +10,12 @@ import constructor.objects.interpreter.core.standard.OneFragmentPageAnalyser;
 import constructor.objects.interpreter.core.standard.OnePageListAnalyser;
 import constructor.objects.interpreter.core.standard.StandardFragmentAnalyser;
 import dated.item.modification.Modification;
-import downloader.BatchLoader;
+import http.BatchLoader;
 import timeservice.StandardTimeService;
 import util.Assert;
 
 /**
- * Адаптер блиц-интерпретатора
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 29.10.2009

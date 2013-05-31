@@ -14,14 +14,16 @@ public class NumericSequencerTest extends TestCase {
     }
 
     // первоначальный тест
-    public void testSmoke(){
+
+    public void testSmoke() {
         NumericSequencer sequencer = new NumericSequencer(0, 10, 1, 1);
 
         assertTrue(sequencer.hasNext());
     }
 
     // тест последовательности из двух элементов
-    public void testTwoElements(){
+
+    public void testTwoElements() {
         NumericSequencer sequencer = new NumericSequencer(0, 1, 1, 1);
 
         assertTrue(sequencer.hasNext());
@@ -32,7 +34,8 @@ public class NumericSequencerTest extends TestCase {
     }
 
     // тест последовательности из одного элемента
-    public void testOneElement(){
+
+    public void testOneElement() {
         NumericSequencer sequencer = new NumericSequencer(0, 1, 100, 1);
 
         assertTrue(sequencer.hasNext());
@@ -41,7 +44,8 @@ public class NumericSequencerTest extends TestCase {
     }
 
     // тест последовательности из двух элементов с множителем
-    public void testTwoElementsWithMult(){
+
+    public void testTwoElementsWithMult() {
         NumericSequencer sequencer = new NumericSequencer(0, 1, 1, 20);
 
         assertTrue(sequencer.hasNext());
@@ -52,7 +56,8 @@ public class NumericSequencerTest extends TestCase {
     }
 
     // тест старт равен стопу
-    public void testStartStopEquals(){
+
+    public void testStartStopEquals() {
         NumericSequencer sequencer = new NumericSequencer(1, 1, 1, 1);
 
         assertTrue(sequencer.hasNext());

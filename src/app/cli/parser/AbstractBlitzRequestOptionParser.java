@@ -7,17 +7,18 @@ import app.cli.command.BlitzRequestCommand;
 import app.cli.command.Command;
 import app.cli.command.LoadSettingsCommand;
 import app.cli.command.LoadWorkspaceCommand;
-import static app.cli.parser.OptionNameTable.FORCED_MODE_OPTION_SHORT_NAME;
 import constructor.objects.output.configuration.Composition;
 import org.apache.commons.cli.CommandLine;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static app.cli.parser.OptionNameTable.FORCED_MODE_OPTION_SHORT_NAME;
+import static util.CollectionUtils.newArrayList;
+
 /**
- * Абстрактный парсер блиц-запросов
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 01.11.2009
@@ -29,7 +30,7 @@ public abstract class AbstractBlitzRequestOptionParser implements OptionParser {
         Assert.notNull(_api, "Api is null.");
         Assert.notNull(_context, "Context is null.");
 
-        List<Command> result = new ArrayList<Command>();
+        List<Command> result = newArrayList();
 
         String settingsName = _api.getDefaultSettingsName();
 
@@ -62,6 +63,10 @@ public abstract class AbstractBlitzRequestOptionParser implements OptionParser {
     protected abstract BlitzRequest createRequest(final CommandLine _commandLine);
 
     protected void processMiscOptions(final CommandLine _commandLine, final BlitzRequest _request) {
+
+        if (_commandLine.hasOption(OptionNameTable.AUTO_OPTION_SHORT_NAME)) {
+            _request.setCriterionType(CriterionType.FILTER);
+        }
 
         if (_commandLine.hasOption(OptionNameTable.XPATH_OPTION_SHORT_NAME)) {
             _request.setCriterionType(CriterionType.XPATH);

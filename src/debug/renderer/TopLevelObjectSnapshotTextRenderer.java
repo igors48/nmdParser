@@ -5,8 +5,9 @@ import debug.SnapshotTextRenderer;
 import debug.snapshot.TopLevelObjectSnapshot;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Рендерер снапшота объекта верхнего уровня
@@ -22,7 +23,7 @@ public class TopLevelObjectSnapshotTextRenderer implements SnapshotTextRenderer 
         Assert.notNull(_snapshot, "Snapshot is null");
         Assert.isTrue(_snapshot instanceof TopLevelObjectSnapshot, "This is not top level object snapshot");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         result.add(((TopLevelObjectSnapshot) _snapshot).getName());
 

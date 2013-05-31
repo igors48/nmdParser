@@ -1,10 +1,10 @@
 package work.unit.dom;
 
-import org.w3c.dom.Element;
 import constructor.dom.Constructor;
 import constructor.dom.ConstructorFactory;
 import constructor.dom.ElementHandler;
 import constructor.dom.ObjectType;
+import org.w3c.dom.Element;
 import util.Assert;
 
 /**

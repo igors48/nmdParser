@@ -4,14 +4,15 @@ import constructor.dom.Constructor;
 import constructor.dom.ConstructorFactory;
 import constructor.dom.ObjectType;
 import constructor.dom.UsedObject;
-import constructor.objects.output.configuration.OutputConfiguration;
 import constructor.objects.output.configuration.Composition;
+import constructor.objects.output.configuration.OutputConfiguration;
 import junit.framework.TestCase;
-import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
+import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
 /**
  * @author Igor Usenko
@@ -24,8 +25,9 @@ public class OutputConfigurationTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("output", "<output format=\"format\" storage=\"storage\" branch=\"branch\" channel=\"channel\"/>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -43,8 +45,9 @@ public class OutputConfigurationTest extends TestCase {
     }
 
     // тест режима обработки линков - обработка отключена
+
     public void testLinkModeOff() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("output", "<output format=\"format\" storage=\"storage\" branch=\"branch\" channel=\"channel\" linksAsFootnotes=\"no\"/>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -57,8 +60,9 @@ public class OutputConfigurationTest extends TestCase {
     }
 
     // тест режима обработки линков - обработка включена
+
     public void testLinkModeOn() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("output", "<output format=\"format\" storage=\"storage\" branch=\"branch\" channel=\"channel\" linksAsFootnotes=\"yEs\"/>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -71,8 +75,9 @@ public class OutputConfigurationTest extends TestCase {
     }
 
     // тест на конфигурирование one-to-one по умолчанию
+
     public void testOneToOne() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("output", "<output format=\"format\" storage=\"storage\" branch=\"branch\" channel=\"channel\"/>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -85,8 +90,9 @@ public class OutputConfigurationTest extends TestCase {
     }
 
     // тест на прямое конфигурирование one-to-one
+
     public void testOneToOneDirect() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("output", "<output format=\"format\" storage=\"storage\" branch=\"branch\" channel=\"channel\"><one-to-one/></output>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -99,8 +105,9 @@ public class OutputConfigurationTest extends TestCase {
     }
 
     // тест на прямое конфигурирование many-to-one
+
     public void testManyToOneDirect() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("output", "<output format=\"format\" storage=\"storage\" branch=\"branch\" channel=\"channel\"><many-to-one name=\"docname\"/></output>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -114,8 +121,9 @@ public class OutputConfigurationTest extends TestCase {
     }
 
     // тест определения зависимостей
+
     public void testDependencies() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("output", "<output format=\"format\" storage=\"storage\" branch=\"branch\" channel=\"channel\"><many-to-one name=\"docname\"/></output>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);

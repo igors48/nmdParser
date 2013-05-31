@@ -1,10 +1,12 @@
 package app.cli.parser;
 
-import static app.cli.parser.OptionNameTable.FORCED_MODE_OPTION_SHORT_NAME;
 import org.apache.commons.cli.CommandLine;
 import util.Assert;
 
 import java.util.*;
+
+import static app.cli.parser.OptionNameTable.FORCED_MODE_OPTION_SHORT_NAME;
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Утилиты для парсера опций
@@ -40,7 +42,7 @@ public final class OptionParserUtils {
     public static Map<String, String> convert(final Properties _properties) {
         Assert.notNull(_properties, "Properties is null");
 
-        Map<String, String> result = new HashMap<String, String>();
+        Map<String, String> result = newHashMap();
 
         for (Object key : _properties.keySet()) {
             result.put((String) key, _properties.getProperty((String) key));

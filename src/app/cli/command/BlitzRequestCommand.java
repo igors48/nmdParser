@@ -2,7 +2,6 @@ package app.cli.command;
 
 import app.api.ApiFacade;
 import app.cli.blitz.request.BlitzRequest;
-import app.cli.blitz.BlitzRequestHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import util.Assert;
@@ -41,4 +40,5 @@ public class BlitzRequestCommand implements Command {
             throw new CommandExecutionException(e);
         }
     }
+
 }

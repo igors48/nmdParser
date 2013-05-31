@@ -1,6 +1,0 @@
-<processor>
-	<getGroup>
-		<pattern><![CDATA[<img\s+src="(image.php\?u=.+?)".+?>]]></pattern> 
-		<occurrence>0</occurrence>
-	</getGroup>
-</processor>

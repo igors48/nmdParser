@@ -2,12 +2,13 @@ package util.html;
 
 import util.Assert;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static util.CollectionUtils.newArrayList;
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Утилитный класс для работы с кодом HTML тега
@@ -38,7 +39,7 @@ public final class HtmlTagTools {
         Assert.isValidString(_image, "Image is not valid.");
 
         String image = _image;
-        Map<String, String> result = new HashMap<String, String>();
+        Map<String, String> result = newHashMap();
 
         List<String> singleQuoted = getMatches(image, SINGLE_QUOTED_PATTERN);
         image = removeSubstrings(image, singleQuoted);
@@ -57,7 +58,7 @@ public final class HtmlTagTools {
     }
 
     private static List<String> getMatches(final String _data, final Pattern _pattern) {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         Matcher matcher = _pattern.matcher(_data);
 

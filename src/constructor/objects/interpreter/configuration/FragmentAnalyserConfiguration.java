@@ -9,8 +9,9 @@ import constructor.objects.dateparser.core.DateParserAdapter;
 import constructor.objects.processor.chain.adapter.StandardChainProcessorAdapter;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Конфигурация анализатора фрагмента
@@ -97,7 +98,7 @@ public class FragmentAnalyserConfiguration implements Blank {
     }
 
     public List<UsedObject> getUsedObjects() {
-        List<UsedObject> result = new ArrayList<UsedObject>();
+        List<UsedObject> result = newArrayList();
 
         if (this.nickProcessor != null) {
             result.add(new UsedObject(this.nickProcessor.getId(), ObjectType.PROCESSOR));

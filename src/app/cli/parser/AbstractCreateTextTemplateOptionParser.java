@@ -5,16 +5,17 @@ import app.cli.command.Command;
 import app.cli.command.CreateTemplatesCommand;
 import app.cli.command.LoadSettingsCommand;
 import app.cli.command.LoadWorkspaceCommand;
-import static app.cli.parser.OptionNameTable.SETTINGS_OPTION_SHORT_NAME;
-import static app.cli.parser.OptionNameTable.WORKSPACE_OPTION_SHORT_NAME;
 import app.templater.TemplateParameters;
 import app.templater.TemplateType;
 import org.apache.commons.cli.CommandLine;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static app.cli.parser.OptionNameTable.SETTINGS_OPTION_SHORT_NAME;
+import static app.cli.parser.OptionNameTable.WORKSPACE_OPTION_SHORT_NAME;
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Абстрактный парсер опции создания шаблонов для обработки фидов
@@ -32,7 +33,7 @@ public abstract class AbstractCreateTextTemplateOptionParser implements OptionPa
         Assert.notNull(_api, "Api is null.");
         Assert.notNull(_context, "Context is null.");
 
-        List<Command> result = new ArrayList<Command>();
+        List<Command> result = newArrayList();
 
         String settingsName = _api.getDefaultSettingsName();
 

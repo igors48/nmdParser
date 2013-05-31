@@ -6,11 +6,11 @@ package work.unit.reflectools;
  */
 public class Fixture {
 
-    public void setName(String _name){
-        
+    public void setName(String _name) {
+
     }
 
-    public void setOops(int _value){
-        
+    public void setOops(int _value) {
+
     }
 }

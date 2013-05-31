@@ -1,3 +1,0 @@
-<output channel="MotorNews.channel" branch="auto">
-    <many-to-one name="MotorNews"/>
-</output>

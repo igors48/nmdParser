@@ -1,9 +1,0 @@
-<source>
-
-	<store days="0"/>
-	
-	<custom id="lisp.custom"/>
-	
-	<processor id="lisp.source-processor"/>
-	
-</source>

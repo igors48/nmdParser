@@ -1,7 +1,7 @@
 package work.unit.fb2.tools;
 
-import junit.framework.TestCase;
 import converter.format.fb2.Fb2Tools;
+import junit.framework.TestCase;
 
 /**
  * @author Igor Usenko
@@ -26,93 +26,93 @@ public class Fb2ToolsTest extends TestCase {
         super(_s);
     }
 
-    public void testNumericEntity(){
+    public void testNumericEntity() {
         assertTrue(Fb2Tools.isNumericEntity(NUMERIC_ENTITY_FIXTURE, NUMERIC_ENTITY_FIXTURE.indexOf("&")));
     }
 
-    public void testNotNumericEntity(){
+    public void testNotNumericEntity() {
         assertFalse(Fb2Tools.isNumericEntity(NOT_NUMERIC_ENTITY_FIXTURE_01, NOT_NUMERIC_ENTITY_FIXTURE_01.indexOf("&")));
         assertFalse(Fb2Tools.isNumericEntity(NOT_NUMERIC_ENTITY_FIXTURE_02, NOT_NUMERIC_ENTITY_FIXTURE_02.indexOf("&")));
     }
-    
-    public void testCharacterEntity(){
+
+    public void testCharacterEntity() {
         assertTrue(Fb2Tools.isCharacterEntity(CHARACHTER_ENTITY_FIXTURE, CHARACHTER_ENTITY_FIXTURE.indexOf("&")));
     }
 
-    public void testNotCharacterEntity(){
+    public void testNotCharacterEntity() {
         assertFalse(Fb2Tools.isCharacterEntity(NOT_CHARACHTER_ENTITY_FIXTURE_01, NOT_CHARACHTER_ENTITY_FIXTURE_01.indexOf("&")));
     }
 
-    public void testStandaloneAmp(){
+    public void testStandaloneAmp() {
         assertTrue(Fb2Tools.isStandaloneAmp(STANDALONE_AMP_FIXTURE, STANDALONE_AMP_FIXTURE.indexOf("&")));
     }
 
-    public void testNotStandaloneAmp(){
+    public void testNotStandaloneAmp() {
         assertFalse(Fb2Tools.isStandaloneAmp(NOT_STANDALONE_AMP_FIXTURE_01, NOT_STANDALONE_AMP_FIXTURE_01.indexOf("&")));
         assertFalse(Fb2Tools.isStandaloneAmp(NOT_STANDALONE_AMP_FIXTURE_02, NOT_STANDALONE_AMP_FIXTURE_02.indexOf("&")));
     }
 
-    public void testResolveRealAmps(){
+    public void testResolveRealAmps() {
         String result = Fb2Tools.resolveAmps("a&b");
 
         assertEquals("a&amp;b", result);
     }
 
-    public void testResolveRealAmpsAtTheEnd(){
+    public void testResolveRealAmpsAtTheEnd() {
         String result = Fb2Tools.resolveAmps("a&");
 
         assertEquals("a&amp;", result);
     }
 
-    public void testResolveRealAmpsAtTheBegin(){
+    public void testResolveRealAmpsAtTheBegin() {
         String result = Fb2Tools.resolveAmps("&a");
 
         assertEquals("&amp;a", result);
     }
 
-    public void testResolveAmpEntityAmps(){
+    public void testResolveAmpEntityAmps() {
         String result = Fb2Tools.resolveAmps("a&amp;b");
 
         assertEquals("a&amp;b", result);
     }
 
-    public void testResolveCharEntityAmps(){
+    public void testResolveCharEntityAmps() {
         String result = Fb2Tools.resolveAmps("a&deg;b");
 
         assertEquals("a&deg;b", result);
     }
 
-    public void testResolveNumEntityAmps(){
+    public void testResolveNumEntityAmps() {
         String result = Fb2Tools.resolveAmps("a&#123;b");
 
         assertEquals("a&#123;b", result);
     }
 
-    public void testRealFixture01(){
+    public void testRealFixture01() {
         String result = Fb2Tools.resolveAmps(REAL_FIXTURE_01);
 
         assertEquals("&amp;_t=rec&amp;id=25625", result);
     }
 
-    public void testRealFixture02(){
+    public void testRealFixture02() {
         String result = Fb2Tools.resolveAmps(REAL_FIXTURE_02);
 
         assertEquals("http://fotobank.mediaport.info/galery.php?theme=23&amp;collapsed=10&amp;galery_id=1164&#9001;=rus", result);
     }
 
-    public void testProcEntSmoke(){
+    public void testProcEntSmoke() {
         String result = Fb2Tools.processEntities("&&amp;&lt;&gt;&apos;&quot;&nbsp;");
 
         assertEquals("&amp;&amp;&lt;&gt;&quot;&quot;&#160;", result);
     }
 
-    public void testProcEntWithNotSup(){
+    public void testProcEntWithNotSup() {
         String result = Fb2Tools.processEntities("&&amp;&lt;&gt;&apos;&quot;&nbsp;&diams;");
 
         assertEquals("&amp;&amp;&lt;&gt;&quot;&quot;&#160;[?]", result);
     }
 
-    public void testProcEntWithNotSupAndNumeric(){
+    public void testProcEntWithNotSupAndNumeric() {
         String result = Fb2Tools.processEntities("&&amp;&lt;&#48;&gt;&apos;&quot;&nbsp;&diams;");
 
         assertEquals("&amp;&amp;&lt;&#48;&gt;&quot;&quot;&#160;[?]", result);

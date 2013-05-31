@@ -47,6 +47,7 @@ public class StandardChannelDataListProcessorEx implements ChannelDataListProces
     }
 
     //todo замещение одного другим - как-то кривовато... и в тестах пришлось закомментить
+
     private Header createHeader(final ChannelDataList _data, final String _title, final TimeService _timeService) {
         String lastName = generateLastName(_data);
 

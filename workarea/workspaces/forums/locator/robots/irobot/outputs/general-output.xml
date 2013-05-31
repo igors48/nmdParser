@@ -1,3 +1,0 @@
-<output channel="robots.irobot.channels.general-channel" branch="robots.irobot.general" storage="common.storage.root">
-	<one-to-one/>
-</output>

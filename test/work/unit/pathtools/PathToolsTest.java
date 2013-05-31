@@ -14,6 +14,7 @@ public class PathToolsTest extends TestCase {
     }
 
     // проверка на неизменение нормализованного пути
+
     public void testNormalized() {
         String fixture = "E:\\s48\\";
 
@@ -21,6 +22,7 @@ public class PathToolsTest extends TestCase {
     }
 
     // проверка на нормализацию ненормализованного пути
+
     public void testNotNormalized() {
         String fixture = "E:\\s48";
 
@@ -28,6 +30,7 @@ public class PathToolsTest extends TestCase {
     }
 
     // добавление времени в имя файла с расширением
+
     public void testAppendTimeWithExtension() {
         String fixture = "name.ext";
         String result = PathTools.appendDateTimeToName(fixture);
@@ -36,6 +39,7 @@ public class PathToolsTest extends TestCase {
     }
 
     // добавление времени в имя файла без расширения
+
     public void testAppendTimeWithoutExtension() {
         String fixture = "name";
         String result = PathTools.appendDateTimeToName(fixture);
@@ -44,6 +48,7 @@ public class PathToolsTest extends TestCase {
     }
 
     // добавление времени в имя файла с точками
+
     public void testAppendTimeWithPoints() {
         String fixture = "name.ext.ext";
         String result = PathTools.appendDateTimeToName(fixture);

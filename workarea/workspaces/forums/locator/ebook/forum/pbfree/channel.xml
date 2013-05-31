@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="cp1251"?>
-	<!-- Pocket Book Free-->
-
-<channel source="ebook.forum.pbfree.source" header="ebook.forum.header-processor" interpreter="ebook.forum.interpreter" lastitems="100" forced="yes"/>

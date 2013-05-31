@@ -5,8 +5,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import util.Assert;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Стандартный менеджер внешних процессов
@@ -30,7 +31,7 @@ public class ExternalProcessManager implements ProcessWrapper {
         Assert.notNull(_executor, "Executor is null");
         this.executor = _executor;
 
-        this.statistic = new HashMap<String, ProcessStatistic>();
+        this.statistic = newHashMap();
 
         this.log = LogFactory.getLog(getClass());
     }

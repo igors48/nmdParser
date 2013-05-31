@@ -1,7 +1,0 @@
-<processor>
-	
-	<xPath>
-		<expression>/body/center/table[2]/tbody/tr[3]/td[3]/table[1]/tbody/tr[3]/td/a[@class='title']</expression>
-	</xPath>
-	
-</processor>

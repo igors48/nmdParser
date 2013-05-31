@@ -1,3 +1,0 @@
-<output channel="robots.irobot.channels.scooba-channel" branch="robots.irobot.scooba" storage="common.storage.root">
-	<one-to-one/>
-</output>

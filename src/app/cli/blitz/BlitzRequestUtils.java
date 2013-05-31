@@ -2,8 +2,9 @@ package app.cli.blitz;
 
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Утилиты для работы с блиц запросами
@@ -18,7 +19,7 @@ public final class BlitzRequestUtils {
         Assert.notNull(_urls, "Urls list is null");
         Assert.isFalse(_urls.isEmpty(), "Urls list is empty");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         for (String url : _urls) {
             result.add(_base.concat(url));

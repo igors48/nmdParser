@@ -5,8 +5,6 @@ import org.htmlcleaner.TagNode;
 import org.htmlcleaner.XPatherException;
 import util.Assert;
 
-import java.io.IOException;
-
 /**
  * @author Igor Usenko
  *         Date: 20.09.2008
@@ -34,9 +32,9 @@ public final class SimpleHtmlConverterUtil {
             //"<q>", "</q>",
             "<cite>", "</cite>",
             "<ins>", "</ins>",
-            "<del>", "</del>",
-            "<s>", "</s>",
-            "<strike>", "</strike>",
+            //"<del>", "</del>",
+            //"<s>", "</s>",
+            //"<strike>", "</strike>",
             //"<a.*?>", "</a>",
             "<link.*?>",
             "<frame.*?>",
@@ -58,7 +56,7 @@ public final class SimpleHtmlConverterUtil {
             "<ol.*?>", "</ol>",
             //"<li>", "</li>",
             "<dir>", "</dir>",
-            "<sup.*?>", "</sup>",
+            //"<sup.*?>", "</sup>",
             //"<dl>", "</dl>",
             //"<dt>, </dt>",
             //"<dd>, </dd>",

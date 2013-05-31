@@ -11,8 +11,9 @@ import util.html.HtmlTagBounds;
 import util.html.HtmlTagExtractor;
 import variables.Variables;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Реализует удаление содержимого тэга. Тэг задается регулярным выражением,
@@ -69,7 +70,7 @@ public class RemoveTagProcessor extends AbstractVariableProcessor {
     }
 
     private List<Boundary> getBoundaries(final List<HtmlTagBounds> _bounds) {
-        List<Boundary> result = new ArrayList<Boundary>();
+        List<Boundary> result = newArrayList();
 
         for (int index = 0; index < _bounds.size(); ++index) {
 

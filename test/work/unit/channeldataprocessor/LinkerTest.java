@@ -1,21 +1,21 @@
 package work.unit.channeldataprocessor;
 
-import junit.framework.TestCase;
-import constructor.objects.output.core.linker.*;
-import constructor.objects.output.configuration.DateSectionMode;
 import constructor.objects.channel.core.ChannelData;
 import constructor.objects.channel.core.ChannelDataHeader;
 import constructor.objects.channel.core.stream.ChannelDataList;
 import constructor.objects.interpreter.core.data.InterpreterData;
-
-import java.util.List;
-import java.util.ArrayList;
-
+import constructor.objects.output.configuration.DateSectionMode;
+import constructor.objects.output.core.linker.*;
 import dated.DatedItem;
 import dated.item.atdc.AtdcItem;
-import work.testutil.AtdcTestUtils;
-import downloader.Data;
+import http.Data;
+import junit.framework.TestCase;
 import timeservice.StillTimeService;
+import work.testutil.AtdcTestUtils;
+
+import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -175,8 +175,8 @@ public class LinkerTest extends TestCase {
         // date sections sort
         assertEquals(3, linkerSectionList.size());
 
-        assertTrue(((DateSection)linkerSectionList.get(0)).getDate().getTime() > ((DateSection)linkerSectionList.get(1)).getDate().getTime());
-        assertTrue(((DateSection)linkerSectionList.get(1)).getDate().getTime() > ((DateSection)linkerSectionList.get(2)).getDate().getTime());
+        assertTrue(((DateSection) linkerSectionList.get(0)).getDate().getTime() > ((DateSection) linkerSectionList.get(1)).getDate().getTime());
+        assertTrue(((DateSection) linkerSectionList.get(1)).getDate().getTime() > ((DateSection) linkerSectionList.get(2)).getDate().getTime());
 
         // date sections content
         DateSection linkerSection = (DateSection) linkerSectionList.get(0);
@@ -212,8 +212,8 @@ public class LinkerTest extends TestCase {
         // date sections sort
         assertEquals(3, linkerSectionList.size());
 
-        assertTrue(((DateSection)linkerSectionList.get(0)).getDate().getTime() < ((DateSection)linkerSectionList.get(1)).getDate().getTime());
-        assertTrue(((DateSection)linkerSectionList.get(1)).getDate().getTime() < ((DateSection)linkerSectionList.get(2)).getDate().getTime());
+        assertTrue(((DateSection) linkerSectionList.get(0)).getDate().getTime() < ((DateSection) linkerSectionList.get(1)).getDate().getTime());
+        assertTrue(((DateSection) linkerSectionList.get(1)).getDate().getTime() < ((DateSection) linkerSectionList.get(2)).getDate().getTime());
 
         // date sections content
         DateSection linkerSection = (DateSection) linkerSectionList.get(0);
@@ -239,7 +239,7 @@ public class LinkerTest extends TestCase {
         ChannelDataHeader header = new ChannelDataHeader(_title, _firstName, _lastName, _sourceUrl, _coverUrl);
 
         InterpreterData interpreterData = createSameDatedInterpreterItems(_from, _to);
-        List<InterpreterData > interpreterDataList = new ArrayList<InterpreterData>();
+        List<InterpreterData> interpreterDataList = newArrayList();
         interpreterDataList.add(interpreterData);
 
         return new ChannelData(header, interpreterDataList);
@@ -249,14 +249,14 @@ public class LinkerTest extends TestCase {
         ChannelDataHeader header = new ChannelDataHeader(_title, _firstName, _lastName, _sourceUrl, _coverUrl);
 
         InterpreterData interpreterData = createDifferentDatesInterpreterItems(_from, _to);
-        List<InterpreterData > interpreterDataList = new ArrayList<InterpreterData>();
+        List<InterpreterData> interpreterDataList = newArrayList();
         interpreterDataList.add(interpreterData);
 
         return new ChannelData(header, interpreterDataList);
     }
 
     private InterpreterData createSameDatedInterpreterItems(final int _from, final int _to) {
-        List<DatedItem> datedItemList = new ArrayList<DatedItem>();
+        List<DatedItem> datedItemList = newArrayList();
 
         for (int i = _from; i <= _to; ++i) {
             datedItemList.add(AtdcTestUtils.getAtdcFullItem(i));
@@ -264,10 +264,10 @@ public class LinkerTest extends TestCase {
 
         return new InterpreterData(datedItemList);
     }
-    
+
     private InterpreterData createDifferentDatesInterpreterItems(final int _from, final int _to) {
-        List<DatedItem> datedItemList = new ArrayList<DatedItem>();
-        
+        List<DatedItem> datedItemList = newArrayList();
+
         StillTimeService timeService = new StillTimeService();
 
         for (int i = _from; i <= _to; ++i) {

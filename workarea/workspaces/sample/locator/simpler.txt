@@ -1,3 +1,0 @@
-<simpler feedUrl="http://www.3dnews.ru/news/rss/" coverUrl="http://www.3dnews.ru/i/3dn.gif" storeDays="7" branch="" outName="3d" fromNewToOld="yes">
-	<xPath>//div[@class='newsArticle']</xPath>
-</simpler>

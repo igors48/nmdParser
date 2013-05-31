@@ -16,8 +16,8 @@ public class Fb2FootNoteLink implements Stringable {
 
     private final String id;
 
-    public Fb2FootNoteLink(String _content) {
-        Assert.isValidString(_content);
+    public Fb2FootNoteLink(final String _content) {
+        Assert.isValidString(_content, "Content is not valid");
 
         this.id = Fb2Tools.processEntities(_content);
     }

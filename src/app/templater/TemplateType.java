@@ -15,4 +15,5 @@ public enum TemplateType {
      * Шаблон для RSS ленты с анонсами
      */
     BRIEF_RSS_TEMPLATE
+
 }

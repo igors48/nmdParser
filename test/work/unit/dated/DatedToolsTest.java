@@ -1,10 +1,10 @@
 package work.unit.dated;
 
+import dated.DatedTools;
+import dated.item.atdc.AtdcItem;
 import junit.framework.TestCase;
 import timeservice.StillTimeService;
 import work.testutil.AtdcTestUtils;
-import dated.item.atdc.AtdcItem;
-import dated.DatedTools;
 
 /**
  * @author Igor Usenko
@@ -17,7 +17,8 @@ public class DatedToolsTest extends TestCase {
     }
 
     // первоначальный тест
-    public void testSmoke(){
+
+    public void testSmoke() {
         StillTimeService timeService = new StillTimeService();
         AtdcItem item01 = AtdcTestUtils.getAtdcNoTitleItem(timeService, 1);
         timeService.changeDay(3);
@@ -29,7 +30,8 @@ public class DatedToolsTest extends TestCase {
     }
 
     // тест равных по времени элементов 
-    public void testEquals(){
+
+    public void testEquals() {
         StillTimeService timeService = new StillTimeService();
         AtdcItem item01 = AtdcTestUtils.getAtdcNoTitleItem(timeService, 1);
         AtdcItem item02 = AtdcTestUtils.getAtdcNoTitleItem(timeService, 2);
@@ -40,7 +42,8 @@ public class DatedToolsTest extends TestCase {
     }
 
     // первоначальный тест с переставленными параметрами 
-    public void testSmokeInv(){
+
+    public void testSmokeInv() {
         StillTimeService timeService = new StillTimeService();
         AtdcItem item01 = AtdcTestUtils.getAtdcNoTitleItem(timeService, 1);
         timeService.changeDay(3);

@@ -4,9 +4,10 @@ import flowtext.FlowTextType;
 import flowtext.Section;
 import html.Converter;
 import junit.framework.TestCase;
-import static work.testutil.HtmlConverterTestUtils.*;
 
 import java.util.List;
+
+import static work.testutil.HtmlConverterTestUtils.*;
 
 
 /**

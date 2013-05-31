@@ -3,9 +3,10 @@ package converter.format.fb2.objects;
 import converter.format.fb2.Stringable;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -14,23 +15,22 @@ import java.util.List;
 public class Fb2Body implements Stringable {
 
     private static final String TEMPLATE_START = "<body>";
-
     private static final String TEMPLATE_END = "</body>";
 
     private final List<Fb2Section> sections;
 
     public Fb2Body() {
-        this.sections = new ArrayList<Fb2Section>();
+        this.sections = newArrayList();
     }
 
-    public void insertSection(Fb2Section _section) {
-        Assert.notNull(_section);
+    public void insertSection(final Fb2Section _section) {
+        Assert.notNull(_section, "Section is null");
 
         this.sections.add(_section);
     }
 
     public String[] getStrings() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         result.add(TEMPLATE_START);
 

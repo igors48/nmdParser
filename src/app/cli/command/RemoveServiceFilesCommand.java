@@ -13,6 +13,7 @@ import util.Assert;
  *         Date: 16.11.2009
  */
 public class RemoveServiceFilesCommand implements Command {
+
     private final Mask mask;
     private final ApiFacade facade;
 

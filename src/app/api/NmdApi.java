@@ -54,7 +54,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import greader.GoogleReaderAdapter;
+import static util.CollectionUtils.newArrayList;
 
 /**
  * NMD API
@@ -159,13 +159,11 @@ public class NmdApi implements ApiFacade {
     public List<ObjectMetaData> getObjectsMetaData() throws FatalException {
         checkWorkspaceAndSettings();
 
-        ConstructorFactory factory = null;
-
         try {
-            List<ObjectMetaData> result = new ArrayList<ObjectMetaData>();
+            List<ObjectMetaData> result = newArrayList();
 
             Locator locator = this.workspace.getLocator();
-            factory = this.workspace.getConstructorFactory();
+            ConstructorFactory factory = this.workspace.getConstructorFactory();
 
             this.serviceManager.activateReflectionMode();
 
@@ -180,11 +178,7 @@ public class NmdApi implements ApiFacade {
             result.addAll(getMetaDatas(locator, factory, ObjectType.SIMPLER));
 
             return result;
-        } catch (Workspace.WorkspaceException e) {
-            throw new FatalException(e);
-        } catch (Locator.LocatorException e) {
-            throw new FatalException(e);
-        } catch (Constructor.ConstructorException e) {
+        } catch (Workspace.WorkspaceException | Locator.LocatorException | Constructor.ConstructorException e) {
             throw new FatalException(e);
         } finally {
             this.serviceManager.deactivateReflectionMode();
@@ -230,7 +224,7 @@ public class NmdApi implements ApiFacade {
         Assert.notNull(_context, "External context is null");
         Assert.notNull(_externalConverterContext, "External converter context is null");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         if (!_controller.isCancelled()) {
             updateSource(_sourceId, _controller, _context);
@@ -251,26 +245,6 @@ public class NmdApi implements ApiFacade {
         return result;
     }
 
-    private void convertFilesExternal(final List<String> _files, final Controller _controller, final ExternalConverterContext _externalConverterContext) {
-        int index = 0;
-
-        for (String current : _files) {
-            _controller.onProgress(_files.size() == 1 ? new SingleProcessInfo(EXTERNAL_POSTPROCESSING) : new SingleProcessInfo(EXTERNAL_POSTPROCESSING, index++, _files.size()));
-            convertFileExternal(current, _externalConverterContext);
-        }
-    }
-
-    private void convertFileExternal(final String _file, final ExternalConverterContext _externalConverterContext) {
-        ForEachPostProcessor postProcessor = ForEachPostProcessorUtils.createForEachPostProcessor(this.serviceManager.getProcessWrapper(), _externalConverterContext.getPath(), _externalConverterContext.getPattern(), _externalConverterContext.getTimeout());
-
-        File target = new File(_file);
-
-        String path = PathTools.normalize(target.getParent());
-        String name = target.getName();
-
-        postProcessor.process(path, name);
-    }
-
     public List<String> getSourcesNames(final Mask _mask) throws FatalException {
         Assert.notNull(_mask, "Mask is null.");
         return locateAll(ObjectType.SOURCE, _mask);
@@ -288,11 +262,7 @@ public class NmdApi implements ApiFacade {
 
             Source source = getSource(_id, _controller);
             source.process();
-        } catch (Workspace.WorkspaceException e) {
-            throw new FatalException(e);
-        } catch (Source.SourceException e) {
-            throw new FatalException(e);
-        } catch (ServiceManager.ServiceManagerException e) {
+        } catch (Workspace.WorkspaceException | ServiceManager.ServiceManagerException | Source.SourceException e) {
             throw new FatalException(e);
         }
     }
@@ -314,11 +284,7 @@ public class NmdApi implements ApiFacade {
 
             Channel channel = getChannel(_id, _forcedDays, _controller);
             channel.process();
-        } catch (Workspace.WorkspaceException e) {
-            throw new FatalException(e);
-        } catch (Channel.ChannelException e) {
-            throw new FatalException(e);
-        } catch (ServiceManager.ServiceManagerException e) {
+        } catch (Workspace.WorkspaceException | ServiceManager.ServiceManagerException | Channel.ChannelException e) {
             throw new FatalException(e);
         }
     }
@@ -341,11 +307,7 @@ public class NmdApi implements ApiFacade {
             DocumentBuilder documentBuilder = getOutput(_id, _forcedDays, _controller);
 
             return documentBuilder.process();
-        } catch (Workspace.WorkspaceException e) {
-            throw new FatalException(e);
-        } catch (DocumentBuilder.DocumentBuilderException e) {
-            throw new FatalException(e);
-        } catch (ServiceManager.ServiceManagerException e) {
+        } catch (Workspace.WorkspaceException | DocumentBuilder.DocumentBuilderException | ServiceManager.ServiceManagerException e) {
             throw new FatalException(e);
         }
     }
@@ -362,9 +324,7 @@ public class NmdApi implements ApiFacade {
 
         try {
             this.workspace.getLocator().storeSimplerConfiguration(_configuration);
-        } catch (Locator.LocatorException e) {
-            throw new FatalException(e);
-        } catch (Workspace.WorkspaceException e) {
+        } catch (Locator.LocatorException | Workspace.WorkspaceException e) {
             throw new FatalException(e);
         }
     }
@@ -376,9 +336,7 @@ public class NmdApi implements ApiFacade {
 
         try {
             this.workspace.getLocator().removeSimplerConfiguration(_configuration);
-        } catch (Locator.LocatorException e) {
-            throw new FatalException(e);
-        } catch (Workspace.WorkspaceException e) {
+        } catch (Locator.LocatorException | Workspace.WorkspaceException e) {
             throw new FatalException(e);
         }
     }
@@ -395,9 +353,7 @@ public class NmdApi implements ApiFacade {
 
             List<Template> templates = this.templatesFactory.createTemplates(_parameters);
             this.workspace.getLocator().storeTemplates(_parameters.getName(), templates);
-        } catch (Locator.LocatorException e) {
-            throw new FatalException(e);
-        } catch (Workspace.WorkspaceException e) {
+        } catch (Locator.LocatorException | Workspace.WorkspaceException e) {
             throw new FatalException(e);
         }
     }
@@ -445,13 +401,7 @@ public class NmdApi implements ApiFacade {
             }
 
             return result;
-        } catch (Workspace.WorkspaceException e) {
-            throw new FatalException(e);
-        } catch (ServiceManager.ServiceManagerException e) {
-            throw new FatalException(e);
-        } catch (SnippetProcessor.SnippetProcessorException e) {
-            throw new FatalException(e);
-        } catch (SnippetProcessorAdapter.SnippetProcessorAdapterException e) {
+        } catch (Workspace.WorkspaceException | SnippetProcessor.SnippetProcessorException | SnippetProcessorAdapter.SnippetProcessorAdapterException | ServiceManager.ServiceManagerException e) {
             throw new FatalException(e);
         }
     }
@@ -489,48 +439,6 @@ public class NmdApi implements ApiFacade {
         removeOutputsServiceFiles(_mask);
     }
 
-    public void cancelDownload() throws FatalException {
-        checkWorkspaceAndSettings();
-
-        try {
-            this.serviceManager.getDownloader().cancel();
-        } catch (ServiceManager.ServiceManagerException e) {
-            throw new FatalException("Error cancel download", e);
-        }
-    }
-
-    public void createGoogleReaderProfile(final String _email, final String _password) throws FatalException {
-        Assert.isValidString(_email, "EMail is not valid");
-        Assert.isValidString(_password, "Password is not valid");
-
-        try {
-            this.serviceManager.getGoogleReaderAdapter().createProfile(_email, _password);
-        } catch (GoogleReaderAdapter.GoogleReaderAdapterException e) {
-            throw new FatalException(e);
-        } catch (ServiceManager.ServiceManagerException e) {
-            throw new FatalException(e);
-        }
-    }
-
-    public void updateGoogleReaderProfile(final String _email) throws FatalException {
-        Assert.isValidString(_email, "EMail is not valid");
-
-        try {
-            this.serviceManager.getGoogleReaderAdapter().updateProfile(_email, this);
-        } catch (GoogleReaderAdapter.GoogleReaderAdapterException e) {
-            throw new FatalException(e);
-        } catch (ServiceManager.ServiceManagerException e) {
-            throw new FatalException(e);
-        }
-    }
-
-
-    public void testGoogleReaderProfile(final String _email, final String _feed) throws FatalException {
-        Assert.isValidString(_email, "EMail is not valid");
-        Assert.isValidString(_feed, "Feeds is not valid");
-
-    }
-
     public void cleanup() {
 
         if (this.serviceManager != null) {
@@ -546,8 +454,28 @@ public class NmdApi implements ApiFacade {
         }
     }
 
+    private void convertFilesExternal(final List<String> _files, final Controller _controller, final ExternalConverterContext _externalConverterContext) {
+        int index = 0;
+
+        for (String current : _files) {
+            _controller.onProgress(_files.size() == 1 ? new SingleProcessInfo(EXTERNAL_POSTPROCESSING) : new SingleProcessInfo(EXTERNAL_POSTPROCESSING, index++, _files.size()));
+            convertFileExternal(current, _externalConverterContext);
+        }
+    }
+
+    private void convertFileExternal(final String _file, final ExternalConverterContext _externalConverterContext) {
+        ForEachPostProcessor postProcessor = ForEachPostProcessorUtils.createForEachPostProcessor(this.serviceManager.getProcessWrapper(), _externalConverterContext.getPath(), _externalConverterContext.getPattern(), _externalConverterContext.getTimeout());
+
+        File target = new File(_file);
+
+        String path = PathTools.normalize(target.getParent());
+        String name = target.getName();
+
+        postProcessor.process(path, name);
+    }
+
     private List<ObjectMetaData> getMetaDatas(final Locator _locator, final ConstructorFactory _factory, final ObjectType _type) throws Locator.LocatorException, Constructor.ConstructorException {
-        List<ObjectMetaData> result = new ArrayList<ObjectMetaData>();
+        List<ObjectMetaData> result = newArrayList();
 
         List<String> ids = _locator.locateAll(_type, new Mask(new ArrayList<String>(), new ArrayList<String>()));
 
@@ -593,9 +521,7 @@ public class NmdApi implements ApiFacade {
 
         try {
             return this.workspace.getLocator().locateAll(_type, _mask);
-        } catch (Locator.LocatorException e) {
-            throw new FatalException(e);
-        } catch (Workspace.WorkspaceException e) {
+        } catch (Locator.LocatorException | Workspace.WorkspaceException e) {
             throw new FatalException(e);
         }
     }
@@ -630,9 +556,7 @@ public class NmdApi implements ApiFacade {
                 removePropertiesSilent(Simpler.createId(simpler, ObjectType.OUTPUT), ObjectType.OUTPUT);
             }
 
-        } catch (Locator.LocatorException e) {
-            this.log.error("Error while remove service files", e);
-        } catch (Workspace.WorkspaceException e) {
+        } catch (Locator.LocatorException | Workspace.WorkspaceException e) {
             this.log.error("Error while remove service files", e);
         }
 
@@ -652,9 +576,7 @@ public class NmdApi implements ApiFacade {
             for (String simpler : simplers) {
                 removeChannelDataSilent(Simpler.createId(simpler, ObjectType.CHANNEL));
             }
-        } catch (Locator.LocatorException e) {
-            this.log.error("Error while remove service files", e);
-        } catch (Workspace.WorkspaceException e) {
+        } catch (Locator.LocatorException | Workspace.WorkspaceException e) {
             this.log.error("Error while remove service files", e);
         }
     }
@@ -676,9 +598,7 @@ public class NmdApi implements ApiFacade {
                 removePropertiesSilent(Simpler.createId(simpler, ObjectType.SOURCE), ObjectType.SOURCE);
             }
 
-        } catch (Locator.LocatorException e) {
-            this.log.error("Error while remove service files", e);
-        } catch (Workspace.WorkspaceException e) {
+        } catch (Locator.LocatorException | Workspace.WorkspaceException e) {
             this.log.error("Error while remove service files", e);
         }
 
@@ -688,9 +608,7 @@ public class NmdApi implements ApiFacade {
 
         try {
             this.workspace.getCloud().removeProperties(_output, _type);
-        } catch (PropertiesCloud.PropertyCloudException e) {
-            this.log.error("Error while remove service files", e);
-        } catch (Workspace.WorkspaceException e) {
+        } catch (PropertiesCloud.PropertyCloudException | Workspace.WorkspaceException e) {
             this.log.error("Error while remove service files", e);
         }
     }
@@ -699,9 +617,7 @@ public class NmdApi implements ApiFacade {
 
         try {
             this.workspace.getChannelDataListStorage().remove(_channel);
-        } catch (ChannelDataListStorage.ChannelDataListStorageException e) {
-            this.log.error("Error while remove service files", e);
-        } catch (Workspace.WorkspaceException e) {
+        } catch (ChannelDataListStorage.ChannelDataListStorageException | Workspace.WorkspaceException e) {
             this.log.error("Error while remove service files", e);
         }
     }
@@ -710,9 +626,7 @@ public class NmdApi implements ApiFacade {
 
         try {
             this.workspace.getModificationListStorage().remove(_source);
-        } catch (ModificationListStorage.ModificationListStorageException e) {
-            this.log.error("Error while remove service files", e);
-        } catch (Workspace.WorkspaceException e) {
+        } catch (ModificationListStorage.ModificationListStorageException | Workspace.WorkspaceException e) {
             this.log.error("Error while remove service files", e);
         }
     }
@@ -728,7 +642,6 @@ public class NmdApi implements ApiFacade {
                     this.serviceManager.getFetcherFactory(),
                     this.workspace.getModificationListStorage(),
                     this.serviceManager.getTimeService(),
-                    this.settings,
                     _controller);
         }
 
@@ -751,7 +664,7 @@ public class NmdApi implements ApiFacade {
         if (configuration instanceof ChannelConfiguration) {
             adapter = new StandardChannelAdapter(this.workspace.getChannelDataListStorage(),
                     (ChannelConfiguration) configuration,
-                    this.serviceManager.getDownloader(),
+                    this.serviceManager.getBatchLoader(),
                     this.workspace.getModificationListStorage(),
                     this.workspace.getConstructorFactory(),
                     _forcedDays,
@@ -777,14 +690,14 @@ public class NmdApi implements ApiFacade {
         DocumentBuilderAdapter adapter = null;
 
         if (configuration instanceof OutputConfiguration) {
-            List<Storage> storages = new ArrayList<Storage>();
+            List<Storage> storages = newArrayList();
             storages.add(this.workspace.getStorage(((OutputConfiguration) configuration).getStorageId()));
 
             adapter = new StandardDocumentBuilderAdapter(this.workspace.getCloud(),
                     this.workspace.getChannelDataListStorage(),
                     (OutputConfiguration) configuration,
                     this.serviceManager.getTimeService(),
-                    this.serviceManager.getDownloader(),
+                    this.serviceManager.getBatchLoader(),
                     this.serviceManager.getConverterFactory(),
                     this.serviceManager.getResourceCache(),
                     this.serviceManager.getProcessWrapper(),
@@ -813,7 +726,7 @@ public class NmdApi implements ApiFacade {
     private Simpler getSimpler(final SimplerConfiguration _configuration, final int _forcedDays, final Controller _controller) throws ServiceManager.ServiceManagerException, Workspace.WorkspaceException {
         SimplerAdapter adapter = new StandardSimplerAdapter(_configuration,
                 this.serviceManager.getTimeService(),
-                this.serviceManager.getDownloader(),
+                this.serviceManager.getBatchLoader(),
                 this.workspace.getCloud(),
                 _controller,
                 this.serviceManager.getConverterFactory(),
@@ -864,6 +777,5 @@ public class NmdApi implements ApiFacade {
 
         return result;
     }
-
 
 }

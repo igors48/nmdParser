@@ -1,3 +1,0 @@
-<simpler feedUrl="http://feeds.bbci.co.uk/news/rss.xml" coverUrl="http://static.bbc.co.uk/frameworks/barlesque/1.6.3//desktop/3/img/blocks/light.png" storeDays="7" branch="" outName="bbc" fromNewToOld="no">
-<xPath>//div[@class='story-body']</xPath>
-</simpler>

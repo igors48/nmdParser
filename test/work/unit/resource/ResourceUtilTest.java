@@ -1,9 +1,9 @@
 package work.unit.resource;
 
+import http.data.DataFile;
 import junit.framework.TestCase;
 import resource.ResourceType;
 import resource.ResourceUtil;
-import downloader.data.DataFile;
 import work.testutil.CompTestsUtils;
 
 /**
@@ -20,7 +20,7 @@ public class ResourceUtilTest extends TestCase {
         super(s);
     }
 
-    public void testOne(){
+    public void testOne() {
         ResourceType typePng = ResourceUtil.getResourceType(new DataFile(PNG_FILE));
         ResourceType typeGif = ResourceUtil.getResourceType(new DataFile(GIF_FILE));
         ResourceType typeJpg = ResourceUtil.getResourceType(new DataFile(JPG_FILE));

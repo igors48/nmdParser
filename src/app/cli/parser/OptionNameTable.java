@@ -1,7 +1,7 @@
 package app.cli.parser;
 
 /**
- * Имена опций, атрибутов и их описания для командной строки
+ * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 20.04.2009
@@ -14,8 +14,6 @@ public final class OptionNameTable {
     private static final String URL_TOKEN = "url";
     private static final String URLS_TOKEN = "url(s)";
     private static final String TEMPLATES_TOKEN = "name rss_url";
-    private static final String EMAIL_PASSWORD_TOKEN = "email password";
-    private static final String EMAIL_TOKEN = "email";
 
     public static final String DEBUG_MODE_OPTION_SHORT_NAME = "d";
     public static final String DEBUG_MODE_OPTION_FULL_NAME = "debug";
@@ -105,15 +103,6 @@ public final class OptionNameTable {
     public static final String BLITZ_FEED_REQUEST_OPTION_ATTRIBUTE_NAME = URL_TOKEN;
     public static final String BLITZ_FEED_REQUEST_OPTION_DESCRIPTION = "Process blitz request for given feed";
 
-    public static final String GOOGLE_READER_CREATE_PROFILE_OPTION_SHORT_NAME = "gc";
-    public static final String GOOGLE_READER_CREATE_PROFILE_OPTION_FULL_NAME = "google-create";
-    public static final String GOOGLE_READER_CREATE_PROFILE_OPTION_ATTRIBUTE_NAME = EMAIL_PASSWORD_TOKEN;
-    public static final String GOOGLE_READER_CREATE_PROFILE_OPTION_DESCRIPTION = "Create Google Reader profile";
-
-    public static final String GOOGLE_READER_UPDATE_PROFILE_OPTION_SHORT_NAME = "gu";
-    public static final String GOOGLE_READER_UPDATE_PROFILE_OPTION_FULL_NAME = "google-update";
-    public static final String GOOGLE_READER_UPDATE_PROFILE_OPTION_ATTRIBUTE_NAME = EMAIL_TOKEN;
-    public static final String GOOGLE_READER_UPDATE_PROFILE_OPTION_DESCRIPTION = "Update Google Reader profile";
 
     private static final String FOR_BLITZ_REQUEST_ONLY_TOKEN = " !!! For blitz requests only !!!";
 
@@ -135,6 +124,11 @@ public final class OptionNameTable {
     public static final String REG_EXP_OPTION_ATTRIBUTE_NAME = "RegExp_request";
     public static final String REG_EXP_OPTION_DESCRIPTION = "Set RegExp criterion for content extraction" + FOR_BLITZ_REQUEST_ONLY_TOKEN;
 
+    // a use Philter for content extraction [*]
+    public static final String AUTO_OPTION_SHORT_NAME = "a";
+    public static final String AUTO_OPTION_FULL_NAME = "auto";
+    public static final String AUTO_OPTION_DESCRIPTION = "Use Philter for content extraction" + FOR_BLITZ_REQUEST_ONLY_TOKEN;
+
     // mto name [*]
     public static final String MTO_OPTION_SHORT_NAME = "mto";
     public static final String MTO_OPTION_FULL_NAME = "many-to-one";
@@ -153,17 +147,17 @@ public final class OptionNameTable {
     public static final String STORAGE_OPTION_ATTRIBUTE_NAME = NAME_TOKEN;
     public static final String STORAGE_OPTION_DESCRIPTION = "Set output storage" + FOR_BLITZ_REQUEST_ONLY_TOKEN;
 
-    // -nlaf -no-links-as-footnotes - запрещает формирование сносок из ссылок [*]
+    // -nlaf -no-links-as-footnotes - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ [*]
     public static final String NO_LINKS_AS_FOOTNOTES_MODE_OPTION_SHORT_NAME = "nlaf";
     public static final String NO_LINKS_AS_FOOTNOTES_MODE_OPTION_FULL_NAME = "no-links-as-footnotes";
     public static final String NO_LINKS_AS_FOOTNOTES_MODE_OPTION_DESCRIPTION = "Disable links as footnotes mode" + FOR_BLITZ_REQUEST_ONLY_TOKEN;
 
-    // -nril -no-resolve-image-links - запрещает подкачку изображения по ссылке [*]
+    // -nril -no-resolve-image-links - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ [*]
     public static final String NO_RESOLVE_IMAGE_LINKS_MODE_OPTION_SHORT_NAME = "nril";
     public static final String NO_RESOLVE_IMAGE_LINKS_MODE_OPTION_FULL_NAME = "no-resolve-image-links";
     public static final String NO_RESOLVE_IMAGE_LINKS_MODE_OPTION_DESCRIPTION = "Disable resolve image links mode" + FOR_BLITZ_REQUEST_ONLY_TOKEN;
 
-    // -re -remove-exists - активирует удаление существующего файла [*]
+    // -re -remove-exists - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ [*]
     public static final String REMOVE_EXISTENT_FILE_MODE_OPTION_SHORT_NAME = "re";
     public static final String REMOVE_EXISTENT_FILE_MODE_OPTION_FULL_NAME = "remove-existent";
     public static final String REMOVE_EXISTENT_FILE_MODE_OPTION_DESCRIPTION = "Remove existent file mode" + FOR_BLITZ_REQUEST_ONLY_TOKEN;

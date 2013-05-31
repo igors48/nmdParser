@@ -2,9 +2,10 @@ package app.templater;
 
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Утилитный класс работы со строками содержащими плейсхолдеры типа ${name}
@@ -21,7 +22,7 @@ public final class PlaceHolderUtils {
     public static List<PlaceHolderInfo> getPlaceHolderInfos(final String _template) {
         Assert.isValidString(_template, "Placeholder template is not valid");
 
-        List<PlaceHolderInfo> result = new ArrayList<PlaceHolderInfo>();
+        List<PlaceHolderInfo> result = newArrayList();
         StringBuilder template = new StringBuilder(_template);
 
         PlaceHolderBoundary boundary = getBoundary(template, 0);
@@ -41,7 +42,7 @@ public final class PlaceHolderUtils {
         Assert.notNull(_templates, "Templates list is null");
         Assert.notNull(_values, "Values map is null");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         for (String template : _templates) {
             result.add(replace(template, _values));
@@ -142,20 +143,8 @@ public final class PlaceHolderUtils {
         return result;
     }
 
-    /*
-    private static StringBuilder replacePlaceholder(final StringBuilder _template, final String _key, final String _value){
-        String placeHolder = getPlaceholder(_key);
-        int index;
-
-        while ((index = _template.indexOf(placeHolder)) != -1) {
-            _template.replace(index, index + placeHolder.length(), _value);
-        }
-
-        return _template;
-    }
-    */
-
     private PlaceHolderUtils() {
         // empty
     }
+
 }

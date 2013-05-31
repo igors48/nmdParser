@@ -1,7 +1,7 @@
 package converter.format.fb2.resource.resolver.cache;
 
-import downloader.Data;
-import downloader.data.DataFile;
+import http.Data;
+import http.data.DataFile;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import util.Assert;
@@ -12,11 +12,12 @@ import util.PathTools;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
-import java.util.HashMap;
 import java.util.Map;
 
+import static util.CollectionUtils.newHashMap;
+
 /**
- * Хранилище данных ресурсного кэша расположенное в каталоге
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 08.11.2009
@@ -33,8 +34,8 @@ public class InDirectoryStorageAdapter implements StorageAdapter {
     private final Log log;
 
     public InDirectoryStorageAdapter(final String _root) {
-        Assert.isValidString(_root, "Cache storage root is not valid");
-        Assert.isTrue(new File(_root).exists(), "Cache storage root does not exists");
+        Assert.isValidString(_root, String.format("Cache storage root [ %s ] is not valid", _root == null ? "" : _root));
+        Assert.isTrue(new File(_root).exists(), String.format("Cache storage root [ %s ]does not exists", _root == null ? "" : _root));
         this.root = PathTools.normalize(_root);
         this.rootDirectory = new File(this.root);
 
@@ -67,11 +68,13 @@ public class InDirectoryStorageAdapter implements StorageAdapter {
         try {
             stream = new FileInputStream(getTocName());
             decoder = new XMLDecoder(stream);
+
             result = (Map<String, CacheEntry>) decoder.readObject();
+
             decoder.close();
             stream.close();
         } catch (FileNotFoundException e) {
-            result = new HashMap<String, CacheEntry>();
+            result = newHashMap();
         } catch (IOException e) {
             throw new StorageAdapterException(e);
         } finally {
@@ -120,7 +123,7 @@ public class InDirectoryStorageAdapter implements StorageAdapter {
     }
 
     public Map<String, StoredItem> getMap() {
-        Map<String, StoredItem> result = new HashMap<String, StoredItem>();
+        Map<String, StoredItem> result = newHashMap();
 
         File[] files = this.rootDirectory.listFiles(DATA_FILE_FILTER);
 

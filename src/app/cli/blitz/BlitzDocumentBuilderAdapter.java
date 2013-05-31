@@ -23,11 +23,12 @@ import flowtext.Document;
 import timeservice.TimeService;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
- * Адаптер блиц-генератора документа
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 30.10.2009
@@ -89,7 +90,7 @@ public class BlitzDocumentBuilderAdapter implements DocumentBuilderAdapter {
         Assert.notNull(_document, "Document is null.");
 
         try {
-            Fb2Converter converter = new Fb2Converter(this.serviceManager.getDownloader(),
+            Fb2Converter converter = new Fb2Converter(this.serviceManager.getBatchLoader(),
                     this.serviceManager.getConverterFactory(),
                     this.serviceManager.getResourceCache(),
                     this.settings.getResourceDummy(),
@@ -98,7 +99,7 @@ public class BlitzDocumentBuilderAdapter implements DocumentBuilderAdapter {
 
             String name = DocumentBuilderAdapterUtils.getName(_document.getHeader().getBookTitle(), this.settings.getMaxFileNameLength());
 
-            List<Storage> storages = new ArrayList<Storage>();
+            List<Storage> storages = newArrayList();
             storages.add(this.workspace.getStorage(this.request.getStorage()));
 
             ConverterContext context = new ConverterContext(_document,

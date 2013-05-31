@@ -5,9 +5,10 @@ import converter.format.fb2.footnotes.Fb2FootNoteList;
 import converter.format.fb2.resource.Fb2ResourceBundle;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -37,7 +38,7 @@ public class Fb2Document implements Stringable {
     }
 
     public String[] getStrings() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         result.add(XML_HEADER);
         result.add(TEMPLATE_START);

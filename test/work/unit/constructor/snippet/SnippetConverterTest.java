@@ -1,11 +1,11 @@
 package work.unit.constructor.snippet;
 
 import app.cli.blitz.request.BlitzRequest;
-import app.cli.blitz.request.RequestSourceType;
 import app.cli.blitz.request.CriterionType;
+import app.cli.blitz.request.RequestSourceType;
+import constructor.objects.output.configuration.Composition;
 import constructor.objects.snippet.configuration.SnippetConfiguration;
 import constructor.objects.snippet.core.SnippetConverter;
-import constructor.objects.output.configuration.Composition;
 import junit.framework.TestCase;
 
 /**
@@ -19,6 +19,7 @@ public class SnippetConverterTest extends TestCase {
     }
 
     // первоначальный тест - тип источника не задан
+
     public void testSmoke() {
 
         try {
@@ -32,6 +33,7 @@ public class SnippetConverterTest extends TestCase {
     }
 
     // тест для источника RSS + REGEXP
+
     public void testRssRegExpSourceType() throws SnippetConverter.SnippetConverterException {
         SnippetConfiguration configuration = new SnippetConfiguration();
         configuration.setRssUrl("rssurl");
@@ -48,12 +50,29 @@ public class SnippetConverterTest extends TestCase {
         assertEquals(Composition.ONE_TO_ONE, request.getComposition());
     }
 
+    // тест для источника RSS + CONTENT_FILTER
+
+    public void testRssContentFilterSourceType() throws SnippetConverter.SnippetConverterException {
+        SnippetConfiguration configuration = new SnippetConfiguration();
+        configuration.setRssUrl("rssurl");
+        configuration.setAutoContentFiltering();
+
+        BlitzRequest request = SnippetConverter.convert(configuration);
+
+        assertEquals(RequestSourceType.RSS, request.getSourceType());
+        assertEquals(1, request.getAddresses().size());
+        assertEquals("rssurl", request.getAddresses().get(0));
+
+        assertEquals(CriterionType.FILTER, request.getCriterionType());
+    }
+
     // тест для источника RSS + XPATH
+
     public void testRssXPathSourceType() throws SnippetConverter.SnippetConverterException {
         SnippetConfiguration configuration = new SnippetConfiguration();
         configuration.setRssUrl("rssurl");
         configuration.setXPath("xpath");
-        
+
         BlitzRequest request = SnippetConverter.convert(configuration);
 
         assertEquals(RequestSourceType.RSS, request.getSourceType());
@@ -67,6 +86,7 @@ public class SnippetConverterTest extends TestCase {
     }
 
     // тест для источника URLs without base + REGEXP
+
     public void testUrlsWithoutBaseRegExpSourceType() throws SnippetConverter.SnippetConverterException {
         SnippetConfiguration configuration = new SnippetConfiguration();
         configuration.addUrl("url1");
@@ -87,15 +107,16 @@ public class SnippetConverterTest extends TestCase {
 
         assertEquals(Composition.ONE_TO_ONE, request.getComposition());
     }
-    
+
     // тест для источника URLs with base + REGEXP
+
     public void testUrlsWithBaseRegExpSourceType() throws SnippetConverter.SnippetConverterException {
         SnippetConfiguration configuration = new SnippetConfiguration();
         configuration.addUrl("url1");
         configuration.addUrl("url2");
         configuration.addUrl("url3");
         configuration.setBase("base");
-        
+
         configuration.setRegExp("regexp");
         BlitzRequest request = SnippetConverter.convert(configuration);
 
@@ -112,6 +133,7 @@ public class SnippetConverterTest extends TestCase {
     }
 
     // тест для источника URLs without base + REGEXP + ManyToOne
+
     public void testUrlsWithoutBaseRegExpSourceTypeManyToOne() throws SnippetConverter.SnippetConverterException {
         SnippetConfiguration configuration = new SnippetConfiguration();
         configuration.addUrl("url1");
@@ -138,11 +160,12 @@ public class SnippetConverterTest extends TestCase {
     }
 
     // тест на установку coverUrl
+
     public void testCoverUrlSet() throws SnippetConverter.SnippetConverterException {
         SnippetConfiguration configuration = new SnippetConfiguration();
         configuration.setRssUrl("rssurl");
         configuration.setCoverUrl("cover");
-        
+
         BlitzRequest request = SnippetConverter.convert(configuration);
 
         assertEquals("cover", request.getCoverUrl());

@@ -1,9 +1,9 @@
 package work.unit.imagehelper;
 
 import junit.framework.TestCase;
+import resource.split.ImageHelper;
 import resource.split.ImageHelperContext;
 import resource.split.ImageProcessingContext;
-import resource.split.ImageHelper;
 import resource.split.SplitItem;
 
 /**
@@ -13,6 +13,7 @@ import resource.split.SplitItem;
 public class ImageHelperTest extends TestCase {
 
     // просто подходит. поворот и разбивка запрещены
+
     public void testFitAsIsNoRotateNoSplit() {
         ImageHelperContext context = new ImageHelperContext(10, 10, 100, 100, 0.7, false, false, 5);
 
@@ -23,6 +24,7 @@ public class ImageHelperTest extends TestCase {
     }
 
     // просто подходит. поворот разрешен разбивка запрещена
+
     public void testFitAsIsWithRotateNoSplit() {
         ImageHelperContext context = new ImageHelperContext(10, 10, 100, 100, 0.7, true, false, 5);
 
@@ -33,6 +35,7 @@ public class ImageHelperTest extends TestCase {
     }
 
     // просто подходит. поворот разрешен разбивка разрешена
+
     public void testFitAsIsWithRotateWithSplit() {
         ImageHelperContext context = new ImageHelperContext(10, 10, 100, 100, 0.7, true, true, 5);
 
@@ -43,6 +46,7 @@ public class ImageHelperTest extends TestCase {
     }
 
     // не подходит по высоте. поворот и разбивка запрещены
+
     public void testDoesNotFitHeightNoRotateNoSplit() {
         ImageHelperContext context = new ImageHelperContext(10, 200, 100, 100, 0.7, false, false, 5);
 
@@ -53,6 +57,7 @@ public class ImageHelperTest extends TestCase {
     }
 
     // не подходит по высоте. поворот разрешен разбивка запрещена
+
     public void testDoesNotFitHeightWithRotateNoSplit() {
         ImageHelperContext context = new ImageHelperContext(10, 200, 200, 100, 0.7, true, false, 5);
 
@@ -63,6 +68,7 @@ public class ImageHelperTest extends TestCase {
     }
 
     // не подходит по ширине. поворот и разбивка запрещены
+
     public void testDoesNotFitWidthNoRotateNoSplit() {
         ImageHelperContext context = new ImageHelperContext(200, 10, 100, 100, 0.7, false, false, 5);
 
@@ -73,6 +79,7 @@ public class ImageHelperTest extends TestCase {
     }
 
     // не подходит ни по ширине ни по высоте. поворот и разбивка запрещены
+
     public void testDoesNotFitWidthAndHeightNoRotateNoSplit() {
         ImageHelperContext context = new ImageHelperContext(200, 400, 100, 100, 0.7, false, false, 5);
 
@@ -83,6 +90,7 @@ public class ImageHelperTest extends TestCase {
     }
 
     // не подходит ни по ширине ни по высоте. поворот разрешен разбивка запрещена
+
     public void testDoesNotFitWidthAndHeightWithRotateNoSplit() {
         ImageHelperContext context = new ImageHelperContext(400, 200, 200, 100, 0.7, true, false, 5);
 
@@ -94,6 +102,7 @@ public class ImageHelperTest extends TestCase {
 
     // не подходит ни по ширине ни по высоте. поворот разрешен разбивка запрещена
     // изображение д.б. повернуто т.к. так меньше уменьшение
+
     public void testDoesNotFitWidthAndHeightWithRotateNoSplitRotateForLessScale() {
         ImageHelperContext context = new ImageHelperContext(200, 400, 200, 100, 0.7, true, false, 5);
 
@@ -121,7 +130,7 @@ public class ImageHelperTest extends TestCase {
         ImageProcessingContext result = ImageHelper.handle(context);
 
         assertBaseParametersValid(result, 0, 1, 9);
-        
+
         assertSplitItemValid(result.getSplitItems().get(0), 0, 0, 200, 200);
         assertSplitItemValid(result.getSplitItems().get(1), 0, 190, 200, 200);
         assertSplitItemValid(result.getSplitItems().get(2), 0, 380, 200, 200);

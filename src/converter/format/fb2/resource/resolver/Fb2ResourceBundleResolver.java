@@ -4,10 +4,10 @@ import app.controller.Controller;
 import app.iui.flow.custom.SingleProcessInfo;
 import converter.format.fb2.resource.Fb2ResourceItem;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
-import downloader.*;
-import downloader.batchloader.StandardBatchLoader;
-import downloader.data.DataFile;
 import html.HttpData;
+import http.BatchLoader;
+import http.Data;
+import http.data.DataFile;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import resource.Converter;
@@ -19,10 +19,11 @@ import util.IOTools;
 import util.PathTools;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static util.CollectionUtils.newArrayList;
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -34,7 +35,7 @@ public class Fb2ResourceBundleResolver implements Controller {
     private static final String TEMP_FILE_PRF = "chd";
     private static final String TEMP_FILE_SFX = "chd";
 
-    private final Downloader downloader;
+    private final BatchLoader batchLoader;
     private final String dummy;
     private final Log log;
     private final ConverterFactory factory;
@@ -42,19 +43,19 @@ public class Fb2ResourceBundleResolver implements Controller {
     private final String tempDir;
     private final Controller controller;
 
-    private Map<Fb2ResourceItem, RequestList> itemMap;
+    private Map<Fb2ResourceItem, String> itemMap;
 
-    //todo если тип ресурса можно вычислить по имени файла, то тип загруженного ресурса можно сравнить с предполагаемым и выводы поделать
+    //todo пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-    //todo проверить, чтобы ресурсы неопознанных типов в документ не попадали
+    //todo пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-    //todo что такое именно связывает этот класс с Fb2, что он так называется - это Fb2ResourceItem - надо связь эту устранить
+    //todo пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ Fb2, пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅ Fb2ResourceItem - пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-    //todo если делать общий ресолвер ресурсов - нужно сразу закладывать поддерживаемые, не поддерживаемые и конвертируемые типы
-    //todo или по другому - задача ресолвера - выкачать, а шо там потом - не его головняк
+    //todo пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    //todo пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ - пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-    public Fb2ResourceBundleResolver(final Downloader _downloader, final ConverterFactory _factory, final ResourceCache _cache, final String _dummy, final String _tempDir, final Controller _controller) {
-        Assert.notNull(_downloader, "Downloader is null");
+    public Fb2ResourceBundleResolver(final BatchLoader _batchLoader, final ConverterFactory _factory, final ResourceCache _cache, final String _dummy, final String _tempDir, final Controller _controller) {
+        Assert.notNull(_batchLoader, "Batch loader is null");
         Assert.notNull(_factory, "Converter factory is null");
         Assert.notNull(_cache, "Resource cache is null");
         Assert.isValidString(_dummy, "Resource dummy is not valid");
@@ -62,7 +63,7 @@ public class Fb2ResourceBundleResolver implements Controller {
         Assert.isTrue(new File(_tempDir).exists(), "Temp directory does not exists");
         Assert.notNull(_controller, "Conttroller is null");
 
-        this.downloader = _downloader;
+        this.batchLoader = _batchLoader;
         this.factory = _factory;
         this.cache = _cache;
         this.dummy = _dummy;
@@ -75,44 +76,49 @@ public class Fb2ResourceBundleResolver implements Controller {
     public void resolve(final List<Fb2ResourceItem> _resources) {
         Assert.notNull(_resources, "Resources is null");
 
-        this.itemMap = new HashMap<Fb2ResourceItem, RequestList>();
+        this.itemMap = newHashMap();
 
-        List<RequestList> list = new ArrayList<RequestList>();
+        List<String> list = createRequests(_resources);
+
+        Map<String, HttpData> loaded = this.batchLoader.loadUrls(list, 0, this);
+
+        if (!isCancelled()) {
+            handleResponses(_resources, loaded);
+        }
+    }
+
+    private List<String> createRequests(final List<Fb2ResourceItem> _resources) {
+        List<String> list = newArrayList();
 
         for (Fb2ResourceItem item : _resources) {
-            List<Request> requests = createRequests(item);
+            String request = createRequest(item);
 
-            if (requests.size() != 0) {
-                //паузу между запросами здесь пока не делаем
-                RequestList requestList = new RequestList(requests, 0);
-                list.add(requestList);
-                this.itemMap.put(item, requestList);
+            if (!request.isEmpty()) {
+                //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+                list.add(request);
+                this.itemMap.put(item, request);
             }
         }
 
-        BatchLoader loader = new StandardBatchLoader(this.downloader, this);
+        return list;
+    }
 
-        Map<RequestList, HttpData> loaded = loader.load(list);
-
-        joinMaps(loaded);
+    private void handleResponses(final List<Fb2ResourceItem> _resources, final Map<String, HttpData> _loaded) {
+        joinMaps(_loaded);
 
         checkResourcesFormat(_resources);
 
-        commitCacheToc();
-    }
-
-    private void commitCacheToc() {
         this.cache.commitToc();
     }
 
-    private void joinMaps(final Map<RequestList, HttpData> _loaded) {
+    private void joinMaps(final Map<String, HttpData> _loaded) {
 
         for (Fb2ResourceItem item : this.itemMap.keySet()) {
-            RequestList list = this.itemMap.get(item);
+            String list = this.itemMap.get(item);
             HttpData data = _loaded.get(list);
 
             if (data == null) {
-                this.log.error("Can`t find Data for request list id [ " + list.getId() + " ]");
+                this.log.error("Can`t find Data for request list id [ " + list + " ]");
             } else {
                 item.setData(data.getData());
             }
@@ -172,33 +178,7 @@ public class Fb2ResourceBundleResolver implements Controller {
         }
     }
 
-    private List<Request> createRequests(final Fb2ResourceItem _item) {
-        List<Request> result;
-
-        if (isItRemoteResource(_item)) {
-            result = createRequestsForRemote(_item);
-        } else {
-            result = createRequestsForLocal(_item);
-        }
-
-        return result;
-    }
-
-    private List<Request> createRequestsForLocal(final Fb2ResourceItem _item) {
-        List<Request> result = new ArrayList<Request>();
-
-        Request request = new Request(_item.getAddress(), Destination.FILE);
-        result.add(request);
-        request = new Request(this.dummy, Destination.FILE);
-        result.add(request);
-
-        return result;
-    }
-
-    private List<Request> createRequestsForRemote(final Fb2ResourceItem _item) {
-        List<Request> result = new ArrayList<Request>();
-        Request request;
-
+    private String createRequest(final Fb2ResourceItem _item) {
         String address = isItFullRemotePath(_item.getAddress()) ?
                 _item.getAddress() :
                 Fb2ResourceResolverTools.joinAddress(_item.getBase(), _item.getAddress());
@@ -213,14 +193,11 @@ public class Fb2ResourceBundleResolver implements Controller {
         }
 
         if (data == null) {
-            request = new Request(address, Destination.FILE);
-            result.add(request);
+            return address;
         } else {
             this.log.debug("Resource from URL [ " + address + " ] taken from cache");
+            return "";
         }
-
-
-        return result;
     }
 
     private Data copyCached(final Data _data) {
@@ -249,19 +226,12 @@ public class Fb2ResourceBundleResolver implements Controller {
         return result;
     }
 
-    private boolean isItRemoteResource(final Fb2ResourceItem _item) {
-        boolean remoteBase = _item.getBase().startsWith(REMOTE_RESOURCE_SIGN) || _item.getBase().startsWith(REMOTE_RESOURCE_SIGN.toUpperCase());
-        boolean remoteAddress = _item.getAddress().startsWith(REMOTE_RESOURCE_SIGN) || _item.getAddress().startsWith(REMOTE_RESOURCE_SIGN.toUpperCase());
-
-        return remoteAddress || remoteBase;
-    }
-
     private boolean isItFullRemotePath(final String _path) {
         return _path.trim().toUpperCase().startsWith(REMOTE_RESOURCE_SIGN.toUpperCase());
     }
 
     public void onStart() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        // empty
     }
 
     public void onProgress(final SingleProcessInfo _info) {
@@ -270,18 +240,19 @@ public class Fb2ResourceBundleResolver implements Controller {
     }
 
     public void onComplete() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        // empty
     }
 
     public void onFault() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        // empty
     }
 
     public void onCancel() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        // empty
     }
 
     public boolean isCancelled() {
         return this.controller.isCancelled();
     }
+
 }

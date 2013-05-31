@@ -2,9 +2,10 @@ package variables;
 
 import util.Assert;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -15,12 +16,12 @@ public class Variable {
     private final Map<Integer, String> values;
 
     public Variable() {
-        this.values = new HashMap<Integer, String>();
+        this.values = newHashMap();
     }
 
     public Variable(final Variable _source) {
         Assert.notNull(_source, "Source is null");
-        this.values = new HashMap<Integer, String>();
+        this.values = newHashMap();
 
         this.values.putAll(_source.values);
     }

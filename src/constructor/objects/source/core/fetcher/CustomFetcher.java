@@ -8,8 +8,9 @@ import util.Assert;
 import variables.VariableIterator;
 import variables.Variables;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Определяемый пользователем источник модификаций
@@ -33,7 +34,7 @@ public class CustomFetcher implements ModificationFetcher {
     public List<Modification> getModifications() throws ModificationFetcherException {
 
         try {
-            List<Modification> result = new ArrayList<Modification>();
+            List<Modification> result = newArrayList();
             Variables variables = new Variables();
 
             this.processor.process(variables);

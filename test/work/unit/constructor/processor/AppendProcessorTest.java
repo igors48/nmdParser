@@ -22,6 +22,7 @@ public class AppendProcessorTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws VariableProcessor.VariableProcessorException {
         AppendProcessor processor = new AppendProcessor("", "", "", "");
 
@@ -38,6 +39,7 @@ public class AppendProcessorTest extends TestCase {
     }
 
     // тест указанных переменных
+
     public void testVariables() throws VariableProcessor.VariableProcessorException {
         AppendProcessor processor = new AppendProcessor("", "first", "second", "");
 
@@ -55,11 +57,13 @@ public class AppendProcessorTest extends TestCase {
     }
 
     // тест создание с дефолтными значениями
+
     public void testCreateWithDefaults() throws ConfigurationException {
         AppendProcessor processor = (AppendProcessor) new AppendProcessorAdapter().getProcessor();
     }
 
     // тест снапшота
+
     public void testSnapshot() {
         AppendProcessor processor = new AppendProcessor("test", "content", "text", "content2");
 

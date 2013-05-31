@@ -4,7 +4,6 @@ import constructor.objects.source.core.ModificationFetcher;
 import dated.item.modification.Modification;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,5 +22,5 @@ public class ModificationsListFetcher implements ModificationFetcher {
     public List<Modification> getModifications() {
         return this.list;
     }
-    
+
 }

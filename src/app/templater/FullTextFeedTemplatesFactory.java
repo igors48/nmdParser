@@ -2,9 +2,10 @@ package app.templater;
 
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Фабрика комплектка насетапленных шаблонов для полнотекстового фида
@@ -24,7 +25,7 @@ public class FullTextFeedTemplatesFactory implements TemplatesFactory {
     public List<Template> createTemplates(final TemplateParameters _parameters) {
         Assert.notNull(_parameters, "Template creation parameters is null");
 
-        List<Template> result = new ArrayList<Template>();
+        List<Template> result = newArrayList();
         Map<String, String> parameters = TemplatesFactoryUtils.createParametersMap(_parameters);
 
         List<String> sourceContent = PlaceHolderUtils.replace(this.contentFactory.getTemplateContent(TemplateContentType.SOURCE), parameters);
@@ -38,6 +39,5 @@ public class FullTextFeedTemplatesFactory implements TemplatesFactory {
 
         return result;
     }
-
 
 }

@@ -9,6 +9,7 @@ import util.Assert;
  *         Date: 10.03.2010
  */
 public class PlaceHolderInfo {
+
     private final String name;
     private final String defValue;
 
@@ -26,4 +27,5 @@ public class PlaceHolderInfo {
     public String getName() {
         return this.name;
     }
+
 }

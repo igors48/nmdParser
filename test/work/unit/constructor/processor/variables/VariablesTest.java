@@ -1,14 +1,14 @@
 package work.unit.constructor.processor.variables;
 
+import debug.snapshot.ValueChangedPair;
+import debug.snapshot.VariablesSnapshot;
 import junit.framework.TestCase;
 import variables.Variables;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Map;
 
-import debug.snapshot.VariablesSnapshot;
-import debug.snapshot.ValueChangedPair;
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -21,6 +21,7 @@ public class VariablesTest extends TestCase {
     }
 
     // первоначальный тест put/get
+
     public void testSmoke() {
         Variables variables = new Variables();
 
@@ -30,6 +31,7 @@ public class VariablesTest extends TestCase {
     }
 
     // тест чтения отстутствующей переменной
+
     public void testNonExistent() {
         Variables variables = new Variables();
 
@@ -37,6 +39,7 @@ public class VariablesTest extends TestCase {
     }
 
     // тест на перезапись существующего значения
+
     public void testOwerwrite() {
         Variables variables = new Variables();
 
@@ -47,6 +50,7 @@ public class VariablesTest extends TestCase {
     }
 
     // тест на чтение/запись индексированной переменной
+
     public void testIndexedPutGet() {
         Variables variables = new Variables();
 
@@ -54,8 +58,9 @@ public class VariablesTest extends TestCase {
 
         assertEquals("value", variables.get("name", 48));
     }
-    
+
     // тест чтения отстутствующей индексированной переменной
+
     public void testIndexedNonExistent() {
         Variables variables = new Variables();
 
@@ -63,6 +68,7 @@ public class VariablesTest extends TestCase {
     }
 
     // тест на перезапись существующего значения индексированной переменной
+
     public void testIndexedOwerwrite() {
         Variables variables = new Variables();
 
@@ -73,6 +79,7 @@ public class VariablesTest extends TestCase {
     }
 
     // тест на нулевой размер несуществующей переменной
+
     public void testNonExistentZeroSize() {
         Variables variables = new Variables();
 
@@ -80,6 +87,7 @@ public class VariablesTest extends TestCase {
     }
 
     // тест на размер переменной
+
     public void testVariableSize() {
         Variables variables = new Variables();
 
@@ -88,8 +96,9 @@ public class VariablesTest extends TestCase {
 
         assertEquals(2, variables.getSize("name"));
     }
-    
+
     // тест на правильность обработки списочной переменной
+
     public void testVariableList() {
         Variables variables = new Variables();
 
@@ -101,8 +110,9 @@ public class VariablesTest extends TestCase {
     }
 
     // тест сохранения в переменной списка целиком
-    public void testPutAll(){
-        List<String> datas = new ArrayList<String>();
+
+    public void testPutAll() {
+        List<String> datas = newArrayList();
         datas.add("1");
         datas.add("2");
         datas.add("3");
@@ -117,8 +127,9 @@ public class VariablesTest extends TestCase {
     }
 
     // тест формирования снапшота
-    public void testSnapshot(){
-        List<String> firstDatas = new ArrayList<String>();
+
+    public void testSnapshot() {
+        List<String> firstDatas = newArrayList();
         firstDatas.add("1");
 
         Variables variables = new Variables();
@@ -138,7 +149,7 @@ public class VariablesTest extends TestCase {
         assertNotNull(firstPair);
         assertEquals("1", firstPair.getValue());
         assertTrue(firstPair.isChanged());
-        
+
         Map<Integer, ValueChangedPair> second = items.get("second");
         assertNotNull(second);
         ValueChangedPair secondPair = second.get(48);
@@ -148,8 +159,9 @@ public class VariablesTest extends TestCase {
     }
 
     // тест сброса флагов модификации после получения снапшота
-    public void testChangeLogReset(){
-        List<String> firstDatas = new ArrayList<String>();
+
+    public void testChangeLogReset() {
+        List<String> firstDatas = newArrayList();
         firstDatas.add("1");
 
         Variables variables = new Variables();
@@ -179,12 +191,13 @@ public class VariablesTest extends TestCase {
     }
 
     // тест добавления списком
-    public void testAppendList(){
+
+    public void testAppendList() {
         Variables variables = new Variables();
         variables.put("result", 0, "0e");
         variables.put("result", 48, "48e");
 
-        List<String> appended = new ArrayList<String>();
+        List<String> appended = newArrayList();
         appended.add("1a");
         appended.add("2a");
 
@@ -199,10 +212,11 @@ public class VariablesTest extends TestCase {
     }
 
     // тест добавления списком в несуществующую
-    public void testAppendListToNonExistent(){
+
+    public void testAppendListToNonExistent() {
         Variables variables = new Variables();
 
-        List<String> appended = new ArrayList<String>();
+        List<String> appended = newArrayList();
         appended.add("1a");
         appended.add("2a");
 
@@ -213,5 +227,5 @@ public class VariablesTest extends TestCase {
         assertEquals("1a", variables.get("result", 0));
         assertEquals("2a", variables.get("result", 1));
     }
-    
+
 }

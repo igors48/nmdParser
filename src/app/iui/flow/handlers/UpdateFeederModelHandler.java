@@ -39,8 +39,9 @@ public class UpdateFeederModelHandler {
             }
 
             return result;
-        } catch (Throwable t) {
+        } catch (Exception t) {
             throw new ModelHandlerException(t);
         }
     }
+
 }

@@ -5,9 +5,10 @@ import debug.snapshot.VariablesSnapshot;
 import util.Assert;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Область хранения для пар "имя переменной - список значений".
@@ -27,7 +28,7 @@ public class Variables {
     private final ChangeLog changeLog;
 
     public Variables() {
-        this.variables = new HashMap<String, Variable>();
+        this.variables = newHashMap();
         this.changeLog = new ChangeLog();
     }
 

@@ -5,12 +5,13 @@ import dated.item.modification.Modification;
 import dated.item.modification.stream.ModificationList;
 import junit.framework.TestCase;
 import timeservice.StillTimeService;
-import static work.testutil.SourceTestUtils.bothExists;
-import static work.testutil.SourceTestUtils.getForUrl;
 import work.testutil.ModificationTestUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
+import static work.testutil.SourceTestUtils.bothExists;
+import static work.testutil.SourceTestUtils.getForUrl;
 
 /**
  * @author Igor Usenko
@@ -23,6 +24,7 @@ public class SourceUtilsTest extends TestCase {
     }
 
     // первоначальная проверка
+
     public void testSmoke() {
         StillTimeService timeService = new StillTimeService();
 
@@ -32,7 +34,7 @@ public class SourceUtilsTest extends TestCase {
         ModificationList modificationList = new ModificationList();
         modificationList.add(modification01);
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
         modifications.add(modification02);
 
         ModificationList result = SourceUtils.mergeModifications(modificationList, modifications);
@@ -42,6 +44,7 @@ public class SourceUtilsTest extends TestCase {
     }
 
     // случай : пришла модификация, а такая в архиве уже есть с такой же датой
+
     public void testExistsSameDate() {
         StillTimeService timeService = new StillTimeService();
 
@@ -52,7 +55,7 @@ public class SourceUtilsTest extends TestCase {
         modificationList.add(modification01);
         modificationList.add(modification02);
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
         modifications.add(modification02);
 
         ModificationList result = SourceUtils.mergeModifications(modificationList, modifications);
@@ -62,6 +65,7 @@ public class SourceUtilsTest extends TestCase {
     }
 
     // случай : пришла модификация, а такая в архиве уже есть с такой же датой, но старше
+
     public void testExistsSameDateInArchiveOlder() {
         StillTimeService timeService = new StillTimeService();
 
@@ -74,7 +78,7 @@ public class SourceUtilsTest extends TestCase {
 
         timeService.changeDay(2);
         Modification modification03 = new Modification(timeService.getCurrentDate(), "URL02");
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
         modifications.add(modification03);
 
         ModificationList result = SourceUtils.mergeModifications(modificationList, modifications);
@@ -87,6 +91,7 @@ public class SourceUtilsTest extends TestCase {
     }
 
     // случай : пришла модификация, а такая в архиве уже есть с такой же датой, но моложе
+
     public void testExistsSameDateInArchiveNewer() {
         StillTimeService timeService = new StillTimeService();
 
@@ -99,7 +104,7 @@ public class SourceUtilsTest extends TestCase {
 
         timeService.changeDay(-2);
         Modification modification03 = new Modification(timeService.getCurrentDate(), "URL02");
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
         modifications.add(modification03);
 
         ModificationList result = SourceUtils.mergeModifications(modificationList, modifications);
@@ -112,6 +117,7 @@ public class SourceUtilsTest extends TestCase {
     }
 
     // случай : пришло две модификации, а такая в архиве уже есть с такой же датой, но моложе
+
     public void testExistsSameDateInArchiveNewerTwo() {
         StillTimeService timeService = new StillTimeService();
 
@@ -122,7 +128,7 @@ public class SourceUtilsTest extends TestCase {
         modificationList.add(modification01);
         modificationList.add(modification02);
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
 
         timeService.changeDay(-2);
         Modification modification03 = new Modification(timeService.getCurrentDate(), "URL02");
@@ -142,6 +148,7 @@ public class SourceUtilsTest extends TestCase {
     }
 
     // случай : пришло две модификации, а такая в архиве уже есть с такой же датой, но старше
+
     public void testExistsSameDateInArchiveOlderTwo() {
         StillTimeService timeService = new StillTimeService();
 
@@ -152,7 +159,7 @@ public class SourceUtilsTest extends TestCase {
         modificationList.add(modification01);
         modificationList.add(modification02);
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
 
         timeService.changeDay(2);
         Modification modification03 = new Modification(timeService.getCurrentDate(), "URL02");
@@ -172,6 +179,7 @@ public class SourceUtilsTest extends TestCase {
     }
 
     // случай : пришло две модификации старше и моложе той, что в архиве 
+
     public void testExistsSameDateInArchiveOlderAndNewerTwo() {
         StillTimeService timeService = new StillTimeService();
 
@@ -182,7 +190,7 @@ public class SourceUtilsTest extends TestCase {
         modificationList.add(modification01);
         modificationList.add(modification02);
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
 
         timeService.changeDay(2);
         Modification modification03 = new Modification(timeService.getCurrentDate(), "URL02");
@@ -202,6 +210,7 @@ public class SourceUtilsTest extends TestCase {
     }
 
     // случай : пришла модификация, а архив пуст
+
     public void testArchiveEmpty() {
         StillTimeService timeService = new StillTimeService();
 
@@ -209,7 +218,7 @@ public class SourceUtilsTest extends TestCase {
 
         ModificationList modificationList = new ModificationList();
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
         modifications.add(modification01);
 
         ModificationList result = SourceUtils.mergeModifications(modificationList, modifications);
@@ -221,17 +230,19 @@ public class SourceUtilsTest extends TestCase {
     }
 
     // случай : пришел пустой список модификаций, а архив пуст
+
     public void testBothEmpty() {
         StillTimeService timeService = new StillTimeService();
 
         ModificationList modificationList = new ModificationList();
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
         ModificationList result = SourceUtils.mergeModifications(modificationList, modifications);
 
         assertEquals(0, result.size());
     }
 
     // случай : пришел пустой список модификаций, а архив не пуст
+
     public void testNoModsArchiveNotEmpty() {
         StillTimeService timeService = new StillTimeService();
 
@@ -242,7 +253,7 @@ public class SourceUtilsTest extends TestCase {
         modificationList.add(modification01);
         modificationList.add(modification02);
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
 
         ModificationList result = SourceUtils.mergeModifications(modificationList, modifications);
 
@@ -251,6 +262,7 @@ public class SourceUtilsTest extends TestCase {
     }
 
     // тест на сохранение порядка поступления модификаций
+
     public void testOrder() {
         StillTimeService timeService = new StillTimeService();
 
@@ -260,7 +272,7 @@ public class SourceUtilsTest extends TestCase {
         Modification modification02 = new Modification(timeService.getCurrentDate(), "3");
         Modification modification03 = new Modification(timeService.getCurrentDate(), "a");
 
-        List<Modification> modifications = new ArrayList<Modification>();
+        List<Modification> modifications = newArrayList();
 
         modifications.add(modification01);
         modifications.add(modification02);

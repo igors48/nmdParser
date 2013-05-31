@@ -1,16 +1,16 @@
 package work.unit.constructor.interpreter.stream;
 
-import junit.framework.TestCase;
-import dated.item.atdc.AtdcItem;
+import constructor.objects.interpreter.core.data.InterpreterData;
+import constructor.objects.interpreter.core.data.stream.InterpreterDataHelperBean;
 import dated.DatedItem;
+import dated.item.atdc.AtdcItem;
+import junit.framework.TestCase;
 import work.testutil.AtdcTestUtils;
 import work.testutil.InterpreterDataTestUtils;
 
 import java.util.List;
-import java.util.ArrayList;
 
-import constructor.objects.interpreter.core.data.InterpreterData;
-import constructor.objects.interpreter.core.data.stream.InterpreterDataHelperBean;
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -23,11 +23,12 @@ public class InterpreterDataHelperBeanTest extends TestCase {
     }
 
     // тест сохранения/восстановления
-    public void testStoreRestore(){
+
+    public void testStoreRestore() {
         AtdcItem item01 = AtdcTestUtils.getAtdcFullItem(1);
         AtdcItem item02 = AtdcTestUtils.getAtdcFullItem(2);
 
-        List<DatedItem> originalList = new ArrayList<DatedItem>();
+        List<DatedItem> originalList = newArrayList();
         originalList.add(item01);
         originalList.add(item02);
 

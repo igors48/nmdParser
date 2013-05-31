@@ -2,18 +2,23 @@ package app.cli.parser;
 
 import app.api.ApiFacade;
 import app.cli.command.Command;
-import static app.cli.parser.OptionNameTable.*;
 import org.apache.commons.cli.*;
 import util.Assert;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
+import static app.cli.parser.OptionNameTable.*;
+import static util.CollectionUtils.newArrayList;
+import static util.CollectionUtils.newHashMap;
 
 /**
- * Парсер для командной строки. Задача - из командной строки
- * выпарсить осмысленную(ые) команду(ы) и пропертя, если таковые
- * найдутся
+ * пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ(пїЅпїЅ) пїЅпїЅпїЅпїЅпїЅпїЅпїЅ(пїЅ) пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 14.04.2009
@@ -45,11 +50,11 @@ public class CliParser {
         createParsersMap();
     }
 
-    public CliParserResult parse(final String[] _args) throws CliParserException {
+    public Script parse(final String[] _args) throws CliParserException {
         Assert.notNull(_args, "Arguments list is null.");
 
         try {
-            List<Command> script = new ArrayList<Command>();
+            List<Command> script = newArrayList();
             Properties properties = null;
 
             CommandLineParser parser = new GnuParser();
@@ -65,7 +70,7 @@ public class CliParser {
                 script = optionParser.parse(commandLine, this.api, OptionParserUtils.convert(properties));
             }
 
-            return new CliParserResult(script);
+            return new Script(script);
         } catch (ParseException e) {
             printUsage();
 
@@ -85,7 +90,7 @@ public class CliParser {
     }
 
     private void createParsersMap() {
-        this.parsers = new HashMap<String, OptionParser>();
+        this.parsers = newHashMap();
 
         this.parsers.put(CREATE_WORKSPACE_OPTION_SHORT_NAME, new CreateWorkspaceOptionParser());
         this.parsers.put(UPDATE_SOURCES_OPTION_SHORT_NAME, new UpdateSourcesOptionParser());
@@ -101,8 +106,6 @@ public class CliParser {
         this.parsers.put(BLITZ_FEED_REQUEST_OPTION_SHORT_NAME, new BlitzFeedRequestOptionParser());
         this.parsers.put(REMOVE_SERVICE_FILES_OPTION_SHORT_NAME, new RemoveServiceFilesOptionParser());
         this.parsers.put(PROCESS_SNIPPET_OPTION_SHORT_NAME, new ProcessSnippetsOptionParser());
-        this.parsers.put(GOOGLE_READER_CREATE_PROFILE_OPTION_SHORT_NAME, new GoogleReaderCreateProfileOptionParser());
-        this.parsers.put(GOOGLE_READER_UPDATE_PROFILE_OPTION_SHORT_NAME, new GoogleReaderUpdateProfileOptionParser());
     }
 
     private OptionParser getParser(final CommandLine _commandLine) {
@@ -119,7 +122,8 @@ public class CliParser {
         return result;
     }
 
-    // todo !!! ПРОСТЫНЯ !!!
+    // todo !!! пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ !!!
+
     private void createOptions() {
         this.options = new Options();
 
@@ -261,24 +265,6 @@ public class CliParser {
         blitzFeedRequestOption.setOptionalArg(false);
         blitzFeedRequestOption.setArgs(ONE_ARG);
 
-        Option googleReaderCreateProfileOption = new Option(GOOGLE_READER_CREATE_PROFILE_OPTION_SHORT_NAME,
-                GOOGLE_READER_CREATE_PROFILE_OPTION_FULL_NAME,
-                false,
-                GOOGLE_READER_CREATE_PROFILE_OPTION_DESCRIPTION);
-        googleReaderCreateProfileOption.setArgName(GOOGLE_READER_CREATE_PROFILE_OPTION_ATTRIBUTE_NAME);
-        googleReaderCreateProfileOption.setRequired(true);
-        googleReaderCreateProfileOption.setOptionalArg(false);
-        googleReaderCreateProfileOption.setArgs(2);
-
-        Option googleReaderUpdateProfileOption = new Option(GOOGLE_READER_UPDATE_PROFILE_OPTION_SHORT_NAME,
-                GOOGLE_READER_UPDATE_PROFILE_OPTION_FULL_NAME,
-                false,
-                GOOGLE_READER_UPDATE_PROFILE_OPTION_DESCRIPTION);
-        googleReaderUpdateProfileOption.setArgName(GOOGLE_READER_UPDATE_PROFILE_OPTION_ATTRIBUTE_NAME);
-        googleReaderUpdateProfileOption.setRequired(true);
-        googleReaderUpdateProfileOption.setOptionalArg(false);
-        googleReaderUpdateProfileOption.setArgs(1);
-
         Option baseUrlOption = new Option(BASE_URL_OPTION_SHORT_NAME,
                 BASE_URL_OPTION_FULL_NAME,
                 true,
@@ -296,6 +282,11 @@ public class CliParser {
                 true,
                 REG_EXP_OPTION_DESCRIPTION);
         regExpOption.setArgName(REG_EXP_OPTION_ATTRIBUTE_NAME);
+
+        Option autoOption = new Option(AUTO_OPTION_SHORT_NAME,
+                AUTO_OPTION_FULL_NAME,
+                false,
+                AUTO_OPTION_DESCRIPTION);
 
         Option mtoOption = new Option(MTO_OPTION_SHORT_NAME,
                 MTO_OPTION_FULL_NAME,
@@ -359,8 +350,6 @@ public class CliParser {
         mainGroup.addOption(blitzPageRequestOption);
         mainGroup.addOption(blitzFeedRequestOption);
         mainGroup.addOption(removeServiceFilesOption);
-        mainGroup.addOption(googleReaderCreateProfileOption);
-        mainGroup.addOption(googleReaderUpdateProfileOption);
 
         this.options.addOptionGroup(mainGroup);
 
@@ -377,24 +366,13 @@ public class CliParser {
         this.options.addOption(baseUrlOption);
         this.options.addOption(xPathOption);
         this.options.addOption(regExpOption);
+        this.options.addOption(autoOption);
         this.options.addOption(mtoOption);
         this.options.addOption(branchOption);
         this.options.addOption(storageOption);
     }
 
     public static class CliParserException extends Exception {
-
-        public CliParserException() {
-            super();
-        }
-
-        public CliParserException(final String _s) {
-            super(_s);
-        }
-
-        public CliParserException(final String _s, final Throwable _throwable) {
-            super(_s, _throwable);
-        }
 
         public CliParserException(final Throwable _throwable) {
             super(_throwable);

@@ -1,6 +1,0 @@
-<processor>
-	<getGroup>
-		<pattern><![CDATA[<script>t_post\((.*?)\)</script>]]></pattern> 
-		<occurrence>-1</occurrence>
-	</getGroup>
-</processor>

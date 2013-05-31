@@ -2,9 +2,10 @@ package app.templater;
 
 import util.Assert;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Фабрика комплектка шаблонов для фида
@@ -17,7 +18,7 @@ public class FeedTemplatesFactory implements TemplatesFactory {
     private static Map<TemplateType, TemplatesFactory> factories;
 
     static {
-        factories = new HashMap<TemplateType, TemplatesFactory>();
+        factories = newHashMap();
 
         factories.put(TemplateType.BRIEF_RSS_TEMPLATE, new BriefTextFeedTemplatesFactory(new TemplateContentFactory()));
         factories.put(TemplateType.FULL_RSS_TEMPLATE, new FullTextFeedTemplatesFactory(new TemplateContentFactory()));
@@ -28,4 +29,5 @@ public class FeedTemplatesFactory implements TemplatesFactory {
 
         return factories.get(_parameters.getType()).createTemplates(_parameters);
     }
+
 }

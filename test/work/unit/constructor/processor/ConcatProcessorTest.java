@@ -1,11 +1,11 @@
 package work.unit.constructor.processor;
 
-import junit.framework.TestCase;
-import constructor.objects.processor.concat.ConcatProcessor;
 import constructor.objects.processor.VariableProcessor;
-import variables.Variables;
-import debug.snapshot.ProcessorSnapshot;
+import constructor.objects.processor.concat.ConcatProcessor;
 import debug.snapshot.NameValuePair;
+import debug.snapshot.ProcessorSnapshot;
+import junit.framework.TestCase;
+import variables.Variables;
 
 import java.util.List;
 
@@ -20,6 +20,7 @@ public class ConcatProcessorTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws VariableProcessor.VariableProcessorException {
         ConcatProcessor processor = new ConcatProcessor("", "", "", "");
 
@@ -31,8 +32,9 @@ public class ConcatProcessorTest extends TestCase {
 
         assertEquals("firstsecond", variables.get(Variables.DEFAULT_OUTPUT_VARIABLE_NAME));
     }
-    
+
     // тест конкатенации указанных переменных
+
     public void testVariables() throws VariableProcessor.VariableProcessorException {
         ConcatProcessor processor = new ConcatProcessor("", "first", "second", "");
 
@@ -46,6 +48,7 @@ public class ConcatProcessorTest extends TestCase {
     }
 
     // тест сцепления элементов
+
     public void testConcatElements() throws VariableProcessor.VariableProcessorException {
         ConcatProcessor processor = new ConcatProcessor("", "", "", "");
 
@@ -63,6 +66,7 @@ public class ConcatProcessorTest extends TestCase {
     }
 
     // тест сцепления элементов c указанием переменных
+
     public void testConcatElementsToVariable() throws VariableProcessor.VariableProcessorException {
         ConcatProcessor processor = new ConcatProcessor("", "first", "second", "test");
 
@@ -80,6 +84,7 @@ public class ConcatProcessorTest extends TestCase {
     }
 
     // тест на случайно пойманный глюк #1
+
     public void testBugNo1() throws VariableProcessor.VariableProcessorException {
         ConcatProcessor processor = new ConcatProcessor("", "", "", "test");
 
@@ -97,6 +102,7 @@ public class ConcatProcessorTest extends TestCase {
     }
 
     // тест на случайно пойманный глюк #2
+
     public void testBugNo2() throws VariableProcessor.VariableProcessorException {
         ConcatProcessor processor = new ConcatProcessor("", "content", "text", "content");
 
@@ -114,6 +120,7 @@ public class ConcatProcessorTest extends TestCase {
     }
 
     // тест конкатенации к выходной переменной
+
     public void testConcatToOutput() throws VariableProcessor.VariableProcessorException {
         ConcatProcessor processor = new ConcatProcessor("", Variables.DEFAULT_OUTPUT_VARIABLE_NAME, "text", "");
 
@@ -127,7 +134,8 @@ public class ConcatProcessorTest extends TestCase {
     }
 
     // тест снапшота
-    public void testSnapshot(){
+
+    public void testSnapshot() {
         ConcatProcessor processor = new ConcatProcessor("test", "content", "text", "content2");
 
         ProcessorSnapshot snapshot = (ProcessorSnapshot) processor.getSnapshot();

@@ -1,21 +1,24 @@
 package html.parser;
 
 import dated.item.atdc.HtmlContent;
-import downloader.Data;
 import flowtext.DocumentBuilder;
 import flowtext.DocumentBuilderContext;
 import flowtext.Section;
 import html.Converter;
 import html.parser.tag.HtmlTag;
-import html.parser.tag.format.CancelTextFormatHandler;
-import html.parser.tag.format.EmphasisTextFormatHandler;
-import html.parser.tag.format.StrongTextFormatHandler;
+import html.parser.tag.format.*;
 import html.parser.tag.section.*;
+import http.Data;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import util.Assert;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+import static util.CollectionUtils.newArrayList;
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -57,7 +60,7 @@ public class SimpleHtmlConverter implements Converter {
         builder.createCurrentParagraph();
         builder.createCurrentSection();
 
-        List<Section> result = new ArrayList<Section>();
+        List<Section> result = newArrayList();
 
         try {
 
@@ -71,9 +74,9 @@ public class SimpleHtmlConverter implements Converter {
                 if (buffer.equals(OPEN_BRACE)) {
                     increaseOpenBraceCounter();
 
-                    // учет количества скобок в этом и следующем блоке
-                    // нужен для того, чтобы разрулить ситуацию,
-                    // когда в теле тэга попадаются символы < >
+                    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+                    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ,
+                    // пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ < >
                     if (this.openBraceCounter == 1) {
                         openBraceReceived();
                     }
@@ -106,7 +109,7 @@ public class SimpleHtmlConverter implements Converter {
     private String prepare(final String _data) throws Data.DataException {
         return SimpleHtmlConverterUtil.clearEmptyLines(
                 SimpleHtmlConverterUtil.processIgnoredTags(
-                        /*SimpleHtmlConverterUtil.cleanupHtml*/(_data))); //cleanup приводил к куче неэскейпленных тегов, в ряде случаев       
+                        /*SimpleHtmlConverterUtil.cleanupHtml*/(_data))); //cleanup пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ       
     }
 
     private void textReceived(final String _text) {
@@ -125,9 +128,9 @@ public class SimpleHtmlConverter implements Converter {
     private void decreaseOpenBraceCounter() {
         --this.openBraceCounter;
 
-        // нельзя, чтобы счетчик опускался ниже нуля
-        // это сбивает с ритма весь конвертор
-        // посвящено баге при разборе новостей АТН от 8 мая 2009
+        // пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+        // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ 8 пїЅпїЅпїЅ 2009
         if (this.openBraceCounter < 0) {
             this.openBraceCounter = 0;
         }
@@ -187,12 +190,18 @@ public class SimpleHtmlConverter implements Converter {
     }
 
     private void createTagHandlersMap() {
-        this.tagHandlers = new HashMap<String, TagHandler>();
+        this.tagHandlers = newHashMap();
 
         this.tagHandlers.put("B", new StrongTextFormatHandler());
         this.tagHandlers.put("/B", new CancelTextFormatHandler());
         this.tagHandlers.put("I", new EmphasisTextFormatHandler());
         this.tagHandlers.put("/I", new CancelTextFormatHandler());
+        this.tagHandlers.put("S", new StrikethroughTextFormatHandler());
+        this.tagHandlers.put("/S", new CancelTextFormatHandler());
+        this.tagHandlers.put("DEL", new StrikethroughTextFormatHandler());
+        this.tagHandlers.put("/DEL", new CancelTextFormatHandler());
+        this.tagHandlers.put("STRIKE", new StrikethroughTextFormatHandler());
+        this.tagHandlers.put("/STRIKE", new CancelTextFormatHandler());
         this.tagHandlers.put("CODE", new EmphasisTextFormatHandler());
         this.tagHandlers.put("/CODE", new CancelTextFormatHandler());
         this.tagHandlers.put("EM", new EmphasisTextFormatHandler());
@@ -203,6 +212,10 @@ public class SimpleHtmlConverter implements Converter {
         this.tagHandlers.put("/Q", new CancelTextFormatHandler());
         this.tagHandlers.put("STRONG", new StrongTextFormatHandler());
         this.tagHandlers.put("/STRONG", new CancelTextFormatHandler());
+        this.tagHandlers.put("SUB", new SubscriptTextFormatHandler());
+        this.tagHandlers.put("/SUB", new CancelTextFormatHandler());
+        this.tagHandlers.put("SUP", new SuperscriptTextFormatHandler());
+        this.tagHandlers.put("/SUP", new CancelTextFormatHandler());
         this.tagHandlers.put("H1", new hOpenTagHandler());
         this.tagHandlers.put("/H1", new hCloseTagHandler());
         this.tagHandlers.put("H2", new hOpenTagHandler());

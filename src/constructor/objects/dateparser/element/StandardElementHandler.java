@@ -3,8 +3,9 @@ package constructor.objects.dateparser.element;
 import constructor.dom.ElementHandler;
 import constructor.dom.loader.MappedElementHandler;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Обработчик элемента dateParser.standard
@@ -20,7 +21,7 @@ public class StandardElementHandler extends MappedElementHandler {
     public StandardElementHandler() {
         super();
 
-        Map<String, ElementHandler> handlers = new HashMap<String, ElementHandler>();
+        Map<String, ElementHandler> handlers = newHashMap();
 
         handlers.put(PATTERN_KEY, new StandardPatternElementHandler());
         handlers.put(MONTH_KEY, new StandardMonthsElementHandler());

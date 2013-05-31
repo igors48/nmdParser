@@ -1,8 +1,8 @@
 package work.unit.constructor.channel.stream;
 
-import junit.framework.TestCase;
 import constructor.objects.channel.core.ChannelDataHeader;
 import constructor.objects.channel.core.stream.ChannelDataHeaderHelperBean;
+import junit.framework.TestCase;
 import work.testutil.ChannelDataHeaderTestUtils;
 
 /**
@@ -16,7 +16,8 @@ public class ChannelDataHeaderHelperBeanTest extends TestCase {
     }
 
     // тест идентичности сохраненной и восстановленной единицы
-    public void testStoreRestore(){
+
+    public void testStoreRestore() {
         ChannelDataHeader original = new ChannelDataHeader("TITLE", "FIRST", "LAST", "SOURCE", "COVER");
 
         ChannelDataHeaderHelperBean bean = new ChannelDataHeaderHelperBean();

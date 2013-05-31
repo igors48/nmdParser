@@ -7,8 +7,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * Сервис фиксированного времени
- *
  * @author Igor Usenko
  *         Date: 27.12.2008
  */

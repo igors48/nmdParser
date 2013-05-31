@@ -3,8 +3,9 @@ package constructor.objects.processor;
 import util.Assert;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
+
+import static util.CollectionUtils.newHashSet;
 
 /**
  * Множество номеров вхождений. Если пустое - считает,
@@ -24,7 +25,7 @@ public class OccurrenceSet {
     private boolean allAcceptable;
 
     public OccurrenceSet() {
-        this.occurrences = new HashSet<Integer>();
+        this.occurrences = newHashSet();
     }
 
     public void add(final int _occurrence) {

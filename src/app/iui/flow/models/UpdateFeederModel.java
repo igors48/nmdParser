@@ -5,9 +5,10 @@ import app.iui.flow.Model;
 import app.iui.flow.ModelType;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -34,7 +35,7 @@ public class UpdateFeederModel extends Model {
         Assert.notNull(_context, "Context is null");
         this.context = _context;
 
-        this.files = new ArrayList<String>();
+        this.files = newArrayList();
     }
 
     public Entity getFeeder() {
@@ -62,7 +63,8 @@ public class UpdateFeederModel extends Model {
         return this.cause;
     }
 
-    public void setCause(Throwable _cause) {
+    public void setCause(final Throwable _cause) {
         this.cause = _cause;
     }
+
 }

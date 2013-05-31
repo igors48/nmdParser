@@ -15,10 +15,11 @@ public class XmlFileNameFilter implements FilenameFilter {
 
     private static final String XML_EXTENSION = ".XML";
 
-    public boolean accept(File _file, String _s) {
+    public boolean accept(final File _file, final String _s) {
         Assert.notNull(_file, "File is null.");
         Assert.isValidString(_s, "File name is not valid.");
 
         return _s.toUpperCase().endsWith(XML_EXTENSION);
     }
+
 }

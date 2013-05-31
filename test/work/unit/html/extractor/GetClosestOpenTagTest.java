@@ -15,7 +15,8 @@ public class GetClosestOpenTagTest extends TestCase {
     }
 
     // первоначальный тест
-    public void testSmoke(){
+
+    public void testSmoke() {
         TagImage result = HtmlTagExtractor.getClosestOpenTag("0123<a>456<b>", 0);
 
         assertNotNull(result);
@@ -24,9 +25,10 @@ public class GetClosestOpenTagTest extends TestCase {
         assertEquals("<a>", result.getImage());
         assertEquals("", result.getAttributes());
     }
-    
+
     // тест с указанием стартовой позиции
-    public void testPosition(){
+
+    public void testPosition() {
         TagImage result = HtmlTagExtractor.getClosestOpenTag("0123<a>4</b>56<b>", 7);
 
         assertNotNull(result);
@@ -37,7 +39,8 @@ public class GetClosestOpenTagTest extends TestCase {
     }
 
     // тест с указанием стартовой позиции плюс тег с аттрибутами
-    public void testPositionWithAttrs(){
+
+    public void testPositionWithAttrs() {
         TagImage result = HtmlTagExtractor.getClosestOpenTag("0123<a>456<b ref=\"ref\">", 7);
 
         assertNotNull(result);

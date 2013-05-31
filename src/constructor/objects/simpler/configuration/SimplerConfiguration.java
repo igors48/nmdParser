@@ -7,8 +7,9 @@ import constructor.objects.storage.local.core.LocalStorage;
 import util.Assert;
 import util.TextTools;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -24,6 +25,7 @@ public class SimplerConfiguration implements Blank {
     private String feedUrl;
     private String storeDays;
     private String criterions;
+    private boolean autoContentFiltering;
     private String branch;
     private String outName;
     private DocumentItemsSortMode fromNewToOld;
@@ -35,6 +37,7 @@ public class SimplerConfiguration implements Blank {
         this.feedUrl = "";
         this.storeDays = "7";
         this.criterions = "";
+        this.autoContentFiltering = false;
         this.branch = "";
         this.outName = "";
         this.fromNewToOld = DocumentItemsSortMode.DEFAULT;
@@ -111,7 +114,7 @@ public class SimplerConfiguration implements Blank {
     }
 
     public List<UsedObject> getUsedObjects() {
-        return new ArrayList<UsedObject>();
+        return newArrayList();
     }
 
     public String getId() {
@@ -131,7 +134,16 @@ public class SimplerConfiguration implements Blank {
         return LocalStorage.DEFAULT_STORAGE_ID;
     }
 
+    public void setAutoContentFiltering(final boolean _value) {
+        this.autoContentFiltering = _value;
+    }
+
+    public boolean isAutoContentFiltering() {
+        return this.autoContentFiltering;
+    }
+
     public static SimplerConfiguration getDefault() {
         return new SimplerConfiguration();
     }
+
 }

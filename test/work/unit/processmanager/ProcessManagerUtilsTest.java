@@ -1,10 +1,11 @@
 package work.unit.processmanager;
 
-import junit.framework.TestCase;
 import app.workingarea.process.ProcessManagerUtils;
+import junit.framework.TestCase;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -17,32 +18,36 @@ public class ProcessManagerUtilsTest extends TestCase {
     }
 
     // строка без плейсхолдеров не меняется
-    public void testSmoke(){
-        Map<String, String> map = new HashMap<String, String>();
+
+    public void testSmoke() {
+        Map<String, String> map = newHashMap();
         map.put("1", "1val");
 
         assertEquals("test", ProcessManagerUtils.createCommandLine("test", map));
     }
 
     // тест одного плейсхолдера и одного значения
-    public void testOneValueOneHolder(){
-        Map<String, String> map = new HashMap<String, String>();
+
+    public void testOneValueOneHolder() {
+        Map<String, String> map = newHashMap();
         map.put("d", "1val");
 
         assertEquals("test1val", ProcessManagerUtils.createCommandLine("test%d", map));
     }
 
     // тест двух плейсхолдеров и одного значения
-    public void testOneValueTwoHolder(){
-        Map<String, String> map = new HashMap<String, String>();
+
+    public void testOneValueTwoHolder() {
+        Map<String, String> map = newHashMap();
         map.put("d", "1val");
 
         assertEquals("1valtest1val", ProcessManagerUtils.createCommandLine("%dtest%d", map));
     }
 
     // тест двух плейсхолдеров и двух значений
-    public void testTwoValueTwoHolder(){
-        Map<String, String> map = new HashMap<String, String>();
+
+    public void testTwoValueTwoHolder() {
+        Map<String, String> map = newHashMap();
         map.put("d", "1val");
         map.put("f", "2val");
 
@@ -50,16 +55,18 @@ public class ProcessManagerUtilsTest extends TestCase {
     }
 
     // тест двух разных плейсхолдеров и одного значений
-    public void testOneValueTwoDiffHolder(){
-        Map<String, String> map = new HashMap<String, String>();
+
+    public void testOneValueTwoDiffHolder() {
+        Map<String, String> map = newHashMap();
         map.put("d", "1val");
 
         assertEquals("%ftest1val", ProcessManagerUtils.createCommandLine("%ftest%d", map));
     }
 
     // тест точек в шаблоне и параметрах
+
     public void testWithPoints() {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = newHashMap();
         map.put("f", "bash.fb2");
         map.put("d", "E:\\Users\\Igor\\IdeaProjects\\Nomad\\.\\workarea\\root\\");
         map.put("n", "E:\\Users\\Igor\\IdeaProjects\\Nomad\\.\\workarea\\root\\bash.fb2");

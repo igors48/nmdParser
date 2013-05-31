@@ -1,7 +1,7 @@
 package work.unit.ftf;
 
-import junit.framework.TestCase;
 import flowtext.Paragraph;
+import junit.framework.TestCase;
 
 /**
  * @author Igor Usenko
@@ -13,7 +13,7 @@ public class ParagraphTest extends TestCase {
         super(s);
     }
 
-    public void testGetBriefWithTextOnly(){
+    public void testGetBriefWithTextOnly() {
         Paragraph paragraph = new Paragraph();
 
         paragraph.insertCodeText("12");
@@ -31,7 +31,7 @@ public class ParagraphTest extends TestCase {
         assertEquals("12345678", result);
     }
 
-    public void testGetBriefWithTextAndResource(){
+    public void testGetBriefWithTextAndResource() {
         Paragraph paragraph = new Paragraph();
 
         paragraph.insertResource("base", "address");
@@ -55,7 +55,7 @@ public class ParagraphTest extends TestCase {
         assertEquals("12345678", result);
     }
 
-    public void testGetSize(){
+    public void testGetSize() {
         Paragraph paragraph = new Paragraph();
 
         paragraph.insertResource("base", "address");

@@ -13,21 +13,24 @@ public interface Converter {
 
     List<Section> convert(HtmlContent _content) throws ConverterException;
 
-    public class ConverterException extends Exception {
+    class ConverterException extends Exception {
 
         public ConverterException() {
+            super();
         }
 
-        public ConverterException(String s) {
-            super(s);
+        public ConverterException(final String _s) {
+            super(_s);
         }
 
-        public ConverterException(String s, Throwable throwable) {
-            super(s, throwable);
+        public ConverterException(final String _s, final Throwable _throwable) {
+            super(_s, _throwable);
         }
 
-        public ConverterException(Throwable throwable) {
-            super(throwable);
+        public ConverterException(final Throwable _throwable) {
+            super(_throwable);
         }
+
     }
+
 }

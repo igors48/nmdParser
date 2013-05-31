@@ -1,6 +1,0 @@
-<processor>
-	<getGroup>
-		<pattern><![CDATA[<a class="bigusername" href="member.php.+?">(.+?)</a>]]></pattern> 
-		<occurrence>0</occurrence>
-	</getGroup>
-</processor>

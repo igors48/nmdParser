@@ -1,5 +1,0 @@
-<source>
-	<store days="0"/>
-	<custom id="expert.custom"/>
-	<processor id="expert.postprocessor"/>
-</source>

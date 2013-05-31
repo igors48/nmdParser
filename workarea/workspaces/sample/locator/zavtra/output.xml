@@ -1,3 +1,0 @@
-<output channel="zavtra.channel" branch="news">
-    <many-to-one name="zavtra"/>
-</output>

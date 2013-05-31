@@ -3,8 +3,9 @@ package constructor.objects.processor.xpath.element;
 import constructor.dom.ElementHandler;
 import constructor.dom.loader.MappedElementHandler;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Обработчик элемента xPath в XML файле
@@ -19,7 +20,8 @@ public class XPathProcessorElementHandler extends MappedElementHandler {
     public XPathProcessorElementHandler() {
         super();
 
-        Map<String, ElementHandler> handlers = new HashMap<String, ElementHandler>();
+        Map<String, ElementHandler> handlers = newHashMap();
+
         handlers.put(EXPRESSION_KEY, new ExpressionElementHandler());
 
         this.elementHandlers = handlers;

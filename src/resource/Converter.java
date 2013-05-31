@@ -1,6 +1,6 @@
 package resource;
 
-import downloader.Data;
+import http.Data;
 
 /**
  * @author Igor Usenko

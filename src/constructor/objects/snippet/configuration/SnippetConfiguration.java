@@ -11,11 +11,12 @@ import constructor.objects.storage.local.core.LocalStorage;
 import util.Assert;
 import util.sequense.SequenceGenerationParams;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
- * Конфигурация сниппета
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 09.12.2009
@@ -70,9 +71,9 @@ public class SnippetConfiguration implements Blank {
         this.branch = "";
 
         this.base = "";
-        this.urlGenerationPatterns = new ArrayList<SequenceGenerationParams>();
+        this.urlGenerationPatterns = newArrayList();
 
-        this.genres = new ArrayList<String>();
+        this.genres = newArrayList();
 
         this.criterionType = CriterionType.REGEXP;
         this.criterionExpression = "";
@@ -103,7 +104,7 @@ public class SnippetConfiguration implements Blank {
     }
 
     public List<UsedObject> getUsedObjects() {
-        List<UsedObject> result = new ArrayList<UsedObject>();
+        List<UsedObject> result = newArrayList();
 
         if (!this.storage.isEmpty()) {
             result.add(new UsedObject(this.storage, ObjectType.STORAGE));
@@ -252,6 +253,10 @@ public class SnippetConfiguration implements Blank {
         this.requestSourceType = RequestSourceType.URLS;
         this.urlGenerationPatterns.add(getSequenceGenerationParams(_url));
         setSequenceGenerationDefaults();
+    }
+
+    public void setAutoContentFiltering() {
+        this.criterionType = CriterionType.FILTER;
     }
 
     public void setXPath(final String _expression) {

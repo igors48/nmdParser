@@ -33,7 +33,7 @@ public class StringResourceBundle implements StringResource {
 
         try {
             result = this.bundle.getString(_key);
-        } catch (Throwable t) {
+        } catch (Exception t) {
             this.log.error("Resource with id [ " + _key + " ] not found", t);
         }
 

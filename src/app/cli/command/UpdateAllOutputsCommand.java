@@ -42,4 +42,5 @@ public class UpdateAllOutputsCommand extends UpdateOutputsCommand {
             throw new CommandExecutionException(e);
         }
     }
+
 }

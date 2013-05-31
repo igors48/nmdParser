@@ -17,8 +17,6 @@ import util.Assert;
 import java.util.List;
 
 /**
- * Обработчик блиц запроса
- *
  * @author Igor Usenko
  *         Date: 28.10.2009
  */
@@ -60,13 +58,7 @@ public class BlitzRequestProcessor {
             }
 
             return createDocument(channelDataList);
-        } catch (Source.SourceException e) {
-            throw new BlitzRequestProcessorException(e);
-        } catch (ServiceManager.ServiceManagerException e) {
-            throw new BlitzRequestProcessorException(e);
-        } catch (Channel.ChannelException e) {
-            throw new BlitzRequestProcessorException(e);
-        } catch (DocumentBuilder.DocumentBuilderException e) {
+        } catch (Source.SourceException | ServiceManager.ServiceManagerException | Channel.ChannelException | DocumentBuilder.DocumentBuilderException e) {
             throw new BlitzRequestProcessorException(e);
         }
     }
@@ -79,7 +71,7 @@ public class BlitzRequestProcessor {
     }
 
     private ModificationList getModificationList() throws Source.SourceException, ServiceManager.ServiceManagerException {
-        BlitzSourceAdapter adapter = new BlitzSourceAdapter(this.request, this.serviceManager.getTimeService(), this.settings);
+        BlitzSourceAdapter adapter = new BlitzSourceAdapter(this.request, this.serviceManager.getTimeService(), this.serviceManager.getBatchLoader());
         Source source = new Source(adapter);
 
         source.process();
@@ -97,17 +89,6 @@ public class BlitzRequestProcessor {
     }
 
     public class BlitzRequestProcessorException extends Exception {
-
-        public BlitzRequestProcessorException() {
-        }
-
-        public BlitzRequestProcessorException(final String _s) {
-            super(_s);
-        }
-
-        public BlitzRequestProcessorException(final String _s, final Throwable _throwable) {
-            super(_s, _throwable);
-        }
 
         public BlitzRequestProcessorException(final Throwable _throwable) {
             super(_throwable);

@@ -48,7 +48,8 @@ public interface Storage {
     void remove(String _branch, String _fileName) throws StorageException;
 
     //todo deleteEmptyBranches
-    public class StorageException extends Exception {
+
+    class StorageException extends Exception {
 
         public StorageException() {
             super();

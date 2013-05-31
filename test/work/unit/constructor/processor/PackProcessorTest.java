@@ -1,11 +1,11 @@
 package work.unit.constructor.processor;
 
-import junit.framework.TestCase;
-import constructor.objects.processor.pack.PackProcessor;
 import constructor.objects.processor.VariableProcessor;
-import variables.Variables;
-import debug.snapshot.ProcessorSnapshot;
+import constructor.objects.processor.pack.PackProcessor;
 import debug.snapshot.NameValuePair;
+import debug.snapshot.ProcessorSnapshot;
+import junit.framework.TestCase;
+import variables.Variables;
 
 import java.util.List;
 
@@ -20,6 +20,7 @@ public class PackProcessorTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws VariableProcessor.VariableProcessorException {
         PackProcessor processor = new PackProcessor("", "");
 
@@ -34,6 +35,7 @@ public class PackProcessorTest extends TestCase {
     }
 
     // тест c пустыми элементами
+
     public void testWithEmpties() throws VariableProcessor.VariableProcessorException {
         PackProcessor processor = new PackProcessor("", "");
 
@@ -51,7 +53,8 @@ public class PackProcessorTest extends TestCase {
     }
 
     // тест снапшота
-    public void testSnapshot(){
+
+    public void testSnapshot() {
         PackProcessor processor = new PackProcessor("test", "content2");
 
         ProcessorSnapshot snapshot = (ProcessorSnapshot) processor.getSnapshot();

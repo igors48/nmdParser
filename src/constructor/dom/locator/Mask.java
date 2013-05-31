@@ -1,12 +1,13 @@
 package constructor.dom.locator;
 
-import static constructor.dom.locator.MaskUtils.accepted;
-import static constructor.dom.locator.MaskUtils.excepted;
 import util.Assert;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static constructor.dom.locator.MaskUtils.accepted;
+import static constructor.dom.locator.MaskUtils.excepted;
 
 /**
  * Маскa отбора объектов по идентификатору

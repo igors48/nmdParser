@@ -9,7 +9,7 @@ import constructor.objects.storage.Storage;
 import converter.format.fb2.resource.Fb2ResourceConversionContext;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
 import debug.DebugConsole;
-import downloader.Downloader;
+import http.BatchLoader;
 import resource.ConverterFactory;
 import timeservice.TimeService;
 
@@ -45,7 +45,7 @@ public interface SimplerAdapter {
 
     ChannelDataListStorage getChannelDataListStorage();
 
-    Downloader getDownloader();
+    BatchLoader getBatchLoader();
 
     int getForcedDays();
 
@@ -84,4 +84,6 @@ public interface SimplerAdapter {
     String getCriterions();
 
     DebugConsole getDebugConsole();
+
+    boolean isAutoContentFiltering();
 }

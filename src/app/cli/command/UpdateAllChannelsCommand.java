@@ -42,4 +42,5 @@ public class UpdateAllChannelsCommand extends UpdateChannelsCommand {
             throw new CommandExecutionException(e);
         }
     }
+
 }

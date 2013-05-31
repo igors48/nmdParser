@@ -2,8 +2,9 @@ package util.fragment;
 
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Итератор для получения списка по частям
@@ -31,7 +32,7 @@ public class ListFragmentIterator<E> {
     }
 
     public List<E> getNext() {
-        List<E> result = new ArrayList<E>();
+        List<E> result = newArrayList();
 
         for (int index = this.current; isCorrectIndex(index); ++index) {
             result.add(this.items.get(index));

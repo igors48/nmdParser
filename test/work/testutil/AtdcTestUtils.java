@@ -3,12 +3,11 @@ package work.testutil;
 import dated.item.atdc.AtdcItem;
 import dated.item.atdc.Author;
 import dated.item.atdc.HtmlContent;
-import downloader.Data;
+import http.Data;
 import timeservice.TimeService;
+import util.Assert;
 
 import java.util.Date;
-
-import util.Assert;
 
 /**
  * @author Igor Usenko
@@ -51,43 +50,43 @@ public final class AtdcTestUtils {
         return _item.getContent().getContent().trim();
     }
 
-    public static boolean atdcItemEquals(AtdcItem _first, AtdcItem _second){
+    public static boolean atdcItemEquals(AtdcItem _first, AtdcItem _second) {
         Assert.notNull(_first);
         Assert.notNull(_second);
-        
+
         boolean result = true;
 
-        if (!_first.getAuthorNick().equalsIgnoreCase(_second.getAuthorNick())){
+        if (!_first.getAuthorNick().equalsIgnoreCase(_second.getAuthorNick())) {
             result = false;
         }
 
-        if (!_first.getAuthorInfo().equalsIgnoreCase(_second.getAuthorInfo())){
+        if (!_first.getAuthorInfo().equalsIgnoreCase(_second.getAuthorInfo())) {
             result = false;
         }
 
-        if (!_first.getAuthorAvatar().equalsIgnoreCase(_second.getAuthorAvatar())){
+        if (!_first.getAuthorAvatar().equalsIgnoreCase(_second.getAuthorAvatar())) {
             result = false;
         }
 
-        if (!_first.getTitle().equalsIgnoreCase(_second.getTitle())){
+        if (!_first.getTitle().equalsIgnoreCase(_second.getTitle())) {
             result = false;
         }
 
-        if (!_first.getDate().equals(_second.getDate())){
+        if (!_first.getDate().equals(_second.getDate())) {
             result = false;
         }
 
-        if (!_first.getContent().getContent().equalsIgnoreCase(_second.getContent().getContent())){
+        if (!_first.getContent().getContent().equalsIgnoreCase(_second.getContent().getContent())) {
             result = false;
         }
 
-        if (!_first.getContent().getUrl().equalsIgnoreCase(_second.getContent().getUrl())){
+        if (!_first.getContent().getUrl().equalsIgnoreCase(_second.getContent().getUrl())) {
             result = false;
         }
 
         return result;
     }
-    
+
     private AtdcTestUtils() {
         // empty
     }

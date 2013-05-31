@@ -11,8 +11,9 @@ import org.apache.commons.logging.LogFactory;
 import util.Assert;
 import variables.Variables;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * —тандартный анализатор списка страниц
@@ -36,7 +37,7 @@ public class StandardPageListAnalyserEx implements PageListAnalyser {
     public List<PageListItem> getPageList(final Page _page) {
         Assert.notNull(_page, "Page is null.");
 
-        List<PageListItem> result = new ArrayList<PageListItem>();
+        List<PageListItem> result = newArrayList();
 
         try {
             Variables variables = new Variables();

@@ -1,9 +1,9 @@
 package work.unit.debug;
 
-import junit.framework.TestCase;
-import debug.snapshot.ProcessorSnapshot;
 import debug.SnapshotTextRenderer;
 import debug.renderer.ProcessorSnapshotTextRenderer;
+import debug.snapshot.ProcessorSnapshot;
+import junit.framework.TestCase;
 
 import java.util.List;
 
@@ -18,7 +18,8 @@ public class ProcessorSnapshotTextRendererTest extends TestCase {
     }
 
     // первоначальный тест
-    public void testSmoke(){
+
+    public void testSmoke() {
         ProcessorSnapshot snapshot = new ProcessorSnapshot("name");
         snapshot.addParameter("par01", "val01");
         snapshot.addParameter("par02", "");

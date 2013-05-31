@@ -15,8 +15,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -167,7 +168,7 @@ public class UpdatedFilesForm extends AbstractForm implements ActionListener, Vi
     }
 
     private void viewSelectedFiles() {
-        List<String> selected = new ArrayList<String>();
+        List<String> selected = newArrayList();
 
         for (Object current : this.filesList.getSelectedValues()) {
             String candidate = (String) current;

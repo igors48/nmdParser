@@ -3,8 +3,9 @@ package constructor.objects.channel.core.stream;
 import constructor.objects.channel.core.ChannelData;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Сериализуемый/десериализуемый список данных канала
@@ -17,7 +18,7 @@ public class ChannelDataList {
     private List<ChannelData> list;
 
     public ChannelDataList() {
-        this.list = new ArrayList<ChannelData>();
+        this.list = newArrayList();
     }
 
     public void add(final ChannelData _channelData) {
@@ -61,7 +62,7 @@ public class ChannelDataList {
     }
 
     public List<ChannelDataHelperBean> getList() {
-        List<ChannelDataHelperBean> result = new ArrayList<ChannelDataHelperBean>();
+        List<ChannelDataHelperBean> result = newArrayList();
 
         for (ChannelData data : this.list) {
             ChannelDataHelperBean bean = new ChannelDataHelperBean();
@@ -75,7 +76,7 @@ public class ChannelDataList {
     public void setList(final List<ChannelDataHelperBean> _list) {
         Assert.notNull(_list);
 
-        this.list = new ArrayList<ChannelData>();
+        this.list = newArrayList();
 
         for (ChannelDataHelperBean bean : _list) {
             this.list.add((ChannelData) bean.restore());

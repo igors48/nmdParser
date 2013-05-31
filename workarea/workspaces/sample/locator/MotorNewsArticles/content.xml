@@ -1,5 +1,0 @@
-<processor>
-    <xPath>
-        <expression>//td[@class='text_box']/table/tbody/tr/td[1]/div/table/tbody/tr/td</expression>
-    </xPath>
-</processor>

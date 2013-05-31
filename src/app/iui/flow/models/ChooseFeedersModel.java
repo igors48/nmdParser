@@ -5,8 +5,9 @@ import app.iui.flow.Model;
 import app.iui.flow.ModelType;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -39,7 +40,7 @@ public class ChooseFeedersModel extends Model {
         Assert.isValidString(_nextTaskName, "Next task name is not valid");
         this.nextTaskName = _nextTaskName;
 
-        this.selected = new ArrayList<Entity>();
+        this.selected = newArrayList();
     }
 
     public boolean isMultiSelect() {

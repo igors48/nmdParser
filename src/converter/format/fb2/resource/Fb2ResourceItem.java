@@ -1,8 +1,8 @@
 package converter.format.fb2.resource;
 
 import converter.format.fb2.Stringable;
-import downloader.Data;
-import downloader.data.EmptyData;
+import http.Data;
+import http.data.EmptyData;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import resource.ResourceType;
@@ -19,8 +19,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -50,6 +51,7 @@ public class Fb2ResourceItem implements Stringable {
     private Data data;
 
     //todo нужно создать отдельную абстракцию "внешний ресурс"
+
     public Fb2ResourceItem(final String _base, final String _address, final String _tag, final Fb2ResourceConversionContext _conversionContext) {
         Assert.notNull(_base, "Base is null");
         this.base = _base;
@@ -111,7 +113,7 @@ public class Fb2ResourceItem implements Stringable {
     }
 
     private List<ImageTypeAndData> getImages() {
-        List<ImageTypeAndData> result = new ArrayList<ImageTypeAndData>();
+        List<ImageTypeAndData> result = newArrayList();
 
         BufferedImage originalImage;
         byte[] data;
@@ -149,7 +151,7 @@ public class Fb2ResourceItem implements Stringable {
     }
 
     private List<ImageTypeAndData> processImage(final BufferedImage _image, final ImageProcessingContext _processingContext) {
-        List<ImageTypeAndData> result = new ArrayList<ImageTypeAndData>();
+        List<ImageTypeAndData> result = newArrayList();
 
         for (SplitItem current : _processingContext.getSplitItems()) {
             result.add(processClipItem(_image, current.getTop(), current.getLeft(), current.getWidth(), current.getHeight(), _processingContext.getScale(), _processingContext.getRotate(), this.conversionContext.isGrayscale()));

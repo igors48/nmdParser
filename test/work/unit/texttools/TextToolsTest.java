@@ -3,8 +3,9 @@ package work.unit.texttools;
 import junit.framework.TestCase;
 import util.TextTools;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -47,26 +48,30 @@ public class TextToolsTest extends TestCase {
     }
 
     // проверка с простой строкой
+
     public void testCapFirstNormal() {
         assertEquals("Qwerty", TextTools.capsFirst("qwerty"));
 
     }
 
     // проверка со строкой где первая и так большая
+
     public void testCapFirstCaps() {
         assertEquals("Qwerty", TextTools.capsFirst("Qwerty"));
 
     }
 
     // проверка со строкой из одного символа
+
     public void testCapOneChar() {
         assertEquals("Q", TextTools.capsFirst("q"));
 
     }
 
     // тест сварки с разделителем
+
     public void testWeldWithDivider() {
-        List<String> fixture = new ArrayList<String>();
+        List<String> fixture = newArrayList();
         fixture.add("a");
         fixture.add("b");
         fixture.add("c");
@@ -77,8 +82,9 @@ public class TextToolsTest extends TestCase {
     }
 
     // тест сварки без разделителя
+
     public void testWeldWithoutDivider() {
-        List<String> fixture = new ArrayList<String>();
+        List<String> fixture = newArrayList();
         fixture.add("a");
         fixture.add("b");
         fixture.add("c");
@@ -89,6 +95,7 @@ public class TextToolsTest extends TestCase {
     }
 
     // smoke тест экранирования амперсанда
+
     public void testSmokeEscapeAmpersand() {
         String result = TextTools.escapeAmpersands("asd&asd");
 
@@ -96,6 +103,7 @@ public class TextToolsTest extends TestCase {
     }
 
     // тест - экранированный без изменений
+
     public void testEscapedAmpersandDoesntChanged() {
         String result = TextTools.escapeAmpersands("asd&amp;asd");
 
@@ -103,13 +111,15 @@ public class TextToolsTest extends TestCase {
     }
 
     // тест - экранирование двух подряд
+
     public void testTwoAmpersands() {
         String result = TextTools.escapeAmpersands("asd&&asd");
 
         assertEquals("asd&amp;&amp;asd", result);
     }
-    
+
     // тест - амперсанд в начале строки
+
     public void testStartsWithAmpersand() {
         String result = TextTools.escapeAmpersands("&asd");
 
@@ -117,6 +127,7 @@ public class TextToolsTest extends TestCase {
     }
 
     // тест - амперсанд в конце строки
+
     public void testEndsWithAmpersand() {
         String result = TextTools.escapeAmpersands("asd&");
 
@@ -124,6 +135,7 @@ public class TextToolsTest extends TestCase {
     }
 
     //тест удаления заэскейпленных амперсандов
+
     public void testRemoveEscapedAmps() {
         assertEquals("a&b", TextTools.removeEscapedAmpersands("a&amp;b"));
         assertEquals("a&b", TextTools.removeEscapedAmpersands("a&AMP;b"));

@@ -18,9 +18,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -132,7 +133,7 @@ public class ChooseFeedersForm extends AbstractForm implements ActionListener, L
     protected void onApprove() {
 
         if (this.nextButton.isEnabled()) {
-            List<Entity> selected = new ArrayList<Entity>();
+            List<Entity> selected = newArrayList();
 
             for (int current : this.feedersList.getSelectedIndices()) {
                 selected.add(this.model.getFeeders().get(current));

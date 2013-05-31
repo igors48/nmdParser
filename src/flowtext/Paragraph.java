@@ -4,8 +4,9 @@ import flowtext.resource.Resource;
 import flowtext.text.*;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -13,11 +14,11 @@ import java.util.List;
  */
 public class Paragraph implements FlowTextObject {
 
-    //TODO Section, Paragraph, Title пахнут как FlowTextObjectContainer
+    //TODO Section, Paragraph, Title пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ FlowTextObjectContainer
     private final List<FlowTextObject> content;
 
     public Paragraph() {
-        this.content = new ArrayList<FlowTextObject>();
+        this.content = newArrayList();
     }
 
     public void insertSimpleText(String _text) {
@@ -42,6 +43,24 @@ public class Paragraph implements FlowTextObject {
         Assert.isValidString(_text);
 
         this.content.add(new CodeText(_text));
+    }
+
+    public void insertStrikethroughText(String _text) {
+        Assert.isValidString(_text);
+
+        this.content.add(new StrikethroughText(_text));
+    }
+
+    public void insertSubscriptText(String _text) {
+        Assert.isValidString(_text);
+
+        this.content.add(new SubscriptText(_text));
+    }
+
+    public void insertSuperscriptText(String _text) {
+        Assert.isValidString(_text);
+
+        this.content.add(new SuperscriptText(_text));
     }
 
     public void insertFootNote(String _text, String _base) {
@@ -98,7 +117,8 @@ public class Paragraph implements FlowTextObject {
         return result;
     }
 
-    //todo проверка типов
+    //todo пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+
     public void addContent(List<FlowTextObject> _content) {
         Assert.notNull(_content);
 

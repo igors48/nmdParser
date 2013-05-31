@@ -5,11 +5,12 @@ import constructor.dom.UsedObject;
 import constructor.objects.dateparser.core.ParsingStrategy;
 import util.Assert;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+
+import static util.CollectionUtils.newArrayList;
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Конфигурация парсера даты
@@ -27,7 +28,7 @@ public class DateParserConfiguration implements Blank {
     private String month;
 
     public DateParserConfiguration() {
-        this.parsers = new HashMap<Pattern, ParsingStrategy>();
+        this.parsers = newHashMap();
     }
 
     public void setId(final String _id) {
@@ -40,7 +41,7 @@ public class DateParserConfiguration implements Blank {
     }
 
     public List<UsedObject> getUsedObjects() {
-        return new ArrayList<UsedObject>();
+        return newArrayList();
     }
 
     public void addStrategy(final String _pattern, final ParsingStrategy _strategy) {

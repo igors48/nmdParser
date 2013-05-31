@@ -1,7 +1,7 @@
 package work.unit.html;
 
-import junit.framework.TestCase;
 import html.parser.ChunkSource;
+import junit.framework.TestCase;
 
 /**
  * @author Igor Usenko
@@ -16,7 +16,7 @@ public class ChunkSourceTest extends TestCase {
         super(s);
     }
 
-    public void test01(){
+    public void test01() {
         ChunkSource source = new ChunkSource("...>", new String[]{OPEN_BRACE, CLOSE_BRACE});
 
         String first = source.get();
@@ -28,7 +28,7 @@ public class ChunkSourceTest extends TestCase {
         assertEquals(null, third);
     }
 
-    public void test02(){
+    public void test02() {
         ChunkSource source = new ChunkSource("...>...", new String[]{OPEN_BRACE, CLOSE_BRACE});
 
         String first = source.get();
@@ -42,7 +42,7 @@ public class ChunkSourceTest extends TestCase {
         assertEquals(null, fourth);
     }
 
-    public void test03(){
+    public void test03() {
         ChunkSource source = new ChunkSource("...<...", new String[]{OPEN_BRACE, CLOSE_BRACE});
 
         String first = source.get();
@@ -56,7 +56,7 @@ public class ChunkSourceTest extends TestCase {
         assertEquals(null, fourth);
     }
 
-    public void test04(){
+    public void test04() {
         ChunkSource source = new ChunkSource("<...<...>", new String[]{OPEN_BRACE, CLOSE_BRACE});
 
         String first = source.get();
@@ -74,7 +74,7 @@ public class ChunkSourceTest extends TestCase {
         assertEquals(null, sixth);
     }
 
-    public void test05(){
+    public void test05() {
         String data = "width=535 height = 25 src=\"topic-229134_files/p_tofaq-on.gif\"id=\"img25\"    class =  \"preload\" alt=\"\"";
 
         ChunkSource source = new ChunkSource(data, new String[]{" ", "=", "\""});

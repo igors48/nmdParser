@@ -138,14 +138,6 @@ public class FormFactory {
             result = new ExternalPostprocessingSettingsForm(this.owner, this.validatorFactory, FORM_WIDTH, FORM_HEIGHT, this.stringResource, (ExternalPostprocessorModel) _model, (ExternalPostprocessingSettingsForm.Listener) _listener);
         }
 
-        if (ModelType.AUTO_UPDATE_TASKS == _model.getType()) {
-            result = new AutoUpdateTasksForm(this.owner, FORM_WIDTH, FORM_HEIGHT, this.stringResource, (AutoUpdateTasksModel) _model, (AutoUpdateTasksForm.Listener) _listener);
-        }
-
-        if (ModelType.AUTO_UPDATE_FEEDERS == _model.getType()) {
-            result = new AutoUpdateFeedersForm(this.owner, FORM_WIDTH, FORM_HEIGHT, this.stringResource, (AutoUpdateFeedersModel) _model, this.apiService, this.commandExecutor, (AutoUpdateFeedersForm.Listener) _listener);
-        }
-
         return result;
     }
 

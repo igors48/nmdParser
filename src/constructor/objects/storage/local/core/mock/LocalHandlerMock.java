@@ -4,9 +4,11 @@ import constructor.objects.storage.local.core.Handler;
 import util.Assert;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static util.CollectionUtils.newArrayList;
+import static util.CollectionUtils.newHashMap;
 
 public class LocalHandlerMock implements Handler {
 
@@ -14,7 +16,7 @@ public class LocalHandlerMock implements Handler {
 
 
     public LocalHandlerMock() {
-        this.root = new HashMap<String, List<String>>();
+        this.root = newHashMap();
     }
 
     public void createDirectory(final String _directory) throws HandlerException {
@@ -79,7 +81,7 @@ public class LocalHandlerMock implements Handler {
         List<String> result = this.root.get(_directory);
 
         if (result == null) {
-            result = new ArrayList<String>();
+            result = newArrayList();
         }
 
         return result;

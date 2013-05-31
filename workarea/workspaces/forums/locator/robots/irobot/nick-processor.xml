@@ -1,8 +1,0 @@
-<processor>
-
-	<getGroup>
-		<pattern><![CDATA[<a href='/irobothome/view_profile\?user.id=.*?>(.+?)</a>]]></pattern> 
-		<occurrence>0</occurrence>
-	</getGroup>
-	
-</processor>

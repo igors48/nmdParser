@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="cp1251"?>
-	<!-- PocketBook-->
-
-<output channel="ebook.forum.pocket.channel" branch="ebook.forum.pocket">
-	<one-to-one/>
-</output>

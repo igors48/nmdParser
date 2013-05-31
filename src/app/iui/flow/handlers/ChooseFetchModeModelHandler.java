@@ -11,9 +11,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -111,7 +112,7 @@ public class ChooseFetchModeModelHandler {
     }
 
     private List<Entity> filterForFetchMode(final List<Entity> _feeders, final ChooseFetchModeModel.FetchMode _fetchMode) {
-        List<Entity> result = new ArrayList<Entity>();
+        List<Entity> result = newArrayList();
 
         for (Entity candidate : _feeders) {
 

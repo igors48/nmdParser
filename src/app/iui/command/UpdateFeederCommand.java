@@ -8,9 +8,10 @@ import util.Assert;
 import util.UpdateContextTools;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -46,7 +47,7 @@ public class UpdateFeederCommand implements Command, Controller {
         Assert.notNull(_listener, "Listener is null");
         this.listener = _listener;
 
-        this.files = new ArrayList<String>();
+        this.files = newArrayList();
     }
 
     public List<String> getFiles() {

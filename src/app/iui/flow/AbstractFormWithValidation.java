@@ -8,8 +8,9 @@ import util.Assert;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -123,7 +124,7 @@ public abstract class AbstractFormWithValidation extends AbstractForm {
     }
 
     private Map<JTextField, Validators> setupValidators() {
-        Map<JTextField, Validators> result = new HashMap<JTextField, Validators>();
+        Map<JTextField, Validators> result = newHashMap();
 
         addValidators(result);
 

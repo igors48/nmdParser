@@ -1,13 +1,14 @@
 package converter.format.fb2.resource.resolver.cache;
 
-import downloader.Data;
+import http.Data;
 import util.Assert;
 
-import java.util.HashMap;
 import java.util.Map;
 
+import static util.CollectionUtils.newHashMap;
+
 /**
- * Хранилище кэша ресурсов расположенное в памяти
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 06.11.2009
@@ -21,8 +22,8 @@ public class InMemoryStorageAdapter implements StorageAdapter {
     private long freeSpace;
 
     public InMemoryStorageAdapter() {
-        this.items = new HashMap<String, Container>();
-        this.toc = new HashMap<String, CacheEntry>();
+        this.items = newHashMap();
+        this.toc = newHashMap();
 
         this.freeSpace = Long.MAX_VALUE;
     }
@@ -62,7 +63,7 @@ public class InMemoryStorageAdapter implements StorageAdapter {
     }
 
     public Map<String, StoredItem> getMap() {
-        Map<String, StoredItem> result = new HashMap<String, StoredItem>();
+        Map<String, StoredItem> result = newHashMap();
 
         for (String key : this.items.keySet()) {
             result.put(key, this.items.get(key).getItem());

@@ -1,8 +1,8 @@
 package work.unit.html.extractor;
 
 import junit.framework.TestCase;
-import util.html.TagImage;
 import util.html.HtmlTagExtractor;
+import util.html.TagImage;
 
 /**
  * @author Igor Usenko
@@ -15,7 +15,8 @@ public class GetClosestCloseTagTest extends TestCase {
     }
 
     // первоначальный тест
-    public void testSmoke(){
+
+    public void testSmoke() {
         TagImage result = HtmlTagExtractor.getClosestCloseTag("0123<a>456</b>789", 0);
 
         assertNotNull(result);
@@ -26,7 +27,8 @@ public class GetClosestCloseTagTest extends TestCase {
     }
 
     // тест с указанием позиции
-    public void testPosition(){
+
+    public void testPosition() {
         TagImage result = HtmlTagExtractor.getClosestCloseTag("0123<a>456</b>78</c>9", 11);
 
         assertNotNull(result);

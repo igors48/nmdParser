@@ -2,8 +2,9 @@ package app.iui.validator;
 
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -14,7 +15,7 @@ public class Validators {
     private final List<Validator> validators;
 
     public Validators() {
-        this.validators = new ArrayList<Validator>();
+        this.validators = newArrayList();
     }
 
     public void addValidator(final Validator _validator) {

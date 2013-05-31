@@ -3,8 +3,9 @@ package dated.item.modification.stream;
 import dated.item.modification.Modification;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Сериализуемый/десериализуемый список модификаций
@@ -17,7 +18,7 @@ public class ModificationList {
     private List<Modification> list;
 
     public ModificationList() {
-        this.list = new ArrayList<Modification>();
+        this.list = newArrayList();
     }
 
     public void add(Modification _modification) {
@@ -47,7 +48,7 @@ public class ModificationList {
     }
 
     public List<ModificationHelperBean> getList() {
-        List<ModificationHelperBean> result = new ArrayList<ModificationHelperBean>();
+        List<ModificationHelperBean> result = newArrayList();
 
         for (Modification modification : this.list) {
             ModificationHelperBean helperBean = new ModificationHelperBean();

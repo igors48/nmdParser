@@ -8,19 +8,21 @@ import constructor.objects.channel.core.AbstractChannelAdapter;
 import constructor.objects.channel.core.ChannelAdapterTools;
 import constructor.objects.channel.core.ChannelDataListStorage;
 import constructor.objects.interpreter.adapter.SimpleInterpreterAdapter;
+import constructor.objects.interpreter.configuration.FragmentAnalyserConfiguration;
 import constructor.objects.interpreter.core.InterpreterAdapter;
 import constructor.objects.interpreter.core.InterpreterEx;
-import constructor.objects.interpreter.core.standard.SimpleInterpreterEx;
-import constructor.objects.interpreter.core.standard.StandardInterpreterEx;
+import constructor.objects.interpreter.core.standard.SimpleInterpreter;
+import constructor.objects.interpreter.core.standard.StandardInterpreter;
 import constructor.objects.source.core.ModificationListStorage;
 import dated.item.modification.Modification;
 import debug.DebugConsole;
-import downloader.Downloader;
+import http.BatchLoader;
 import timeservice.TimeService;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -33,15 +35,17 @@ public class SimplerChannelAdapter extends AbstractChannelAdapter {
     private final String sourceId;
     private final String id;
     private final String criterions;
+    private final boolean autoContentFiltering;
     private final String coverUrl;
     private final DebugConsole debugConsole;
 
     public SimplerChannelAdapter(final String _id,
                                  final String _sourceId,
                                  final String _criterions,
+                                 final boolean _autoContentFiltering,
                                  final String _coverUrl,
                                  final ChannelDataListStorage _channelDataListStorage,
-                                 final Downloader _downloader,
+                                 final BatchLoader _batchLoader,
                                  final ModificationListStorage _modificationListStorage,
                                  final int _forcedDays,
                                  final TimeService _timeService,
@@ -49,7 +53,7 @@ public class SimplerChannelAdapter extends AbstractChannelAdapter {
                                  final int _precachedItemsCount,
                                  final long _pauseBetweenRequests,
                                  final DebugConsole _debugConsole) {
-        super(_channelDataListStorage, _downloader, _modificationListStorage, _forcedDays, _timeService, _controller, _precachedItemsCount, _pauseBetweenRequests);
+        super(_channelDataListStorage, _batchLoader, _modificationListStorage, _forcedDays, _timeService, _controller, _precachedItemsCount, _pauseBetweenRequests);
 
         Assert.isValidString(_id, "Id is not valid");
         this.id = _id;
@@ -59,6 +63,8 @@ public class SimplerChannelAdapter extends AbstractChannelAdapter {
 
         Assert.notNull(_criterions, "Criterions list is null");
         this.criterions = _criterions;
+
+        this.autoContentFiltering = _autoContentFiltering;
 
         Assert.notNull(_coverUrl, "Cover Url is null");
         this.coverUrl = _coverUrl;
@@ -78,12 +84,12 @@ public class SimplerChannelAdapter extends AbstractChannelAdapter {
     public List<InterpreterEx> getInterpreters(final Modification _modification) throws AdapterException {
         Assert.notNull(_modification, "Modification is null");
 
-        List<InterpreterEx> result = new ArrayList<InterpreterEx>();
+        List<InterpreterEx> result = newArrayList();
 
         if (isSimpleHandling()) {
-            result.add(new SimpleInterpreterEx(new SimpleInterpreterAdapter(_modification)));
+            result.add(new SimpleInterpreter(new SimpleInterpreterAdapter(_modification)));
         } else {
-            result.add(new StandardInterpreterEx(createInterpreterAdapter(_modification)));
+            result.add(new StandardInterpreter(createInterpreterAdapter(_modification)));
         }
 
         return result;
@@ -98,10 +104,22 @@ public class SimplerChannelAdapter extends AbstractChannelAdapter {
     }
 
     public boolean isSimpleHandling() {
-        return this.criterions.isEmpty();
+        return this.criterions.isEmpty() && !autoContentFiltering;
     }
 
     private InterpreterAdapter createInterpreterAdapter(final Modification _modification) {
-        return new BlitzInterpreterAdapter(_modification, ChannelAdapterTools.createFragmentAnalyserConfiguration(CriterionType.XPATH, this.criterions, SIMPLER_CHAIN_PROCESSOR_ADAPTER_ID, this.debugConsole), this.batchLoader, getPrecachedItemsCount(), getPauseBetweenRequests());
+        final FragmentAnalyserConfiguration fragmentAnalyserConfiguration = autoContentFiltering ?
+                ChannelAdapterTools.createContentFilterConfiguration(SIMPLER_CHAIN_PROCESSOR_ADAPTER_ID, this.debugConsole) :
+                ChannelAdapterTools.createFragmentAnalyserConfiguration(
+                        CriterionType.XPATH,
+                        this.criterions,
+                        SIMPLER_CHAIN_PROCESSOR_ADAPTER_ID,
+                        this.debugConsole);
+
+        return new BlitzInterpreterAdapter(_modification,
+                fragmentAnalyserConfiguration,
+                this.batchLoader,
+                getPrecachedItemsCount(),
+                getPauseBetweenRequests());
     }
 }

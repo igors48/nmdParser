@@ -6,15 +6,15 @@ import constructor.objects.channel.core.ChannelDataTools;
 import constructor.objects.processor.VariableProcessor;
 import constructor.objects.processor.chain.ChainProcessor;
 import dated.item.modification.Modification;
-import downloader.BatchLoader;
-import downloader.Data;
+import http.BatchLoader;
+import http.Data;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import util.Assert;
 import variables.Variables;
 
 /**
- * Определяемый пользователем анализатор канала
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 06.08.2009
@@ -32,14 +32,13 @@ public class CustomAnalyser implements ChannelAnalyser {
         this.log = LogFactory.getLog(getClass());
     }
 
-    public ChannelDataHeader getHeader(final Modification _modification, final BatchLoader _batchLoader, final String _coverUrl, long _pauseBetweenRequests) throws ChannelAnalyserException {
+    public ChannelDataHeader getHeader(final Modification _modification, final BatchLoader _batchLoader, final String _coverUrl) throws ChannelAnalyserException {
         Assert.notNull(_modification, "Modification is null");
         Assert.notNull(_batchLoader, "Page loader is null");
         Assert.notNull(_coverUrl, "Cover URL is null");
-        Assert.greaterOrEqual(_pauseBetweenRequests, 0, "Pause between requests < 0");
 
         try {
-            String pageImage = ChannelDataTools.loadImage(_modification.getUrl(), _batchLoader, _pauseBetweenRequests);
+            String pageImage = ChannelDataTools.loadImage(_modification.getUrl(), _batchLoader);
 
             String title = parseHeader(_modification, pageImage);
             String host = ChannelAnalyserTools.getHostName(_modification.getUrl());

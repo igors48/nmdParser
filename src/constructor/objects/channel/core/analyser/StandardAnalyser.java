@@ -4,31 +4,30 @@ import constructor.objects.channel.core.ChannelAnalyser;
 import constructor.objects.channel.core.ChannelDataHeader;
 import constructor.objects.channel.core.ChannelDataTools;
 import dated.item.modification.Modification;
-import downloader.BatchLoader;
-import downloader.Data;
+import http.BatchLoader;
+import http.Data;
 import util.Assert;
 
 /**
- * Стандартный анализатор информации канала. Формирует заголовок
- * канала из урла и заголовка веб-страницы соответствующей этому
- * урлу
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+ * пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+ * пїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 31.12.2008
  */
 public class StandardAnalyser implements ChannelAnalyser {
 
-    public ChannelDataHeader getHeader(final Modification _modification, final BatchLoader _batchLoader, final String _coverUrl, long _pauseBetweenRequests) throws ChannelAnalyserException {
+    public ChannelDataHeader getHeader(final Modification _modification, final BatchLoader _batchLoader, final String _coverUrl) throws ChannelAnalyserException {
         Assert.notNull(_modification, "Modification is null");
         Assert.notNull(_batchLoader, "Page loader is null");
         Assert.notNull(_coverUrl, "Cover URL is null");
-        Assert.greaterOrEqual(_pauseBetweenRequests, 0, "Pause between requests < 0");
 
         try {
             String title = _modification.getTitle();
 
             if (title == null || title.isEmpty()) {
-                String pageImage = ChannelDataTools.loadImage(_modification.getUrl(), _batchLoader, _pauseBetweenRequests);
+                String pageImage = ChannelDataTools.loadImage(_modification.getUrl(), _batchLoader);
                 title = ChannelAnalyserTools.parseTitle(pageImage);
             }
 

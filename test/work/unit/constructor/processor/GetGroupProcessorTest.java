@@ -21,6 +21,7 @@ public class GetGroupProcessorTest extends TestCase {
     }
 
     // тест - нормальная работа
+
     public void testNormal() {
         Variables variables = new Variables();
         variables.put("inVar", "asdopaefg");
@@ -40,6 +41,7 @@ public class GetGroupProcessorTest extends TestCase {
     }
 
     // тест - паттерн не совпал
+
     public void testNoMatch() {
         Variables variables = new Variables();
         variables.put("inVar", "addopaefg");
@@ -59,6 +61,7 @@ public class GetGroupProcessorTest extends TestCase {
     }
 
     // тест - дефолтные имена входа и выхода
+
     public void testDefaultNames() {
         Variables variables = new Variables();
         variables.put("input", "asdopaefg");
@@ -78,6 +81,7 @@ public class GetGroupProcessorTest extends TestCase {
     }
 
     // тест списка вхождений
+
     public void testGroupList() {
         Variables variables = new Variables();
         variables.put("input", "asdopaefgasdppaefgasdpppefg");
@@ -100,6 +104,7 @@ public class GetGroupProcessorTest extends TestCase {
     }
 
     // тест списка вхождений с указанной группой
+
     public void testGroupListWithDefinedGroup() {
         Variables variables = new Variables();
         variables.put("input", "asdopaefgasdppaefgasdpppefg");
@@ -122,6 +127,7 @@ public class GetGroupProcessorTest extends TestCase {
     }
 
     // тест обработки многоэлементной переменной
+
     public void testManyElements() {
         Variables variables = new Variables();
         variables.put("input", 0, "asdopaefgasdppaefgasdpppefg");
@@ -147,6 +153,7 @@ public class GetGroupProcessorTest extends TestCase {
     }
 
     // тест снапшота с заданными вхождениями
+
     public void testSnapshotWithOccurrences() {
         OccurrenceSet occurrenceSet = new OccurrenceSet();
         occurrenceSet.add(0);

@@ -1,3 +1,0 @@
-<output channel="rbc.main.channel" branch="rbc">
-    <many-to-one name="main"/>
-</output>

@@ -1,12 +1,13 @@
 package work.unit.dom;
 
-import util.Assert;
 import constructor.dom.Blank;
 import constructor.dom.UsedObject;
 import debug.Snapshot;
+import util.Assert;
 
 import java.util.List;
-import java.util.ArrayList;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -64,6 +65,6 @@ public class SampleObject01 implements Blank {
     }
 
     public List<UsedObject> getUsedObjects() {
-        return new ArrayList<UsedObject>();
+        return newArrayList();
     }
 }

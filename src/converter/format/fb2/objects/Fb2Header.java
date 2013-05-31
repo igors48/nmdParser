@@ -3,7 +3,12 @@ package converter.format.fb2.objects;
 import converter.format.fb2.Stringable;
 import util.Assert;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -100,7 +105,7 @@ public class Fb2Header implements Stringable {
     }
 
     public String[] getStrings() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         store(result);
 

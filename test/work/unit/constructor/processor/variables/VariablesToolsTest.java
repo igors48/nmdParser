@@ -1,8 +1,8 @@
 package work.unit.constructor.processor.variables;
 
 import junit.framework.TestCase;
-import variables.Variables;
 import variables.Variable;
+import variables.Variables;
 import variables.VariablesTools;
 
 /**

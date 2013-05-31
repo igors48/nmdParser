@@ -5,8 +5,8 @@ import constructor.objects.processor.load.LoadProcessor;
 import debug.snapshot.NameValuePair;
 import debug.snapshot.ProcessorSnapshot;
 import junit.framework.TestCase;
-import work.unit.constructor.processor.mock.PageLoaderMock;
 import variables.Variables;
+import work.unit.constructor.processor.mock.PageLoaderMock;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -22,6 +22,7 @@ public class LoadProcessorTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws UnsupportedEncodingException, VariableProcessor.VariableProcessorException {
         PageLoaderMock loader = new PageLoaderMock("testing");
 
@@ -34,6 +35,7 @@ public class LoadProcessorTest extends TestCase {
     }
 
     // тест - url в переменной in
+
     public void testUrlInVariable() throws UnsupportedEncodingException, VariableProcessor.VariableProcessorException {
         PageLoaderMock loader = new PageLoaderMock("testing");
 
@@ -47,6 +49,7 @@ public class LoadProcessorTest extends TestCase {
     }
 
     // тест - загрузка с реферером
+
     public void testLoadWithReferer() throws UnsupportedEncodingException, VariableProcessor.VariableProcessorException {
         PageLoaderMock loader = new PageLoaderMock("testing");
 
@@ -62,6 +65,7 @@ public class LoadProcessorTest extends TestCase {
     }
 
     // тест снапшота
+
     public void testSnapshot() throws UnsupportedEncodingException {
         PageLoaderMock loader = new PageLoaderMock("testing");
 

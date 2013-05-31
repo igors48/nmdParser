@@ -1,3 +1,0 @@
-<output channel="inosmi.channel" branch="news">
-	<many-to-one name="inosmi"/>
-</output>

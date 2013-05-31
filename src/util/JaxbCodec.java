@@ -1,9 +1,9 @@
 package util;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.JAXBException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -28,6 +28,7 @@ public final class JaxbCodec<T> {
 
         try {
             Marshaller marshaller = this.context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
             marshaller.marshal(object, writer);
 

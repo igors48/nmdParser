@@ -1,3 +1,0 @@
-<output channel="nzg.channel" branch="nzg">
-    <many-to-one name="nzg"/>
-</output>

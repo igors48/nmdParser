@@ -14,9 +14,10 @@ import org.apache.commons.logging.LogFactory;
 import util.Assert;
 import util.DateTools;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Класс из данных канала строит документ и отдает его на конвертацию
@@ -39,7 +40,7 @@ public class DocumentBuilder {
     }
 
     public List<String> process() throws DocumentBuilderException {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         this.adapter.onStart();
 
@@ -67,7 +68,7 @@ public class DocumentBuilder {
                     List<ChannelDataList> workItems = null;
 
                     if (this.adapter.getComposition() == Composition.MANY_TO_ONE) {
-                        workItems = new ArrayList<ChannelDataList>();
+                        workItems = newArrayList();
                         workItems.add(datas);
                     } else {
                         workItems = split(datas);
@@ -98,7 +99,7 @@ public class DocumentBuilder {
     }
 
     private List<ChannelDataList> split(final ChannelDataList _datas) {
-        List<ChannelDataList> result = new ArrayList<ChannelDataList>();
+        List<ChannelDataList> result = newArrayList();
 
         for (int index = 0; index < _datas.size(); ++index) {
             ChannelData data = _datas.get(index);
@@ -113,7 +114,7 @@ public class DocumentBuilder {
     }
 
     private List<String> processItems(final List<ChannelDataList> _items, final String _name) throws AdapterException {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         for (ChannelDataList current : _items) {
             result.addAll(processItem(current, _name));

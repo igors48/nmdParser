@@ -1,12 +1,11 @@
 package work.unit.constructor.simpler;
 
-import junit.framework.TestCase;
 import constructor.objects.simpler.configuration.SimplerConfiguration;
 import constructor.objects.simpler.configuration.SimplerConfigurationTools;
+import junit.framework.TestCase;
+import work.testutil.SimplerConfigurationTestUtils;
 
 import java.util.List;
-
-import work.testutil.SimplerConfigurationTestUtils;
 
 /**
  * @author Igor Usenko
@@ -30,6 +29,7 @@ public class SimplerConfigurationToolsTest extends TestCase {
     }
 
     // тест рендеринга режима fromNewToOld="no"
+
     public void testFromNewToOldNo() {
         SimplerConfiguration fixture = SimplerConfigurationTestUtils.createSimplerConfiguration("id", "no");
 
@@ -42,6 +42,7 @@ public class SimplerConfigurationToolsTest extends TestCase {
     }
 
     // тест рендеринга дефолтного режима fromNewToOld
+
     public void testFromNewToOldDefault() {
         SimplerConfiguration fixture = SimplerConfigurationTestUtils.createSimplerConfiguration("id", "");
 
@@ -51,5 +52,20 @@ public class SimplerConfigurationToolsTest extends TestCase {
         assertEquals("<simpler feedUrl=\"feedUrl\" coverUrl=\"coverUrl\" storeDays=\"7\" branch=\"branch\" outName=\"outName\" >", result.get(0));
         assertEquals("<xPath>xPath</xPath>", result.get(1));
         assertEquals("</simpler>", result.get(2));
+    }
+
+    // тест рендеринга с фильтром контента
+
+    public void testWithContentFilter() {
+        SimplerConfiguration fixture = SimplerConfigurationTestUtils.createSimplerConfiguration("id", "");
+        fixture.setAutoContentFiltering(true);
+
+        List<String> result = SimplerConfigurationTools.render(fixture);
+
+        assertEquals(4, result.size());
+        assertEquals("<simpler feedUrl=\"feedUrl\" coverUrl=\"coverUrl\" storeDays=\"7\" branch=\"branch\" outName=\"outName\" >", result.get(0));
+        assertEquals("<xPath>xPath</xPath>", result.get(1));
+        assertEquals("<content-filter/>", result.get(2));
+        assertEquals("</simpler>", result.get(3));
     }
 }

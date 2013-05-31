@@ -5,8 +5,9 @@ import flowtext.FlowTextType;
 import flowtext.Paragraph;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -17,7 +18,7 @@ public class FlowList implements FlowTextObject {
     private final List<ListItem> items;
 
     public FlowList() {
-        this.items = new ArrayList<ListItem>();
+        this.items = newArrayList();
     }
 
     public FlowTextType getType() {

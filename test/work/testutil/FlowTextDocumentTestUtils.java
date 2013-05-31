@@ -1,7 +1,7 @@
 package work.testutil;
 
-import flowtext.*;
 import constructor.objects.channel.core.ChannelData;
+import flowtext.*;
 
 import java.util.List;
 
@@ -35,35 +35,35 @@ public final class FlowTextDocumentTestUtils {
         return result;
     }
 
-    public static boolean bodyStructureValid(Body _body, List<ChannelData> _channelData){
-        return _body.getSections().size() == _channelData.size();    
+    public static boolean bodyStructureValid(Body _body, List<ChannelData> _channelData) {
+        return _body.getSections().size() == _channelData.size();
     }
 
-    public static int getChannelSectionCount(Body _body){
-        return _body.getSections().size();    
+    public static int getChannelSectionCount(Body _body) {
+        return _body.getSections().size();
     }
 
-    public static Section getChannelSection(Body _body, int _index){
+    public static Section getChannelSection(Body _body, int _index) {
         return (Section) _body.getSections().get(0)/*.getContent().get(_index)*/;
     }
 
-    public static int getInterpreterSectionCount(Body _body, int _channelIndex){
+    public static int getInterpreterSectionCount(Body _body, int _channelIndex) {
         return getChannelSection(_body, _channelIndex).getContent().size();
     }
 
-    public static Section getInterpreterSection(Body _body, int _channelIndex, int _interpreterIndex){
+    public static Section getInterpreterSection(Body _body, int _channelIndex, int _interpreterIndex) {
         return (Section) getChannelSection(_body, _channelIndex).getContent().get(_interpreterIndex);
     }
 
-    public static int getDateSectionCount(Body _body, int _channelIndex, int _interpreterIndex){
+    public static int getDateSectionCount(Body _body, int _channelIndex, int _interpreterIndex) {
         return getInterpreterSection(_body, _channelIndex, _interpreterIndex).getContent().size();
     }
 
-    public static Section getDateSection(Body _body, int _channelIndex, int _interpreterIndex, int _dateIndex){
+    public static Section getDateSection(Body _body, int _channelIndex, int _interpreterIndex, int _dateIndex) {
         return (Section) getInterpreterSection(_body, _channelIndex, _interpreterIndex).getContent().get(_dateIndex);
     }
 
-    public static int getItemSectionCount(Body _body, int _channelIndex, int _interpreterIndex, int _dateIndex){
+    public static int getItemSectionCount(Body _body, int _channelIndex, int _interpreterIndex, int _dateIndex) {
         return getDateSection(_body, _channelIndex, _interpreterIndex, _dateIndex).getContent().size();
     }
 

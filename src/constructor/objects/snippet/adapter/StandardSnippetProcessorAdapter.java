@@ -3,7 +3,6 @@ package constructor.objects.snippet.adapter;
 import constructor.dom.Constructor;
 import constructor.dom.ConstructorFactory;
 import constructor.dom.ObjectType;
-import static constructor.objects.snippet.adapter.StandardSnippetProcessorAdapterUtils.getPropertiesFileName;
 import constructor.objects.snippet.configuration.SnippetConfiguration;
 import constructor.objects.snippet.core.SnippetProcessorAdapter;
 import org.apache.commons.logging.Log;
@@ -16,6 +15,8 @@ import util.IOTools;
 import java.io.*;
 import java.util.Date;
 import java.util.Properties;
+
+import static constructor.objects.snippet.adapter.StandardSnippetProcessorAdapterUtils.getPropertiesFileName;
 
 /**
  * Стандартный адаптер обработчика сниппетов

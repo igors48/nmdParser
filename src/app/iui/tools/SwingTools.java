@@ -23,8 +23,7 @@ public final class SwingTools {
 
                 try {
                     SwingUtilities.invokeAndWait(_runnable);
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     _log.error(e);
                 }
             }

@@ -1,9 +1,9 @@
 package html;
 
-import downloader.Data;
-import downloader.Result;
-import downloader.data.EmptyData;
-import downloader.data.MemoryData;
+import http.Data;
+import http.Result;
+import http.data.EmptyData;
+import http.data.MemoryData;
 import util.Assert;
 
 /**

@@ -1,7 +1,0 @@
-<processor>
-
-	<set value="http://www.popmech.ru/print/" out="base"/>
-	
-	<concat first="base" second="input"/>
-	
-</processor>

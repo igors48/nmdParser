@@ -14,8 +14,8 @@ public class Fb2ResourceLink implements Stringable {
 
     private final String tag;
 
-    public Fb2ResourceLink(String _tag) {
-        Assert.isValidString(_tag);
+    public Fb2ResourceLink(final String _tag) {
+        Assert.isValidString(_tag, "Tag is not valid");
 
         this.tag = _tag;
     }

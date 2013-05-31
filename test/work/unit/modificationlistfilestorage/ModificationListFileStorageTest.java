@@ -6,11 +6,12 @@ import dated.item.modification.Modification;
 import dated.item.modification.stream.ModificationList;
 import junit.framework.TestCase;
 import work.testutil.CompTestsUtils;
-import static work.testutil.CompTestsUtils.cleanupDir;
-import static work.testutil.ModificationTestUtils.assertModificationEquals;
 
 import java.io.IOException;
 import java.util.Date;
+
+import static work.testutil.CompTestsUtils.cleanupDir;
+import static work.testutil.ModificationTestUtils.assertModificationEquals;
 
 /**
  * @author Igor Usenko
@@ -25,6 +26,7 @@ public class ModificationListFileStorageTest extends TestCase {
     }
 
     // тест возврата пустого списка если ранее он не сохранялся
+
     public void testNonExistent() throws IOException, ModificationListStorage.ModificationListStorageException {
         cleanupDir(DIR);
 
@@ -38,6 +40,7 @@ public class ModificationListFileStorageTest extends TestCase {
     }
 
     // тест сохранения/восстановления
+
     public void testStoreLoad() throws IOException, ModificationListStorage.ModificationListStorageException {
         cleanupDir(DIR);
 
@@ -56,6 +59,7 @@ public class ModificationListFileStorageTest extends TestCase {
     }
 
     // тест на удаление
+
     public void testRemove() throws IOException, ModificationListStorage.ModificationListStorageException {
         cleanupDir(DIR);
 
@@ -70,7 +74,7 @@ public class ModificationListFileStorageTest extends TestCase {
 
         assertTrue(result != null);
         assertEquals(0, result.size());
-        
+
         cleanupDir(DIR);
     }
 

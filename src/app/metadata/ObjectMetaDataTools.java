@@ -6,7 +6,12 @@ import constructor.dom.ObjectType;
 import constructor.dom.UsedObject;
 import util.Assert;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import static util.CollectionUtils.*;
 
 /**
  * Утилиты для работы с метаданными
@@ -38,7 +43,7 @@ public final class ObjectMetaDataTools {
 
         Entity result = null;
 
-        List<ObjectMetaData> objects = new ArrayList<ObjectMetaData>();
+        List<ObjectMetaData> objects = newArrayList();
 
         ObjectMetaData output = findMetaData(_outputId, ObjectType.OUTPUT, _metaDatas);
 
@@ -120,7 +125,7 @@ public final class ObjectMetaDataTools {
     }
 
     private static List<String> getSources(final List<ObjectMetaData> _metaDatas) {
-        Set<String> result = new HashSet<String>();
+        Set<String> result = newHashSet();
 
         for (ObjectMetaData current : _metaDatas) {
             result.add(current.getSourceFile());
@@ -130,7 +135,7 @@ public final class ObjectMetaDataTools {
     }
 
     private static Map<String, String> getPlaceHolders(final List<ObjectMetaData> _metaDatas) {
-        Map<String, String> result = new HashMap<String, String>();
+        Map<String, String> result = newHashMap();
 
         for (ObjectMetaData current : _metaDatas) {
             List<PlaceHolderInfo> placeHolders = current.getPlaceholders();
@@ -144,7 +149,7 @@ public final class ObjectMetaDataTools {
     }
 
     private static List<ObjectMetaData> getDepsMetaDatas(final ObjectMetaData _object, final List<ObjectMetaData> _metaDatas) {
-        List<ObjectMetaData> result = new ArrayList<ObjectMetaData>();
+        List<ObjectMetaData> result = newArrayList();
 
         for (UsedObject current : _object.getDependencies()) {
             ObjectMetaData metaData = findUsedObjectMetaData(current, _metaDatas);
@@ -165,7 +170,7 @@ public final class ObjectMetaDataTools {
         Assert.notNull(_type, "Object type is null");
         Assert.notNull(_dependencies, "Meta data list is null");
 
-        List<UsedObject> result = new ArrayList<UsedObject>();
+        List<UsedObject> result = newArrayList();
 
         for (UsedObject current : _dependencies) {
 
@@ -203,4 +208,5 @@ public final class ObjectMetaDataTools {
     private ObjectMetaDataTools() {
         // empty
     }
+
 }

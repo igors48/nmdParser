@@ -1,9 +1,9 @@
 package work.unit.constructor.source;
 
-import junit.framework.TestCase;
 import constructor.objects.strategies.store.StoreDaysStrategy;
-import timeservice.StillTimeService;
 import dated.item.modification.Modification;
+import junit.framework.TestCase;
+import timeservice.StillTimeService;
 
 /**
  * @author Igor Usenko
@@ -16,6 +16,7 @@ public class StoreDaysStrategyTest extends TestCase {
     }
 
     // проверка реакции на разные даты
+
     public void testAcceptance() {
         StillTimeService timeService01 = new StillTimeService();
 
@@ -38,6 +39,7 @@ public class StoreDaysStrategyTest extends TestCase {
     }
 
     // проверка реакции на будущее
+
     public void testFutureAcceptance() {
         StillTimeService timeService01 = new StillTimeService();
 

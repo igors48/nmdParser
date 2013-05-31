@@ -8,8 +8,9 @@ import util.Assert;
 import util.sequense.PatternListSequencer;
 import util.sequense.SequenceGenerationParams;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Конфигурация источника модификаций
@@ -38,7 +39,7 @@ public class SourceConfiguration implements Blank {
     private static final String AUTO_UPDATE_MODE_NAME = "auto";
 
     public SourceConfiguration() {
-        this.urlGenerationPatterns = new ArrayList<SequenceGenerationParams>();
+        this.urlGenerationPatterns = newArrayList();
         this.fetcherType = FetcherType.RSS;
 
         this.storeDays = "0";
@@ -185,7 +186,7 @@ public class SourceConfiguration implements Blank {
     }
 
     public List<UsedObject> getUsedObjects() {
-        List<UsedObject> result = new ArrayList<UsedObject>();
+        List<UsedObject> result = newArrayList();
 
         if (this.customAdapter != null) {
             result.add(new UsedObject(this.customAdapter.getId(), ObjectType.PROCESSOR));

@@ -1,8 +1,0 @@
-<processor>
-
-	<getGroup>
-		<pattern><![CDATA[<div id="bodyContent">(.+?)<div class="printfooter">]]></pattern>
-		<occurrence>0</occurrence>
-	</getGroup>
-	
-</processor>

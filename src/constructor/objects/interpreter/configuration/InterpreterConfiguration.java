@@ -6,8 +6,9 @@ import constructor.dom.UsedObject;
 import constructor.objects.processor.chain.adapter.StandardChainProcessorAdapter;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Конфигурация интерпретатора
@@ -33,7 +34,7 @@ public class InterpreterConfiguration implements Blank {
     }
 
     public List<UsedObject> getUsedObjects() {
-        List<UsedObject> result = new ArrayList<UsedObject>();
+        List<UsedObject> result = newArrayList();
 
         if (this.pages != null) {
             result.add(new UsedObject(this.pages.getId(), ObjectType.PROCESSOR));

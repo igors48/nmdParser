@@ -2,10 +2,11 @@ package converter.format.fb2;
 
 import util.Assert;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Различные утилиты работы с FB2
@@ -27,7 +28,7 @@ public final class Fb2Tools {
     private static final String UNSUPPORTED_ENTITY_SUBST = "[?]";
 
     static {
-        characterEntityReplacements = new HashMap<String, String>();
+        characterEntityReplacements = newHashMap();
 
         characterEntityReplacements.put("&amp;", "&amp;");
         characterEntityReplacements.put("&lt;", "&lt;");

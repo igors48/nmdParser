@@ -2,8 +2,9 @@ package constructor.objects.output.core.linker;
 
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -14,7 +15,7 @@ public class RootSection {
     private final List<LinkerSection> children;
 
     public RootSection() {
-        this.children = new ArrayList<LinkerSection>();
+        this.children = newArrayList();
     }
 
     public List<LinkerSection> getChildren() {

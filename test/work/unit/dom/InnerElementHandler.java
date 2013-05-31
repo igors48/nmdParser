@@ -1,9 +1,9 @@
 package work.unit.dom;
 
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import constructor.dom.ConstructorFactory;
 import constructor.dom.ElementHandler;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import util.Assert;
 
 /**

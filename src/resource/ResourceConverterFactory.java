@@ -10,15 +10,15 @@ public class ResourceConverterFactory implements ConverterFactory {
 
     private final String tempDirectory;
 
-    public ResourceConverterFactory(String _tempDirectory) {
-        Assert.isValidString(_tempDirectory);
+    public ResourceConverterFactory(final String _tempDirectory) {
+        Assert.isValidString(_tempDirectory, "Temp directory is not valid");
 
         this.tempDirectory = _tempDirectory;
     }
 
-    public Converter getConverter(ResourceType _from, ResourceType _to) {
-        Assert.notNull(_from);
-        Assert.notNull(_to);
+    public Converter getConverter(final ResourceType _from, final ResourceType _to) {
+        Assert.notNull(_from, "Origin type is null");
+        Assert.notNull(_to, "Destination type is null");
 
         Converter result = null;
 
@@ -28,4 +28,5 @@ public class ResourceConverterFactory implements ConverterFactory {
 
         return result;
     }
+
 }

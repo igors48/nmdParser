@@ -5,8 +5,9 @@ import flowtext.text.EmptyLine;
 import util.Assert;
 import util.TextTools;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -24,7 +25,7 @@ public class Section implements FlowTextObject {
         Assert.isValidString(_id, "Id is not valid");
 
         this.id = _id;
-        this.content = new ArrayList<FlowTextObject>();
+        this.content = newArrayList();
         this.title = null;
 
         this.mode = SectionMode.UNDEFINED;
@@ -121,6 +122,7 @@ public class Section implements FlowTextObject {
     }
 
     //todo некрасиво сделано. м.б. insertTo(Section _section) и нужно ли оно вообще
+
     public void copyFrom(final Section _section) throws SectionException {
         Assert.notNull(_section, "Section is null");
 

@@ -22,7 +22,7 @@ public class Simpler {
     }
 
     public SourceAdapter getSourceAdapter() {
-        ModificationFetcher fetcher = new RssFeedFetcher(this.adapter.getFeedUrl(), this.adapter.getTimeService(), this.adapter.getTryCount(), this.adapter.getTimeout(), this.adapter.getMinTimeout());
+        ModificationFetcher fetcher = new RssFeedFetcher(this.adapter.getFeedUrl(), this.adapter.getTimeService(), this.adapter.getBatchLoader());
 
         return new SimplerSourceAdapter(createId(this.adapter.getId(), ObjectType.SOURCE), fetcher, this.adapter.getStoreDays(), this.adapter.getTimeService(), this.adapter.getController(), this.adapter.getPropertiesCloud(), this.adapter.getModificationListStorage());
     }
@@ -32,9 +32,10 @@ public class Simpler {
         return new SimplerChannelAdapter(createId(this.adapter.getId(), ObjectType.CHANNEL),
                 createId(this.adapter.getId(), ObjectType.SOURCE),
                 this.adapter.getCriterions(),
+                this.adapter.isAutoContentFiltering(),
                 this.adapter.getCoverUrl(),
                 this.adapter.getChannelDataListStorage(),
-                this.adapter.getDownloader(),
+                this.adapter.getBatchLoader(),
                 this.adapter.getModificationListStorage(),
                 this.adapter.getForcedDays(),
                 this.adapter.getTimeService(),
@@ -56,7 +57,7 @@ public class Simpler {
                 this.adapter.isLinksAsFootnotes(),
                 this.adapter.removeExists(),
                 this.adapter.isResolveImageLinks(),
-                this.adapter.getDownloader(),
+                this.adapter.getBatchLoader(),
                 this.adapter.getConverterFactory(),
                 this.adapter.getResourceCache(),
                 this.adapter.getDummy(),

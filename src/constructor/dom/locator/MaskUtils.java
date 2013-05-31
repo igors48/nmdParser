@@ -2,8 +2,9 @@ package constructor.dom.locator;
 
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Утилиты для работы масок
@@ -38,7 +39,7 @@ public final class MaskUtils {
     public static List<String> parseAccepted(final List<String> _masks) {
         Assert.notNull(_masks, "Masks list is null");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         for (String current : _masks) {
 
@@ -53,7 +54,7 @@ public final class MaskUtils {
     public static List<String> parseExcepted(final List<String> _masks) {
         Assert.notNull(_masks, "Masks list is null");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         for (String current : _masks) {
 

@@ -1,8 +1,0 @@
-<processor>
-
-	<getGroup>
-		<pattern><![CDATA[(.+?)#]]></pattern> 
-		<occurrence>0</occurrence>
-	</getGroup>
-	
-</processor>

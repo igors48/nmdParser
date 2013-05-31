@@ -5,16 +5,21 @@ import constructor.objects.interpreter.core.data.InterpreterData;
 import constructor.objects.interpreter.core.data.InterpreterDataTools;
 import dated.DatedItem;
 import dated.DatedTools;
-import downloader.BatchLoader;
-import downloader.Data;
-import downloader.data.DataUtil;
 import html.HttpData;
+import http.BatchLoader;
+import http.Data;
+import http.data.DataUtil;
 import util.Assert;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import static util.CollectionUtils.newArrayList;
+import static util.CollectionUtils.newHashSet;
 
 /**
- * Утилитный класс для работы с данными канала
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 26.04.2009
@@ -24,19 +29,15 @@ public final class ChannelDataTools {
     public static final String DEFAULT_GENRE = "science";
     public static final String DEFAULT_LANG = "ru";
 
-    public static final List<String> DEFAULT_GENRES = new ArrayList<String>();
+    public static final List<String> DEFAULT_GENRES = newArrayList();
 
-    public static String loadImage(final String _url, final BatchLoader _loader, final long _pauseBetweenRequests) throws Data.DataException {
+    public static String loadImage(final String _url, final BatchLoader _loader) throws Data.DataException {
         Assert.isValidString(_url, "Url is not valid");
         Assert.notNull(_loader, "Loader is null");
-        Assert.greaterOrEqual(_pauseBetweenRequests, 0, "Pause between requests < 0");
 
-        List<String> urls = new ArrayList<String>();
-        urls.add(_url);
+        HttpData data = _loader.loadUrl(_url);
 
-        Map<String, HttpData> datas = _loader.loadUrls(urls, _pauseBetweenRequests);
-
-        return DataUtil.getDataImage(datas.get(_url).getData());
+        return DataUtil.getDataImage(data.getData());
     }
 
     public static DatedItem getLatestItem(final ChannelData _data) {
@@ -90,7 +91,7 @@ public final class ChannelDataTools {
     public static Set<Date> getDateSet(final ChannelDataList _data) {
         Assert.notNull(_data, "Channel data list is null.");
 
-        Set<Date> result = new HashSet<Date>();
+        Set<Date> result = newHashSet();
 
         if (!_data.isEmpty()) {
 
@@ -105,7 +106,7 @@ public final class ChannelDataTools {
     public static Set<Date> getDateSet(final ChannelData _data) {
         Assert.notNull(_data, "Channel data is null.");
 
-        Set<Date> result = new HashSet<Date>();
+        Set<Date> result = newHashSet();
 
         if (!_data.isEmpty()) {
 
@@ -120,7 +121,7 @@ public final class ChannelDataTools {
     public static List<DatedItem> getFlat(final ChannelDataList _data) {
         Assert.notNull(_data, "Channel data list is null.");
 
-        List<DatedItem> result = new ArrayList<DatedItem>();
+        List<DatedItem> result = newArrayList();
 
         if (!_data.isEmpty()) {
 
@@ -135,7 +136,7 @@ public final class ChannelDataTools {
     public static List<DatedItem> getFlat(final ChannelData _data) {
         Assert.notNull(_data, "Channel data is null.");
 
-        List<DatedItem> result = new ArrayList<DatedItem>();
+        List<DatedItem> result = newArrayList();
 
         if (!_data.isEmpty()) {
 
@@ -151,7 +152,7 @@ public final class ChannelDataTools {
         Assert.notNull(_data, "Channel data list is null.");
         Assert.notNull(_date, "Date is null");
 
-        List<DatedItem> result = new ArrayList<DatedItem>();
+        List<DatedItem> result = newArrayList();
 
         if (!_data.isEmpty()) {
 
@@ -167,7 +168,7 @@ public final class ChannelDataTools {
         Assert.notNull(_data, "Channel data list is null.");
         Assert.notNull(_date, "Date is null");
 
-        List<DatedItem> result = new ArrayList<DatedItem>();
+        List<DatedItem> result = newArrayList();
 
         if (!_data.isEmpty()) {
 

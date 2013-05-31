@@ -1,12 +1,13 @@
 package work.unit.propertiesresolver;
 
-import junit.framework.TestCase;
 import app.workingarea.settings.properties.PropertiesLoaderMock;
 import app.workingarea.settings.properties.PropertiesResolver;
+import junit.framework.TestCase;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * @author Igor Usenko
@@ -19,12 +20,13 @@ public class PropertiesResolverTest extends TestCase {
     }
 
     // проста€ проверка без наследовани€
+
     public void testSimpleWithoutExtends() throws PropertiesResolver.PropertyResolverException {
         Properties pack01 = new Properties();
         pack01.setProperty("first", "firstValue");
         pack01.setProperty("second", "secondValue");
 
-        Map<String, Properties> map = new HashMap<String, Properties>();
+        Map<String, Properties> map = newHashMap();
         map.put("pack01", pack01);
 
         PropertiesLoaderMock loader = new PropertiesLoaderMock(map);
@@ -38,6 +40,7 @@ public class PropertiesResolverTest extends TestCase {
     }
 
     // проверка c наследованием
+
     public void testWithExtends() throws PropertiesResolver.PropertyResolverException {
         Properties zpack01 = new Properties();
         zpack01.setProperty("first", "firstValue");
@@ -48,7 +51,7 @@ public class PropertiesResolverTest extends TestCase {
         pack02.setProperty("third", "thirdValue");
         pack02.setProperty("fourth", "fourthValue");
 
-        Map<String, Properties> map = new HashMap<String, Properties>();
+        Map<String, Properties> map = newHashMap();
         map.put("pack02", pack02);
         map.put("zpack01", zpack01);
 
@@ -66,6 +69,7 @@ public class PropertiesResolverTest extends TestCase {
     }
 
     // проверка c наследованием от двух
+
     public void testWithExtendsOfTwo() throws PropertiesResolver.PropertyResolverException {
         Properties pack01 = new Properties();
         pack01.setProperty("first", "firstValue");
@@ -80,7 +84,7 @@ public class PropertiesResolverTest extends TestCase {
         pack03.setProperty("extends", "pack02");
         pack03.setProperty("fifth", "fifthValue");
 
-        Map<String, Properties> map = new HashMap<String, Properties>();
+        Map<String, Properties> map = newHashMap();
         map.put("pack01", pack01);
         map.put("pack02", pack02);
         map.put("pack03", pack03);
@@ -99,12 +103,13 @@ public class PropertiesResolverTest extends TestCase {
     }
 
     // проверка реакции на отсутствие пропертей
+
     public void testNotExists() {
         Properties pack01 = new Properties();
         pack01.setProperty("first", "firstValue");
         pack01.setProperty("second", "secondValue");
 
-        Map<String, Properties> map = new HashMap<String, Properties>();
+        Map<String, Properties> map = newHashMap();
         map.put("pack01", pack01);
 
         PropertiesLoaderMock loader = new PropertiesLoaderMock(map);
@@ -119,6 +124,7 @@ public class PropertiesResolverTest extends TestCase {
     }
 
     // проверка реакции на отсутствие предка
+
     public void testParentNotExists() throws PropertiesResolver.PropertyResolverException {
         Properties pack01 = new Properties();
         pack01.setProperty("first", "firstValue");
@@ -129,7 +135,7 @@ public class PropertiesResolverTest extends TestCase {
         pack02.setProperty("third", "thirdValue");
         pack02.setProperty("fourth", "fourthValue");
 
-        Map<String, Properties> map = new HashMap<String, Properties>();
+        Map<String, Properties> map = newHashMap();
         map.put("pack01", pack01);
         map.put("pack02", pack02);
 
@@ -145,6 +151,7 @@ public class PropertiesResolverTest extends TestCase {
     }
 
     // тест на ошибку 03 окт 2009 (v1.1.83) с нарушением пор€дка наследовани€ default <- another
+
     public void testRealIncorrectInheritanceOrder() throws PropertiesResolver.PropertyResolverException {
         Properties defaults = new Properties();
         defaults.setProperty("api.temp.directory", "E:/temp/_cache_nmd_/");
@@ -153,8 +160,8 @@ public class PropertiesResolverTest extends TestCase {
         Properties another = new Properties();
         another.setProperty("extends", "defaults");
         another.setProperty("api.temp.directory", "E:/temp/_cache_nmd_2/");
-        
-        Map<String, Properties> map = new HashMap<String, Properties>();
+
+        Map<String, Properties> map = newHashMap();
         map.put("defaults", defaults);
         map.put("another", another);
 

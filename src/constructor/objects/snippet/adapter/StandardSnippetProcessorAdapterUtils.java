@@ -13,7 +13,7 @@ import java.io.File;
  */
 public final class StandardSnippetProcessorAdapterUtils {
 
-    private static String EXTENSION = ".timestamp";
+    private static final String EXTENSION = ".timestamp";
     private static final String DOT = ".";
 
     public static String getPropertiesFileName(final String _name) {

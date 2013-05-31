@@ -1,9 +1,9 @@
 package work.unit.htmlconverter.simple;
 
-import junit.framework.TestCase;
-import html.Converter;
-import flowtext.Section;
 import flowtext.FlowTextType;
+import flowtext.Section;
+import html.Converter;
+import junit.framework.TestCase;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import static work.testutil.HtmlConverterTestUtils.*;
  *         Date: 25.01.2009
  */
 public class HtmlConverterComplexManyParagraphFormattingTest extends TestCase {
-    
+
     private static final String TEST_PATTERN_01 = "<blockquote>цитата:<br><b>EvgenyS</b>:</blockquote>Неправда";
 
     /**

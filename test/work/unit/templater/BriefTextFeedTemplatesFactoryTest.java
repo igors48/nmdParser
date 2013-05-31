@@ -1,7 +1,7 @@
 package work.unit.templater;
 
-import junit.framework.TestCase;
 import app.templater.*;
+import junit.framework.TestCase;
 
 import java.util.List;
 
@@ -16,7 +16,8 @@ public class BriefTextFeedTemplatesFactoryTest extends TestCase {
     }
 
     // первоначальный тест
-    public void testSmoke(){
+
+    public void testSmoke() {
         TemplateContentFactory contentFactory = new TemplateContentFactory();
         BriefTextFeedTemplatesFactory templatesFactory = new BriefTextFeedTemplatesFactory(contentFactory);
         TemplateParameters parameters = new TemplateParameters(TemplateType.BRIEF_RSS_TEMPLATE, "name", "url", "workspace");

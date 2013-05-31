@@ -6,11 +6,12 @@ import constructor.dom.ObjectType;
 import constructor.dom.UsedObject;
 import constructor.objects.storage.local.configuration.LocalStorageConfiguration;
 import junit.framework.TestCase;
-import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
+import static work.testutil.ConstructorTestUtils.createConstructorFactory;
 
 /**
  * @author Igor Usenko
@@ -25,8 +26,9 @@ public class LocalStorageConfigurationTest extends TestCase {
     }
 
     // первоначальный тест с дефолтным временем хранения
+
     public void testSmoke() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("storage", "<storage><root>E:/root/</root></storage>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -39,10 +41,11 @@ public class LocalStorageConfigurationTest extends TestCase {
         assertEquals("E:/root/", configuration.getRoot());
         assertEquals(0, configuration.getAge());
     }
-    
+
     // тест с указанным временем хранения
+
     public void testAgeSet() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("storage", "<storage days=\"3\"><root>E:/root/</root></storage>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);
@@ -57,8 +60,9 @@ public class LocalStorageConfigurationTest extends TestCase {
     }
 
     // тест зависимостей
+
     public void testDependencies() throws Constructor.ConstructorException {
-        Map<String, String> streams = new HashMap<String, String>();
+        Map<String, String> streams = newHashMap();
         streams.put("storage", "<storage days=\"3\"><root>E:/root/</root></storage>");
 
         ConstructorFactory constructorFactory = createConstructorFactory(streams);

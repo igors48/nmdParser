@@ -13,9 +13,9 @@ public class Resource implements FlowTextObject {
     private final String address;
     private final String base;
 
-    public Resource(String _base, String _address) {
-        Assert.isValidString(_base);
-        Assert.isValidString(_address);
+    public Resource(final String _base, final String _address) {
+        Assert.isValidString(_base, "Base is not valid");
+        Assert.isValidString(_address, "Address is not valid");
 
         this.address = _address;
         this.base = _base;

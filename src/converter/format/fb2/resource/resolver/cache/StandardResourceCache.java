@@ -1,6 +1,6 @@
 package converter.format.fb2.resource.resolver.cache;
 
-import downloader.Data;
+import http.Data;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import timeservice.TimeService;
@@ -8,8 +8,10 @@ import util.Assert;
 
 import java.util.*;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
- * Кэш ресурсов
+ * пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 03.11.2009
@@ -56,11 +58,11 @@ public class StandardResourceCache implements ResourceCache {
     }
 
     /**
-     * Помещает данные в кэш. Если такие там уже есть - заменяет.
-     * Контроллирует размер кэша и удаляет старые элементы если ситуация того требует.
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ. пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
      *
-     * @param _url  адрес
-     * @param _data данные
+     * @param _url  пїЅпїЅпїЅпїЅпїЅ
+     * @param _data пїЅпїЅпїЅпїЅпїЅпїЅ
      */
     public void put(final String _url, final Data _data) {
         Assert.isValidString(_url, "URL is not valid");
@@ -94,10 +96,10 @@ public class StandardResourceCache implements ResourceCache {
     }
 
     /**
-     * Возвращает данные из кэша. Если они просроченные - удаляет
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
      *
-     * @param _url адрес
-     * @return данные или null если нужных данных в кэше нет или они просроченные
+     * @param _url пїЅпїЅпїЅпїЅпїЅ
+     * @return пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ null пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
      */
     public Data get(final String _url) {
         Assert.isValidString(_url, "URL is not valid");
@@ -265,7 +267,7 @@ public class StandardResourceCache implements ResourceCache {
     }
 
     private List<StoredItem> getStoredItems() throws StorageAdapter.StorageAdapterException {
-        List<StoredItem> result = new ArrayList<StoredItem>();
+        List<StoredItem> result = newArrayList();
 
         result.addAll(this.adapter.getMap().values());
 

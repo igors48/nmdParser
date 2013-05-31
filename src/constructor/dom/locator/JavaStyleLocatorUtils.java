@@ -11,8 +11,9 @@ import util.PathTools;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Утилиты для JavaStyleLocator
@@ -34,7 +35,7 @@ public final class JavaStyleLocatorUtils {
         Assert.notNull(_names, "Names list is null;");
         Assert.notNull(_mask, "Mask is null;");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
         for (String current : _names) {
 

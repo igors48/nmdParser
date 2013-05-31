@@ -38,11 +38,6 @@ public class MainTasksModelHandler {
                 result = new SelectWorkspaceModel(_controller.getString(UPDATE_TASK_NAME), _controller.getString(SELECT_FEEDERS_TASK_NAME), _controller.getApi().getWorkspacesNames());
             }
 
-            if (_model.getMainTask() == MainTasksModel.MainTask.AUTO_UPDATE_FEEDERS) {
-                _controller.setMode(FlowController.Mode.AUTO_UPDATE_FEEDERS);
-                result = new AutoUpdateTasksModel();
-            }
-
             if (_model.getMainTask() == MainTasksModel.MainTask.MANAGE_FEEDERS) {
                 _controller.setMode(FlowController.Mode.MANAGE_FEEDERS);
                 result = new SelectWorkspaceModel(_controller.getString(MANAGE_TASK_NAME), _controller.getString(SELECT_FEEDER_ACTION_TASK_NAME), _controller.getApi().getWorkspacesNames());

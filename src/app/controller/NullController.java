@@ -33,4 +33,5 @@ public class NullController implements Controller {
     public boolean isCancelled() {
         return false;
     }
+
 }

@@ -23,6 +23,6 @@ public class TimeoutToolsTest extends TestCase {
         assertEquals(70, TimeoutTools.getTimeout(10, 100, 6, 9));
         assertEquals(80, TimeoutTools.getTimeout(10, 100, 7, 9));
         assertEquals(90, TimeoutTools.getTimeout(10, 100, 8, 9));
-        assertEquals(100, TimeoutTools.getTimeout(10, 100, 9, 9));    
+        assertEquals(100, TimeoutTools.getTimeout(10, 100, 9, 9));
     }
 }

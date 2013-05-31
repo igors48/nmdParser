@@ -1,3 +1,0 @@
-<output channel="inopressa.channel" branch="news">
-	<many-to-one name="inopressa"/>
-</output>

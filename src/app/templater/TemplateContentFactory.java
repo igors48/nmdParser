@@ -2,10 +2,11 @@ package app.templater;
 
 import util.Assert;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static util.CollectionUtils.newArrayList;
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Фабрика содержимого шаблонов объектов верхнего уровня
@@ -26,7 +27,8 @@ public class TemplateContentFactory {
     private static List<String> sourceTemplate;
 
     static {
-        sourceTemplate = new ArrayList<String>();
+        sourceTemplate = newArrayList();
+
         sourceTemplate.add("<source>");
         sourceTemplate.add(INDENT + "<store days=\"7\"/>");
         sourceTemplate.add(INDENT + "<rss>" + RSS_URL_HOLDER + "</rss>");
@@ -36,21 +38,23 @@ public class TemplateContentFactory {
     private static List<String> channelBriefTemplate;
 
     static {
-        channelBriefTemplate = new ArrayList<String>();
+        channelBriefTemplate = newArrayList();
+
         channelBriefTemplate.add("<channel source=\"" + NAME_HOLDER + ".source\"/>");
     }
 
     private static List<String> channelFullTemplate;
 
     static {
-        channelFullTemplate = new ArrayList<String>();
+        channelFullTemplate = newArrayList();
+
         channelFullTemplate.add("<channel source=\"" + NAME_HOLDER + ".source\" interpreter=\"" + NAME_HOLDER + ".interpreter\"/>");
     }
 
     private static List<String> interpreterTemplate;
 
     static {
-        interpreterTemplate = new ArrayList<String>();
+        interpreterTemplate = newArrayList();
         interpreterTemplate.add("<interpreter>");
         interpreterTemplate.add(INDENT + "<fragment content=\"" + NAME_HOLDER + ".content\"/>");
         interpreterTemplate.add("</interpreter>");
@@ -59,7 +63,8 @@ public class TemplateContentFactory {
     private static List<String> processorTemplate;
 
     static {
-        processorTemplate = new ArrayList<String>();
+        processorTemplate = newArrayList();
+
         processorTemplate.add("<processor>");
         processorTemplate.add(INDENT + "<getGroup>");
         processorTemplate.add(INDENT + INDENT + "<pattern><![CDATA[<body(.+?)</body>]]></pattern> ");
@@ -76,7 +81,8 @@ public class TemplateContentFactory {
     private static List<String> outputTemplate;
 
     static {
-        outputTemplate = new ArrayList<String>();
+        outputTemplate = newArrayList();
+
         outputTemplate.add("<output channel=\"" + NAME_HOLDER + ".channel\" branch=\"" + NAME_HOLDER + "\">");
         outputTemplate.add(INDENT + "<many-to-one name=\"" + NAME_HOLDER + "\"/>");
         outputTemplate.add("</output>");
@@ -85,7 +91,8 @@ public class TemplateContentFactory {
     private static Map<TemplateContentType, List<String>> templatesMap;
 
     static {
-        templatesMap = new HashMap<TemplateContentType, List<String>>();
+        templatesMap = newHashMap();
+
         templatesMap.put(TemplateContentType.SOURCE, sourceTemplate);
         templatesMap.put(TemplateContentType.BRIEF_CHANNEL, channelBriefTemplate);
         templatesMap.put(TemplateContentType.FULL_CHANNEL, channelFullTemplate);
@@ -105,4 +112,5 @@ public class TemplateContentFactory {
 
         return templatesMap.get(_type);
     }
+
 }

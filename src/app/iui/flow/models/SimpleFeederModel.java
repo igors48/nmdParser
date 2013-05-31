@@ -11,8 +11,9 @@ import util.Assert;
  */
 public class SimpleFeederModel extends Model {
 
+    private final boolean blank;
+
     private SimplerConfiguration configuration;
-    private boolean blank;
 
     public SimpleFeederModel(final SimplerConfiguration _configuration, final boolean _blank) {
         super(ModelType.SIMPLE_FEEDER);
@@ -26,7 +27,7 @@ public class SimpleFeederModel extends Model {
         return this.configuration;
     }
 
-    public void setConfiguration(final SimplerConfiguration _configuration) {
+    public final void setConfiguration(final SimplerConfiguration _configuration) {
         Assert.notNull(_configuration, "Configuration is null");
         this.configuration = _configuration;
     }

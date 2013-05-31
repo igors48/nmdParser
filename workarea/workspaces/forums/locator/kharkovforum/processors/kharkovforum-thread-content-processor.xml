@@ -1,6 +1,0 @@
-<processor>
-	<extractTag>
-		<pattern><![CDATA[<div id="post_message]]></pattern> 
-		<occurrence>0</occurrence>
-	</extractTag>
-</processor>

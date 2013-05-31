@@ -1,10 +1,10 @@
 package work.unit.ftf;
 
-import junit.framework.TestCase;
+import flowtext.FlowTextType;
 import flowtext.Paragraph;
 import flowtext.Section;
 import flowtext.Title;
-import flowtext.FlowTextType;
+import junit.framework.TestCase;
 
 /**
  * @author Igor Usenko
@@ -42,7 +42,7 @@ public class SectionTest extends TestCase {
         Title title = new Title();
         title.insertParagraph(titleParagraph);
         title.insertEmptyLine();
-        
+
         Section section = new Section("ID48");
         section.insertEmptyLine();
         section.insertTitle(title);
@@ -140,9 +140,9 @@ public class SectionTest extends TestCase {
 
         int emptyCount = 0;
 
-        for (int index = 0; index < section.getContent().size(); ++index){
+        for (int index = 0; index < section.getContent().size(); ++index) {
 
-            if(section.getContent().get(index).getType() == FlowTextType.EMPTY_LINE){
+            if (section.getContent().get(index).getType() == FlowTextType.EMPTY_LINE) {
                 ++emptyCount;
             }
         }

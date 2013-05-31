@@ -1,5 +1,0 @@
-<source>
-	<store days="3"/>
-	<rss><![CDATA[http://forum.ixbt.com/misc.cgi?id=rss&forum=82]]></rss>
-	<processor id="ixbtforum.processors.ixbt-thread-source-processor"/> 
-</source>

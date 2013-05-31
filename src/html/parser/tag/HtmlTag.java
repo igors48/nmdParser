@@ -3,8 +3,9 @@ package html.parser.tag;
 import util.Assert;
 import util.html.HtmlTagTools;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Парсер HTML тега. На входе код - на выходе имя тега и список аттрибутов
@@ -22,7 +23,7 @@ public class HtmlTag {
         Assert.isValidString(_data);
         Assert.notNull(_tags);
 
-        this.attributes = new HashMap<String, String>();
+        this.attributes = newHashMap();
 
         decode(_data, _tags);
     }

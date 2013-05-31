@@ -2,8 +2,9 @@ package flowtext;
 
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * FlowList of sections
@@ -16,7 +17,7 @@ public class Body {
     private final List<Section> sections;
 
     public Body() {
-        this.sections = new ArrayList<Section>();
+        this.sections = newArrayList();
     }
 
     public void insertSection(final Section _section) {

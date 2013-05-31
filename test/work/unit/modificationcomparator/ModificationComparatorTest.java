@@ -1,8 +1,8 @@
 package work.unit.modificationcomparator;
 
-import junit.framework.TestCase;
 import dated.item.modification.Modification;
 import dated.item.modification.ModificationComparator;
+import junit.framework.TestCase;
 import timeservice.StillTimeService;
 
 /**
@@ -16,7 +16,8 @@ public class ModificationComparatorTest extends TestCase {
     }
 
     // первый меньше по дате
-    public void testFirstLesserByDate(){
+
+    public void testFirstLesserByDate() {
         StillTimeService timeService = new StillTimeService();
         Modification modification01 = new Modification(timeService.getCurrentDate(), "url01");
         timeService.changeSecond(1);
@@ -28,7 +29,8 @@ public class ModificationComparatorTest extends TestCase {
     }
 
     // первый больше по дате
-    public void testFirstGreaterByDate(){
+
+    public void testFirstGreaterByDate() {
         StillTimeService timeService = new StillTimeService();
         Modification modification01 = new Modification(timeService.getCurrentDate(), "url01");
         timeService.changeSecond(-1);
@@ -40,7 +42,8 @@ public class ModificationComparatorTest extends TestCase {
     }
 
     // оба по дате равны, но первый больше по урлу
-    public void testDateEqualsFirstGreaterByUrl(){
+
+    public void testDateEqualsFirstGreaterByUrl() {
         StillTimeService timeService = new StillTimeService();
         Modification modification01 = new Modification(timeService.getCurrentDate(), "url01");
         Modification modification02 = new Modification(timeService.getCurrentDate(), "url00");
@@ -49,9 +52,10 @@ public class ModificationComparatorTest extends TestCase {
 
         assertEquals(1, comparator.compare(modification01, modification02));
     }
-    
+
     // оба по дате равны, но первый меньше по урлу
-    public void testDateEqualsFirstLesserByUrl(){
+
+    public void testDateEqualsFirstLesserByUrl() {
         StillTimeService timeService = new StillTimeService();
         Modification modification01 = new Modification(timeService.getCurrentDate(), "url00");
         Modification modification02 = new Modification(timeService.getCurrentDate(), "url01");
@@ -60,9 +64,10 @@ public class ModificationComparatorTest extends TestCase {
 
         assertEquals(-1, comparator.compare(modification01, modification02));
     }
-    
+
     // оба абсолютно равны
-    public void testEquals(){
+
+    public void testEquals() {
         StillTimeService timeService = new StillTimeService();
         Modification modification01 = new Modification(timeService.getCurrentDate(), "url00");
         Modification modification02 = new Modification(timeService.getCurrentDate(), "url00");

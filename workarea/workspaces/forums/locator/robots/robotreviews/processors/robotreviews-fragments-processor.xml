@@ -1,5 +1,0 @@
-<processor>
-	<xPath>
-		<expression>//body[@class='section-viewtopic ltr']/div[@id='wrap']/div[@class='border-left']/div[@class='border-right']/div[@class='border-top']/div[@class='border-top-left']/div[@class='border-top-right']/div[@class='inside']/div[@id='page-body']/div/div[@class='inner']</expression> 
-	</xPath>
-</processor>

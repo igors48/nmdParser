@@ -1,15 +1,15 @@
 package work.testutil;
 
+import dated.item.atdc.HtmlContent;
 import flowtext.*;
-
-import java.util.List;
-import java.util.ArrayList;
-
 import html.Converter;
 import html.parser.SimpleHtmlConverter;
 import html.parser.SimpleHtmlConverterContext;
 import util.Assert;
-import dated.item.atdc.HtmlContent;
+
+import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 
 /**
@@ -19,9 +19,9 @@ import dated.item.atdc.HtmlContent;
 public final class HtmlConverterTestUtils {
 
     private static final String FAKE_URL = "www.fake.com";
-    
+
     public static List<FlowTextType> getTypesSnapshot(Paragraph _paragraph) {
-        List<FlowTextType> result = new ArrayList<FlowTextType>();
+        List<FlowTextType> result = newArrayList();
 
         for (FlowTextObject object : _paragraph.getContent()) {
             result.add(object.getType());
@@ -32,7 +32,7 @@ public final class HtmlConverterTestUtils {
 
     public static List<Section> getResult(String _content) throws Converter.ConverterException {
         Assert.isValidString(_content);
-        
+
         HtmlContent content = createContent(_content);
         Converter converter = new SimpleHtmlConverter(new SimpleHtmlConverterContext(false));
 
@@ -51,19 +51,19 @@ public final class HtmlConverterTestUtils {
         return _sections.get(0).getContent().get(_index);
     }
 
-    public static HtmlContent createContent(String _data){
+    public static HtmlContent createContent(String _data) {
         Assert.isValidString(_data);
-        
+
         return new HtmlContent(FAKE_URL, _data, FAKE_URL);
     }
 
-    public static FlowTextObject getObject(List<Section> _sections, int _paraIndex, int _objIndex){
+    public static FlowTextObject getObject(List<Section> _sections, int _paraIndex, int _objIndex) {
         Assert.notNull(_sections);
-        
+
         return getParagraph(_sections, _paraIndex).getContent().get(_objIndex);
     }
 
-    public static FlowTextObjectText getTextObject(List<Section> _sections, int _paraIndex, int _objIndex){
+    public static FlowTextObjectText getTextObject(List<Section> _sections, int _paraIndex, int _objIndex) {
         Assert.notNull(_sections);
 
         return (FlowTextObjectText) getObject(_sections, _paraIndex, _objIndex);

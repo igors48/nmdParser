@@ -6,10 +6,6 @@ import app.iui.StringResource;
 import app.iui.entity.Entity;
 import app.iui.flow.handlers.*;
 import app.iui.flow.models.*;
-import app.iui.schedule.Item;
-import app.iui.schedule.Period;
-import app.iui.schedule.Schedule;
-import app.iui.schedule.ScheduleAdapter;
 import app.iui.tools.SwingTools;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,10 +13,11 @@ import util.Assert;
 import util.UpdateContextTools;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -323,39 +320,6 @@ public class FlowController {
         }
     }
 
-    public Model handle(final AutoUpdateTasksModel _model) {
-        Assert.notNull(_model, "Model is null");
-
-        try {
-            return putToHistory(new AutoUpdateTasksModelHandler().handle(_model, this));
-        } catch (ModelHandlerException e) {
-            this.log.error(e);
-            return new ErrorModel(SwingTools.createErrorText(e), e, ModelType.CHOOSE_MAIN_TASK);
-        }
-    }
-
-    public Model handle(final AutoUpdateFeedersModel _model) {
-        Assert.notNull(_model, "Model is null");
-
-        try {
-            return putToHistory(new AutoUpdateFeedersModelHandler().handle(_model, this));
-        } catch (ModelHandlerException e) {
-            this.log.error(e);
-            return new ErrorModel(SwingTools.createErrorText(e), e, ModelType.CHOOSE_MAIN_TASK);
-        }
-    }
-
-    public ScheduleAdapter getScheduleAdapter() {
-        final Item first = new Item("myFeeds", "bash", Period.ALWAYS);
-        final Item second = new Item("myBlogs", "gastelllo", Period.ALWAYS);
-
-        final List<Item> items = new ArrayList<Item>();
-        items.add(first);
-        items.add(second);
-
-        return new Schedule(items);
-    }
-
     public String getString(final String _key) {
         Assert.isValidString(_key, "Key is not valid");
 
@@ -454,7 +418,7 @@ public class FlowController {
     }
 
     public List<Entity> filterSimpleFeeders() {
-        List<Entity> result = new ArrayList<Entity>();
+        List<Entity> result = newArrayList();
 
         for (Entity candidate : this.feeders) {
 

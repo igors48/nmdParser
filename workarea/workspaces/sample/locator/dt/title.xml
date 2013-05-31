@@ -1,7 +1,0 @@
-<processor>
-	
-	<xPath>
-		<expression>/body/div[@id='out']/div[@class='print-page']/div[@class='wrart']/div[@class='wrart-2']/div[@class='inner']/div[@class='single-post']/div[@class='meta-single-post']/h1</expression>
-	</xPath>
-	
-</processor>

@@ -8,8 +8,9 @@ import org.apache.commons.logging.LogFactory;
 import util.Assert;
 import util.PathTools;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -41,7 +42,7 @@ public class DocumentBuilder {
 
         this.storedFootNote = "";
 
-        this.lists = new ArrayList<FlowList>();
+        this.lists = newArrayList();
 
         this.log = LogFactory.getLog(getClass());
     }
@@ -134,10 +135,10 @@ public class DocumentBuilder {
     public void insertResourceLink(final String _address) {
         Assert.isValidString(_address);
 
-        // если сохраненный линк(при наличии) является ссылкой на графику
-        // считаем, что эта ссылка "тамбнейл" -> "оригинал" и ничего не делаем
-        // если сохраненный линк(при наличии) не является ссылкой на графику
-        // считаем, что эта ссылка "просто картинка" и добавляем ее в документ
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ(пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" -> "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ(пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ) пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (!PathTools.imageLink(this.storedFootNote) || !this.resolveImageLinks) {
             changeCurrentParagraphSilent();
             this.currentParagraph.insertResource(this.baseUrl, _address);
@@ -229,6 +230,15 @@ public class DocumentBuilder {
                 this.currentParagraph.insertEmphasisText(_data);
                 break;
             }
+            case STRIKETHROUGH:
+                this.currentParagraph.insertStrikethroughText(_data);
+                break;
+            case SUBSCRIPT:
+                this.currentParagraph.insertSubscriptText(_data);
+                break;
+            case SUPERSCRIPT:
+                this.currentParagraph.insertSuperscriptText(_data);
+                break;
         }
     }
 

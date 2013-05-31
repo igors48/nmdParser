@@ -1,8 +1,8 @@
 package app.cli.blitz;
 
 import app.cli.blitz.request.BlitzRequest;
+import app.cli.blitz.request.CriterionType;
 import app.cli.blitz.request.RequestSourceType;
-import app.controller.NullController;
 import app.iui.flow.custom.SingleProcessInfo;
 import app.workingarea.ServiceManager;
 import constructor.objects.AdapterException;
@@ -12,22 +12,23 @@ import constructor.objects.channel.core.ChannelAnalyser;
 import constructor.objects.channel.core.analyser.StandardAnalyser;
 import constructor.objects.channel.core.stream.ChannelDataList;
 import constructor.objects.interpreter.adapter.SimpleInterpreterAdapter;
+import constructor.objects.interpreter.configuration.FragmentAnalyserConfiguration;
 import constructor.objects.interpreter.core.InterpreterAdapter;
 import constructor.objects.interpreter.core.InterpreterEx;
-import constructor.objects.interpreter.core.standard.SimpleInterpreterEx;
-import constructor.objects.interpreter.core.standard.StandardInterpreterEx;
+import constructor.objects.interpreter.core.standard.SimpleInterpreter;
+import constructor.objects.interpreter.core.standard.StandardInterpreter;
 import dated.item.modification.Modification;
 import dated.item.modification.stream.ModificationList;
-import downloader.BatchLoader;
-import downloader.batchloader.StandardBatchLoader;
+import http.BatchLoader;
 import timeservice.TimeService;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
- * Адаптер блиц-канала обработки модификаций
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 29.10.2009
@@ -36,7 +37,6 @@ public class BlitzChannelAdapter implements ChannelAdapter {
 
     private final BlitzRequest request;
     private final ModificationList modificationList;
-    private final BatchLoader batchLoader;
     private final ServiceManager serviceManager;
     private final int precachedItemsCount;
 
@@ -57,8 +57,6 @@ public class BlitzChannelAdapter implements ChannelAdapter {
 
         Assert.greater(_precachedItemsCount, 0, "Precached items count < 1");
         this.precachedItemsCount = _precachedItemsCount;
-
-        this.batchLoader = new StandardBatchLoader(this.serviceManager.getDownloader(), new NullController());
 
         this.result = new ChannelDataList();
     }
@@ -89,18 +87,18 @@ public class BlitzChannelAdapter implements ChannelAdapter {
     }
 
     public BatchLoader getPageLoader() throws AdapterException {
-        return this.batchLoader;
+        return this.serviceManager.getBatchLoader();
     }
 
     public List<InterpreterEx> getInterpreters(final Modification _modification) throws AdapterException {
         Assert.notNull(_modification, "Modification is null");
 
-        List<InterpreterEx> result = new ArrayList<InterpreterEx>();
+        List<InterpreterEx> result = newArrayList();
 
         if (isSimpleHandling()) {
-            result.add(new SimpleInterpreterEx(new SimpleInterpreterAdapter(_modification)));
+            result.add(new SimpleInterpreter(new SimpleInterpreterAdapter(_modification)));
         } else {
-            result.add(new StandardInterpreterEx(createInterpreterAdapter(_modification)));
+            result.add(new StandardInterpreter(createInterpreterAdapter(_modification)));
         }
 
         return result;
@@ -140,7 +138,10 @@ public class BlitzChannelAdapter implements ChannelAdapter {
     }
 
     public boolean isSimpleHandling() {
-        return (this.request.getSourceType() == RequestSourceType.RSS  || this.request.getSourceType() == RequestSourceType.MODIFICATIONS) && this.request.expressionNotSet();
+        boolean rssOrModificationsWithoutCriterionExpression = (this.request.getSourceType() == RequestSourceType.RSS || this.request.getSourceType() == RequestSourceType.MODIFICATIONS) && this.request.expressionRemainsDefault();
+        boolean filterModeNotUsed = this.request.getCriterionType() != CriterionType.FILTER;
+
+        return filterModeNotUsed && rssOrModificationsWithoutCriterionExpression;
     }
 
     public boolean isCancelled() {
@@ -172,7 +173,18 @@ public class BlitzChannelAdapter implements ChannelAdapter {
     }
 
     private InterpreterAdapter createInterpreterAdapter(final Modification _modification) {
-        return new BlitzInterpreterAdapter(_modification, ChannelAdapterTools.createFragmentAnalyserConfiguration(this.request.getCriterionType(), this.request.getCriterionExpression(), BLITZ_CHAIN_PROCESSOR_ADAPTER_ID, this.serviceManager.getDebugConsole()), this.batchLoader, getPrecachedItemsCount(), getPauseBetweenRequests());
+        FragmentAnalyserConfiguration fragmentAnalyserConfiguration = this.request.getCriterionType() == CriterionType.FILTER ?
+                ChannelAdapterTools.createContentFilterConfiguration(BLITZ_CHAIN_PROCESSOR_ADAPTER_ID, this.serviceManager.getDebugConsole()) :
+                ChannelAdapterTools.createFragmentAnalyserConfiguration(this.request.getCriterionType(),
+                        this.request.getCriterionExpression(),
+                        BLITZ_CHAIN_PROCESSOR_ADAPTER_ID,
+                        this.serviceManager.getDebugConsole());
+
+        return new BlitzInterpreterAdapter(_modification,
+                fragmentAnalyserConfiguration,
+                this.serviceManager.getBatchLoader(),
+                getPrecachedItemsCount(),
+                getPauseBetweenRequests());
     }
 
 }

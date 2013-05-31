@@ -1,7 +1,7 @@
 package work.unit.constructor.processor.occurrence;
 
-import junit.framework.TestCase;
 import constructor.objects.processor.OccurrenceSet;
+import junit.framework.TestCase;
 
 /**
  * @author Igor Usenko
@@ -14,27 +14,30 @@ public class OccurrenceSetTest extends TestCase {
     }
 
     // первоначальный тест
-    public void testSmoke(){
+
+    public void testSmoke() {
         OccurrenceSet occurrenceSet = new OccurrenceSet();
 
         assertTrue(occurrenceSet.acceptable(0));
     }
 
     // тест на неприемлемость ненулевого при пустом множестве
-    public void testNonZeroSetEmpty(){
+
+    public void testNonZeroSetEmpty() {
         OccurrenceSet occurrenceSet = new OccurrenceSet();
 
         assertFalse(occurrenceSet.acceptable(48));
     }
-    
+
     // тест списка
-    public void testList(){
+
+    public void testList() {
         OccurrenceSet occurrenceSet = new OccurrenceSet();
         occurrenceSet.add(0);
         occurrenceSet.add(24);
         occurrenceSet.add(56);
         occurrenceSet.add(24);
-        
+
         assertTrue(occurrenceSet.acceptable(0));
         assertTrue(occurrenceSet.acceptable(24));
         assertTrue(occurrenceSet.acceptable(56));
@@ -42,7 +45,8 @@ public class OccurrenceSetTest extends TestCase {
     }
 
     // тест на то, что -1 перекрывает все ранее и позднее введенные значения
-    public void testAllAcceptable(){
+
+    public void testAllAcceptable() {
         OccurrenceSet occurrenceSet = new OccurrenceSet();
         occurrenceSet.add(0);
         occurrenceSet.add(24);

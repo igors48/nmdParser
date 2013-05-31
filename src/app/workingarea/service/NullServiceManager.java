@@ -9,17 +9,14 @@ import constructor.objects.storage.Storage;
 import converter.format.fb2.resource.resolver.cache.ResourceCache;
 import debug.DebugConsole;
 import debug.console.NullDebugConsole;
-import downloader.Downloader;
+import http.BatchLoader;
 import resource.ConverterFactory;
 import timeservice.TimeService;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import greader.GoogleReaderAdapter;
-
 /**
- * Пустой сервис менеджер
+ * пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 05.08.2009
@@ -37,7 +34,7 @@ public final class NullServiceManager implements ServiceManager {
         return null;
     }
 
-    public Downloader getDownloader() throws ServiceManagerException {
+    public BatchLoader getBatchLoader() {
         return null;
     }
 
@@ -47,10 +44,6 @@ public final class NullServiceManager implements ServiceManager {
 
     public DebugConsole getDebugConsole() {
         return new NullDebugConsole();
-    }
-
-    public Map<String, String> getExternalContext() {
-        return new HashMap<String, String>();
     }
 
     public ResourceCache getResourceCache() {
@@ -66,20 +59,19 @@ public final class NullServiceManager implements ServiceManager {
     }
 
     public void activateReflectionMode() {
+        // empty
     }
 
     public void deactivateReflectionMode() {
+        // empty
     }
 
     public Preprocessor getPreprocessor() {
         return new NullPreprocessor();
     }
 
-    public GoogleReaderAdapter getGoogleReaderAdapter() {
-        return null;
-    }
-
     public void cleanup() {
+        // empty
     }
 
 }

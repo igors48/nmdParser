@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="cp1251"?>
-	<!-- iRiver Story-->
-
-<output channel="ebook.forum.iriver.channel" branch="ebook.forum.iriver">
-	<one-to-one/>
-</output>

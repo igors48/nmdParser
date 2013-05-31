@@ -3,8 +3,13 @@ package constructor.objects.dateparser.core;
 import util.Assert;
 
 import java.text.DateFormatSymbols;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Map;
 import java.util.regex.Pattern;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Различные утилиты для парсера даты
@@ -66,7 +71,7 @@ public class DateParserTools {
     }
 
     public static Map<Pattern, ParsingStrategy> createParsers() {
-        Map<Pattern, ParsingStrategy> result = new HashMap<Pattern, ParsingStrategy>();
+        Map<Pattern, ParsingStrategy> result = newHashMap();
 
         result.put(Pattern.compile(".*?less.*?than.*?a.*?minute.*?ago.*?", Pattern.CASE_INSENSITIVE), new LessThanMinuteStrategy());
         result.put(Pattern.compile(".*?minutes.*?ago.*?", Pattern.CASE_INSENSITIVE), new MinutesAgoStrategy());

@@ -4,8 +4,9 @@ import constructor.objects.output.configuration.DocumentItemsSortMode;
 import util.Assert;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -23,7 +24,7 @@ public final class SimplerConfigurationTools {
     public static List<String> render(final SimplerConfiguration _configuration) {
         Assert.notNull(_configuration, "Configuration is null");
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
 
 
         String first = MessageFormat.format(FIRST_LINE_TEMPLATE,
@@ -36,12 +37,11 @@ public final class SimplerConfigurationTools {
 
         result.add(first);
 
-        /*
-        for (String criterion : _configuration.getCriterions()) {
-            result.add(renderCriterion(criterion));    
+        result.add(renderCriterions(_configuration.getCriterions()));
+
+        if (_configuration.isAutoContentFiltering()) {
+            result.add("<content-filter/>");
         }
-        */
-        result.add(renderCriterion(_configuration.getCriterions()));
 
         result.add(LAST_LINE_TEMPLATE);
 
@@ -58,7 +58,7 @@ public final class SimplerConfigurationTools {
         return result;
     }
 
-    private static String renderCriterion(final String _criterion) {
+    private static String renderCriterions(final String _criterion) {
         return MessageFormat.format(CRITERION_TEMPLATE, _criterion);
     }
 

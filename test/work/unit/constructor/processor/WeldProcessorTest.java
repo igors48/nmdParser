@@ -1,13 +1,13 @@
 package work.unit.constructor.processor;
 
-import junit.framework.TestCase;
+import constructor.objects.ConfigurationException;
+import constructor.objects.processor.VariableProcessor;
 import constructor.objects.processor.weld.WeldProcessor;
 import constructor.objects.processor.weld.adapter.WeldProcessorAdapter;
-import constructor.objects.processor.VariableProcessor;
-import constructor.objects.ConfigurationException;
-import variables.Variables;
-import debug.snapshot.ProcessorSnapshot;
 import debug.snapshot.NameValuePair;
+import debug.snapshot.ProcessorSnapshot;
+import junit.framework.TestCase;
+import variables.Variables;
 
 import java.util.List;
 
@@ -22,6 +22,7 @@ public class WeldProcessorTest extends TestCase {
     }
 
     // первоначальный тест
+
     public void testSmoke() throws VariableProcessor.VariableProcessorException {
         WeldProcessor processor = new WeldProcessor("", "", "");
 
@@ -34,8 +35,9 @@ public class WeldProcessorTest extends TestCase {
 
         assertEquals("abc", variables.get(Variables.DEFAULT_OUTPUT_VARIABLE_NAME));
     }
-    
+
     // тест с отсутствующими элементами
+
     public void testWithEmpties() throws VariableProcessor.VariableProcessorException {
         WeldProcessor processor = new WeldProcessor("", "", "");
 
@@ -49,8 +51,9 @@ public class WeldProcessorTest extends TestCase {
 
         assertEquals("bc", variables.get(Variables.DEFAULT_OUTPUT_VARIABLE_NAME));
     }
-    
+
     // тест с разделителем
+
     public void testWithDivider() throws VariableProcessor.VariableProcessorException {
         WeldProcessor processor = new WeldProcessor("", "divider", "");
 
@@ -67,11 +70,12 @@ public class WeldProcessorTest extends TestCase {
     }
 
     // тест - создание процессора с дефолтными параметрами
+
     public void testCreateFromDefaults() throws ConfigurationException, VariableProcessor.VariableProcessorException {
         WeldProcessor processor = (WeldProcessor) new WeldProcessorAdapter().getProcessor();
 
         Variables variables = new Variables();
-        
+
         variables.put(Variables.DEFAULT_INPUT_VARIABLE_NAME, 0, "a");
         variables.put(Variables.DEFAULT_INPUT_VARIABLE_NAME, 1, "b");
         variables.put(Variables.DEFAULT_INPUT_VARIABLE_NAME, 2, "c");
@@ -80,9 +84,10 @@ public class WeldProcessorTest extends TestCase {
 
         assertEquals("abc", variables.get(Variables.DEFAULT_OUTPUT_VARIABLE_NAME));
     }
-    
+
     // тест снапшота
-    public void testSnapshot(){
+
+    public void testSnapshot() {
         WeldProcessor processor = new WeldProcessor("test", "divider", "content2");
 
         ProcessorSnapshot snapshot = (ProcessorSnapshot) processor.getSnapshot();

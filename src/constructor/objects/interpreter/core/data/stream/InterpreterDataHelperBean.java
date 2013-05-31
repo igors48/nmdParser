@@ -5,8 +5,9 @@ import constructor.objects.interpreter.core.data.InterpreterData;
 import dated.DatedItem;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Вспомогательный класс для сериализации/десериализации InterpreterData
@@ -21,7 +22,7 @@ public class InterpreterDataHelperBean implements StreamHelperBean {
 
     public InterpreterDataHelperBean() {
         this.id = "";
-        this.list = new ArrayList<DatedItem>();
+        this.list = newArrayList();
     }
 
     public String getId() {
@@ -33,7 +34,7 @@ public class InterpreterDataHelperBean implements StreamHelperBean {
     }
 
     public List<StreamHelperBean> getList() {
-        List<StreamHelperBean> result = new ArrayList<StreamHelperBean>();
+        List<StreamHelperBean> result = newArrayList();
 
         for (DatedItem item : this.list) {
             StreamHelperBean bean = item.getHelperBean();
@@ -73,7 +74,7 @@ public class InterpreterDataHelperBean implements StreamHelperBean {
     }
 
     private List<DatedItem> copyList(List<DatedItem> _list) {
-        List<DatedItem> result = new ArrayList<DatedItem>();
+        List<DatedItem> result = newArrayList();
 
         for (DatedItem item : _list) {
             StreamHelperBean helper = item.getHelperBean();

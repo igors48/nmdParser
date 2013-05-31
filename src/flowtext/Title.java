@@ -3,8 +3,9 @@ package flowtext;
 import flowtext.text.EmptyLine;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -15,7 +16,7 @@ public class Title implements FlowTextObject {
     private final List<FlowTextObject> content;
 
     public Title() {
-        this.content = new ArrayList<FlowTextObject>();
+        this.content = newArrayList();
     }
 
     public FlowTextType getType() {

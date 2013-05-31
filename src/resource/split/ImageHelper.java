@@ -2,13 +2,14 @@ package resource.split;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import static resource.split.ImageHelperTools.*;
 import util.Assert;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static resource.split.ImageHelperTools.*;
+import static util.CollectionUtils.newArrayList;
 
 /**
  * @author Igor Usenko
@@ -87,7 +88,7 @@ public final class ImageHelper {
 
         log.debug(MessageFormat.format("Split source [ {0}, {1} ] to [ {2} ] horizontal and [ {3} ] vertical parts", _context.getSrcWidth(), _context.getSrcHeight(), horSplitCount, verSplitCount));
 
-        List<SplitItem> items = new ArrayList<SplitItem>();
+        List<SplitItem> items = newArrayList();
 
         for (int verSplit = 0; verSplit < verSplitCount; ++verSplit) {
 

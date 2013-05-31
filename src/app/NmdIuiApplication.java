@@ -113,13 +113,10 @@ public class NmdIuiApplication implements MainFrame.Listener, ExitSignalListener
     }
 
     public void onFailureExit(final Throwable _cause) {
-        //this.log.
 
         if (this.mainFrame != null) {
             this.mainFrame.showUnexpectedError(_cause);
         }
-
-        //cleanup();
     }
 
     private void setLookAndFeel() {
@@ -137,6 +134,7 @@ public class NmdIuiApplication implements MainFrame.Listener, ExitSignalListener
         } catch (Throwable e) {
             log.error("Error setting Nimbus LaF. Default will be used");
         }
+
     }
 
     private void loadDefaults() {
@@ -148,7 +146,7 @@ public class NmdIuiApplication implements MainFrame.Listener, ExitSignalListener
     }
 
     private void createSettingsManager() {
-        this.settingsManager = new FileSettingsManager(this.defaults.getSettingsDirectory(), this.defaults.getDefaultStorageRoot(), this.defaults.getDefaultStoragePeriod(), this.defaults.getGoogleReaderDirectory());
+        this.settingsManager = new FileSettingsManager(this.defaults.getSettingsDirectory(), this.defaults.getDefaultStorageRoot(), this.defaults.getDefaultStoragePeriod());
     }
 
     private void createApi() {

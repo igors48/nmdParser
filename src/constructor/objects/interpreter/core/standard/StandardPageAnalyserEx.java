@@ -11,8 +11,9 @@ import org.apache.commons.logging.LogFactory;
 import util.Assert;
 import variables.Variables;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Стандартный анализатор страницы. Разбивает ее на фрагменты.
@@ -36,7 +37,7 @@ public class StandardPageAnalyserEx implements PageAnalyser {
     public List<Fragment> getFragments(final Page _page) {
         Assert.notNull(_page, "Page is null.");
 
-        List<Fragment> result = new ArrayList<Fragment>();
+        List<Fragment> result = newArrayList();
 
         try {
             Variables variables = new Variables();

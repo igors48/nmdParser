@@ -38,17 +38,17 @@
 
     </appender>
 
-    <logger name="httpclient.wire.header">
+    <logger name="org.apache.http.wire">
         <level value="OFF"/>
         <!--<level value="TRACE"/>-->
     </logger>
 
-    <logger name="httpclient.wire.content">
+    <logger name="org.apache.http.client.wire.content">
         <level value="OFF"/>
         <!--<level value="TRACE"/>-->
     </logger>
 
-    <logger name="org.apache.commons.httpclient">
+    <logger name="org.apache.http">
         <level value="OFF"/>
         <!--<level value="TRACE"/>-->
     </logger>

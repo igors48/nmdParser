@@ -17,8 +17,8 @@ public class FormatStack {
         this.stack = new Stack<TextFormat>();
     }
 
-    public void push(TextFormat _format) {
-        Assert.notNull(_format);
+    public void push(final TextFormat _format) {
+        Assert.notNull(_format, "Format is null");
 
         this.stack.push(_format);
     }

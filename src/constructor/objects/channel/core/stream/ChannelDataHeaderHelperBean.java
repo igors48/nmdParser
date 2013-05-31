@@ -4,8 +4,9 @@ import constructor.objects.StreamHelperBean;
 import constructor.objects.channel.core.ChannelDataHeader;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static util.CollectionUtils.newArrayList;
 
 /**
  * Вспомогаетльный класс для сериализации/десериализации ChannelDataHeader
@@ -26,7 +27,7 @@ public class ChannelDataHeaderHelperBean implements StreamHelperBean {
     private String lang;
 
     public ChannelDataHeaderHelperBean() {
-        this.genres = new ArrayList<String>();
+        this.genres = newArrayList();
     }
 
     public String getFirstName() {
@@ -75,7 +76,7 @@ public class ChannelDataHeaderHelperBean implements StreamHelperBean {
     }
 
     public List<String> getGenres() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = newArrayList();
         result.addAll(this.genres);
 
         return result;
@@ -84,7 +85,7 @@ public class ChannelDataHeaderHelperBean implements StreamHelperBean {
     public void setGenres(final List<String> _genres) {
         Assert.notNull(_genres);
 
-        this.genres = new ArrayList<String>();
+        this.genres = newArrayList();
         this.genres.addAll(_genres);
     }
 

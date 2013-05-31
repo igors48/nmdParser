@@ -1,10 +1,10 @@
 package converter.format.fb2.resource.resolver.cache;
 
-import downloader.Data;
+import http.Data;
 import util.Assert;
 
 /**
- * Заглушка кэша ресурсов
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 08.11.2009

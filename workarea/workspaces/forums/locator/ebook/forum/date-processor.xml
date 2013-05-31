@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="cp1251"?>
-
-<processor>
-	<getGroup>
-		<pattern><![CDATA[<span class="postdetails">\w+:\s+\w+\s+(.+?)<span class="gen">]]></pattern> 
-		<occurrence>0</occurrence>
-	</getGroup>
-</processor>

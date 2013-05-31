@@ -1,10 +1,10 @@
 package work.unit.templater;
 
-import junit.framework.TestCase;
 import app.templater.FeedTemplatesFactory;
+import app.templater.Template;
 import app.templater.TemplateParameters;
 import app.templater.TemplateType;
-import app.templater.Template;
+import junit.framework.TestCase;
 
 import java.util.List;
 
@@ -19,7 +19,8 @@ public class FeedTemplatesFactoryTest extends TestCase {
     }
 
     // тест генерации комплекта шаблонов для полного фида
-    public void testFullTemplates(){
+
+    public void testFullTemplates() {
         FeedTemplatesFactory factory = new FeedTemplatesFactory();
         TemplateParameters parameters = new TemplateParameters(TemplateType.FULL_RSS_TEMPLATE, "name", "url", "workspace");
         List<Template> result = factory.createTemplates(parameters);
@@ -28,7 +29,8 @@ public class FeedTemplatesFactoryTest extends TestCase {
     }
 
     // тест генерации комплекта шаблонов для краткого фида
-    public void testBriefTemplates(){
+
+    public void testBriefTemplates() {
         FeedTemplatesFactory factory = new FeedTemplatesFactory();
         TemplateParameters parameters = new TemplateParameters(TemplateType.BRIEF_RSS_TEMPLATE, "name", "url", "workspace");
         List<Template> result = factory.createTemplates(parameters);

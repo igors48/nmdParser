@@ -32,7 +32,7 @@ public class UpdateContextModel extends Model {
         return this.context;
     }
 
-    public void setContext(final Map<String, String> _context) {
+    public final void setContext(final Map<String, String> _context) {
         Assert.notNull(_context, "Context is null");
 
         this.context = _context;

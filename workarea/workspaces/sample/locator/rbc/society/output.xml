@@ -1,3 +1,0 @@
-<output channel="rbc.society.channel" branch="rbc">
-    <many-to-one name="society"/>
-</output>

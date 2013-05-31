@@ -7,6 +7,7 @@ package app.iui.flow;
 public class ModelHandlerException extends Exception {
 
     public ModelHandlerException() {
+        super();
     }
 
     public ModelHandlerException(final String _s) {

@@ -14,7 +14,8 @@ public class ChangeLogTest extends TestCase {
     }
 
     // первоначальный тест
-    public void testSmoke(){
+
+    public void testSmoke() {
         ChangeLog changeLog = new ChangeLog();
 
         changeLog.add("name", 5);
@@ -24,7 +25,8 @@ public class ChangeLogTest extends TestCase {
     }
 
     // тест на немодифицированную
-    public void testNotModified(){
+
+    public void testNotModified() {
         ChangeLog changeLog = new ChangeLog();
 
         changeLog.add("name", 5);
@@ -34,7 +36,8 @@ public class ChangeLogTest extends TestCase {
     }
 
     // тест на отсутствие дублей
-    public void testNoDuplicates(){
+
+    public void testNoDuplicates() {
         ChangeLog changeLog = new ChangeLog();
 
         changeLog.add("name", 5);
@@ -48,7 +51,8 @@ public class ChangeLogTest extends TestCase {
     }
 
     // тест очистки
-    public void testReset(){
+
+    public void testReset() {
         ChangeLog changeLog = new ChangeLog();
 
         changeLog.add("name", 5);

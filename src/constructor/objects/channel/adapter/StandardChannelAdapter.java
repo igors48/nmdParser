@@ -14,21 +14,22 @@ import constructor.objects.channel.core.analyser.StandardAnalyser;
 import constructor.objects.interpreter.adapter.StandardInterpreterAdapter;
 import constructor.objects.interpreter.configuration.InterpreterConfiguration;
 import constructor.objects.interpreter.core.InterpreterEx;
-import constructor.objects.interpreter.core.standard.SimpleInterpreterEx;
-import constructor.objects.interpreter.core.standard.StandardInterpreterEx;
+import constructor.objects.interpreter.core.standard.SimpleInterpreter;
+import constructor.objects.interpreter.core.standard.StandardInterpreter;
 import constructor.objects.processor.chain.ChainProcessor;
 import constructor.objects.processor.chain.ChainProcessorAdapter;
 import constructor.objects.source.core.ModificationListStorage;
 import dated.item.modification.Modification;
-import downloader.Downloader;
+import http.BatchLoader;
 import timeservice.TimeService;
 import util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import static util.CollectionUtils.newArrayList;
+
 /**
- * Стандартный адаптер канала
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author Igor Usenko
  *         Date: 08.04.2009
@@ -36,17 +37,13 @@ import java.util.List;
 public class StandardChannelAdapter extends AbstractChannelAdapter {
 
     private final ChannelConfiguration configuration;
-    private final Downloader downloader;
     private final ConstructorFactory factory;
 
-    public StandardChannelAdapter(final ChannelDataListStorage _channelDataListStorage, final ChannelConfiguration _configuration, final Downloader _downloader, final ModificationListStorage _modificationListStorage, final ConstructorFactory _factory, final int _forcedDays, final TimeService _timeService, final Controller _controller, final int _precachedItemsCount) {
-        super(_channelDataListStorage, _downloader, _modificationListStorage, _forcedDays, _timeService, _controller, _precachedItemsCount, 0);
+    public StandardChannelAdapter(final ChannelDataListStorage _channelDataListStorage, final ChannelConfiguration _configuration, final BatchLoader _batchLoader, final ModificationListStorage _modificationListStorage, final ConstructorFactory _factory, final int _forcedDays, final TimeService _timeService, final Controller _controller, final int _precachedItemsCount) {
+        super(_channelDataListStorage, _batchLoader, _modificationListStorage, _forcedDays, _timeService, _controller, _precachedItemsCount, 0);
 
         Assert.notNull(_configuration, "Channel configuration is null.");
         this.configuration = _configuration;
-
-        Assert.notNull(_downloader, "Downloader is null.");
-        this.downloader = _downloader;
 
         Assert.notNull(_factory, "Factory is null.");
         this.factory = _factory;
@@ -85,22 +82,22 @@ public class StandardChannelAdapter extends AbstractChannelAdapter {
         Assert.notNull(_modification, "Modification is null.");
 
         try {
-            List<InterpreterEx> result = new ArrayList<InterpreterEx>();
+            List<InterpreterEx> result = newArrayList();
 
             if (isSimpleHandling()) {
                 InterpreterConfiguration configuration = new InterpreterConfiguration();
                 configuration.setId("simple");
 
-                StandardInterpreterAdapter adapter = new StandardInterpreterAdapter(configuration, _modification, this.downloader, this.configuration.getLastItemCount(), getRefTimeService(_modification), getPrecachedItemsCount(), getPauseBetweenRequests());
+                StandardInterpreterAdapter adapter = new StandardInterpreterAdapter(configuration, _modification, this.batchLoader, this.configuration.getLastItemCount(), getRefTimeService(_modification), getPrecachedItemsCount(), getPauseBetweenRequests());
 
-                result.add(new SimpleInterpreterEx(adapter));
+                result.add(new SimpleInterpreter(adapter));
             } else {
                 Constructor constructor = this.factory.getConstructor();
 
                 InterpreterConfiguration configuration = (InterpreterConfiguration) constructor.create(this.configuration.getInterpreterId(), ObjectType.INTERPRETER);
-                StandardInterpreterAdapter adapter = new StandardInterpreterAdapter(configuration, _modification, this.downloader, this.configuration.getLastItemCount(), getRefTimeService(_modification), getPrecachedItemsCount(), getPauseBetweenRequests());
+                StandardInterpreterAdapter adapter = new StandardInterpreterAdapter(configuration, _modification, this.batchLoader, this.configuration.getLastItemCount(), getRefTimeService(_modification), getPrecachedItemsCount(), getPauseBetweenRequests());
 
-                result.add(new StandardInterpreterEx(adapter));
+                result.add(new StandardInterpreter(adapter));
             }
 
             return result;

@@ -1,3 +1,0 @@
-<output channel="popmech.channel" branch="science">
-    <many-to-one name="popmech"/>
-</output>

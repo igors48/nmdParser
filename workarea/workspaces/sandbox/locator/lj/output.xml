@@ -1,3 +1,0 @@
-<output channel="lj.channel" branch="livejournal" >
-    <many-to-one name="${name}-lj"/>
-</output>

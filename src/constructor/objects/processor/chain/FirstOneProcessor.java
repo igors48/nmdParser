@@ -12,8 +12,8 @@ import variables.Variables;
 import variables.VariablesTools;
 
 /**
- * Выполняет вложенные операторы до тех пор, пока они не завершатся, либо до первого вложенного оператора,
- * изменившего значение выходной переменной.
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ,
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
  *
  * @author Igor Usenko
  *         Date: 26.06.2010
@@ -62,4 +62,9 @@ public class FirstOneProcessor extends AbstractVariableProcessor {
     public Snapshot getSnapshot() {
         return new TopLevelObjectSnapshot(this.adapter.getId());
     }
+
+    public FirstOneProcessorAdapter getAdapter() {
+        return adapter;
+    }
+
 }

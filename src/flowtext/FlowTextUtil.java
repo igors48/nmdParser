@@ -15,6 +15,9 @@ public final class FlowTextUtil {
         return (_object.getType() == FlowTextType.CODE_TEXT ||
                 _object.getType() == FlowTextType.EMPHASIS_TEXT ||
                 _object.getType() == FlowTextType.SIMPLE_TEXT ||
+                _object.getType() == FlowTextType.STRIKETHROUGH_TEXT ||
+                _object.getType() == FlowTextType.SUBSCRIPT_TEXT ||
+                _object.getType() == FlowTextType.SUPERSCRIPT_TEXT ||
                 _object.getType() == FlowTextType.STRONG_TEXT);
     }
 

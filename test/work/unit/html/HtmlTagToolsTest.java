@@ -16,7 +16,8 @@ public class HtmlTagToolsTest extends TestCase {
     }
 
     // первоначальный тест
-    public void testSmoke(){
+
+    public void testSmoke() {
         String data = "img alt='&#171;Шерлок Холмс&#187; Гая Ричи &#8212; Холмс' title='&#171;Шерлок Холмс&#187; Гая Ричи &#8212; Холмс' vspace=10 hspace=10 border=1 width=147 height=225 src=http://static.oper.ru/data/gallery/m1048753469.jpg";
 
         Map<String, String> result = HtmlTagTools.parseAttributes(data);
@@ -31,8 +32,8 @@ public class HtmlTagToolsTest extends TestCase {
         assertEquals("225", result.get("height"));
         assertEquals("http://static.oper.ru/data/gallery/m1048753469.jpg", result.get("src"));
     }
-    
-    public void testSample01(){
+
+    public void testSample01() {
         String data = "img src=\"topic-229134_files/p_tofaq-on.gif\"id=\"img25\"    class =  \"preload\" alt=\"\"";
 
         Map<String, String> result = HtmlTagTools.parseAttributes(data);
@@ -44,7 +45,7 @@ public class HtmlTagToolsTest extends TestCase {
         assertEquals("", result.get("alt"));
     }
 
-    public void testSample02(){
+    public void testSample02() {
         String data = "img src='http://feeds2.feedburner.com/~ff/oper_ru?i=E9bnId1p4Fs:WGBR6ZI5kRY:D7DqB2pKExk' border=''";
 
         Map<String, String> result = HtmlTagTools.parseAttributes(data);

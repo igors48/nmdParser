@@ -1,3 +1,0 @@
-<simpler feedUrl="http://feeds.feedburner.com/ct_news/" coverUrl="http://www.computerra.ru/new/logo2.gif" storeDays="7" outName="computerra" branch="tech" fromNewToOld="yes">
-	<xPath>//table[@class='_reachbanner_']</xPath>
-</simpler>

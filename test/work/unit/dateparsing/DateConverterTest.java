@@ -1,13 +1,12 @@
 package work.unit.dateparsing;
 
-import junit.framework.TestCase;
-import timeservice.TimeService;
-import timeservice.StillTimeService;
-
-import java.util.Date;
-
 import constructor.objects.dateparser.core.DateParser;
 import constructor.objects.dateparser.core.DateParserTools;
+import junit.framework.TestCase;
+import timeservice.StillTimeService;
+import timeservice.TimeService;
+
+import java.util.Date;
 
 /**
  * @author Igor Usenko

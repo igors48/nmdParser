@@ -3,8 +3,9 @@ package constructor.objects.dateparser.element;
 import constructor.dom.ElementHandler;
 import constructor.dom.loader.MappedElementHandler;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static util.CollectionUtils.newHashMap;
 
 /**
  * Обработчик элемента dateParser в XML файле
@@ -24,7 +25,7 @@ public class DateParserElementHandler extends MappedElementHandler {
     public DateParserElementHandler() {
         super();
 
-        Map<String, ElementHandler> handlers = new HashMap<String, ElementHandler>();
+        Map<String, ElementHandler> handlers = newHashMap();
 
         handlers.put(SECONDS_FROM_EPOCH_KEY, new SecondsFromEpochElementHandler());
         handlers.put(LESS_THAN_MINUTE_KEY, new LessThanMinuteElementHandler());
