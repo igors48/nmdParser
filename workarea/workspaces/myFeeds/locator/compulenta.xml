@@ -1,0 +1,4 @@
+<simpler feedUrl="http://feeds.feedburner.com/cl_news/" coverUrl="" storeDays="140" branch="" outName="compulenta"
+         fromNewToOld="yes">
+    <xPath>//div[@class='article-text']</xPath>
+</simpler>
