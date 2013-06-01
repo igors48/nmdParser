@@ -1,0 +1,4 @@
+<simpler feedUrl="http://www.artlebedev.ru/kovodstvo/business-lynch/business-lynch.rdf" coverUrl="" storeDays="7"
+         branch="" outName="lynch" fromNewToOld="no">
+    <xPath>//div[@class="portfolio_position"]/..|//div[@id="Lynch"]</xPath>
+</simpler>
