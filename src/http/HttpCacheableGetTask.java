@@ -37,7 +37,10 @@ public class HttpCacheableGetTask extends AbstractHttpRequestTask {
 
         if (fromCache == null) {
             execute();
-            this.cache.put(urlWithRequest, getResponseUrl(), this.request.getResult().getData());
+
+            if (this.request.getResult().getResult() == Result.OK) {
+                this.cache.put(urlWithRequest, getResponseUrl(), this.request.getResult().getData());
+            }
         } else {
             this.log.debug(String.format("Data for [ %s ] taken from cache", urlWithRequest));
 
