@@ -30,6 +30,7 @@ import java.util.regex.Pattern;
 public class CustomRedirectStrategy implements RedirectStrategy {
 
     private static final Pattern META_PATTERN = Pattern.compile("<meta.*http-equiv=\"refresh\".*url=(.*)\"");
+    public static final String LOCATION_PARSED = "location.parsed";
 
     private final Log log = LogFactory.getLog(getClass());
 
@@ -55,6 +56,15 @@ public class CustomRedirectStrategy implements RedirectStrategy {
                         || method.equalsIgnoreCase(HttpHead.METHOD_NAME);
             case HttpStatus.SC_SEE_OTHER:
                 return true;
+            case HttpStatus.SC_OK:
+                String location = getLocationFromResponseBody(response);
+                final boolean isRedirected = !location.isEmpty();
+
+                if (isRedirected) {
+                    context.setAttribute(LOCATION_PARSED, location);
+                }
+
+                return isRedirected;
             default:
                 return false;
         } //end of switch
@@ -68,7 +78,9 @@ public class CustomRedirectStrategy implements RedirectStrategy {
             throw new IllegalArgumentException("HTTP response may not be null");
         }
 
-        String location = getLocation(response);
+        String locationFromContext = (String) context.getAttribute(LOCATION_PARSED);
+
+        String location = locationFromContext == null ? getLocation(response) : locationFromContext;
 
         if (location.isEmpty()) {
             throw new ProtocolException(
