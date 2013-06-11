@@ -18,8 +18,10 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,8 +31,12 @@ import java.util.regex.Pattern;
  */
 public class CustomRedirectStrategy implements RedirectStrategy {
 
+    public static final String RESPONSE_BODY = "response.body";
+    public static final String RESPONSE_CHARSET = "response.charset";
+
     private static final Pattern META_PATTERN = Pattern.compile("<meta.*http-equiv=\"refresh\".*url=(.*)\"");
-    public static final String LOCATION_PARSED = "location.parsed";
+
+    private static final String LOCATION_PARSED = "location.parsed";
 
     private final Log log = LogFactory.getLog(getClass());
 
@@ -57,14 +63,25 @@ public class CustomRedirectStrategy implements RedirectStrategy {
             case HttpStatus.SC_SEE_OTHER:
                 return true;
             case HttpStatus.SC_OK:
-                String location = getLocationFromResponseBody(response);
-                final boolean isRedirected = !location.isEmpty();
+                try {
+                    byte[] responseBody = readResponseBody(response);
+                    String responseCharset = getResponseCharset(response);
 
-                if (isRedirected) {
-                    context.setAttribute(LOCATION_PARSED, location);
+                    context.setAttribute(RESPONSE_BODY, responseBody);
+                    context.setAttribute(RESPONSE_CHARSET, responseCharset);
+
+                    String location = getLocationFromResponseBody(new String(responseBody, responseCharset));
+
+                    final boolean isRedirected = !location.isEmpty();
+
+                    if (isRedirected) {
+                        context.setAttribute(LOCATION_PARSED, location);
+                    }
+
+                    return isRedirected;
+                } catch (UnsupportedEncodingException e) {
+                    throw new ProtocolException("Cant read response body", e);
                 }
-
-                return isRedirected;
             default:
                 return false;
         } //end of switch
@@ -155,22 +172,42 @@ public class CustomRedirectStrategy implements RedirectStrategy {
     }
 
     private String getLocation(HttpResponse response) throws ProtocolException {
-        Header locationHeader = response.getFirstHeader("location");
-
-        return locationHeader == null ? getLocationFromResponseBody(response) : locationHeader.getValue();
-    }
-
-    private String getLocationFromResponseBody(HttpResponse response) throws ProtocolException {
 
         try {
-            String content = EntityUtils.toString(response.getEntity());
+            Header locationHeader = response.getFirstHeader("location");
 
-            Matcher matcher = META_PATTERN.matcher(content);
+            if (locationHeader != null) {
+                return locationHeader.getValue();
+            }
 
-            return matcher.find() ? matcher.group(1) : "";
-        } catch (IOException e) {
-            throw new ProtocolException("Error reading response body", e);
+            byte[] responseBody = readResponseBody(response);
+            String responseCharset = getResponseCharset(response);
+
+            return getLocationFromResponseBody(new String(responseBody, responseCharset));
+        } catch (UnsupportedEncodingException e) {
+            throw new ProtocolException("Cant read response body", e);
         }
+    }
+
+    private String getResponseCharset(HttpResponse response) {
+        String responseCharset = EntityUtils.getContentCharSet(response.getEntity());
+
+        return responseCharset == null ? Charset.defaultCharset().name() : responseCharset;
+    }
+
+    private byte[] readResponseBody(HttpResponse response) throws ProtocolException {
+
+        try {
+            return EntityUtils.toByteArray(response.getEntity());
+        } catch (IOException e) {
+            throw new ProtocolException("Error reading response body");
+        }
+    }
+
+    private String getLocationFromResponseBody(String responseBody) throws ProtocolException {
+        Matcher matcher = META_PATTERN.matcher(responseBody);
+
+        return matcher.find() ? matcher.group(1) : "";
     }
 
     /**
