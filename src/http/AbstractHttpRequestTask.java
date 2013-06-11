@@ -5,6 +5,7 @@ import http.banned.BannedList;
 import http.data.MemoryData;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -147,20 +148,18 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
     }
 
     private void handleEntity(final HttpEntity _entity, final HttpResponse _response) throws IOException {
-
-        //final Header[] headers = _response.getHeaders(CONTENT_TYPE_HEADER_NAME);
-        //final String charset = HttpTools.getCharset(headers);
-
-        //final Data data = charset.isEmpty() ? new MemoryData(EntityUtils.toByteArray(_entity)) : new MemoryData(EntityUtils.toByteArray(_entity), charset);
-
         final byte[] responseBody = (byte[]) this.context.getAttribute(CustomRedirectStrategy.RESPONSE_BODY);
-        final String charset = (String) this.context.getAttribute(CustomRedirectStrategy.RESPONSE_CHARSET);
 
         final Data data;
 
         if (responseBody == null) {
+            final Header[] headers = _response.getHeaders(CONTENT_TYPE_HEADER_NAME);
+            final String charset = HttpTools.getCharset(headers);
+
             data = charset.isEmpty() ? new MemoryData(EntityUtils.toByteArray(_entity)) : new MemoryData(EntityUtils.toByteArray(_entity), charset);
         } else {
+            final String charset = (String) this.context.getAttribute(CustomRedirectStrategy.RESPONSE_CHARSET);
+
             data = charset.isEmpty() ? new MemoryData(responseBody) : new MemoryData(responseBody, charset);
         }
 
