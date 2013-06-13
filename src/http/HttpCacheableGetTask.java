@@ -37,7 +37,10 @@ public class HttpCacheableGetTask extends AbstractHttpRequestTask {
 
         if (fromCache == null) {
             execute();
-            this.cache.put(urlWithRequest, getResponseUrl(), this.request.getResult().getData());
+
+            if (canBeCached()) {
+                this.cache.put(urlWithRequest, getResponseUrl(), this.request.getResult().getData());
+            }
         } else {
             this.log.debug(String.format("Data for [ %s ] taken from cache", urlWithRequest));
 
@@ -45,6 +48,10 @@ public class HttpCacheableGetTask extends AbstractHttpRequestTask {
         }
 
         return this.request;
+    }
+
+    private boolean canBeCached() {
+        return this.request.getResult().getResult() == Result.OK && this.request.getResult().getData().size() != 0;
     }
 
     private void createFromCached(final InMemoryCacheItem _fromCache) {

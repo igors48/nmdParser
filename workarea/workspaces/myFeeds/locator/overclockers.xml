@@ -1,0 +1,5 @@
+<simpler feedUrl="http://www.overclockers.ru/rss/hardnews.rss" coverUrl="" storeDays="7" branch=""
+         outName="overclockers" fromNewToOld="yes">
+    <xPath></xPath>
+    <content-filter/>
+</simpler>

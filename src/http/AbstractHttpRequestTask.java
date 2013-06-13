@@ -31,6 +31,8 @@ import static http.HttpTools.*;
  */
 public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
 
+    protected static final Log LOG = LogFactory.getLog(AbstractHttpRequestTask.class);
+
     protected static final String CONTENT_TYPE_HEADER_NAME = "Content-Type";
 
     private static final String REFERER_HEADER_NAME = "Referer";
@@ -52,8 +54,6 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
     private final BannedList bannedList;
     private final String userAgent;
 
-    protected final Log log;
-
     public AbstractHttpRequestTask(final HttpRequest _request, final HttpRequestType _requestType, final HttpClient _httpClient, final BannedList _bannedList, final String _userAgent) {
         Assert.notNull(_request, "Request is null");
         this.request = _request;
@@ -71,13 +71,17 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
         this.userAgent = _userAgent;
 
         this.context = new BasicHttpContext();
-
-        this.log = LogFactory.getLog(getClass());
     }
 
     protected HttpRequest execute() {
         final String urlWithRequest = getUrlWithRequest(this.request.getUrl(), this.request.getRequest());
         final HttpRequestBase method = createMethod();
+
+        if (method == null) {
+            this.request.setResult(HttpData.ERROR_DATA);
+
+            return this.request;
+        }
 
         final String targetHost = getHostFromMethod(method);
 
@@ -85,17 +89,17 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
             final boolean banned = this.bannedList.isBanned(targetHost);
 
             if (banned) {
-                this.log.info(String.format("Host [ %s ] is banned", targetHost));
+                LOG.info(String.format("Host [ %s ] is banned", targetHost));
 
                 this.request.setResult(HttpData.EMPTY_DATA);
             } else {
-                this.log.debug(String.format("%s request to [ %s ] started", this.requestType, removePasswordFromString(urlWithRequest)));
+                LOG.debug(String.format("%s request to [ %s ] started", this.requestType, removePasswordFromString(urlWithRequest)));
 
                 long startTime = System.currentTimeMillis();
                 handle(method);
                 long finishTime = System.currentTimeMillis();
 
-                this.log.debug(String.format("%s request to [ %s ] completed with status [ %s ] in [ %d ] ms", this.requestType, removePasswordFromString(urlWithRequest), this.request.getResult().getResult(), finishTime - startTime));
+                LOG.debug(String.format("%s request to [ %s ] completed with status [ %s ] in [ %d ] ms", this.requestType, removePasswordFromString(urlWithRequest), this.request.getResult().getResult(), finishTime - startTime));
             }
         } catch (Exception e) {
             method.abort();
@@ -104,7 +108,7 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
 
             this.request.setResult(HttpData.ERROR_DATA);
 
-            this.log.error(String.format("Error in %s request to [ %s ]", this.requestType, removePasswordFromString(urlWithRequest)), e);
+            LOG.error(String.format("Error in %s request to [ %s ]", this.requestType, removePasswordFromString(urlWithRequest)), e);
         }
 
         return this.request;
@@ -144,10 +148,20 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
     }
 
     private void handleEntity(final HttpEntity _entity, final HttpResponse _response) throws IOException {
-        final Header[] headers = _response.getHeaders(CONTENT_TYPE_HEADER_NAME);
-        final String charset = HttpTools.getCharset(headers);
+        final byte[] responseBody = (byte[]) this.context.getAttribute(CustomRedirectStrategy.RESPONSE_BODY);
 
-        final Data data = charset.isEmpty() ? new MemoryData(EntityUtils.toByteArray(_entity)) : new MemoryData(EntityUtils.toByteArray(_entity), charset);
+        final Data data;
+
+        if (responseBody == null) {
+            final Header[] headers = _response.getHeaders(CONTENT_TYPE_HEADER_NAME);
+            final String charset = HttpTools.getCharset(headers);
+
+            data = charset.isEmpty() ? new MemoryData(EntityUtils.toByteArray(_entity)) : new MemoryData(EntityUtils.toByteArray(_entity), charset);
+        } else {
+            final String charset = (String) this.context.getAttribute(CustomRedirectStrategy.RESPONSE_CHARSET);
+
+            data = charset.isEmpty() ? new MemoryData(responseBody) : new MemoryData(responseBody, charset);
+        }
 
         final String responseUrl = getResponseUrl();
         final HttpData httpData = new HttpData(responseUrl, data, Result.OK);
@@ -156,13 +170,20 @@ public abstract class AbstractHttpRequestTask implements Callable<HttpRequest> {
     }
 
     private HttpRequestBase createMethod() {
-        final String urlWithRequest = getUrlWithRequest(this.request.getUrl(), this.request.getRequest());
 
-        final HttpRequestBase result = this.requestType == HttpRequestType.POST ? new HttpPost(urlWithRequest) : new HttpGet(urlWithRequest);
+        try {
+            final String urlWithRequest = getUrlWithRequest(this.request.getUrl(), this.request.getRequest());
 
-        setHeaders(result);
+            final HttpRequestBase result = this.requestType == HttpRequestType.POST ? new HttpPost(urlWithRequest) : new HttpGet(urlWithRequest);
 
-        return result;
+            setHeaders(result);
+
+            return result;
+        } catch (Exception e) {
+            LOG.error("Error creating HTTP method", e);
+
+            return null;
+        }
     }
 
 }

@@ -62,9 +62,7 @@ public class StandardBatchLoader implements BatchLoader {
                 }
             }
 
-        } catch (InterruptedException e) {
-            this.log.error(String.format("Error loading from urls list"), e);
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             this.log.error(String.format("Error loading from urls list"), e);
         }
 
